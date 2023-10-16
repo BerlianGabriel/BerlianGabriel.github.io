@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Paper</title>
-    <link>https://hugo-paper.vercel.app/post/</link>
+    <link>https://berliangabriel.github.io/post/</link>
     <description>Recent content in Posts on Paper</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Oct 2023 00:49:51 +0700</lastBuildDate><atom:link href="https://hugo-paper.vercel.app/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 17 Oct 2023 00:49:51 +0700</lastBuildDate><atom:link href="https://berliangabriel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SECCON CTF 2022 Skipinx</title>
-      <link>https://hugo-paper.vercel.app/post/seccon-ctf-2022-skipinx/</link>
+      <link>https://berliangabriel.github.io/post/seccon-ctf-2022-skipinx/</link>
       <pubDate>Tue, 17 Oct 2023 00:49:51 +0700</pubDate>
       
-      <guid>https://hugo-paper.vercel.app/post/seccon-ctf-2022-skipinx/</guid>
+      <guid>https://berliangabriel.github.io/post/seccon-ctf-2022-skipinx/</guid>
       <description>I solved this challenge when competing with my team Fidethus, under the username berlian_gm. The files can be downloaded here and run locally with Docker.
 The Problem The goal of this challenge, just like the title of the challenge implies, is to bypass the Nginx. Trying to access the port 8080 returns the following:
 ❯ curl localhost:8080/ Access here directly, not via nginx :( After checking nginx/default.conf, we can see that the Nginx append the following parameter: proxy=nginx at the end of the query parameter, before proxying the request to backend server.</description>
