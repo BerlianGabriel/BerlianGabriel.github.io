@@ -50,7 +50,7 @@
   
   
   
-  <meta name="description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]]
+  <meta name="description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]] https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py
 From the source code, it can be seen that the jwt.decode() does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key." />
   <meta name="author" content="Paper" />
   
@@ -106,15 +106,15 @@ From the source code, it can be seen that the jwt.decode() does not enforce the 
   
   
   <meta itemprop="name" content="TCP1P CTF 2023">
-<meta itemprop="description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]]
+<meta itemprop="description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]] https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py
 From the source code, it can be seen that the jwt.decode() does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key."><meta itemprop="datePublished" content="2023-10-18T19:33:11+07:00" />
 <meta itemprop="dateModified" content="2023-10-18T19:33:11+07:00" />
-<meta itemprop="wordCount" content="3400">
+<meta itemprop="wordCount" content="3402">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TCP1P CTF 2023"/>
-<meta name="twitter:description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]]
+<meta name="twitter:description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]] https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py
 From the source code, it can be seen that the jwt.decode() does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key."/>
 
   
@@ -241,7 +241,8 @@ From the source code, it can be seen that the jwt.decode() does not enforce the 
   <section><h1 id="cryptography">Cryptography</h1>
 <h2 id="jacks-worst-trials">Jack&rsquo;s Worst Trials</h2>
 <p>(7 Solves, 464 Points)
-![[app.py]]</p>
+![[app.py]]
+<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py</a></p>
 <p>From the source code, it can be seen that the <code>jwt.decode()</code> does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key.</p>
 <p>It turns out that the website is vulnerable to <strong>CVE-2017-11424</strong>. This enables symmetric/asymmetric key confusion attacks against users using the PKCS1 PEM encoded public keys, which would allow an attacker to craft JWTs from scratch.</p>
 <p>Using this tool, (<a href="https://github.com/silentsignal/rsa_sign2n">silentsignal/rsa_sign2n: Deriving RSA public keys from message-signature pairs (github.com)</a>), we can calculate the public key based on 2 JWTs obtained from logging in to the website twice. To avoid dependencies issue, we will run this tool in docker, from the <code>standalone</code> folder.</p>
@@ -266,7 +267,8 @@ Here are your JWT<span style="color:#960050;background-color:#1e0010">&#39;</spa
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.5hogYpjETLomsy6KuesaVoPAJ8NLOxhJIIOyX4xaqm0
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.1Y6oTMLKduPVd-ywj4OIzBaJ_3roybXTImqXgCoXfaM
 </code></pre></div><p>Use the tampered jwt signed with PKCS1
-![[Pasted image 20231020002056.png]]</p>
+![[Pasted image 20231020002056.png]]
+<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020002056.png">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020002056.png</a></p>
 <p><strong><code>FLAG: TCP1P{im_only_human_after_all_dont_put_your_blame_on_me}</code></strong></p>
 <h2 id="cherry-leak">Cherry Leak</h2>
 <p>(28 Solves, 100 Points)
