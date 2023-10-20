@@ -50,7 +50,7 @@
   
   
   
-  <meta name="description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]] https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py
+  <meta name="description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points)
 From the source code, it can be seen that the jwt.decode() does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key." />
   <meta name="author" content="Paper" />
   
@@ -106,15 +106,15 @@ From the source code, it can be seen that the jwt.decode() does not enforce the 
   
   
   <meta itemprop="name" content="TCP1P CTF 2023">
-<meta itemprop="description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]] https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py
+<meta itemprop="description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points)
 From the source code, it can be seen that the jwt.decode() does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key."><meta itemprop="datePublished" content="2023-10-18T19:33:11+07:00" />
 <meta itemprop="dateModified" content="2023-10-18T19:33:11+07:00" />
-<meta itemprop="wordCount" content="3402">
+<meta itemprop="wordCount" content="3356">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TCP1P CTF 2023"/>
-<meta name="twitter:description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]] https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py
+<meta name="twitter:description" content="Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points)
 From the source code, it can be seen that the jwt.decode() does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key."/>
 
   
@@ -240,9 +240,7 @@ From the source code, it can be seen that the jwt.decode() does not enforce the 
 
   <section><h1 id="cryptography">Cryptography</h1>
 <h2 id="jacks-worst-trials">Jack&rsquo;s Worst Trials</h2>
-<p>(7 Solves, 464 Points)
-![[app.py]]
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py</a></p>
+<p>(7 Solves, 464 Points)</p>
 <p>From the source code, it can be seen that the <code>jwt.decode()</code> does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key.</p>
 <p>It turns out that the website is vulnerable to <strong>CVE-2017-11424</strong>. This enables symmetric/asymmetric key confusion attacks against users using the PKCS1 PEM encoded public keys, which would allow an attacker to craft JWTs from scratch.</p>
 <p>Using this tool, (<a href="https://github.com/silentsignal/rsa_sign2n">silentsignal/rsa_sign2n: Deriving RSA public keys from message-signature pairs (github.com)</a>), we can calculate the public key based on 2 JWTs obtained from logging in to the website twice. To avoid dependencies issue, we will run this tool in docker, from the <code>standalone</code> folder.</p>
@@ -267,12 +265,10 @@ Here are your JWT<span style="color:#960050;background-color:#1e0010">&#39;</spa
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.5hogYpjETLomsy6KuesaVoPAJ8NLOxhJIIOyX4xaqm0
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.1Y6oTMLKduPVd-ywj4OIzBaJ_3roybXTImqXgCoXfaM
 </code></pre></div><p>Use the tampered jwt signed with PKCS1
-![[Pasted image 20231020002056.png]]
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020002056.png">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020002056.png</a></p>
+<img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020002056.png" alt=""></p>
 <p><strong><code>FLAG: TCP1P{im_only_human_after_all_dont_put_your_blame_on_me}</code></strong></p>
 <h2 id="cherry-leak">Cherry Leak</h2>
-<p>(28 Solves, 100 Points)
-![[cherry_leak.py]]</p>
+<p>(28 Solves, 100 Points)</p>
 <p>Do the following to get leaks</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nc ctf.tcp1p.com <span style="color:#ae81ff">13339</span>
 1. Get new prime
@@ -357,8 +353,7 @@ sage: long_to_bytes(int(m))
 <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;TCP1P{in_life&#39;s_abundance_a_fragment_suffices}&#34;</span>
 </code></pre></div><p><strong><code>FLAG: TCP1P{in_life's_abundance_a_fragment_suffices}</code></strong></p>
 <h2 id="spider-shambles">Spider Shambles</h2>
-<p>(31 Solves, 100 Points)
-![[web.py]]</p>
+<p>(31 Solves, 100 Points)</p>
 <p>The method <code>random.getrandbits()</code> is not cryptographically secure. We can use <code>randcrack</code> (<a href="https://github.com/tna0y/Python-random-module-cracker">https://github.com/tna0y/Python-random-module-cracker</a>) to predict the the next pseudorandom number.</p>
 <p>Notice that the <code>flago.jpg</code> is XOR-ed with a random key, and we are given the output of the XOR operation in the downloaded file <code>babababububu</code>.
 <code>Commutative properties of XOR: if A XOR B = C then B XOR C = A</code>
@@ -444,11 +439,10 @@ decrypted_content <span style="color:#f92672">=</span> encropt(content)
 <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flago.jpg&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> file:
     file<span style="color:#f92672">.</span>write(decrypted_content)
 
-</code></pre></div><p>![[flago.jpg]]</p>
+</code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/flago.jpg?raw=true" alt=""></p>
 <p><strong><code>FLAG: TCP1P{life's_twisted_like_a_back_road_in_the_country}</code></strong></p>
 <h2 id="final-consensus">Final Consensus</h2>
-<p>(56 Solves, 100 Points)
-![[chall.py]]</p>
+<p>(56 Solves, 100 Points)</p>
 <p>This challenge can be solved using the &ldquo;Meet in the Middle&rdquo; (MitM) attack, which is a cryptographic attack that works on double encryption schemes. Given a plaintext and its double encryption, the attacker first encrypts the plaintext with every possible key and stores the result. Then, for every possible key, the attacker decrypts the ciphertext. If a decrypted ciphertext matches an encrypted plaintext, the attacker has found a pair of keys that could have been used for the double encryption.</p>
 <p>Below is the script to solve the challenge</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
@@ -503,9 +497,7 @@ Found keys: a = b'4231464231464231', b = b'1843881843881843'
 TCP1P{nothing_ever_lasts_forever_everybody_wants_to_rule_the_world}
 </code></pre><p><strong><code>FLAG: TCP1P{nothing_ever_lasts_forever_everybody_wants_to_rule_the_world}</code></strong></p>
 <h2 id="one-pad-time">One Pad Time</h2>
-<p>(67 Solves, 100 Points)
-![[one_pad_time.py]]</p>
-<p>![[output.txt]]</p>
+<p>(67 Solves, 100 Points)</p>
 <p>Since the length of the key is 16 bytes, the key can only be retrieved if we XOR the last 16 bytes of the ct in output.txt against a 16-bytes pad. So, let us assume that the original ct (before XOR) was 256 bytes, and the pad is 16 bytes. Thr pad method follows the PKCS#7 padding scheme, which fills up the remaining block space with bytes that are equal to the number of padding bytes. By reversing the XOR and AES encryption, we can retrieve the flag.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">5</span>]: <span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> xor
 
@@ -528,8 +520,7 @@ Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span>
 </code></pre></div><p><code>FLAG: TCP1P{why_did_the_chicken_cross_the_road?To_ponder_the_meaning_of_life_on_the_other_side_only_to_realize_that_the_road_itself_was_an_arbitrary_construct_with_no_inherent_purpose_and_that_true_enlightenment_could_only_be_found_within_its_own_existence_1234}</code></p>
 <h1 id="web">Web</h1>
 <h2 id="un-secure">Un Secure</h2>
-<p>(68 Solves, 100 Points)
-![[Unsecure.zip]]</p>
+<p>(68 Solves, 100 Points)</p>
 <p>From reading the source code, there are some key observations:</p>
 <ol>
 <li><code>index.php</code> is vulnerable to object deserialization since it uses <code>unserialize()</code> on user-controlled input (in this case, a cookie).</li>
@@ -618,14 +609,13 @@ Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span>
 </ul>
 </li>
 </ol>
-<p>![[Pasted image 20231020221419.png]]</p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020221419.png?raw=true" alt=""></p>
 <p>From this information, we can craft a new cookie to read the random filename of the flag, an decode it to base64</p>
 <pre tabindex="0"><code>b'O:17:&quot;GadgetTwo\\Echoers&quot;:1:{s:5:&quot;klass&quot;;O:16:&quot;GadgetOne\\Adders&quot;:1:{s:1:&quot;x&quot;;O:16:&quot;GadgetThree\\Vuln&quot;:4:{s:4:&quot;waf1&quot;;i:1;s:7:&quot;\x00*\x00waf2&quot;;s:4:&quot;\xde\xad\xbe\xef&quot;;s:10:&quot;\x00Vuln\x00waf3&quot;;b:0;s:3:&quot;cmd&quot;;s:65:&quot;var_dump(system(\'cat 182939124819238912571292389218129123.txt\'));&quot;;}}}'
-</code></pre><p>![[Pasted image 20231020221745.png]]</p>
+</code></pre><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020221745.png?raw=true" alt=""></p>
 <p><code>FLAG: TCP1P{unserialize in php go brrrrrrrr ouch}</code></p>
 <h2 id="a-simple-web">A Simple Web</h2>
-<p>(122 Solves, 100 Points)
-![[ASimpleWebsite.zip]]</p>
+<p>(122 Solves, 100 Points)</p>
 <p>Notice this part inside the Dockerfile</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
@@ -645,8 +635,7 @@ Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span>
 <code>/_nuxt/@fs/flag.txt</code></p>
 <p><code>Flag: TCP1P{OuTD4t3d_NuxxT_fR4m3w0RkK}</code></p>
 <h2 id="latex">Latex</h2>
-<p>(Solved after competition has ended, 38 Solves, 100 Points)
-![[Latex.zip]]</p>
+<p>(Solved after competition has ended, 38 Solves, 100 Points)</p>
 <p>Notice this part of <code>main.go</code> which contains blacklisted strings</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> (
 	<span style="color:#75715e">//go:embed static/*
@@ -669,13 +658,12 @@ Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span>
 <li>Changes the category code of <code>_</code> to 13, making it an active character (like a macro). This is needed because the output of reading the flag.txt will contain <code>_</code> , which will cause LaTex error if its default behavior is not changed.</li>
 <li>Tries to input the file <code>/flag.txt</code> into the document, using <code>@input</code> instead of the typical <code>\input</code>.</li>
 </ol>
-<p>![[Pasted image 20231020231652.png]]
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020231652.png?raw=true" alt="">
 Note that <code>{</code> and <code>}</code> were not printed because they have special significance for grouping and scoping in LaTex.</p>
 <p><code>FLAG: TCP1P{bypassing latex waf require some latex knowledge}</code></p>
 <h1 id="forensic">Forensic</h1>
 <h2 id="brokenimg">brokenimg</h2>
-<p>(57 Solves, 100 Points)
-![[chall.pdf]]</p>
+<p>(57 Solves, 100 Points)</p>
 <pre tabindex="0"><code>└─$ exiftool chall.pdf
 ExifTool Version Number         : 12.65
 File Name                       : chall.pdf
@@ -694,11 +682,11 @@ Page Count                      : 1
 XMP Toolkit                     : Image::ExifTool 12.65
 Artist                          : Maybe here : 150 164 164 160 163 72 57 57 146 151 154 145 163 56 144 157 170 142 151 156 56 147 147 57 157 63 126 144 162 115 160 164 56 160 156 147
 </code></pre><p>We can identify the cipher in the Artist field using the cipher identifier from <a href="https://www.dcode.fr/cipher-identifier">Decrypt a Message - Cipher Identifier - Online Code Recognizer (dcode.fr)</a>
-![[Pasted image 20231021013635.png]]
-![[Pasted image 20231021014023.png]]
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231021013635.png?raw=true" alt="">
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231021014023.png?raw=true" alt="">
 It turns out to be the Octal representation of ASCII. The resulting URL, when visited gave us a shifted image.
 <a href="https://files.doxbin.gg/o3VdrMpt.png">https://files.doxbin.gg/o3VdrMpt.png</a>
-![[o3VdrMpt.png]]</p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/o3VdrMpt.png?raw=true" alt=""></p>
 <p>The following code will unshift the image to its original state:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
 <span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
@@ -742,7 +730,7 @@ It turns out to be the Octal representation of ASCII. The resulting URL, when vi
     main(<span style="color:#e6db74">&#39;o3VdrMpt.png&#39;</span>, <span style="color:#e6db74">&#39;unshifted.png&#39;</span>)
 
 </code></pre></div><p>unshifted.png
-![[unshifted.png]]</p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/unshifted.png?raw=true" alt=""></p>
 <p>The presence of <code>======</code> indicates that it might be base32-encoded text. After appending the two texts, base32 decoding, and then base64 decoding it, we get our flag.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">21</span>]: b32decode(<span style="color:#e6db74">&#34;KZCU4UKNKZBDOY2HKJWVQMTHGBSGUTTGJZDDSUKNK5HDAZCYJF5FQMSKONSFQSTGJZDTK22YPJLG6TKXLIYGMULPHU======&#34;</span>)
 Out[<span style="color:#ae81ff">21</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;VENQMVB7cGRmX2g0djNfNF9QMWN0dXIzX2JsdXJfNG5kXzVoMWZ0fQo=&#39;</span>
@@ -751,14 +739,13 @@ In [<span style="color:#ae81ff">22</span>]: b64decode(<span style="color:#e6db74
 Out[<span style="color:#ae81ff">22</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;TCP1P</span><span style="color:#e6db74">{pdf_h4v3_4_P1ctur3_blur_4nd_5h1ft}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
 </code></pre></div><p><code>FLAG: TCP1P{pdf_h4v3_4_P1ctur3_blur_4nd_5h1ft}</code></p>
 <h2 id="hide-and-split">hide and split</h2>
-<p>(128 Solves, 100 Points)
-![[challenge.zip]]</p>
+<p>(128 Solves, 100 Points)</p>
 <p>Opening challenge.ntfs using Autopsy, we can see that the flag has been split into several parts.
-![[Pasted image 20231021024134.png]]
-If we look closely at <code>flag00.txt:flag0</code>, the Extracted Text indicates that it is the Magic Byte of PNG file.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231021024134.png?raw=true" alt=""></p>
+<p>If we look closely at <code>flag00.txt:flag0</code>, the Extracted Text indicates that it is the Magic Byte of PNG file.
 <code>89504e470d0a1a0a0000000d49484452000003390000033908000000000179a0c500000e684</code></p>
 <p>Looking at the Extracted Text of <code>MFT</code>, we can extract the hexstrings from each flag partitions, concatenate them, and potentially convert them to a PNG file that contains the flag.
-![[Pasted image 20231021024617.png]]</p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231021024617.png?raw=true" alt=""></p>
 <p>After copy-pasting the content of Extracted Text from <code>$MFT</code> to <code>ntfs.txt</code>, using this code, we can extract only the hexstrings and convert it to <code>ntfs.png</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
 
@@ -783,11 +770,11 @@ print(<span style="color:#e6db74">&#34;Done!&#34;</span>)
 
 </code></pre></div><p>ntfs.png
 ![[ntfs.png]]
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/ntfs.png?raw=true" alt="">
 After the QR code is scanned, the flag is obtained.</p>
 <p><code>FLAG: TCP1P{hidden_flag_in_the_extended_attributes_fea73c5920aa8f1c}</code></p>
 <h2 id="ez-pdf">Ez PDF</h2>
-<p>(137 Solves, 100 Points)
-![[TCP1P-CTF.pdf]]</p>
+<p>(137 Solves, 100 Points)</p>
 <pre tabindex="0"><code>└─$ exiftool TCP1P-CTF.pdf
 ExifTool Version Number         : 12.65
 File Name                       : TCP1P-CTF.pdf
@@ -828,7 +815,7 @@ obj <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">0</span>
 ...
 
 </code></pre></div><p>After changing <code>var whutisthis = 1</code> to <code>var whutisthis = 0</code>, the JS code will print out the 3rd part of the flag when executed.
-![[Pasted image 20231021031555.png]]</p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231021031555.png?raw=true" alt=""></p>
 <p><strong>2nd part of the flag</strong>
 Looking closely at the rest of the ouput from <code>pdf-parser</code>, the pdf contains 2 image files in obj 10 and obj 11. However, there is only 1 image in the pdf which can be seen by eyes. This invisible image in the pdf might contain the 2nd part of the flag.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">└─$ pdf-parser TCP1P-CTF.pdf
@@ -873,8 +860,8 @@ obj <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">0</span>
 ...
 
 </code></pre></div><p>The simplest way to extract all images embedded inside the pdf is by using online tool. <a href="https://pdfcandy.com/extract-images.html">Extract Images from PDF Online for Free (pdfcandy.com)</a></p>
-<p>![[image-000.png]]
-![[image-001.png]]
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/image-000.png?raw=true" alt="">
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/image-001.png?raw=true" alt="">
 Indeed we got 2 images, in which the 1st image contains the 2nd part of the flag.</p>
 <p><code>FLAG: TCP1P{D01n9_F023n51C5_0N_pdf_f1L35_15_345y_15N7_17_l3jaf9ci293m1d}</code></p>
 <h1 id="misc">Misc</h1>

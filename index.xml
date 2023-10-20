@@ -13,7 +13,7 @@
       <pubDate>Wed, 18 Oct 2023 19:33:11 +0700</pubDate>
       
       <guid>https://berliangabriel.github.io/post/tcp1p-ctf-2023/</guid>
-      <description>Cryptography Jack&amp;rsquo;s Worst Trials (7 Solves, 464 Points) ![[app.py]] https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/app.py
+      <description>Cryptography Jack&amp;rsquo;s Worst Trials (7 Solves, 464 Points)
 From the source code, it can be seen that the jwt.decode() does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&amp;rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key.</description>
     </item>
     
