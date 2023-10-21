@@ -8,6 +8,24 @@
     <language>en</language>
     <lastBuildDate>Wed, 18 Oct 2023 19:33:11 +0700</lastBuildDate><atom:link href="https://berliangabriel.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Contact</title>
+      <link>https://berliangabriel.github.io/contact/</link>
+      <pubDate>Sat, 21 Oct 2023 07:59:27 +0700</pubDate>
+      
+      <guid>https://berliangabriel.github.io/contact/</guid>
+      <description>berlian.gabriel@u.nus.edu</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://berliangabriel.github.io/about/</link>
+      <pubDate>Sat, 21 Oct 2023 07:59:23 +0700</pubDate>
+      
+      <guid>https://berliangabriel.github.io/about/</guid>
+      <description>Crypto player for team Fidethus under the name berlian</description>
+    </item>
+    
+    <item>
       <title>TCP1P CTF 2023</title>
       <link>https://berliangabriel.github.io/post/tcp1p-ctf-2023/</link>
       <pubDate>Wed, 18 Oct 2023 19:33:11 +0700</pubDate>
