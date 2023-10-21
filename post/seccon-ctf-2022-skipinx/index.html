@@ -31,7 +31,7 @@
 
 <html
   class="not-ready lg:text-base"
-  style="--bg: #faf8f1"
+  style="--bg: #fbfbfb"
   lang="en"
 >
   <head>
@@ -43,7 +43,7 @@
   />
 
   
-  <title>SECCON CTF 2022 Skipinx - Paper</title>
+  <title>SECCON CTF 2022 Skipinx - Berlian Gabriel</title>
 
   
   <meta name="theme-color" />
@@ -55,7 +55,7 @@
   <meta name="description" content="I solved this challenge when competing with my team Fidethus, under the username berlian_gm. The files can be downloaded here and run locally with Docker.
 The Problem The goal of this challenge, just like the title of the challenge implies, is to bypass the Nginx. Trying to access the port 8080 returns the following:
 ❯ curl localhost:8080/ Access here directly, not via nginx :( After checking nginx/default.conf, we can see that the Nginx append the following parameter: proxy=nginx at the end of the query parameter, before proxying the request to backend server." />
-  <meta name="author" content="Paper" />
+  <meta name="author" content="Berlian Gabriel" />
   
 
   
@@ -138,7 +138,7 @@ The Problem The goal of this challenge, just like the title of the challenge imp
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
       href="https://berliangabriel.github.io"
-      >Paper</a
+      >Berlian Gabriel</a
     >
     <div
       class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
@@ -169,7 +169,7 @@ The Problem The goal of this challenge, just like the title of the challenge imp
 
     
     const metaTheme = document.querySelector('meta[name="theme-color"]');
-    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
     const setDark = (isDark) => {
       metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
       htmlClass[isDark ? 'add' : 'remove']('dark');
@@ -364,7 +364,7 @@ Congratz! You got a flag: SECCON{dummydummy}
 >
   <div class="mr-auto">
     &copy; 2023
-    <a class="link" href="https://berliangabriel.github.io">Paper</a>
+    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a
