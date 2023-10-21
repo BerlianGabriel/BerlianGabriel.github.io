@@ -13,8 +13,8 @@
       <pubDate>Wed, 18 Oct 2023 19:33:11 +0700</pubDate>
       
       <guid>https://berliangabriel.github.io/post/tcp1p-ctf-2023/</guid>
-      <description>Cryptography Jack&amp;rsquo;s Worst Trials (7 Solves, 464 Points)
-From the source code, it can be seen that the jwt.decode() does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&amp;rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key.</description>
+      <description>It was an exhilarating experience to compete in TCP1P CTF as team Fidethus, with Chovid99 and Djavaa. Despite narrowly missing out on the Top 3, securing a 4th place finish was a tremendous honor, especially considering we were a three-member team competing against teams with many more members. Below is the write-up for some of the challenges that we solved. Cryptography Jack&amp;rsquo;s Worst Trials (7 Solves, 464 Points)
+From the source code, it can be seen that the jwt.</description>
     </item>
     
     <item>
