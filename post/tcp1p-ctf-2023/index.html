@@ -113,7 +113,7 @@ From the source code, it can be seen that the jwt." />
 <meta itemprop="description" content="It was an exhilarating experience to compete in TCP1P CTF as team Fidethus, with Chovid99 and Djavaa. Despite narrowly missing out on the Top 3, securing a 4th place finish was a tremendous honor, especially considering we were a three-member team competing against teams with many more members. Below is the write-up for some of the challenges that we solved. Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points)
 From the source code, it can be seen that the jwt."><meta itemprop="datePublished" content="2023-10-18T19:33:11+07:00" />
 <meta itemprop="dateModified" content="2023-10-18T19:33:11+07:00" />
-<meta itemprop="wordCount" content="3415">
+<meta itemprop="wordCount" content="3414">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -263,8 +263,8 @@ From the source code, it can be seen that the jwt."/>
 <h1 id="cryptography">Cryptography</h1>
 <h2 id="jacks-worst-trials">Jack&rsquo;s Worst Trials</h2>
 <p>(7 Solves, 464 Points)</p>
-<p>From the source code, it can be seen that the <code>jwt.decode()</code> does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign in with the public key, using the HS256 algorithm. The problem is, the part of the code to fetch the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key.</p>
-<p>It turns out that the website is vulnerable to <strong>CVE-2017-11424</strong>. This enables symmetric/asymmetric key confusion attacks against users using the PKCS1 PEM encoded public keys, which would allow an attacker to craft JWTs from scratch.</p>
+<p>From the source code, it can be seen that the <code>jwt.decode()</code> does not enforce the algorithm. This indicates that we might be able to forge a JWT and sign it with the public key, using the HS256 algorithm. The problem is, the part of the code that fetches the website&rsquo;s public key has been commented out. This means we have to find another way to retrieve the public key.</p>
+<p>It turns out that the website is vulnerable to <strong>CVE-2017-11424</strong>. This enables symmetric/asymmetric key confusion attacks against users using the PKCS1 PEM encoded public keys, which would allow attackers to craft JWTs from scratch.</p>
 <p>Using this tool, (<a href="https://github.com/silentsignal/rsa_sign2n">silentsignal/rsa_sign2n: Deriving RSA public keys from message-signature pairs (github.com)</a>), we can calculate the public key based on 2 JWTs obtained from logging in to the website twice. To avoid dependencies issue, we will run this tool in docker, from the <code>standalone</code> folder.</p>
 <p>Before building the docker, modify the jwt_forgery.py by adding this on line 41
 <code>    payload['admin'] = True</code>
@@ -909,6 +909,12 @@ Indeed we got 2 images, in which the 1st image contains the 2nd part of the flag
   
   
   <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/1337up-ctf-2023/"
+      ><span class="mr-1.5">←</span><span>1337UP CTF 2023</span></a
+    >
     
     
     <a
