@@ -52,7 +52,8 @@
   
   
   
-  <meta name="description" content="Cryptography 1-10 In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.
+  <meta name="description" content="Cryptography 1-10 (31 Solves, 464 Points)
+In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.
 The following operation to generate the new xs basically only replaces the last 3 digits of the original xs with the integers representing the Unicode of the FLAG content (which are also 3 digits)." />
   <meta name="author" content="Berlian Gabriel" />
   
@@ -110,15 +111,17 @@ The following operation to generate the new xs basically only replaces the last 
   
   
   <meta itemprop="name" content="1337UP CTF 2023">
-<meta itemprop="description" content="Cryptography 1-10 In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.
+<meta itemprop="description" content="Cryptography 1-10 (31 Solves, 464 Points)
+In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.
 The following operation to generate the new xs basically only replaces the last 3 digits of the original xs with the integers representing the Unicode of the FLAG content (which are also 3 digits)."><meta itemprop="datePublished" content="2023-11-19T09:56:13+07:00" />
 <meta itemprop="dateModified" content="2023-11-19T09:56:13+07:00" />
-<meta itemprop="wordCount" content="824">
+<meta itemprop="wordCount" content="840">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="1337UP CTF 2023"/>
-<meta name="twitter:description" content="Cryptography 1-10 In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.
+<meta name="twitter:description" content="Cryptography 1-10 (31 Solves, 464 Points)
+In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.
 The following operation to generate the new xs basically only replaces the last 3 digits of the original xs with the integers representing the Unicode of the FLAG content (which are also 3 digits)."/>
 
   
@@ -260,6 +263,7 @@ The following operation to generate the new xs basically only replaces the last 
 
   <section><h1 id="cryptography">Cryptography</h1>
 <h2 id="1-10">1-10</h2>
+<p>(31 Solves, 464 Points)</p>
 <p>In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.</p>
 <p>The following operation to generate the new xs basically only replaces the last 3 digits of the original xs with the integers representing the Unicode of the FLAG content (which are also 3 digits). Hence, once we retrieve the new xs using LLL, we can get the flag characters by converting the last 3 digits of each of the new xs values using chr() function.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xs <span style="color:#f92672">=</span> [ord(f) <span style="color:#f92672">+</span> i <span style="color:#f92672">-</span> (i<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)  <span style="color:#66d9ef">for</span> i, f <span style="color:#f92672">in</span> zip(xs, search(<span style="color:#e6db74">&#34;{(.*)}&#34;</span>, FLAG)<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>))]
@@ -289,7 +293,8 @@ flag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</
     flag<span style="color:#f92672">+=</span>chr(i<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)
 print(flag)
 </code></pre></div><p><code>INTIGRITI{3a8a32c7f6}</code></p>
-<h1 id="not-so-smooth">Not So Smooth</h1>
+<h2 id="not-so-smooth">Not So Smooth</h2>
+<p>(49 Solves, 408 Points)</p>
 <p>The given python code resembles a Diffie-Hellman Key Change, but with unusual mechanism for public integer and shared secret generation.
 The flaw in that mechanism was that, without the secret integer a or b, the shared secret can be calculated. Knowing only either pow(u,a,p) and B or pow(u,b,p) and A will be enough to calculate the shared secret in this case.</p>
 <p>To solve this, we will perform 2 steps:
@@ -333,6 +338,7 @@ print(FLAG<span style="color:#f92672">.</span>decode())
 
 </code></pre></div><p><code>INTIGRITI{1e863724be1ea6d3e}</code></p>
 <h2 id="really-secure-apparently">Really Secure Apparently</h2>
+<p>(201 Solves, 100 Points)</p>
 <p>A very big e indicates that d might be small
 We can use Wiener attack from this script below
 <a href="https://gist.github.com/mananpal1997/73d07cdc91d58b4eb5c818aaab2d38bd">https://gist.github.com/mananpal1997/73d07cdc91d58b4eb5c818aaab2d38bd</a></p>
@@ -383,6 +389,7 @@ m <span style="color:#f92672">=</span> pow(c, d, n)
 print(long_to_bytes(m))
 </code></pre></div><p><code>INTIGRITI{0r_n07_50_53cur3_m4yb3}</code></p>
 <h2 id="keyless">Keyless</h2>
+<p>(282 Solves, 100 Points)</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(encrypted_message):
     decrypted_message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
     <span style="color:#66d9ef">for</span> char <span style="color:#f92672">in</span> encrypted_message:

@@ -13,7 +13,8 @@
       <pubDate>Sun, 19 Nov 2023 09:56:13 +0700</pubDate>
       
       <guid>https://berliangabriel.github.io/post/1337up-ctf-2023/</guid>
-      <description>Cryptography 1-10 In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.
+      <description>Cryptography 1-10 (31 Solves, 464 Points)
+In the equation, xs, which is only 64 bits, is much smaller than cs, which is 1000 bits. Since the values of cs are known, LLL lattice reduction can be used to retrieve the values of new xs.
 The following operation to generate the new xs basically only replaces the last 3 digits of the original xs with the integers representing the Unicode of the FLAG content (which are also 3 digits).</description>
     </item>
     
