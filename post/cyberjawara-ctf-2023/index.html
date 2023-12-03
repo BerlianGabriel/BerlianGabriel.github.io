@@ -54,8 +54,8 @@
   
   <meta name="description" content="Web Wonder Drive (5 Solves, 850 Points)
 The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
-if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add /repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
-data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the above payload is executed, it will write /repository/wonderadmin/flag." />
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
+data[&#39;filepath&#39;] = test..%0arepository/wonderadmin/flag.txt when the above payload is executed, it will write repository/wonderadmin/flag." />
   <meta name="author" content="Berlian Gabriel" />
   
 
@@ -114,8 +114,8 @@ data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the ab
   <meta itemprop="name" content="CyberJawara CTF 2023">
 <meta itemprop="description" content="Web Wonder Drive (5 Solves, 850 Points)
 The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
-if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add /repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
-data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the above payload is executed, it will write /repository/wonderadmin/flag."><meta itemprop="datePublished" content="2023-12-03T19:32:26+07:00" />
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
+data[&#39;filepath&#39;] = test..%0arepository/wonderadmin/flag.txt when the above payload is executed, it will write repository/wonderadmin/flag."><meta itemprop="datePublished" content="2023-12-03T19:32:26+07:00" />
 <meta itemprop="dateModified" content="2023-12-03T19:32:26+07:00" />
 <meta itemprop="wordCount" content="901">
 <meta itemprop="keywords" content="" />
@@ -124,8 +124,8 @@ data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the ab
 <meta name="twitter:title" content="CyberJawara CTF 2023"/>
 <meta name="twitter:description" content="Web Wonder Drive (5 Solves, 850 Points)
 The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
-if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add /repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
-data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the above payload is executed, it will write /repository/wonderadmin/flag."/>
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
+data[&#39;filepath&#39;] = test..%0arepository/wonderadmin/flag.txt when the above payload is executed, it will write repository/wonderadmin/flag."/>
 
   
   
@@ -273,14 +273,14 @@ data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the ab
         <span style="color:#66d9ef">with</span> open(access_file, <span style="color:#e6db74">&#34;a&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ascii&#34;</span>) <span style="color:#66d9ef">as</span> f:
             f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>data[<span style="color:#e6db74">&#39;filepath&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;user_repository_root&#39;</span>, username<span style="color:#f92672">=</span>username))
-</code></pre></div><p>we want to add <code>/repository/wonderadmin/flag.txt</code>  to access_file, and we can do so by abusing the newline character.</p>
-<pre tabindex="0"><code>data['filepath'] = test..%0a/repository/wonderadmin/flag.txt
-</code></pre><p>when the above payload is executed, it will write <code>/repository/wonderadmin/flag.txt</code> to access_file in a new line.</p>
+</code></pre></div><p>we want to add <code>repository/wonderadmin/flag.txt</code>  to access_file, and we can do so by abusing the newline character.</p>
+<pre tabindex="0"><code>data['filepath'] = test..%0arepository/wonderadmin/flag.txt
+</code></pre><p>when the above payload is executed, it will write <code>repository/wonderadmin/flag.txt</code> to access_file in a new line.</p>
 <pre tabindex="0"><code>repository/test
 repository/wonderadmin/flag.txt
 </code></pre><p>This will allow our user account to access the flag.</p>
 <p>But first thing first, we need to create the following folders and upload the file on our own drive, to make this file path exist
-<code>repository/test..%0arepository/wonderadmin/flag.txt</code></p>
+<code>repository/user/test..%0arepository/wonderadmin/flag.txt</code></p>
 <p>Once we shared the file and accept_share the token, we can access wonderadmin/flag.txt
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204032954.png?raw=true" alt=""></p>
 <p>FLAG: <code>CJ2023{wonderful_trick!_zzzzzzzzzzzzzzzzzzzz}</code></p>
