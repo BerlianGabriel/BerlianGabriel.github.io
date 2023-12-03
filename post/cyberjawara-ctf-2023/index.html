@@ -117,7 +117,7 @@ The code snippet below posses security risks. The idea is to create additional n
 if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add /repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
 data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the above payload is executed, it will write /repository/wonderadmin/flag."><meta itemprop="datePublished" content="2023-12-03T19:32:26+07:00" />
 <meta itemprop="dateModified" content="2023-12-03T19:32:26+07:00" />
-<meta itemprop="wordCount" content="909">
+<meta itemprop="wordCount" content="901">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -282,7 +282,7 @@ repository/wonderadmin/flag.txt
 <p>But first thing first, we need to create the following folders and upload the file on our own drive, to make this file path exist
 <code>repository/test..%0arepository/wonderadmin/flag.txt</code></p>
 <p>Once we shared the file and accept_share the token, we can access wonderadmin/flag.txt
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204032954.png?raw=true">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204032954.png?raw=true</a></p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204032954.png?raw=true" alt=""></p>
 <p>FLAG: <code>CJ2023{wonderful_trick!_zzzzzzzzzzzzzzzzzzzz}</code></p>
 <h2 id="magic-1">Magic 1</h2>
 <p>(28 Solves, 300 Points)</p>
@@ -294,9 +294,9 @@ repository/wonderadmin/flag.txt
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#66d9ef">echo</span> <span style="color:#a6e22e">file_get_contents</span>(<span style="color:#e6db74">&#39;/flag.txt&#39;</span>);
 </code></pre></div><p>Embed the php payload after the image magic bytes to trick the webapp into thinking that the uploaded php file is an image.
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204013729.png?raw=true">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204013729.png?raw=true</a></p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204013729.png?raw=true" alt=""></p>
 <p>Execute the php payload by visiting this url path <code>/results/original-{uploaded-filename}.php</code>
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204012852.png?raw=true">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204012852.png?raw=true</a></p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204012852.png?raw=true" alt=""></p>
 <p>FLAG: <code>CJ2023{4n0th3r_unrestricted_file_upload__}</code></p>
 <h2 id="static-web">Static Web</h2>
 <p>(63 Solves, 300 Points)</p>
@@ -364,7 +364,7 @@ Armed with this exploit, we can now perform path traversal to retrieve the conte
 <pre tabindex="0"><code>/static/....//config.js
 </code></pre><p>urlPath after sanitation resulting in path traversel:</p>
 <pre tabindex="0"><code>/static/../config.js
-</code></pre><p><a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231203202524.png?raw=true">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231203202524.png?raw=true</a></p>
+</code></pre><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231203202524.png?raw=true" alt=""></p>
 <p>FLAG: <code>CJ2023{1st_warmup_and_m1c_ch3ck}</code></p>
 <h1 id="forensic">Forensic</h1>
 <h2 id="apocalypse">Apocalypse</h2>
@@ -380,11 +380,11 @@ However, the two screenshots need to be recovered first. The screenshots have mi
 <li>IDAT length is set to <code>0020</code>, except for the IDAT chunk before IEND</li>
 </ul>
 <p>Once all the length-byte and CRC-byte are set properly, the corrupted screenshoots are succesfully recovered.
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/fixed1.png?raw=true">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/fixed1.png?raw=true</a>
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/fixed2.png?raw=true">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/fixed2.png?raw=true</a></p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/fixed1.png?raw=true" alt="">
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/fixed2.png?raw=true" alt=""></p>
 <p>We then proceed to use <a href="https://acropalypse.app/">acropalypse</a> to recover the original screenshot before cropping. Judging from the metadata in the screenshot which has <code>Google Inc. 2016</code> in it, and also the width pixel of the two screenshots, we suspect that the device used to take the screenshots were Pixel XL, which was released in 2016 with 2560x1440 pixels. For the device option in acropalypse, we use the custom resolution of 2560x1440. The recovered original screenshots are as follow:
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/recovered_1.png?raw=true">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/recovered_1.png?raw=true</a>
-<a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/recovered_2.png?raw=true">https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/recovered_2.png?raw=true</a></p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/recovered_1.png?raw=true" alt="">
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/recovered_2.png?raw=true" alt=""></p>
 <p>FLAG: <code>CJ2023{cb2aa1108f6aebb88c30}</code></p>
 </section>
 
