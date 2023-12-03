@@ -6,7 +6,19 @@
     <description>Recent content in Posts on Berlian Gabriel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 19 Nov 2023 09:56:13 +0700</lastBuildDate><atom:link href="https://berliangabriel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Dec 2023 19:32:26 +0700</lastBuildDate><atom:link href="https://berliangabriel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CyberJawara CTF 2023</title>
+      <link>https://berliangabriel.github.io/post/cyberjawara-ctf-2023/</link>
+      <pubDate>Sun, 03 Dec 2023 19:32:26 +0700</pubDate>
+      
+      <guid>https://berliangabriel.github.io/post/cyberjawara-ctf-2023/</guid>
+      <description>Web Wonder Drive (5 Solves, 850 Points)
+The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
+if request.method == &amp;#39;POST&amp;#39;: access_file = f&amp;#34;accounts/{username}/access&amp;#34; with open(access_file, &amp;#34;a&amp;#34;, encoding=&amp;#34;ascii&amp;#34;) as f: f.write(f&amp;#34;{data[&amp;#39;filepath&amp;#39;]}\n&amp;#34;) return redirect(url_for(&amp;#39;user_repository_root&amp;#39;, username=username)) we want to add /repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
+data[&#39;filepath&#39;] = test..%0a/repository/wonderadmin/flag.txt when the above payload is executed, it will write /repository/wonderadmin/flag.</description>
+    </item>
+    
     <item>
       <title>1337UP CTF 2023</title>
       <link>https://berliangabriel.github.io/post/1337up-ctf-2023/</link>
