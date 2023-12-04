@@ -13,7 +13,8 @@
       <pubDate>Sun, 03 Dec 2023 19:32:26 +0700</pubDate>
       
       <guid>https://berliangabriel.github.io/post/cyberjawara-ctf-2023/</guid>
-      <description>Web Wonder Drive Abusing newline character to append arbitrary filepath to obtain unauhtorized access in a drive sharing webapp (5 Solves, 850 Points)
+      <description>Web Wonder Drive Abusing newline character to append arbitrary filepath to obtain unauhtorized access in a drive sharing webapp
+(5 Solves, 850 Points)
 The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
 if request.method == &amp;#39;POST&amp;#39;: access_file = f&amp;#34;accounts/{username}/access&amp;#34; with open(access_file, &amp;#34;a&amp;#34;, encoding=&amp;#34;ascii&amp;#34;) as f: f.write(f&amp;#34;{data[&amp;#39;filepath&amp;#39;]}\n&amp;#34;) return redirect(url_for(&amp;#39;user_repository_root&amp;#39;, username=username)) access_file is a file that controls the path an account can access.</description>
     </item>
