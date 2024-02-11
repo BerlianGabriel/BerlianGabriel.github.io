@@ -395,7 +395,6 @@ Decrypted plaintext: {&quot;isadmin&quot;:1}
 {&quot;option&quot;: &quot;1&quot;}
 0xL4ugh{cryptocats_B3b0_4nd_M1ndfl4y3r}
 </code></pre><p><em><strong>FLAG: <code>0xL4ugh{cryptocats_B3b0_4nd_M1ndfl4y3r}</code></strong></em></p>
-<h2 id="heading"></h2>
 <h1 id="poison">Poison</h1>
 <p><em>Mathematical tricks on ECC ElGamal decryption with flipped private key</em></p>
 <p>First of all, notice how <code>my_priv</code> is related to <code>new_priv</code>. For each bits, the value of <code>my_priv - new_priv</code> will be equal to either <code>2**i</code>  (when the i-th bit in <code>my_priv</code> is 1 and then flipped to 0 in <code>new_priv</code>) or <code>-(2**i)</code> (when the i-th bit in <code>my_priv</code> is 0 and then flipped to 1 in <code>new_priv</code>).</p>
@@ -428,7 +427,6 @@ my_prev<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
         my_prev<span style="color:#f92672">=</span>my_prev<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span><span style="color:#f92672">^</span>bit
 print(long_to_bytes(my_prev))
 </code></pre></div><p><em><strong>FLAG: <code>0xL4ugh{f4u1ty_3CC_EG_CR4CK3r!!!}</code></strong></em></p>
-<h2 id="heading-1"></h2>
 <h1 id="rsa-gcd">RSA-GCD</h1>
 <p><em>Equation manipulation to find common factors of N</em></p>
 <p>We can manipulate the two equations involving p and q such that it has a common factor with n that is greater than 1. That common factor can then be found using GCD.</p>
@@ -441,7 +439,7 @@ p<span style="color:#f92672">**</span>(power1<span style="color:#f92672">*</span
 
 <span style="color:#75715e">#Substracting 2**(power1*power2)*equation1 with equation2:</span>
 
-(<span style="color:#ae81ff">5</span><span style="color:#f92672">*</span>q)<span style="color:#f92672">**</span>(power1<span style="color:#f92672">*</span>power2) <span style="color:#f92672">+</span> (<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>q)<span style="color:#f92672">**</span>(power1<span style="color:#f92672">*</span>power2) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>(power1<span style="color:#f92672">*</span>power2) <span style="color:#f92672">*</span> out1<span style="color:#f92672">**</span>power2 <span style="color:#f92672">-</span>  out2<span style="color:#f92672">**</span>power1 mod pq
+(<span style="color:#ae81ff">10</span><span style="color:#f92672">*</span>q)<span style="color:#f92672">**</span>(power1<span style="color:#f92672">*</span>power2) <span style="color:#f92672">-</span> (<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>q)<span style="color:#f92672">**</span>(power1<span style="color:#f92672">*</span>power2) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>(power1<span style="color:#f92672">*</span>power2) <span style="color:#f92672">*</span> out1<span style="color:#f92672">**</span>power2 <span style="color:#f92672">-</span>  out2<span style="color:#f92672">**</span>power1 mod pq
 
 <span style="color:#75715e">#This last equation shows us that we can have a constant that is divisble by q.</span>
 <span style="color:#75715e">#This constant and n has a common factor of q.</span>
