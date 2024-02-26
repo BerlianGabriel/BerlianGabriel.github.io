@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Berlian Gabriel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 10 Feb 2024 22:18:48 +0800</lastBuildDate><atom:link href="https://berliangabriel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Feb 2024 07:43:29 +0800</lastBuildDate><atom:link href="https://berliangabriel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bi0s CTF 2024 Write-up</title>
+      <link>https://berliangabriel.github.io/post/bi0s-ctf-2024/</link>
+      <pubDate>Mon, 26 Feb 2024 07:43:29 +0800</pubDate>
+      
+      <guid>https://berliangabriel.github.io/post/bi0s-ctf-2024/</guid>
+      <description>Cryptography challengename ECDSA Nonce Reuse Attack due to flawed custom implementation of nonce XOR-ing. Recovering a and b value from two known curve points, the Public Key and Encryption Result
+We were given 2 points from the same curve, Public Key which is equal to dG, and Encrypted Flag which is equal to dF. We can use this two points as (x1,y1) and (x2,y2) to make the curve equation becomes a system of linear equation and solve it to recover a and b.</description>
+    </item>
+    
     <item>
       <title>All Cryptography Challenges in 0xL4ugh CTF 2024</title>
       <link>https://berliangabriel.github.io/post/0xl4ugh-ctf-2024/</link>
