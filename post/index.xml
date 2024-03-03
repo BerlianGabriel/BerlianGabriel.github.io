@@ -13,7 +13,8 @@
       <pubDate>Mon, 04 Mar 2024 03:12:54 +0800</pubDate>
       
       <guid>https://berliangabriel.github.io/post/gcc-ctf-2024/</guid>
-      <description>Cryptography Too Many Leaks *(39 Solves, 397 Points) A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
+      <description>Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
+(39 Solves, 397 Points)
 The Problem The following python script and output text files were given. 
 The problematic part of the code is shown below.
 # What ?! mask = ((1 &amp;lt;&amp;lt; 256) - 1 &amp;lt;&amp;lt; 256) + (1 &amp;lt;&amp;lt; 255) r1 = s &amp;amp; mask print(f&amp;#34;{r1=}&amp;#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob.</description>
