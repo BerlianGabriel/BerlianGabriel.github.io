@@ -1,0 +1,379 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>GCC CTF 2024 Write-up - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
+r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:" />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.92.2" />
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="GCC CTF 2024 Write-up">
+<meta itemprop="description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
+r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:"><meta itemprop="datePublished" content="2024-03-04T03:12:54+08:00" />
+<meta itemprop="dateModified" content="2024-03-04T03:12:54+08:00" />
+<meta itemprop="wordCount" content="380">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GCC CTF 2024 Write-up"/>
+<meta name="twitter:description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
+r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:"/>
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/gcc-ctf-2024/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/BerlianGM"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">GCC CTF 2024 Write-up</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 4, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="cryptography">Cryptography</h1>
+<h2 id="too-many-leaks">Too Many Leaks</h2>
+<p>A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.</p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/header-DH.png?raw=true" alt=""></p>
+<p>r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">AC <span style="color:#f92672">=</span> pow(g,a<span style="color:#f92672">+</span>c,p)
+AC <span style="color:#f92672">=</span> g<span style="color:#f92672">^</span>a <span style="color:#f92672">*</span> g<span style="color:#f92672">^</span>c mod p
+
+s2 <span style="color:#f92672">=</span> pow(AC,b,p)
+s2 <span style="color:#f92672">=</span> (g<span style="color:#f92672">^</span>(ab) <span style="color:#f92672">*</span> g<span style="color:#f92672">^</span>(bc)) mod p
+s2 <span style="color:#f92672">=</span> s <span style="color:#f92672">*</span> g<span style="color:#f92672">^</span>(bc) mod p
+s2 <span style="color:#f92672">=</span> s <span style="color:#f92672">*</span> B<span style="color:#f92672">^</span>c mod p
+
+r2 <span style="color:#f92672">+</span> k2 <span style="color:#f92672">=</span> ( r1 <span style="color:#f92672">+</span> k1 ) <span style="color:#f92672">*</span> t mod p
+</code></pre></div><p>We know r1, r2, and t, while k1 and k2 are small unknown. We can rearrange the equation to the following form, and the construct the following lattice basis to find k1 and k2 using LLL.</p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/eq-1.png?raw=true" alt=""></p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/matrix-1.png?raw=true" alt=""></p>
+<p>In this specific case, the linear equation and lattice basis would be as follow:</p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/eq-2.png?raw=true" alt=""></p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/matrix-2.png?raw=true" alt=""></p>
+<p>K is the upper bound for k1 and k2, which can be inferred from earlier that K = 2^255
+From this lattice basis, LLL can be used to get the vector (k1,k2,K) that satisfy the corresponding linear equation.</p>
+<p>Below is the solver script that can be used to perform LLL and retrieve the flag in sage.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Key in the value of B, c, p, r1, r2, ciphertext, and iv from chall.txt</span>
+
+t<span style="color:#f92672">=</span>pow(B,c,p)
+t_inverse <span style="color:#f92672">=</span> inverse_mod(int(t),int(p))
+K<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">^</span><span style="color:#ae81ff">255</span>
+
+M <span style="color:#f92672">=</span> Matrix(ZZ, [[p, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>], [t_inverse, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>], [r1<span style="color:#f92672">-</span>t_inverse<span style="color:#f92672">*</span>r2, <span style="color:#ae81ff">0</span>, K]])
+L <span style="color:#f92672">=</span> M<span style="color:#f92672">.</span>LLL()
+
+<span style="color:#75715e">#checking which vector has the k1 and k2 value that satisfy the linear equation</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> L:
+    s2 <span style="color:#f92672">=</span> r2 <span style="color:#f92672">+</span> abs(L[i][<span style="color:#ae81ff">1</span>])
+    s <span style="color:#f92672">=</span> (r1 <span style="color:#f92672">+</span> abs(L[i][<span style="color:#ae81ff">0</span>]))<span style="color:#f92672">*</span>t
+    <span style="color:#66d9ef">if</span>(s2<span style="color:#f92672">%</span>p <span style="color:#f92672">==</span> s<span style="color:#f92672">%</span>p):
+        <span style="color:#66d9ef">break</span>
+
+sha1 <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha1()
+sha1<span style="color:#f92672">.</span>update(str(s)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;ascii&#39;</span>))
+key <span style="color:#f92672">=</span> sha1<span style="color:#f92672">.</span>digest()[:<span style="color:#ae81ff">16</span>]
+cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, bytes<span style="color:#f92672">.</span>fromhex(iv))
+print(unpad(cipher<span style="color:#f92672">.</span>decrypt(bytes<span style="color:#f92672">.</span>fromhex(ciphertext)), <span style="color:#ae81ff">16</span>)<span style="color:#f92672">.</span>decode())
+
+</code></pre></div><p>Notice that the vector from L[0] does not give the value of k1 and k2 that satisfy the linear equation. That is why we move on to the next vector, L[1] which in fact, gives the right value for k1 and k2. A more detailed theoretical explanation can be found on section 6.2 in this <a href="https://hal.science/hal-03045663/document">paper</a> by Gabrielle de Micheli and Nadia Heninger.</p>
+<p><em><strong>FLAG: <code>GCC{D1ff13_H3llm4n_L34k_15_FUn!!}</code></strong></em></p>
+<h1 id="social-media">Social Media</h1>
+<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/bi0s-ctf-2024/"
+      ><span>bi0s CTF 2024 Write-up</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
