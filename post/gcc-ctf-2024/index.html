@@ -55,7 +55,8 @@
   
   
   <meta name="description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
-r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:" />
+The Problem The following python script and output text files were given. The problematic part of the code is shown below.
+# What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob." />
   <meta name="author" content="Berlian Gabriel" />
   
 
@@ -115,15 +116,17 @@ r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), wh
   
   <meta itemprop="name" content="GCC CTF 2024 Write-up">
 <meta itemprop="description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
-r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:"><meta itemprop="datePublished" content="2024-03-04T03:12:54+08:00" />
+The Problem The following python script and output text files were given. The problematic part of the code is shown below.
+# What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob."><meta itemprop="datePublished" content="2024-03-04T03:12:54+08:00" />
 <meta itemprop="dateModified" content="2024-03-04T03:12:54+08:00" />
-<meta itemprop="wordCount" content="391">
+<meta itemprop="wordCount" content="546">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="GCC CTF 2024 Write-up"/>
 <meta name="twitter:description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
-r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:"/>
+The Problem The following python script and output text files were given. The problematic part of the code is shown below.
+# What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob."/>
 
   
   
@@ -276,6 +279,18 @@ r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), wh
 <h2 id="too-many-leaks">Too Many Leaks</h2>
 <p>A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.</p>
 <p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/header-DH.png?raw=true" alt=""></p>
+<h3 id="the-problem">The Problem</h3>
+<p>The following python <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/too-many-leaks.py">script</a> and output <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/too-many-leaks.txt">text</a> files were given. The problematic part of the code is shown below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># What ?!</span>
+mask <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">256</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">256</span>) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">255</span>)
+r1 <span style="color:#f92672">=</span> s <span style="color:#f92672">&amp;</span> mask
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>r1<span style="color:#e6db74">=}</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><p>This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob. The same masking is also applied to r2, which leaks a certain part of the shared secret between Alice and Charlie.</p>
+<p>Secondly, with the way Charlie&rsquo;s public key (AC) and shared secret (s2) is constructed, a mathematical correlation between the first shared secret (s) and the second shared secret (s2) can be derived.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">AC <span style="color:#f92672">=</span> pow(g,a<span style="color:#f92672">+</span>c,p)
+s2 <span style="color:#f92672">=</span> pow(AC,b,p)
+</code></pre></div><p>Finally, combining the leak for both s2 and s, and the mathematical correlation between s2 and s, a Hidden Number Problem attack with LLL can be used to retrieve both shared secrets.</p>
+<h3 id="the-solution">The Solution</h3>
 <p>r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">AC <span style="color:#f92672">=</span> pow(g,a<span style="color:#f92672">+</span>c,p)
 AC <span style="color:#f92672">=</span> g<span style="color:#f92672">^</span>a <span style="color:#f92672">*</span> g<span style="color:#f92672">^</span>c mod p
@@ -286,7 +301,7 @@ s2 <span style="color:#f92672">=</span> s <span style="color:#f92672">*</span> g
 s2 <span style="color:#f92672">=</span> s <span style="color:#f92672">*</span> B<span style="color:#f92672">^</span>c mod p
 
 r2 <span style="color:#f92672">+</span> k2 <span style="color:#f92672">=</span> ( r1 <span style="color:#f92672">+</span> k1 ) <span style="color:#f92672">*</span> t mod p
-</code></pre></div><p>We know r1, r2, and t, while k1 and k2 are small unknown. We can rearrange the equation to the following form, and the construct the following lattice basis to find k1 and k2 using LLL.</p>
+</code></pre></div><p>We know r1, r2, and t, while k1 and k2 are small unknown. We can rearrange the equation to the following form, and then construct the following lattice basis to find k1 and k2 using LLL.</p>
 <p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/eq-1.png?raw=true" alt=""></p>
 <p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/matrix-1.png?raw=true" alt=""></p>
 <p>In this specific case, the linear equation and lattice basis would be as follow:</p>
