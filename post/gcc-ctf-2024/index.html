@@ -117,7 +117,7 @@ r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), wh
 <meta itemprop="description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
 r2 is the most significant 256 bits of s2 (leaving 255 bits to be recovered), while r1 is the most significant 255 bits of s is given (leaving 255 bits to be recovered). The interaction with charlie causes the following linear equation to be formed:"><meta itemprop="datePublished" content="2024-03-04T03:12:54+08:00" />
 <meta itemprop="dateModified" content="2024-03-04T03:12:54+08:00" />
-<meta itemprop="wordCount" content="380">
+<meta itemprop="wordCount" content="391">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -294,8 +294,13 @@ r2 <span style="color:#f92672">+</span> k2 <span style="color:#f92672">=</span> 
 <p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/matrix-2.png?raw=true" alt=""></p>
 <p>K is the upper bound for k1 and k2, which can be inferred from earlier that K = 2^255
 From this lattice basis, LLL can be used to get the vector (k1,k2,K) that satisfy the corresponding linear equation.</p>
-<p>Below is the solver script that can be used to perform LLL and retrieve the flag in sage.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Key in the value of B, c, p, r1, r2, ciphertext, and iv from chall.txt</span>
+<p>Below is the solver script that can be used to perform LLL and retrieve the flag in sage.
+<strong>solver.sage</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> hashlib
+<span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+<span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> unpad
+
+<span style="color:#75715e">#Key in the value of B, c, p, r1, r2, ciphertext, and iv from chall.txt</span>
 
 t<span style="color:#f92672">=</span>pow(B,c,p)
 t_inverse <span style="color:#f92672">=</span> inverse_mod(int(t),int(p))
