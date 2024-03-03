@@ -54,7 +54,7 @@
   
   
   
-  <meta name="description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
+  <meta name="description" content="Cryptography Too Many Leaks *(39 Solves, 397 Points) A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
 The Problem The following python script and output text files were given. The problematic part of the code is shown below.
 # What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob." />
   <meta name="author" content="Berlian Gabriel" />
@@ -115,16 +115,16 @@ The Problem The following python script and output text files were given. The pr
   
   
   <meta itemprop="name" content="GCC CTF 2024 Write-up">
-<meta itemprop="description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
+<meta itemprop="description" content="Cryptography Too Many Leaks *(39 Solves, 397 Points) A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
 The Problem The following python script and output text files were given. The problematic part of the code is shown below.
 # What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob."><meta itemprop="datePublished" content="2024-03-04T03:12:54+08:00" />
 <meta itemprop="dateModified" content="2024-03-04T03:12:54+08:00" />
-<meta itemprop="wordCount" content="546">
+<meta itemprop="wordCount" content="616">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="GCC CTF 2024 Write-up"/>
-<meta name="twitter:description" content="Cryptography Too Many Leaks A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
+<meta name="twitter:description" content="Cryptography Too Many Leaks *(39 Solves, 397 Points) A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.
 The Problem The following python script and output text files were given. The problematic part of the code is shown below.
 # What ?! mask = ((1 &lt;&lt; 256) - 1 &lt;&lt; 256) &#43; (1 &lt;&lt; 255) r1 = s &amp; mask print(f&#34;{r1=}&#34;) This is a masking operation which will reveal a certain part of the shared secret between Alice and Bob."/>
 
@@ -277,7 +277,8 @@ The Problem The following python script and output text files were given. The pr
 
   <section><h1 id="cryptography">Cryptography</h1>
 <h2 id="too-many-leaks">Too Many Leaks</h2>
-<p>A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.</p>
+<p>*(39 Solves, 397 Points)
+<code>A Hidden Number Problem attack using LLL algorithm to recover Diffie-Hellman shared secret from the leak of its most significant bits.</code></p>
 <p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/header-DH.png?raw=true" alt=""></p>
 <h3 id="the-problem">The Problem</h3>
 <p>The following python <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/too-many-leaks.py">script</a> and output <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/too-many-leaks.txt">text</a> files were given. The problematic part of the code is shown below.</p>
@@ -325,10 +326,10 @@ M <span style="color:#f92672">=</span> Matrix(ZZ, [[p, <span style="color:#ae81f
 L <span style="color:#f92672">=</span> M<span style="color:#f92672">.</span>LLL()
 
 <span style="color:#75715e">#checking which vector has the k1 and k2 value that satisfy the linear equation</span>
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> L:
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(L<span style="color:#f92672">.</span>nrows()):
     s2 <span style="color:#f92672">=</span> r2 <span style="color:#f92672">+</span> abs(L[i][<span style="color:#ae81ff">1</span>])
-    s <span style="color:#f92672">=</span> (r1 <span style="color:#f92672">+</span> abs(L[i][<span style="color:#ae81ff">0</span>]))<span style="color:#f92672">*</span>t
-    <span style="color:#66d9ef">if</span>(s2<span style="color:#f92672">%</span>p <span style="color:#f92672">==</span> s<span style="color:#f92672">%</span>p):
+    s <span style="color:#f92672">=</span> r1 <span style="color:#f92672">+</span> abs(L[i][<span style="color:#ae81ff">0</span>])
+    <span style="color:#66d9ef">if</span>(s2<span style="color:#f92672">%</span>p <span style="color:#f92672">==</span> s<span style="color:#f92672">*</span>t<span style="color:#f92672">%</span>p):
         <span style="color:#66d9ef">break</span>
 
 sha1 <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha1()
@@ -338,10 +339,29 @@ cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</sp
 print(unpad(cipher<span style="color:#f92672">.</span>decrypt(bytes<span style="color:#f92672">.</span>fromhex(ciphertext)), <span style="color:#ae81ff">16</span>)<span style="color:#f92672">.</span>decode())
 
 </code></pre></div><p>Notice that the vector from L[0] does not give the value of k1 and k2 that satisfy the linear equation. That is why we move on to the next vector, L[1] which in fact, gives the right value for k1 and k2. A more detailed theoretical explanation can be found on section 6.2 in this <a href="https://hal.science/hal-03045663/document">paper</a> by Gabrielle de Micheli and Nadia Heninger.</p>
-<p><em><strong>FLAG: <code>GCC{D1ff13_H3llm4n_L34k_15_FUn!!}</code></strong></em></p>
-<h1 id="social-media">Social Media</h1>
-<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
-</section>
+<p><em><strong>FLAG: <code>GCC{D1ff13_H3llm4n_L34k_15_FUn!!}</code></strong></em>
+<br/></p>
+<h2 id="gcc-news">GCC News</h2>
+<h3 id="the-problem-1">The Problem</h3>
+<p>The following python <a href="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/GCC-CTF-2024/gcc-news.py">script</a> was given. The problematic part of the is shown below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_key</span>(username):
+    
+	length <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> x : len(bin(x)[<span style="color:#ae81ff">2</span>:])
+
+	s <span style="color:#f92672">=</span> bytes_to_long(username<span style="color:#f92672">.</span>encode())
+
+	random<span style="color:#f92672">.</span>seed(s)
+
+</code></pre></div><p>The seed used to generate the modulus N was generated using username, which is user-controllable. This means attacker can replicate the seed generation and obtain the same modulus N.</p>
+<h3 id="the-solution-1">The Solution</h3>
+<pre tabindex="0"><code>generate_signature(str({'a' : [True]}), private_key)
+
+
+
+# Social Media
+Thanks for reading! Follow me on [**Twitter**](https://twitter.com/BerlianGM) and [**LinkedIn**](https://linkedin.com/in/Berlian-Gabriel-Mongkoginta)
+
+</code></pre></section>
 
   
   
