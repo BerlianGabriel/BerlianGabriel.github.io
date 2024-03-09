@@ -1,0 +1,466 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>shakti CTF 2024 Writeup for All Cryptography Challenges - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group member is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF." />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.92.2" />
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="shakti CTF 2024 Writeup for All Cryptography Challenges">
+<meta itemprop="description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group member is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF."><meta itemprop="datePublished" content="2024-03-09T20:36:03+08:00" />
+<meta itemprop="dateModified" content="2024-03-09T20:36:03+08:00" />
+<meta itemprop="wordCount" content="902">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="shakti CTF 2024 Writeup for All Cryptography Challenges"/>
+<meta name="twitter:description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group member is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/shakti-ctf-2024-crypto/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/BerlianGM"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">shakti CTF 2024 Writeup for All Cryptography Challenges</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 9, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>It was <em>tiring</em> but <em>rewarding</em>. Me and my duo <a href="https://chovid99.github.io/">Chovid99</a> won the <strong>1st</strong> place at the shakti CTF 2024, playing as <strong>Fidethus</strong>. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group member is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF. That is why, we would like to also give back, by writing <em>beginner-friendly</em> and <em>easy-to-understand</em> writeup for some of the challenges we solved.</p>
+<p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/scoreboard.jpg" alt=""></p>
+<h1 id="leveled-rsa">Leveled RSA</h1>
+<p><code>The fundamentals of Håstad’s Broadcast Attack and Chinese Remainder Theorem</code></p>
+<p>We were given the following values:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n <span style="color:#f92672">=</span>  [<span style="color:#ae81ff">545394152327813975627251662356063105606316337974491997295378647690615887382846479574222185770313742991341817138659024468087374639702799222795556980078412962871135642157208399755482893225016908344756760491148399064668808613965264647043153983156823158636642122298187635003705135140416384581106771445445866838902215564606282991513088309620556665381025025077916298564022149696039923514239198973728381470562114128511630255098428951603896126507814349986286926299244531906473181800300109162638238425365871862174757398704874277001803426284087704842667837102348645251524380992176692460217226318601343620321244741213250926827952549075857522163537194435684637120568449074357324295022484230373598477863999323833862106064897506150597864275794923075772562581941862580276891765425279394836654380941144060430751699947857452011664910772780374627419328270996247879965712854608282668964275936077835284502503260344526481151382108658947074683831482875758666328986700498636060663311023268378542535072919283647316207318477573989884722754317180757739484913355973631155066950443165796733672505675792650175851365294681518613533477273329114690324131488216531322890892222791915850987021015618865944951297243631358908253993350646886504460532427533372119310733737</span>, <span style="color:#ae81ff">654433017204931030393884251520668374328578502112329065499245002616657014281719335786661515789130219785304265108980804249440767555248681599614916682862272298566529629627370058286372109201394638823768116811457370204225849129591845722537128484986632895594026295390672059538422169297165462771536815309040021941791147092890195692716368835665525512092613874164553286901414066296758277717935130187674237865068581278223382549707919786219467251565941643651468471324264919504851327570536807893676184593090369615446336982200250817405654069585848798291148949544030544445912464576019279805438673487595098987607957982360753492118751134083284569552862643696493090952715189939962405267741340948977001347141197668825546928450773716052590827997930067536828145658744783093287603067336353184698270363381995904498903929951342498169674677772505915917892511524738459697953768204999886007331374287802745911404315520429855768037418781115835733069095398879654230545925889303904167613219754390016014663223711153223936017132539402888384500403173770229974411277713123372655880066512684146667611520206481203450395544265475048082006895566549778942122244442242417697935029036598682099155322609869957736346608794418286642437622221202523419761127578473141962865846981</span>, <span style="color:#ae81ff">656664159253722329929053881846462282075700945358858129208163124111724072395742290938901013857620037064931120187061472360789962188087748211386276211901416888383522524828300057143223768825016771396971405385977912296701653205241363268791119945482193984563702209525916146980620192041687172777300282327706567918940719192625941352443318030308174187644070886142676567420030750535823957313466487841300401041422312228995354355116513411090417618210002201895595206258178569925039733524631945374780219509872794291728386593162704950971804719827413175600084072124550356629242037519156657560708729000058763994398372598969230222262774288107534066249394374210874463105135829436822421427018885352909669880400889642929021806274477907311812473931225976972461016710112993815116030458360517452892106914594396142581080010693210638806241950845753726815623138324369459420597573301222406254185141834168861479275626072566314488512744029700973260213116392570734584708047885637360800801490671987526484030544293507014652255465525769171257967153971904160956737038424454788046814707288145060839042763689179027536837547505707225949731157318193576213129317450470898141922981363516190463218148241380489513924308008187442535923844636042242167172741489445988199453019921</span>]
+c <span style="color:#f92672">=</span>  [<span style="color:#ae81ff">444531112929450459543429140289809619352043140696583900318472311192993219071404501187225377975892835377730046816730541364621576305148629413991072596416292771499353626694086109818825865726561717859290674936479379440924953869745802497198353628780558684040197810639946952446639846962370059860407555603707651647445778690443133041719452682307467799060452350349846151164547227915641440300614643291938358486050614365721847936496784822258945006602953910612408639602112132517355286459246759783844187587029129096933840481577127362013009336024160313155443733324065758746009769735152099454707980327657814044803785801085482527034056357955160912732839285613124640764692992125257747489943274775114507962485142119292818757934178722138157136000746473824670613239038580653315516058082689116313140371701861770391559241728912292295215566353290045617070525565808471805444285287360342155382284563438231306291727245828528779139146737448817803780592932460624820150332962163306763031728808752839666587984335901666270888268651506139805275362721042665537581020335832830312410994318025927058132047888203625481749363694992617336832831079339525064060849711014591696245478262814362615528649645003743928560170024829080375009621610610446758724714824314537539746597741</span>, <span style="color:#ae81ff">319541171989767532755446000602097166896225347200196626508743093402224140241867314191827751378242432733903693226457027547172503513933644166879063390329737707053155660757120607000703717090604353573894803135999560634581998758344371067183496223789431710697723602791123843074248253528892325344824181541637266688749341322598016032961231749993023923925501083482721050000006912410382928977367058736582134488933487634182532948789845269245093447032949294945953727446820372956158776372159289907796522559644584267443854722343476196620885856835627994133495481903950973851962721072743126089395885542852494215551897217409794422711378515783590466394064265338734779437741278799845955991252819063591202033217363086007574680196274165659224036333800913376109841217065565944940099457568618294430030095355884383382620667834498951427954543736556654626809376215414457341164441165372685161034593542013658661053119879650343936895500400491819128442035398244226052712196047030270555306649842215320932928786690145149666668756759100776180801452219969527645958383675069449971323519557391283337465707916843374943797043686423669161710845415697699772587416614436574937381832178519103680075944054520762887757080554038678298312886042341215497149413336248405537740328940</span>, <span style="color:#ae81ff">314059908879839211743982439271947937059807107675462631896947556928279511925709829725602844671587815181775555286443980486387392531683739236166178663508657548957709154052374595822650982768844981478766720967344389614442017880959614694423922004567205566409635186367201016881524545082953206432499470253544887989860186642066374631166504114896535230649898364765325911535379956436163079714333598585317335075342554480091881378075222805824727370003715132887676286327411075743285417931887601252064259088917354520893665152873809394053950846283996475555707043676223754046397879429722459056943614882288569319981732491865180790710996858877015686532952528110893476920835586760432230084065755668348503681437690885155192082177180849600427339431813823500295186150265147541408632605773035109157963829065124156123974842756493976775470713420070192912392424914257865130407451159134318747464239487223402412696929008760074058516565325359822843045675745818560106446225149438122412842575979293252239333514491444976586504031796450972462559975537317488157352723320981150068008900320412564599483826236513029115763658081363396644662285620153927069676732549015641908133201340628720125625078457933298534083623439395740137790446325852716936206960839127509897673926901</span>]
+e <span style="color:#f92672">=</span>  <span style="color:#ae81ff">3</span>
+</code></pre></div><p>There are 3 cipher and 3 public key pair. The n differs, but e is always equal to 3. So, it looks like encrypting the same message to be given to 3 different parties using e = 3, and different n for each party. This means, we can use <a href="https://en.wikipedia.org/wiki/Coppersmith%27s_attack#H.C3.A5stad.27s_broadcast_attack">Håstad’s Broadcast Attack</a> to get the flag.</p>
+<p>By first utilizing <a href="https://www.cryptohack.org/courses/modular/crt1/">Chinese Reminder Theorem</a> to find m**e</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">m<span style="color:#f92672">**</span>e <span style="color:#f92672">=</span> c0 mod n0
+m<span style="color:#f92672">**</span>e <span style="color:#f92672">=</span> c1 mod n1
+m<span style="color:#f92672">**</span>e <span style="color:#f92672">=</span> c2 mod n2
+
+<span style="color:#75715e"># According to Chinese Reminder Theorem, there is a unique solution:</span>
+m<span style="color:#f92672">**</span>e <span style="color:#960050;background-color:#1e0010">≡</span> a mod N, where N <span style="color:#f92672">=</span> n0 <span style="color:#f92672">*</span> n1 <span style="color:#f92672">*</span> n2
+</code></pre></div><p>Once we have <code>m**e == m**3</code>, we can obtain m by just taking the cubic root, because <code>N = n0 * n1 * n2 &gt; m**3</code>
+The following command in sagemath can be used to retrieve the secret number for submission:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">crt([c[<span style="color:#ae81ff">0</span>],c[<span style="color:#ae81ff">1</span>],c[<span style="color:#ae81ff">2</span>]],[n[<span style="color:#ae81ff">0</span>],n[<span style="color:#ae81ff">1</span>],n[<span style="color:#ae81ff">2</span>]])<span style="color:#f92672">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>)
+</code></pre></div><p>After submitting the secret number, we got the following reply:</p>
+<pre tabindex="0"><code>ding ding ding! you've hit the jackpot!
+but wait, there's more! another puzzle appears out of thin air!
+congratulations! you've unlocked...
+342185266855114790359426885033581315593099955970036139517231529585950600555880051526820737905498278660912142151418345314592007444924168095881727789313561844641872100681118669581612313061299477186676980038806404561173793514218086839641140591501320999312295486673483495546104061992211790913192728847973015672049545306681308733429256105324538780037196172237009273964542874625981132228600376842040977550844851046491374354106145415555991822246390203219904043617856757335634834737185790806266054565239504497260172140438968677
+Hope u get the flag from this!!
+P.S : Hope u enjoy having a slice fp izza while you're solving it
+While I'm stuck in this looppp T_T
+Hope you've escaped it
+ Bye!!!!
+</code></pre><p>The subtle hint is: <code>P.S : Hope u enjoy having a slice fp izza while you're solving it</code>, where <code>fp</code> is likely referring to power. Hence, to obtain the flag, we can guess it by taking the cubic root on the newly given number in sagemath.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> long_to_bytes
+
+pizza<span style="color:#f92672">=</span><span style="color:#ae81ff">342185266855114790359426885033581315593099955970036139517231529585950600555880051526820737905498278660912142151418345314592007444924168095881727789313561844641872100681118669581612313061299477186676980038806404561173793514218086839641140591501320999312295486673483495546104061992211790913192728847973015672049545306681308733429256105324538780037196172237009273964542874625981132228600376842040977550844851046491374354106145415555991822246390203219904043617856757335634834737185790806266054565239504497260172140438968677</span>
+
+print(long_to_bytes(int(pow(pizza,<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>))))
+</code></pre></div><p><em><strong>FLAG: <code>shaktictf{H4st4d_C0pp3rsmith_r3v34l3d}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="eh-lvl2">eH lvl2</h1>
+<p>We were given the following code and output.txt:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">h <span style="color:#f92672">=</span> [<span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961521</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961485</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961472</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961541</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961472</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961541</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961560</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961541</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961553</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961555</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961558</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961557</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961554</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961541</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961567</span>, <span style="color:#ae81ff">94679407488132818404660699098842374931489424397235444032237590365827255722083367058700051514705537574410165711179896056841523082769989050948432027496868754650692929646830509011686345739543788335116663878603193093822729085523727432834299509271223474277629700801997533152872965865087117035426980349126297961548</span>]
+ct <span style="color:#f92672">=</span>  <span style="color:#ae81ff">69809574268094587974680690310010875823914402354108791214388914793753290730520176210621110143671156436023479092945510884008537287566990867903409232633006241007449144089984452712221573540394001175526054610509523658488124259372050629488992877535826749460565155712479024148911894543405457084529004738124518126167</span>
+p <span style="color:#f92672">=</span>  <span style="color:#ae81ff">12183163052748797962152083951276410017023381414297530966097687939312125214962148117236820737625705839607797813446007939630781665285299250570390516148709817</span>
+q <span style="color:#f92672">=</span>  <span style="color:#ae81ff">7771332213006128671514628362741773970588675422315769188626146232673657294809145256158466322140793048100178050459366164928658849208228006813771330133382669</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span><span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> gmpy2 <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> secret <span style="color:#f92672">import</span> flag,hint,p,q,n,e
+
+m <span style="color:#f92672">=</span> bytes_to_long(flag)
+h <span style="color:#f92672">=</span> [i<span style="color:#f92672">^</span>n <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> hint]
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;h = </span><span style="color:#e6db74">{</span>(h)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+ct <span style="color:#f92672">=</span> pow(m,e,n)
+print(<span style="color:#e6db74">&#34;ct = &#34;</span>,ct)
+print(<span style="color:#e6db74">&#34;p = &#34;</span>,p)
+print(<span style="color:#e6db74">&#34;q = &#34;</span>,q)
+
+</code></pre></div><p>To get the hint back, we just need to XOR each element in h with n.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> xor
+
+n <span style="color:#f92672">=</span> p<span style="color:#f92672">*</span>q
+s<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> h:
+    s<span style="color:#f92672">+=</span>chr((i<span style="color:#f92672">^^</span>n))
+print(s)
+
+</code></pre></div><p>The outpot is <code>The e = 46307 :)</code>, which is the hint needed to solve the RSA.</p>
+<p>One liner to get the flag in sagemath:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> long_to_bytes
+
+e <span style="color:#f92672">=</span> <span style="color:#ae81ff">46307</span>
+print(long_to_bytes(int(pow(ct,inverse_mod(e,(p<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)),p<span style="color:#f92672">*</span>q))))
+
+</code></pre></div><p><em><strong>FLAG: <code>shaktictf{RSA_1s_fun_t0_d0_ri8?}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="eh-lvl1">eH lvl1</h1>
+<p>We were given the following code and output.txt:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span><span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> gmpy2 <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> secret <span style="color:#f92672">import</span> e,b,hint,msg,d
+p <span style="color:#f92672">=</span> getPrime(<span style="color:#ae81ff">512</span>)
+q <span style="color:#f92672">=</span> getPrime(<span style="color:#ae81ff">512</span>)
+n <span style="color:#f92672">=</span> p<span style="color:#f92672">*</span>q
+m <span style="color:#f92672">=</span> bytes_to_long(msg)
+h <span style="color:#f92672">=</span> bytes([i<span style="color:#f92672">^</span>b <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> hint])
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;h = </span><span style="color:#e6db74">{</span>hex(bytes_to_long(h))<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+ct <span style="color:#f92672">=</span> pow(m,e,n)
+de <span style="color:#f92672">=</span> pow(ct,d,n)
+<span style="color:#66d9ef">assert</span>(m <span style="color:#f92672">==</span> de)
+print(<span style="color:#e6db74">&#34;ct = &#34;</span>,ct)
+print(<span style="color:#e6db74">&#34;p = &#34;</span>,p)
+print(<span style="color:#e6db74">&#34;q = &#34;</span>,q)
+
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x6f535e1b5e1b061b0c020f0b0b10134f535e1b4852555c575e1b59424f5e1b4f535a4f1b4c5a481b4354495e5f121b0112</span>
+ct <span style="color:#f92672">=</span>  <span style="color:#ae81ff">90411409551177819360717236462351545237822367597930505531741437834918499125195272674859389978951589180632146502190429979348445123366914000167832349866368754227474060832624537550600921894849466284315037863094795265822884392628050584343158613338754532642964368052098136565157343201877382609610774291396944124354</span>
+p <span style="color:#f92672">=</span>  <span style="color:#ae81ff">10425866553433272288676977376976736493869099145622614885498170561565122111495807572631609087909399078701783905493563029715011322065331636751277834978526061</span>
+q <span style="color:#f92672">=</span>  <span style="color:#ae81ff">9215753518399683669080201592666232851634627861957009698720674021492716071355990364002777325458055207969176695525292834842774295594232711456066623178861093</span>
+</code></pre></div><p>From the given code, each byte in hint is being XOR-ed with b, which is unknown. It is safe to assume that b is 1-byte, judging from how it is being XOR-ed byte to byte againt hint. So, to get back the hint, we can brute force the value of b from 0 to 255, and XOR it against each element of h that has been converted back to its bytes representation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> xor
+<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> long_to_bytes
+
+h <span style="color:#f92672">=</span> long_to_bytes(h)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>):
+    hint<span style="color:#f92672">=</span>xor(h,i)<span style="color:#f92672">.</span>decode()
+    print(hint)
+    print(<span style="color:#e6db74">&#34;b = &#34;</span>,i)
+
+</code></pre></div><p>Inspecting the output from the bruteforcer script above, there was one legible entry. The following phrase was found:</p>
+<pre tabindex="0"><code>The e = 79400+(the single byte that was xored) :)
+e =  59
+</code></pre><p>One liner to get the flag in sagemath:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> long_to_bytes
+
+e <span style="color:#f92672">=</span> <span style="color:#ae81ff">79400</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">59</span>
+print(long_to_bytes(int(pow(ct,inverse_mod(e,(p<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)),p<span style="color:#f92672">*</span>q))))
+
+</code></pre></div><p>We got the following output:
+<code>&quot;Here is your reward 'vvrkxuqgi{r0i43m0r_f0_hu3_u3gtu3!!!}' You can ask 'Doraemon' to help you with this. Bye!!&quot;</code></p>
+<p><strong>Analyzing the cipher</strong>
+<code>vvrkxuqgi</code> should somehow translates to <code>shaktuctf</code>. Notice that the first <code>v</code> translates to <code>s</code>, while the second <code>v</code> translates to <code>s</code>. This characteristic eliminates many possible cipher that uses Mono-Alphabetic Substitution. Searching the internet with the keyword <code>Doraemon cipher</code> only returns <code>Dorabella</code>, which clearly is not the cipher we are looking for.</p>
+<p>Considering that a different letter in plaintext can be translated into the same letter in the ciphertext, a strong candidate would be the Vigenere Cipher.</p>
+<p>Performing Vignere Cipher in <a href="https://www.dcode.fr/vigenere-cipher">dCode.fr</a> using <code>Doraemon</code> as the key, gives us the flag.</p>
+<p><em><strong>FLAG: <code>shaktictf{d0r43m0n_t0_th3_r3scu3!!!}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="flag-expedition">Flag Expedition</h1>
+<p>We were given this image file
+<img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/maritime.jpg" alt=""></p>
+<p>This is the Navy Signals Code, which can be decoded using this online tool from <a href="https://www.dcode.fr/maritime-signals-code">dCode</a>
+<img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/dcode.png" alt=""></p>
+<p><em><strong>FLAG: <code>shaktictf{was_it_too_easy_to_find}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="social-media">Social Media</h1>
+<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/gcc-ctf-2024/"
+      ><span>GCC CTF 2024 Write-up</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

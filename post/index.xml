@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 09 Mar 2024 20:36:03 +0800</lastBuildDate><atom:link href="https://berliangabriel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>shakti CTF 2024 Writeup for All Cryptography Challenges</title>
-      <link>https://berliangabriel.github.io/post/shakti-ctf-2024/</link>
+      <link>https://berliangabriel.github.io/post/shakti-ctf-2024-crypto/</link>
       <pubDate>Sat, 09 Mar 2024 20:36:03 +0800</pubDate>
       
-      <guid>https://berliangabriel.github.io/post/shakti-ctf-2024/</guid>
+      <guid>https://berliangabriel.github.io/post/shakti-ctf-2024-crypto/</guid>
       <description>It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group member is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF.</description>
     </item>
     
