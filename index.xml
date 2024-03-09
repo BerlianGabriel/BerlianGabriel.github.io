@@ -6,7 +6,16 @@
     <description>Recent content on Berlian Gabriel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 04 Mar 2024 03:12:54 +0800</lastBuildDate><atom:link href="https://berliangabriel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Mar 2024 20:36:03 +0800</lastBuildDate><atom:link href="https://berliangabriel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>shakti CTF 2024 Writeup for All Crypto Challenges</title>
+      <link>https://berliangabriel.github.io/post/shakti-ctf-2024/</link>
+      <pubDate>Sat, 09 Mar 2024 20:36:03 +0800</pubDate>
+      
+      <guid>https://berliangabriel.github.io/post/shakti-ctf-2024/</guid>
+      <description>It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group member is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to organizers for this unique CTF.</description>
+    </item>
+    
     <item>
       <title>GCC CTF 2024 Write-up</title>
       <link>https://berliangabriel.github.io/post/gcc-ctf-2024/</link>
