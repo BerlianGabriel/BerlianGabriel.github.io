@@ -115,7 +115,7 @@
   <meta itemprop="name" content="Shakti CTF 2024 Writeup for Forensic and OSINT Challenges">
 <meta itemprop="description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF."><meta itemprop="datePublished" content="2024-03-10T16:05:16+08:00" />
 <meta itemprop="dateModified" content="2024-03-10T16:05:16+08:00" />
-<meta itemprop="wordCount" content="1656">
+<meta itemprop="wordCount" content="1706">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -273,6 +273,7 @@
 <p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/scoreboard.jpg" alt=""></p>
 <h1 id="forensic">Forensic</h1>
 <h2 id="machiavellian">Machiavellian</h2>
+<p><code>Recovering Skype Chat History from an AD1 File</code></p>
 <p>We were given an <code>.ad1</code> file, which you can download <a href="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/chall.zip">here</a>. The context was that Freddy Mileman, who is working on his research paper is contacted by someone who claims to be the his professor&rsquo;s associate. After opening a file from sent by that someone, Freddy&rsquo;s computer starts to show signs of getting hacked.</p>
 <pre tabindex="0"><code>Help find the following:
 
@@ -284,7 +285,7 @@ The name of the downloaded file that looked suspicious.
 
 Flag Format : shaktictf{fullname_no_space_all_in_small_case:date/month/year/hour/minutes:name_of_the_file_with_extension}
 </code></pre><p>We need to use FTK Imager, can be downloaded <a href="https://go.exterro.com/l/43312/2023-05-03/fc4b78">here</a> to open an <code>.ad1</code> file. To open <code>chal.ad1</code> in FTK Imager, click <code>File</code> &gt; <code>Add Evidence Item</code> &gt; <code>Image File</code> &gt; <code>Browse</code> &gt; choose the location where you store the <code>chal.ad1</code> file &gt; <code>Finish</code></p>
-<p>Expanding the Evidence Tree, we can browse this <code>chal.ad1</code> just like a copy of Freddy&rsquo;s computer disk. The logic here is to explore Freddy&rsquo;s personal file to find interesing lead. Looking at the <code>Users</code> folder, there is the non-default folder named <code>mayyoo</code>, which should be Freddy&rsquo;s user folder.</p>
+<p>Expanding the Evidence Tree, we can browse this <code>chal.ad1</code> just like a copy of Freddy&rsquo;s computer disk. The logic here is to explore Freddy&rsquo;s personal file to find interesing lead. Looking at the <code>Users</code> folder, there is the non-default folder named <code>mayyoo</code>, which should be Freddy&rsquo;s user folder. What makes this challenge tricky is that, some of Freddy&rsquo;s personal file and folders, such as Desktop and Downloads, are deleted. So we have to find the information through some other means.</p>
 <p>There is an interesting screenshot image file located at:
 <code>\Users\mayyoo\OneDrive\Pictures\Screenshots\2024-02-08.png</code>
 <img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/screenshot.png" alt="">
@@ -311,7 +312,7 @@ The proper way to open it is by using SQLite Database Browser, such as this <a h
 <p>We were given a zip file, that gives this image file when extracted:
 <img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/sea.jpg" alt=""></p>
 <p>First observation, the image size of ~800 KB for a 1920x1080 JPEG seems on the bigger side. This might be an indication that there are some hidden files embedded inside this sea.jpeg. We can use <code>binwalk</code> to make sure and extract the hidden files.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">binwalk -e sea.jpg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">binwalk -e sea.jpeg
 </code></pre></div><p>Turns out, hidden inside there is <code>7D353.zip</code> which contains <code>artofeye.jpg</code>. The zip file is password protected, but it can be cracked using John the Ripper, as follow:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">zip2john 7D353.zip &gt; zip.hash
 john zip.hash
@@ -335,6 +336,7 @@ sudo chmod +x /usr/bin/slink
 <br/></p>
 <h1 id="osint">OSINT</h1>
 <h2 id="ocean_enigma">Ocean_Enigma</h2>
+<p><code>Tricks in Gemini to get accurate answers quickly for OSINT</code></p>
 <p>In this OSINT challenge, I want to demonstrate that the <em><strong>Gemini Advanced</strong></em> might actually be pretty good to solve image-based OSINT challenges (probably due to its Google Image Search Integration). We were given this image, and need to find some information, namely:</p>
 <ul>
 <li>Who is the individual from crew has previously sailed with the captain of the ship?</li>
