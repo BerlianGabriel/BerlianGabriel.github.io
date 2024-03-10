@@ -1,0 +1,447 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Shakti CTF 2024 Writeup for Forensic and OSINT Challenges - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF." />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.92.2" />
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="Shakti CTF 2024 Writeup for Forensic and OSINT Challenges">
+<meta itemprop="description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF."><meta itemprop="datePublished" content="2024-03-10T16:05:16+08:00" />
+<meta itemprop="dateModified" content="2024-03-10T16:05:16+08:00" />
+<meta itemprop="wordCount" content="1656">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Shakti CTF 2024 Writeup for Forensic and OSINT Challenges"/>
+<meta name="twitter:description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/shakti-ctf-2024-foren/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/BerlianGM"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Shakti CTF 2024 Writeup for Forensic and OSINT Challenges</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 10, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>It was <em>tiring</em> but <em>rewarding</em>. Me and my duo <a href="https://chovid99.github.io/">Chovid99</a> won the <strong>1st</strong> place at the shakti CTF 2024, playing as <strong>Fidethus</strong>. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF. That is why, we would like to also give back, by writing <em>beginner-friendly</em> and <em>easy-to-understand</em> writeup for some of the challenges we solved.</p>
+<p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/scoreboard.jpg" alt=""></p>
+<h1 id="forensic">Forensic</h1>
+<h2 id="machiavellian">Machiavellian</h2>
+<p>We were given an <code>.ad1</code> file, which you can download <a href="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/chall.zip">here</a>. The context was that Freddy Mileman, who is working on his research paper is contacted by someone who claims to be the his professor&rsquo;s associate. After opening a file from sent by that someone, Freddy&rsquo;s computer starts to show signs of getting hacked.</p>
+<pre tabindex="0"><code>Help find the following:
+
+The name of the person that Freddy is trying to contact in regards of his research paper.
+
+The submisssion date of Freddy's Research paper that he had specifically noted on his desktop.
+
+The name of the downloaded file that looked suspicious.
+
+Flag Format : shaktictf{fullname_no_space_all_in_small_case:date/month/year/hour/minutes:name_of_the_file_with_extension}
+</code></pre><p>We need to use FTK Imager, can be downloaded <a href="https://go.exterro.com/l/43312/2023-05-03/fc4b78">here</a> to open an <code>.ad1</code> file. To open <code>chal.ad1</code> in FTK Imager, click <code>File</code> &gt; <code>Add Evidence Item</code> &gt; <code>Image File</code> &gt; <code>Browse</code> &gt; choose the location where you store the <code>chal.ad1</code> file &gt; <code>Finish</code></p>
+<p>Expanding the Evidence Tree, we can browse this <code>chal.ad1</code> just like a copy of Freddy&rsquo;s computer disk. The logic here is to explore Freddy&rsquo;s personal file to find interesing lead. Looking at the <code>Users</code> folder, there is the non-default folder named <code>mayyoo</code>, which should be Freddy&rsquo;s user folder.</p>
+<p>There is an interesting screenshot image file located at:
+<code>\Users\mayyoo\OneDrive\Pictures\Screenshots\2024-02-08.png</code>
+<img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/screenshot.png" alt="">
+The image is actually a screenshot of Freddy&rsquo;s Desktop, and we can see his sticky notes that serves as a reminder for submission date of his Research paper.</p>
+<p>Great! so we now have the 2nd part of the flag, which is <code>12/03/2024/12/45</code>
+However aside from this, there are some clue that we can infer from this Desktop screenshot. There is a <em><strong>Skype</strong></em> icon on Freddy&rsquo;s Desktop. So it is likely that Freddy was communicating with that someone via Skype.</p>
+<p>Additionally, we can see from <code>\Users\mayyoo\AppData\Roaming\Microsoft\Windows\Recent</code>, which shows files that are recently used, there is a shortcut file to a <em><strong>Skype</strong></em> thread chat <code>skypechat&amp;threadId=19ce0b83be831145b0a4c9667d6e4b5ca1@thread.skype&amp;correlationId=57e16fa5-c674-4204-b873-13facbcd120b&amp;origin=launcher</code>.</p>
+<p>From these 2 findings, we can focus our effort investigating Freddy&rsquo;s Skype chat history, which is located at:</p>
+<p><code>Users\mayyoo\AppData\Local\Packages\Microsoft.SkypeApp_kzf8qxf38zg5c\LocalState\s4l-live%003a.cid.70fc9949a8a59d33.db</code></p>
+<p>To extract the file from FTK Imager, right click on the file &gt; <code>Export Files...</code> &gt; choose destination folder.
+The proper way to open it is by using SQLite Database Browser, such as this <a href="https://sqlitebrowser.org/dl/">one</a>. However, opening it with just a text editor like Visual Code is also fine, since we only need to find text-based information.</p>
+<p>Inside the text editor, we can start with using the search function for the word &ldquo;Freddy&rdquo;. We can see a conversation flow between Freddy and someone. When searching using Freddy&rsquo;s last name <strong>&ldquo;Mileman&rdquo;</strong>, we found this key message:</p>
+<pre tabindex="0"><code>&quot;Hello.Mr Mileman I am an associate of Prof. Simon Clarke I was told to give u some suggestions on your report .I shall sent you the corrections in a document please go through it and make the required changes.&quot;
+</code></pre><p>It looks like this message was sent by that someone who pretends to be Freddy&rsquo;s Professor, and then sends malware disguised as documents file, likely via Skype as well.</p>
+<p>So, if we try to follow Freddy&rsquo;s conversation and piece everything together, it seems like Freddy tried to contact his Professor, but then, he encountered someone who he is not familiar with. Since the name of Freddy&rsquo;s Professor is revealed in the message above, we got the 1st part of the flag, which is <code>simonclarke</code>.</p>
+<p>Since we saw earlier in <code>\Users\mayyoo\AppData\Roaming\Microsoft\Windows\Recent</code>, there were a few Microsoft Word file, we can assume that the corrections document sent by this someone is also using similar extension. When searching for <strong>&quot;.doc&quot;</strong>, we found this file name:</p>
+<pre tabindex="0"><code>Corrections.docm
+</code></pre><p>This is the suspicious file that has infected Freddy&rsquo;s computer. It make senses because <code>.docm</code> is document file type that can contain <strong>Macro</strong> which is perfect for sneaking in malware.</p>
+<p><em><strong>FLAG: <code>shaktictf{simonclarke:12/03/2024/12/45:corrections.docm}</code></strong></em>
+<br/>
+<br/></p>
+<h2 id="aqua-gaze">Aqua Gaze</h2>
+<p><code>Steganography and LSB on JPEG file</code></p>
+<p>We were given a zip file, that gives this image file when extracted:
+<img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/sea.jpg" alt=""></p>
+<p>First observation, the image size of ~800 KB for a 1920x1080 JPEG seems on the bigger side. This might be an indication that there are some hidden files embedded inside this sea.jpeg. We can use <code>binwalk</code> to make sure and extract the hidden files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">binwalk -e sea.jpg
+</code></pre></div><p>Turns out, hidden inside there is <code>7D353.zip</code> which contains <code>artofeye.jpg</code>. The zip file is password protected, but it can be cracked using John the Ripper, as follow:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">zip2john 7D353.zip &gt; zip.hash
+john zip.hash
+</code></pre></div><p>The zip cracking finished quickly and the password was found to be <code>angel1</code>.
+Upon unzipping, there is another image file, <code>artofeye.jpg</code>
+<img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/artofeye.jpg" alt="">
+Looking at the size, ~300 KB for 1470x980 JPEG seems about right. Checking with Exiftool and inspecting the file in a Hex Editor, nothing seems to be out of place. So, it is time to move on to the next step of checking in steganography, which is LSB. The Least Significant Bit (LSB) method hides the message by inserting the message at the lower or rightmost bits in the cover work file as a medium to hide the message. Since this is a JPEG file, we can use <code>jsteg</code> to try to extract hidden information in artofeye.jpg.</p>
+<p><strong>jsteg installation</strong></p>
+<pre tabindex="0"><code>sudo wget -O /usr/bin/jsteg https://github.com/lukechampine/jsteg/releases/download/v0.1.0/jsteg-linux-amd64
+sudo chmod +x /usr/bin/jsteg
+sudo wget -O /usr/bin/slink https://github.com/lukechampine/jsteg/releases/download/v0.2.0/slink-linux-amd64
+sudo chmod +x /usr/bin/slink
+</code></pre><p><strong>Using jsteg</strong></p>
+<pre tabindex="0"><code>jsteg reveal artofeye.jpg
+</code></pre><p>Bingo! The output is a lengthy, readable story about the art of eye, but none of the story is needed to find the flag. Looking carefully at the paragraph, there is a base64-encoded text:</p>
+<pre tabindex="0"><code>c2hha3RpY3Rme3RoM19yM2RfczM0XzRuZF90aDNfNHJ0X29mXzN5M18xc19sb29rMW5nX2cwMGR9
+</code></pre><p>After base64-decoding it, we got the flag.</p>
+<p><em><strong>FLAG: <code>shaktictf{th3_r3d_s34_4nd_th3_4rt_of_3y3_1s_look1ng_g00d}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="osint">OSINT</h1>
+<h2 id="ocean_enigma">Ocean_Enigma</h2>
+<p>In this OSINT challenge, I want to demonstrate that the <em><strong>Gemini Advanced</strong></em> might actually be pretty good to solve image-based OSINT challenges (probably due to its Google Image Search Integration). We were given this image, and need to find some information, namely:</p>
+<ul>
+<li>Who is the individual from crew has previously sailed with the captain of the ship?</li>
+<li>What was the name of Captain&rsquo;s close friend from the crew that found the abandoned ship?</li>
+<li>In the logbook, the captain noted the sighting of land, describing it as an island.What is the name of this enigmatic island?</li>
+<li>What was the original name of the ship shown in the image?</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/ship.jpg" alt=""></p>
+<p>Using Gemini Advanced, we were able to shorten the amount of time needed to solve this OSINT challenge.</p>
+<h3 id="1st-prompt---identifying-the-image">1st Prompt - Identifying the image</h3>
+<pre tabindex="0"><code>what is this image all about
+[upload the ship.jpg to Gemini Advanced chat]
+</code></pre><p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/ship1.png" alt=""></p>
+<h3 id="2nd-prompt---asking-the-ctf-questions">2nd Prompt - Asking the CTF questions</h3>
+<pre tabindex="0"><code>these questions are from CTF OSINT challenge
+1)Who is the individual from crew has previously sailed with the captain of the ship?
+2)What was the name of Captain's close friend from the crew that found the abandoned ship?
+3)In the logbook, the captain noted the sighting of land, describing it as an island.What is the name of this enigmatic island?
+4)What was the original name of the ship shown in the image?
+
+it is about the Mary Celeste
+</code></pre><p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/ship2.png" alt=""></p>
+<p>The response was followed with some guideline from Gemini on how to research the answer ourself. We can see that Gemini is reluctant to give answers, because it is not sure with the validity of the answers. To extract the answers from Gemini, the trick is to ask for possible answers to it, instead of asking for the absolute answers right away.</p>
+<h3 id="3rd-prompt---rewording-the-request">3rd Prompt - Rewording the request</h3>
+<pre tabindex="0"><code>give me a few possible answers for each question that you are in doubt
+</code></pre><p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/ship3.png" alt=""></p>
+<p>However, the flag crafted from Gemini&rsquo;s answer is still wrong. So some of the answers might not be correct.</p>
+<h3 id="4th-prompt---identifying-geminis-misunderstanding">4th Prompt - Identifying Gemini&rsquo;s Misunderstanding</h3>
+<p>Looking at answers and the reasoning from question 1,2,3,4, we can immediately identify that Gemini&rsquo;s answer for the 2nd questions indicates that it might misunderstood the question.</p>
+<pre tabindex="0"><code>2) What was the name of Captain's close friend from the crew that found the abandoned ship?
+
+Oliver Deveau: Deveau was the first mate on the Dei Gratia, the ship that discovered the Mary Celeste. While he and Captain Morehouse may have had to work closely together during the salvage process, it's hard to say definitively if they were &quot;close friends&quot;.
+</code></pre><p>It seems that Gemini mistakenly thought that we were asking, <code>who is the close friend of the Captain of the crew that found Mary Celeste</code>. This is partly due to the ambiguous wording from the 2nd questions from the CTF challenge. A better phrasing would be <code>who is the Captain of Mary Celeste's close friend, who is also from the crew who found the abandoned ship?</code>. Since we know that the crew who found the abandoned ship is <code>Dei Gratia</code>, to get the answer we needed, we can try this prompt:</p>
+<pre tabindex="0"><code>Out of the crew of Dei Gratia, who is the most likely to be close friend with the captain of Mary Celeste?
+</code></pre><p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/ship4.png" alt=""></p>
+<p>So, here is the final answer:</p>
+<pre tabindex="0"><code>1)Who is the individual from crew has previously sailed with the captain of the ship?
+Albert G. Richardson
+
+2)What was the name of Captain's close friend from the crew that found the abandoned ship?
+David Morehouse
+
+3)In the logbook, the captain noted the sighting of land, describing it as an island.What is the name of this enigmatic island?
+Santa Maria
+
+4)What was the original name of the ship shown in the image?
+Amazon
+</code></pre><p><em>Do note that you might get different answers / behavior from Gemini, due to the nature of LLM.</em></p>
+<p><em><strong>FLAG: <code>shaktictf{Albert_G_Richardson:David_Morehouse:Santa_Maria:Amazon}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="social-media">Social Media</h1>
+<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/shakti-ctf-2024-crypto/"
+      ><span>shakti CTF 2024 Writeup for All Cryptography Challenges</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
