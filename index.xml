@@ -6,9 +6,20 @@
     <description>Recent content on Berlian Gabriel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 Mar 2024 16:05:16 +0800</lastBuildDate><atom:link href="https://berliangabriel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Mar 2024 20:05:02 +0800</lastBuildDate><atom:link href="https://berliangabriel.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Shakti CTF 2024 Writeup for Forensic and OSINT Challenges</title>
+      <title>Cyber Apocalypse CTF 2024 Writeup: Web</title>
+      <link>https://berliangabriel.github.io/post/cyber-apocalypse-ctf-2024/</link>
+      <pubDate>Thu, 14 Mar 2024 20:05:02 +0800</pubDate>
+      
+      <guid>https://berliangabriel.github.io/post/cyber-apocalypse-ctf-2024/</guid>
+      <description>Testimonial This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.
+err := os.WriteFile(fmt.Sprintf(&amp;#34;public/testimonials/%s&amp;#34;, req.Customer), []byte(req.Testimonial), 0644) We need the following python libaray to interact directly with the gRPC server:
+pip install grpcio grpcio-tools Inside the folder that has the .proto file, which in this case is \challenge\pb\pytypes.</description>
+    </item>
+    
+    <item>
+      <title>shakti CTF 2024 Writeup for Forensic and OSINT Challenges</title>
       <link>https://berliangabriel.github.io/post/shakti-ctf-2024-foren/</link>
       <pubDate>Sun, 10 Mar 2024 16:05:16 +0800</pubDate>
       

