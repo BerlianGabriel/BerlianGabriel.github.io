@@ -19,7 +19,7 @@ pip install grpcio grpcio-tools Inside the folder that has the .proto file, whic
     </item>
     
     <item>
-      <title>shakti CTF 2024 Writeup for Forensic and OSINT Challenges</title>
+      <title>Shakti CTF 2024 Writeup: Forensic and OSINT</title>
       <link>https://berliangabriel.github.io/post/shakti-ctf-2024-foren/</link>
       <pubDate>Sun, 10 Mar 2024 16:05:16 +0800</pubDate>
       
@@ -28,7 +28,7 @@ pip install grpcio grpcio-tools Inside the folder that has the .proto file, whic
     </item>
     
     <item>
-      <title>shakti CTF 2024 Writeup for All Cryptography Challenges</title>
+      <title>Shakti CTF 2024 Writeup: All Crypto Challenges</title>
       <link>https://berliangabriel.github.io/post/shakti-ctf-2024-crypto/</link>
       <pubDate>Sat, 09 Mar 2024 20:36:03 +0800</pubDate>
       
