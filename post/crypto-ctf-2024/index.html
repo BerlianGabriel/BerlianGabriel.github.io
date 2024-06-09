@@ -1,0 +1,464 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Crypto CTF 2024 - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="RM2 - Safe Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
+The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
+  Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537." />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.92.2" />
+
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="Crypto CTF 2024">
+<meta itemprop="description" content="RM2 - Safe Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
+The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
+  Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537."><meta itemprop="datePublished" content="2024-06-09T21:45:16+08:00" />
+<meta itemprop="dateModified" content="2024-06-09T21:45:16+08:00" />
+<meta itemprop="wordCount" content="714">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Crypto CTF 2024"/>
+<meta name="twitter:description" content="RM2 - Safe Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
+The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
+  Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537."/>
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/crypto-ctf-2024/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/BerlianGM"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Crypto CTF 2024</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jun 9, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="rm2---safe-prime">RM2 - Safe Prime</h1>
+<p><code>Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes</code></p>
+<h2 id="the-problem">The Problem</h2>
+<p>We need to decrypt encrypted data to retrieve a flag. It operates as follows:</p>
+<ol>
+<li>
+<p><strong>Setup and Prime Validation:</strong> The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537.</p>
+</li>
+<li>
+<p><strong>Message Encryption:</strong> The script generates a random 64-character string, converts it to a long integer, and splits it into two halves, ( m1 ) and ( m2 ). Each half is encrypted using different modulus calculations:</p>
+<ul>
+<li>( c1 ) is computed as ( m1^e \mod ((p-1) \times (q-1)) ).</li>
+<li>( c1 ) is computed as ( m2^e \mod ((2 \times p + 1) \times (2 \times q + 1)) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Flag Retrieval:</strong> The script outputs the encrypted values ( c1 ) and ( c2 ). Participants must submit the original string used for encryption. If the submission is correct, the flag is displayed; otherwise, a failure message is shown.</p>
+</li>
+</ol>
+<p>This script introduces a modified and non-standard RSA encryption process where the correct decryption of the secret string results in obtaining the flag. Below is the source code given.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> flag <span style="color:#f92672">import</span> flag
+	
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">die</span>(<span style="color:#f92672">*</span>args):
+	pr(<span style="color:#f92672">*</span>args)
+	quit()
+	
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pr</span>(<span style="color:#f92672">*</span>args):
+	s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join(map(str, args))
+	sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>write(s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+	sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>flush()
+	
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sc</span>(): 
+	<span style="color:#66d9ef">return</span> sys<span style="color:#f92672">.</span>stdin<span style="color:#f92672">.</span>buffer<span style="color:#f92672">.</span>readline()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">randstr</span>(l):
+	<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([printable[randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">90</span>)] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(l)])
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(msg, p, q):
+	e <span style="color:#f92672">=</span> <span style="color:#ae81ff">65537</span>
+	m1, m2 <span style="color:#f92672">=</span> msg[:len(msg) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>], msg[len(msg) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>:]
+	m1, m2 <span style="color:#f92672">=</span> bytes_to_long(m1), bytes_to_long(m2)
+	c1, c2 <span style="color:#f92672">=</span> pow(m1, e, (p <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (q <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)), pow(m2, e, (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+	<span style="color:#66d9ef">return</span> (c1, c2)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+	border <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;┃&#34;</span>
+	pr(        <span style="color:#e6db74">&#34;┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓&#34;</span>)
+	pr(border, <span style="color:#e6db74">&#34;.: Welcome to RM2 task! Your mission is break our cryptosystem :. &#34;</span>, border)
+	pr(        <span style="color:#e6db74">&#34;┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛&#34;</span>)
+	nbit, _b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>, <span style="color:#66d9ef">False</span>
+	pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Please provide your desired </span><span style="color:#e6db74">{</span>nbit<span style="color:#e6db74">}</span><span style="color:#e6db74">-bit prime numbers p, q:&#34;</span>)
+	inp <span style="color:#f92672">=</span> sc()<span style="color:#f92672">.</span>decode()
+	<span style="color:#66d9ef">try</span>:
+		p, q <span style="color:#f92672">=</span> [int(_) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> inp<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)]
+		<span style="color:#66d9ef">if</span> p<span style="color:#f92672">.</span>bit_length() <span style="color:#f92672">==</span> q<span style="color:#f92672">.</span>bit_length() <span style="color:#f92672">==</span> nbit <span style="color:#f92672">and</span> isPrime(p) <span style="color:#f92672">and</span> isPrime(q) <span style="color:#f92672">and</span> p <span style="color:#f92672">!=</span> q:
+			_b <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+	<span style="color:#66d9ef">except</span>:
+		die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;The input you provided is is not valid!&#34;</span>)
+	<span style="color:#66d9ef">if</span> _b:
+		e, n <span style="color:#f92672">=</span>  <span style="color:#ae81ff">65537</span>, p <span style="color:#f92672">*</span> q
+		s <span style="color:#f92672">=</span> randstr(nbit <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>)<span style="color:#f92672">.</span>encode()
+		m <span style="color:#f92672">=</span> bytes_to_long(s)
+		<span style="color:#66d9ef">assert</span> m <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">2</span>
+		c1, c2 <span style="color:#f92672">=</span> encrypt(s, p, q)
+		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;c1 = </span><span style="color:#e6db74">{</span>c1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;c2 = </span><span style="color:#e6db74">{</span>c2<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Now, send us the secret string to get the flag: &#39;</span>)
+		_m <span style="color:#f92672">=</span> sc()<span style="color:#f92672">.</span>strip()
+		<span style="color:#66d9ef">if</span> _m <span style="color:#f92672">==</span> s:
+			die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Congrats, you got the flag: </span><span style="color:#e6db74">{</span>flag<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+		<span style="color:#66d9ef">else</span>:
+			die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;The secret string is not correct! Bye!!&#39;</span>)
+	<span style="color:#66d9ef">else</span>:
+		die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Your input does not meet the requirements!!!&#34;</span>)
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+	main()
+</code></pre></div><h2 id="the-approach">The Approach</h2>
+<p>If we were to key in just any random 1024 bit prime, for example with <code>getPrime</code>, for p and q, when the modulus for m1 is calculated using <code>p-1</code> times <code>q-1</code>, we will be having a hard time to factorize <code>p-1</code> and <code>q-1</code>. We need to be able to fully factorize the modulus in order to find the private key <code>d1</code></p>
+<p>If <code>(p-1)/2</code> and <code>(q-1)/2</code> are prime, then we the factors for the modulus are <code>2 * 2 * p-1)/2 * q-1)/2</code> . This form can be achieve if p and q are <em><strong>safe prime</strong></em>.</p>
+<p>However, if <code>2*p + 1</code> and <code>2*q + 1</code> are not prime, we encounter the same problem of not being able to factorize the modulus for m2. Therefore, our goal is to find a safeprimes, such that when these safeprimes is multiplied by 2 and added by 1, the results are still prime.</p>
+<h2 id="the--solution">The  Solution</h2>
+<p>We will be using this python module to generate safe primes efficiently, which utilizes OpenSSL library.</p>
+<p><code>pip install gensafeprime</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> gensafeprime
+
+<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+	q<span style="color:#f92672">=</span>gensafeprime<span style="color:#f92672">.</span>generate(<span style="color:#ae81ff">1024</span>)
+	<span style="color:#66d9ef">if</span>(isPrime(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)):
+		print(q)
+		<span style="color:#66d9ef">break</span>
+		
+<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+	q<span style="color:#f92672">=</span>gensafeprime<span style="color:#f92672">.</span>generate(<span style="color:#ae81ff">1024</span>)
+	<span style="color:#66d9ef">if</span>(isPrime(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)):
+		print(q)
+		<span style="color:#66d9ef">break</span>
+</code></pre></div><p>The value for p,q:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">169194620251703858075766787002845117826782728307804112241541460118297294592839800584882431985607581317467148795429884320941043407650495244580290142763342255204639646424792083004834455333121989625428010280368195491460528110022173187250961479792664640176528892927821163498029868502993224699703551060234194136003</span>,<span style="color:#ae81ff">178086053588076990370726365945746370167509100523491591032981698822451130074770989110398704889900487505668890200447437395599465343714147010785511521737038970446868266619658036032874035398809496255700351082467224430010500840903667131391176788939702167995481063647081215602275653776272564038256557685746047286319</span>
+
+</code></pre></div><p>solver (manual interaction)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">p1<span style="color:#f92672">=</span>(p<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>
+q1<span style="color:#f92672">=</span>(q<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>
+d1<span style="color:#f92672">=</span>inverse_mod(<span style="color:#ae81ff">65537</span>,(p1<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q1<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+p2<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+q2<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+d2<span style="color:#f92672">=</span>inverse_mod(<span style="color:#ae81ff">65537</span>,(p2<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q2<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+
+<span style="color:#75715e">#output from remote challenge</span>
+c1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2666405150814882406020869508843979521823711936771508675348373851431360083458929650387111870892332389051072028978363538533019745810391287890214563894362001847104148239051954278213640220920881345285111470092163762871509850653697760159655690385911898285939611459475146567114528716219696052329619769333801742470270961294635339828828755212970003964478434463566322063157829126515859264290838849153463643265076495605490393991218241085054283656488681594567818</span>
+<span style="color:#ae81ff">7569066336248309604099096263759301684928873069540725060123531066731951289102830176196797961598058322124538820268841711231372544237399086811850903588416865592680024336</span>
+c2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">9899770990649464461536158716323908196237719110660135972171955868688058086919446809023281977200245043905852903067996655400219667722583558326385729030258633834595528047766378994184385884997442379498945710520757861764015762598149862273781378967970605837688660935860165780315994742621521591986123157109364662145556466437768785414552812306075153332179813173388058622551779353654834696655477764766595184158994338622689156787713136095227648931338217236062500</span>
+<span style="color:#ae81ff">2874949745704914541871646405867846042366066387248683760913799463136248537283410871219561255105515774205475936977667465334871195441457956341234307457631890231954831593</span>
+
+m1<span style="color:#f92672">=</span>pow(c1,d1,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p1<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q1)
+m2<span style="color:#f92672">=</span>pow(c2,d2,p2<span style="color:#f92672">*</span>q2)
+print((long_to_bytes(m1) <span style="color:#f92672">+</span> long_to_bytes(m2))<span style="color:#f92672">.</span>decode())
+<span style="color:#75715e">#&#39;gMryPw#bt@m_SYG9!Z$87#a!bTm#6&#34;jHLFCzvIglH6bgp$I%YT%ie&lt;]r7!EA.;E1&#39;</span>
+</code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Crypto-CTF-2024/RM2.jpg?raw=true" alt=""></p>
+<p><em><strong>FLAG: CCTF{i_l0v3_5UpeR_S4fE_Pr1m3s!!}</strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="social-media">Social Media</h1>
+<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/cyber-apocalypse-ctf-2024/"
+      ><span>Cyber Apocalypse CTF 2024 Writeup: Web</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
