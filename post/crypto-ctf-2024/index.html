@@ -56,7 +56,8 @@
   
   <meta name="description" content="RM2 - Safe Prime and Sophie Germaine Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
 The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
-Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537." />
+Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, p and q, which must be distinct and valid primes.
+Message Encryption: The script generates a random 64-character string, converts it to a long integer, and splits it into two halves, m1 and m2." />
   <meta name="author" content="Berlian Gabriel" />
   
 
@@ -121,17 +122,19 @@ Setup and Prime Validation: The script prompts users to enter two 1024-bit prime
   <meta itemprop="name" content="Crypto CTF 2024">
   <meta itemprop="description" content="RM2 - Safe Prime and Sophie Germaine Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
 The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
-Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537.">
+Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, p and q, which must be distinct and valid primes.
+Message Encryption: The script generates a random 64-character string, converts it to a long integer, and splits it into two halves, m1 and m2.">
   <meta itemprop="datePublished" content="2024-06-09T21:45:16+08:00">
   <meta itemprop="dateModified" content="2024-06-09T21:45:16+08:00">
-  <meta itemprop="wordCount" content="1293">
+  <meta itemprop="wordCount" content="1289">
   
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Crypto CTF 2024">
   <meta name="twitter:description" content="RM2 - Safe Prime and Sophie Germaine Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
 The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
-Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537.">
+Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, p and q, which must be distinct and valid primes.
+Message Encryption: The script generates a random 64-character string, converts it to a long integer, and splits it into two halves, m1 and m2.">
 
   
   
@@ -286,20 +289,20 @@ Setup and Prime Validation: The script prompts users to enter two 1024-bit prime
 <p>We need to decrypt encrypted data to retrieve a flag. It operates as follows:</p>
 <ol>
 <li>
-<p><strong>Setup and Prime Validation:</strong> The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537.</p>
+<p><strong>Setup and Prime Validation:</strong> The script prompts users to enter two 1024-bit prime numbers, p and q, which must be distinct and valid primes.</p>
 </li>
 <li>
-<p><strong>Message Encryption:</strong> The script generates a random 64-character string, converts it to a long integer, and splits it into two halves, ( m1 ) and ( m2 ). Each half is encrypted using different modulus calculations:</p>
+<p><strong>Message Encryption:</strong> The script generates a random 64-character string, converts it to a long integer, and splits it into two halves, m1 and m2. Each half is encrypted using different modulus calculations:</p>
 <ul>
-<li>( c1 ) is computed as ( m1^e \mod ((p-1) \times (q-1)) ).</li>
-<li>( c1 ) is computed as ( m2^e \mod ((2 \times p + 1) \times (2 \times q + 1)) ).</li>
+<li>c1 is computed as m1^e mod ((p-1) * (q-1)).</li>
+<li>c2 is computed as m2^e mod ((2p + 1) * (2q + 1)).</li>
 </ul>
 </li>
 <li>
-<p><strong>Flag Retrieval:</strong> The script outputs the encrypted values ( c1 ) and ( c2 ). Participants must submit the original string used for encryption. If the submission is correct, the flag is displayed; otherwise, a failure message is shown.</p>
+<p><strong>Flag Retrieval:</strong> The script outputs the encrypted values c1 and c2. Participants must submit the original string used for encryption. If the submission is correct, the flag is displayed; otherwise, a failure message is shown.</p>
 </li>
 </ol>
-<p>This script introduces a modified and non-standard RSA encryption process where the correct decryption of the secret string results in obtaining the flag. Below is the source code given.</p>
+<p>This script introduces a modified and non-standard RSA encryption process, in which the user can supply their own primes. The encryption result gives 2 parts of encrypted secret. The correct decryption of the secret string results in obtaining the flag. Below is the source code given.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
@@ -370,7 +373,7 @@ Setup and Prime Validation: The script prompts users to enter two 1024-bit prime
 <p>However, if <code>2*p + 1</code> and <code>2*q + 1</code> are not prime, we encounter the same problem of not being able to factorize the modulus for m2. o overcome this, we need to have <em><strong>Sophie Germain prime</strong></em>. A Sophie Germain prime is a prime number <code>p</code> for which <code>2p+1</code> is also a prime number.</p>
 <p>Therefore, our goal is to find prime numbers which exhibit both the properties of safe prime and Sophie Germain prime at the same time.</p>
 <h2 id="the--solution">The  Solution</h2>
-<p>We will be using this python module to generate safe primes efficiently, which utilizes OpenSSL library.</p>
+<p>We will be using this python module to generate safe primes efficiently, which utilizes OpenSSL library. Once a safeprime is generated, we will manually check it 2*safeprime + 1 is also a prime. This might take some time, but not too long.</p>
 <p><code>pip install gensafeprime</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> gensafeprime
 </span></span><span style="display:flex;"><span>

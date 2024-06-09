@@ -13,7 +13,7 @@
       <link>https://berliangabriel.github.io/post/crypto-ctf-2024/</link>
       <pubDate>Sun, 09 Jun 2024 21:45:16 +0800</pubDate>
       <guid>https://berliangabriel.github.io/post/crypto-ctf-2024/</guid>
-      <description>RM2 - Safe Prime and Sophie Germaine Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes&#xA;The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:&#xA;Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537.</description>
+      <description>RM2 - Safe Prime and Sophie Germaine Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes&#xA;The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:&#xA;Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, p and q, which must be distinct and valid primes.&#xA;Message Encryption: The script generates a random 64-character string, converts it to a long integer, and splits it into two halves, m1 and m2.</description>
     </item>
     <item>
       <title>Cyber Apocalypse CTF 2024 Writeup: Web</title>
