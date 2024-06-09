@@ -54,9 +54,9 @@
   
   
   
-  <meta name="description" content="RM2 - Safe Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
+  <meta name="description" content="RM2 - Safe Prime and Sophie Germaine Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
 The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
-  Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537." />
+Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537." />
   <meta name="author" content="Berlian Gabriel" />
   
 
@@ -107,26 +107,31 @@ The Problem We need to decrypt encrypted data to retrieve a flag. It operates as
   <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
   
-  <meta itemprop="name" content="Crypto CTF 2024">
-<meta itemprop="description" content="RM2 - Safe Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
-The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
-  Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537."><meta itemprop="datePublished" content="2024-06-09T21:45:16+08:00" />
-<meta itemprop="dateModified" content="2024-06-09T21:45:16+08:00" />
-<meta itemprop="wordCount" content="714">
-<meta itemprop="keywords" content="" />
+
+
   
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Crypto CTF 2024"/>
-<meta name="twitter:description" content="RM2 - Safe Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
+  
+  <meta itemprop="name" content="Crypto CTF 2024">
+  <meta itemprop="description" content="RM2 - Safe Prime and Sophie Germaine Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
 The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
-  Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537."/>
+Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537.">
+  <meta itemprop="datePublished" content="2024-06-09T21:45:16+08:00">
+  <meta itemprop="dateModified" content="2024-06-09T21:45:16+08:00">
+  <meta itemprop="wordCount" content="1293">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Crypto CTF 2024">
+  <meta name="twitter:description" content="RM2 - Safe Prime and Sophie Germaine Prime Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes
+The Problem We need to decrypt encrypted data to retrieve a flag. It operates as follows:
+Setup and Prime Validation: The script prompts users to enter two 1024-bit prime numbers, ( p ) and ( q ), which must be distinct and valid primes. It then computes the RSA modulus ( n = p \times q ) and sets the public exponent ( e ) to 65537.">
 
   
   
@@ -141,7 +146,7 @@ The Problem We need to decrypt encrypted data to retrieve a flag. It operates as
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://berliangabriel.github.io"
+      href="https://berliangabriel.github.io/"
       >Berlian Gabriel</a
     >
     <div
@@ -275,7 +280,7 @@ The Problem We need to decrypt encrypted data to retrieve a flag. It operates as
     
   </header>
 
-  <section><h1 id="rm2---safe-prime">RM2 - Safe Prime</h1>
+  <section><h1 id="rm2---safe-prime-and-sophie-germaine-prime">RM2 - Safe Prime and Sophie Germaine Prime</h1>
 <p><code>Breaking custom RSA implementation by supplying p and q that are both safe primes and Sophie Germaine primes</code></p>
 <h2 id="the-problem">The Problem</h2>
 <p>We need to decrypt encrypted data to retrieve a flag. It operates as follows:</p>
@@ -295,112 +300,221 @@ The Problem We need to decrypt encrypted data to retrieve a flag. It operates as
 </li>
 </ol>
 <p>This script introduces a modified and non-standard RSA encryption process where the correct decryption of the secret string results in obtaining the flag. Below is the source code given.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
-
-<span style="color:#f92672">import</span> sys
-<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
-<span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
-<span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
-<span style="color:#f92672">from</span> flag <span style="color:#f92672">import</span> flag
-	
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">die</span>(<span style="color:#f92672">*</span>args):
-	pr(<span style="color:#f92672">*</span>args)
-	quit()
-	
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pr</span>(<span style="color:#f92672">*</span>args):
-	s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join(map(str, args))
-	sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>write(s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-	sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>flush()
-	
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sc</span>(): 
-	<span style="color:#66d9ef">return</span> sys<span style="color:#f92672">.</span>stdin<span style="color:#f92672">.</span>buffer<span style="color:#f92672">.</span>readline()
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">randstr</span>(l):
-	<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([printable[randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">90</span>)] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(l)])
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(msg, p, q):
-	e <span style="color:#f92672">=</span> <span style="color:#ae81ff">65537</span>
-	m1, m2 <span style="color:#f92672">=</span> msg[:len(msg) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>], msg[len(msg) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>:]
-	m1, m2 <span style="color:#f92672">=</span> bytes_to_long(m1), bytes_to_long(m2)
-	c1, c2 <span style="color:#f92672">=</span> pow(m1, e, (p <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (q <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)), pow(m2, e, (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
-	<span style="color:#66d9ef">return</span> (c1, c2)
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
-	border <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;┃&#34;</span>
-	pr(        <span style="color:#e6db74">&#34;┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓&#34;</span>)
-	pr(border, <span style="color:#e6db74">&#34;.: Welcome to RM2 task! Your mission is break our cryptosystem :. &#34;</span>, border)
-	pr(        <span style="color:#e6db74">&#34;┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛&#34;</span>)
-	nbit, _b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>, <span style="color:#66d9ef">False</span>
-	pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Please provide your desired </span><span style="color:#e6db74">{</span>nbit<span style="color:#e6db74">}</span><span style="color:#e6db74">-bit prime numbers p, q:&#34;</span>)
-	inp <span style="color:#f92672">=</span> sc()<span style="color:#f92672">.</span>decode()
-	<span style="color:#66d9ef">try</span>:
-		p, q <span style="color:#f92672">=</span> [int(_) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> inp<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)]
-		<span style="color:#66d9ef">if</span> p<span style="color:#f92672">.</span>bit_length() <span style="color:#f92672">==</span> q<span style="color:#f92672">.</span>bit_length() <span style="color:#f92672">==</span> nbit <span style="color:#f92672">and</span> isPrime(p) <span style="color:#f92672">and</span> isPrime(q) <span style="color:#f92672">and</span> p <span style="color:#f92672">!=</span> q:
-			_b <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
-	<span style="color:#66d9ef">except</span>:
-		die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;The input you provided is is not valid!&#34;</span>)
-	<span style="color:#66d9ef">if</span> _b:
-		e, n <span style="color:#f92672">=</span>  <span style="color:#ae81ff">65537</span>, p <span style="color:#f92672">*</span> q
-		s <span style="color:#f92672">=</span> randstr(nbit <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>)<span style="color:#f92672">.</span>encode()
-		m <span style="color:#f92672">=</span> bytes_to_long(s)
-		<span style="color:#66d9ef">assert</span> m <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">2</span>
-		c1, c2 <span style="color:#f92672">=</span> encrypt(s, p, q)
-		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;c1 = </span><span style="color:#e6db74">{</span>c1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;c2 = </span><span style="color:#e6db74">{</span>c2<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Now, send us the secret string to get the flag: &#39;</span>)
-		_m <span style="color:#f92672">=</span> sc()<span style="color:#f92672">.</span>strip()
-		<span style="color:#66d9ef">if</span> _m <span style="color:#f92672">==</span> s:
-			die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Congrats, you got the flag: </span><span style="color:#e6db74">{</span>flag<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-		<span style="color:#66d9ef">else</span>:
-			die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;The secret string is not correct! Bye!!&#39;</span>)
-	<span style="color:#66d9ef">else</span>:
-		die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Your input does not meet the requirements!!!&#34;</span>)
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-	main()
-</code></pre></div><h2 id="the-approach">The Approach</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flag <span style="color:#f92672">import</span> flag
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">die</span>(<span style="color:#f92672">*</span>args):
+</span></span><span style="display:flex;"><span>	pr(<span style="color:#f92672">*</span>args)
+</span></span><span style="display:flex;"><span>	quit()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pr</span>(<span style="color:#f92672">*</span>args):
+</span></span><span style="display:flex;"><span>	s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join(map(str, args))
+</span></span><span style="display:flex;"><span>	sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>write(s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>	sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>flush()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sc</span>(): 
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> sys<span style="color:#f92672">.</span>stdin<span style="color:#f92672">.</span>buffer<span style="color:#f92672">.</span>readline()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">randstr</span>(l):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([printable[randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">90</span>)] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(l)])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(msg, p, q):
+</span></span><span style="display:flex;"><span>	e <span style="color:#f92672">=</span> <span style="color:#ae81ff">65537</span>
+</span></span><span style="display:flex;"><span>	m1, m2 <span style="color:#f92672">=</span> msg[:len(msg) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>], msg[len(msg) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>:]
+</span></span><span style="display:flex;"><span>	m1, m2 <span style="color:#f92672">=</span> bytes_to_long(m1), bytes_to_long(m2)
+</span></span><span style="display:flex;"><span>	c1, c2 <span style="color:#f92672">=</span> pow(m1, e, (p <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (q <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)), pow(m2, e, (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> (c1, c2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>	border <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;┃&#34;</span>
+</span></span><span style="display:flex;"><span>	pr(        <span style="color:#e6db74">&#34;┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓&#34;</span>)
+</span></span><span style="display:flex;"><span>	pr(border, <span style="color:#e6db74">&#34;.: Welcome to RM2 task! Your mission is break our cryptosystem :. &#34;</span>, border)
+</span></span><span style="display:flex;"><span>	pr(        <span style="color:#e6db74">&#34;┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛&#34;</span>)
+</span></span><span style="display:flex;"><span>	nbit, _b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>, <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>	pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Please provide your desired </span><span style="color:#e6db74">{</span>nbit<span style="color:#e6db74">}</span><span style="color:#e6db74">-bit prime numbers p, q:&#34;</span>)
+</span></span><span style="display:flex;"><span>	inp <span style="color:#f92672">=</span> sc()<span style="color:#f92672">.</span>decode()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>		p, q <span style="color:#f92672">=</span> [int(_) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> inp<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)]
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> p<span style="color:#f92672">.</span>bit_length() <span style="color:#f92672">==</span> q<span style="color:#f92672">.</span>bit_length() <span style="color:#f92672">==</span> nbit <span style="color:#f92672">and</span> isPrime(p) <span style="color:#f92672">and</span> isPrime(q) <span style="color:#f92672">and</span> p <span style="color:#f92672">!=</span> q:
+</span></span><span style="display:flex;"><span>			_b <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>		die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;The input you provided is is not valid!&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> _b:
+</span></span><span style="display:flex;"><span>		e, n <span style="color:#f92672">=</span>  <span style="color:#ae81ff">65537</span>, p <span style="color:#f92672">*</span> q
+</span></span><span style="display:flex;"><span>		s <span style="color:#f92672">=</span> randstr(nbit <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>)<span style="color:#f92672">.</span>encode()
+</span></span><span style="display:flex;"><span>		m <span style="color:#f92672">=</span> bytes_to_long(s)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">assert</span> m <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>		c1, c2 <span style="color:#f92672">=</span> encrypt(s, p, q)
+</span></span><span style="display:flex;"><span>		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;c1 = </span><span style="color:#e6db74">{</span>c1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;c2 = </span><span style="color:#e6db74">{</span>c2<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>		pr(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Now, send us the secret string to get the flag: &#39;</span>)
+</span></span><span style="display:flex;"><span>		_m <span style="color:#f92672">=</span> sc()<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> _m <span style="color:#f92672">==</span> s:
+</span></span><span style="display:flex;"><span>			die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Congrats, you got the flag: </span><span style="color:#e6db74">{</span>flag<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>			die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;The secret string is not correct! Bye!!&#39;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		die(border, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Your input does not meet the requirements!!!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>	main()
+</span></span></code></pre></div><h2 id="the-approach">The Approach</h2>
 <p>If we were to key in just any random 1024 bit prime, for example with <code>getPrime</code>, for p and q, when the modulus for m1 is calculated using <code>p-1</code> times <code>q-1</code>, we will be having a hard time to factorize <code>p-1</code> and <code>q-1</code>. We need to be able to fully factorize the modulus in order to find the private key <code>d1</code></p>
-<p>If <code>(p-1)/2</code> and <code>(q-1)/2</code> are prime, then we the factors for the modulus are <code>2 * 2 * p-1)/2 * q-1)/2</code> . This form can be achieve if p and q are <em><strong>safe prime</strong></em>.</p>
-<p>However, if <code>2*p + 1</code> and <code>2*q + 1</code> are not prime, we encounter the same problem of not being able to factorize the modulus for m2. Therefore, our goal is to find a safeprimes, such that when these safeprimes is multiplied by 2 and added by 1, the results are still prime.</p>
+<p>When trying to generate random prime using <code>getPrime</code>, and pass p-1 and 2p+1 to factordb.com, it was not able to fully factorize. Factorizing locally using ecm.factor() in sage also took to long to complete.</p>
+<p>If <code>(p-1)/2</code> and <code>(q-1)/2</code> are prime, then we can know that the factors for the modulus are <code>2 * 2 * (p-1)/2 * (q-1)/2</code> . This form can be achieve if p and q are <em><strong>safe prime</strong></em>. A safe prime is a prime number that can be written in the form <code>2k+1</code>, where <code>k</code> is also a prime number.</p>
+<p>However, if <code>2*p + 1</code> and <code>2*q + 1</code> are not prime, we encounter the same problem of not being able to factorize the modulus for m2. o overcome this, we need to have <em><strong>Sophie Germain prime</strong></em>. A Sophie Germain prime is a prime number <code>p</code> for which <code>2p+1</code> is also a prime number.</p>
+<p>Therefore, our goal is to find prime numbers which exhibit both the properties of safe prime and Sophie Germain prime at the same time.</p>
 <h2 id="the--solution">The  Solution</h2>
 <p>We will be using this python module to generate safe primes efficiently, which utilizes OpenSSL library.</p>
 <p><code>pip install gensafeprime</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> gensafeprime
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> gensafeprime
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>	q<span style="color:#f92672">=</span>gensafeprime<span style="color:#f92672">.</span>generate(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(isPrime(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)):
+</span></span><span style="display:flex;"><span>		print(q)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>	q<span style="color:#f92672">=</span>gensafeprime<span style="color:#f92672">.</span>generate(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(isPrime(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)):
+</span></span><span style="display:flex;"><span>		print(q)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><p>The value for p,q:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">169194620251703858075766787002845117826782728307804112241541460118297294592839800584882431985607581317467148795429884320941043407650495244580290142763342255204639646424792083004834455333121989625428010280368195491460528110022173187250961479792664640176528892927821163498029868502993224699703551060234194136003</span>,<span style="color:#ae81ff">178086053588076990370726365945746370167509100523491591032981698822451130074770989110398704889900487505668890200447437395599465343714147010785511521737038970446868266619658036032874035398809496255700351082467224430010500840903667131391176788939702167995481063647081215602275653776272564038256557685746047286319</span>
+</span></span></code></pre></div><p><strong>solver</strong> (manual interaction)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p1<span style="color:#f92672">=</span>(p<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>q1<span style="color:#f92672">=</span>(q<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>d1<span style="color:#f92672">=</span>inverse_mod(<span style="color:#ae81ff">65537</span>,(p1<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q1<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)) <span style="color:#75715e">#phi = (2-1) * (2-1) * (p1-1) * (q1-1)</span>
+</span></span><span style="display:flex;"><span>p2<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>q2<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>d2<span style="color:#f92672">=</span>inverse_mod(<span style="color:#ae81ff">65537</span>,(p2<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q2<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#output from remote challenge</span>
+</span></span><span style="display:flex;"><span>c1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2666405150814882406020869508843979521823711936771508675348373851431360083458929650387111870892332389051072028978363538533019745810391287890214563894362001847104148239051954278213640220920881345285111470092163762871509850653697760159655690385911898285939611459475146567114528716219696052329619769333801742470270961294635339828828755212970003964478434463566322063157829126515859264290838849153463643265076495605490393991218241085054283656488681594567818</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7569066336248309604099096263759301684928873069540725060123531066731951289102830176196797961598058322124538820268841711231372544237399086811850903588416865592680024336</span>
+</span></span><span style="display:flex;"><span>c2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">9899770990649464461536158716323908196237719110660135972171955868688058086919446809023281977200245043905852903067996655400219667722583558326385729030258633834595528047766378994184385884997442379498945710520757861764015762598149862273781378967970605837688660935860165780315994742621521591986123157109364662145556466437768785414552812306075153332179813173388058622551779353654834696655477764766595184158994338622689156787713136095227648931338217236062500</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2874949745704914541871646405867846042366066387248683760913799463136248537283410871219561255105515774205475936977667465334871195441457956341234307457631890231954831593</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>m1<span style="color:#f92672">=</span>pow(c1,d1,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p1<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q1)
+</span></span><span style="display:flex;"><span>m2<span style="color:#f92672">=</span>pow(c2,d2,p2<span style="color:#f92672">*</span>q2)
+</span></span><span style="display:flex;"><span>print((long_to_bytes(m1) <span style="color:#f92672">+</span> long_to_bytes(m2))<span style="color:#f92672">.</span>decode())
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#&#39;gMryPw#bt@m_SYG9!Z$87#a!bTm#6&#34;jHLFCzvIglH6bgp$I%YT%ie&lt;]r7!EA.;E1&#39;</span>
+</span></span></code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Crypto-CTF-2024/RM2.jpg?raw=true" alt=""></p>
+<p><em><strong>FLAG: <code>CCTF{i_l0v3_5UpeR_S4fE_Pr1m3s!!}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="joe-19">Joe-19</h1>
+<p><code>RSA with factorable modulus</code></p>
+<p>The following source code and output were given:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env sage</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> GPT <span style="color:#f92672">import</span> GPT6 <span style="color:#75715e"># deep fake </span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flag <span style="color:#f92672">import</span> flag
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>P <span style="color:#f92672">=</span> [GPT6(<span style="color:#e6db74">&#39;A 512-bit prime appears in consecutive digits of e&#39;</span>) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>)]
+</span></span><span style="display:flex;"><span>n, m <span style="color:#f92672">=</span> prod(P), bytes_to_long(flag)
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> pow(m, <span style="color:#ae81ff">0x10001</span>, n)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;n = </span><span style="color:#e6db74">{</span>n<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;c = </span><span style="color:#e6db74">{</span>c<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>n = 8098851734937207931222242323719278262039311278408396153102939840336549151541408692581651429325092535316359074019383926520363453725271849258924996783681725111665666420297112252565291898169877088446887149672943461236879128453847442584868198963005276340812322871768679441501282681171263391133217373094824601748838255306528243603493400515452224778867670063040337191204276832576625227337670689681430055765023322478267339944312535862682499007423158988134472889946113994555274385595499503495488202251032898470224056637967019786473820952632846823442509236976892995505554046850101313269847925347047514591030406052185186963433
+c = 7109666883988892105091816608945789114105575520302872143453259352879355990908149124303310269223886289484842913063773914475282456079383409262649058768777227206800315566373109284537693635270488429501591721126853086090237488579840160957328710017268493911400151764046320861154478494943928510792105098343926542515526432005970840321142196894715037239909959538873866099850417570975505565638622448664580282210383639403173773002795595142150433695880167315674091756597784809792396452578104130341085213443116999368555639128246707794076354522200892568943534878523445909591352323861659891882091917178199085781803940677425823784662
+</code></pre><p>The modulus seems to be generated from 4 512-bit primes, in which the primes are taken from the consecutive digits of e (Euler number), using the help of GPT. This indicates that the modules might factorable.</p>
+<p>Using <a href="http://factordb.com/index.php?query=8098851734937207931222242323719278262039311278408396153102939840336549151541408692581651429325092535316359074019383926520363453725271849258924996783681725111665666420297112252565291898169877088446887149672943461236879128453847442584868198963005276340812322871768679441501282681171263391133217373094824601748838255306528243603493400515452224778867670063040337191204276832576625227337670689681430055765023322478267339944312535862682499007423158988134472889946113994555274385595499503495488202251032898470224056637967019786473820952632846823442509236976892995505554046850101313269847925347047514591030406052185186963433"><em><strong>factordb</strong></em></a>, the modulus can be fully factorized. Although the modulus consists of more than 2 primes, unlike the normal RSA, there is no issue in finding the private key. The <code>phi</code> can still be calculated as <code>(p-1)*(q-1)*(r-1)*(s-1)</code>, in which <code>p, q, r, s</code> are all of the prime factors of the modulus. Afterwards, the private key <code>d</code> can be calculated as <code>e</code> modulo inverse <code>phi</code>.</p>
+<p><strong>solver</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">=</span><span style="color:#ae81ff">7728751393377105569802455757436190501772466214587592374418657530064998056688376964229825501195065837843125232135309371235243969149662310110328243570065781</span>
+</span></span><span style="display:flex;"><span>q<span style="color:#f92672">=</span><span style="color:#ae81ff">9688632098638681429535439991332657144752666147923336383829750592576742104399942931057096761773496510622226977570278994077236841491368959008277469453600569</span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">=</span><span style="color:#ae81ff">10019005372961705640183251650710051163228093250949727357306333102512304273058618645339800283588040423877666492199352609508401454089083503146788384653241593</span>
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">=</span><span style="color:#ae81ff">10795109107229646654467923653403055635071360620150038008453082390943756377071343139771120080956310498862485323957447467376538994662280143050510681877597429</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d<span style="color:#f92672">=</span>inverse_mod(<span style="color:#ae81ff">65537</span>,(p<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(r<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(s<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>long_to_bytes(pow(c,d,n))<span style="color:#f92672">.</span>decode()
+</span></span></code></pre></div><p><em><strong>FLAG: <code>CCTF{ASIS_h1r3_7aL3nT5_t0_cO1La8orAt3_!N_Crypto_CTF!}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="alibos">Alibos</h1>
+<p><code>Weak custom cryptosystem</code></p>
+<p>The following source code and output are given.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> gmpy2 <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> secret <span style="color:#f92672">import</span> d, flag
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>get_context()<span style="color:#f92672">.</span>precision <span style="color:#f92672">=</span> <span style="color:#ae81ff">1337</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pad</span>(m, d):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> len(str(m)) <span style="color:#f92672">&lt;</span> d:
+</span></span><span style="display:flex;"><span>		m <span style="color:#f92672">=</span> str(m) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;1&#39;</span> <span style="color:#f92672">*</span> (d <span style="color:#f92672">-</span> len(str(m)))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> int(m)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">genkey</span>(d):
+</span></span><span style="display:flex;"><span>	skey <span style="color:#f92672">=</span> getRandomRange(<span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span> (d <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>), <span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span> d)
+</span></span><span style="display:flex;"><span>	pkey <span style="color:#f92672">=</span> int(<span style="color:#ae81ff">10</span><span style="color:#f92672">**</span>d <span style="color:#f92672">*</span> (sqrt(skey) <span style="color:#f92672">-</span> floor(sqrt(skey))))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> pkey, skey
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(m, pkey):
+</span></span><span style="display:flex;"><span>	m <span style="color:#f92672">=</span> pad(m, len(str(pkey)))
+</span></span><span style="display:flex;"><span>	d <span style="color:#f92672">=</span> len(str(pkey))
+</span></span><span style="display:flex;"><span>	c <span style="color:#f92672">=</span> (pkey <span style="color:#f92672">+</span> d <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> m) <span style="color:#f92672">%</span> (<span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span> d)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pkey, skey <span style="color:#f92672">=</span> genkey(d)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>m <span style="color:#f92672">=</span> bytes_to_long(flag)
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> encrypt(m, pkey)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;pkey = </span><span style="color:#e6db74">{</span>pkey<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;enc  = </span><span style="color:#e6db74">{</span>c<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pkey <span style="color:#f92672">=</span> <span style="color:#ae81ff">8582435512564229286688465405009040056856016872134514945016805951785759509953023638490767572236748566493023965794194297026085882082781147026501124183913218900918532638964014591302221504335115379744625749001902791287122243760312557423006862735120339132655680911213722073949690947638446354528576541717311700749946777</span>
+</span></span><span style="display:flex;"><span>enc  <span style="color:#f92672">=</span> <span style="color:#ae81ff">6314597738211377086770535291073179315279171595861180001679392971498929017818237394074266448467963648845725270238638741470530326527225591470945568628357663345362977083408459035746665948779559824189070193446347235731566688204757001867451307179564783577100125355658166518394135392082890798973020986161756145194380336</span>
+</span></span></code></pre></div><p>The encryption is achieved by modulo <code>10**d</code>, which is equivalent of taking the last <code>d</code> digits of <code>pkey + d ** 2 * m</code>.
+<code>d</code> can be derived from the length of <code>pkey</code>, which is found to be 313. <code>d**2</code> is equal to 97969. Let us refer the product of 97969 and padded_m as t</p>
+<pre tabindex="0"><code>d = 313
+d**2 = 97969
+padded_m is 313 digits
 
-<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
-	q<span style="color:#f92672">=</span>gensafeprime<span style="color:#f92672">.</span>generate(<span style="color:#ae81ff">1024</span>)
-	<span style="color:#66d9ef">if</span>(isPrime(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)):
-		print(q)
-		<span style="color:#66d9ef">break</span>
-		
-<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
-	q<span style="color:#f92672">=</span>gensafeprime<span style="color:#f92672">.</span>generate(<span style="color:#ae81ff">1024</span>)
-	<span style="color:#66d9ef">if</span>(isPrime(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)):
-		print(q)
-		<span style="color:#66d9ef">break</span>
-</code></pre></div><p>The value for p,q:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">169194620251703858075766787002845117826782728307804112241541460118297294592839800584882431985607581317467148795429884320941043407650495244580290142763342255204639646424792083004834455333121989625428010280368195491460528110022173187250961479792664640176528892927821163498029868502993224699703551060234194136003</span>,<span style="color:#ae81ff">178086053588076990370726365945746370167509100523491591032981698822451130074770989110398704889900487505668890200447437395599465343714147010785511521737038970446868266619658036032874035398809496255700351082467224430010500840903667131391176788939702167995481063647081215602275653776272564038256557685746047286319</span>
+97969 * padded_m = t
+t is 318 digits
 
-</code></pre></div><p>solver (manual interaction)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">p1<span style="color:#f92672">=</span>(p<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>
-q1<span style="color:#f92672">=</span>(q<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>
-d1<span style="color:#f92672">=</span>inverse_mod(<span style="color:#ae81ff">65537</span>,(p1<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q1<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
-p2<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
-q2<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
-d2<span style="color:#f92672">=</span>inverse_mod(<span style="color:#ae81ff">65537</span>,(p2<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q2<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+pkey * t = enc mod (10**313)
 
-<span style="color:#75715e">#output from remote challenge</span>
-c1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2666405150814882406020869508843979521823711936771508675348373851431360083458929650387111870892332389051072028978363538533019745810391287890214563894362001847104148239051954278213640220920881345285111470092163762871509850653697760159655690385911898285939611459475146567114528716219696052329619769333801742470270961294635339828828755212970003964478434463566322063157829126515859264290838849153463643265076495605490393991218241085054283656488681594567818</span>
-<span style="color:#ae81ff">7569066336248309604099096263759301684928873069540725060123531066731951289102830176196797961598058322124538820268841711231372544237399086811850903588416865592680024336</span>
-c2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">9899770990649464461536158716323908196237719110660135972171955868688058086919446809023281977200245043905852903067996655400219667722583558326385729030258633834595528047766378994184385884997442379498945710520757861764015762598149862273781378967970605837688660935860165780315994742621521591986123157109364662145556466437768785414552812306075153332179813173388058622551779353654834696655477764766595184158994338622689156787713136095227648931338217236062500</span>
-<span style="color:#ae81ff">2874949745704914541871646405867846042366066387248683760913799463136248537283410871219561255105515774205475936977667465334871195441457956341234307457631890231954831593</span>
+enc - pkey = negative value
 
-m1<span style="color:#f92672">=</span>pow(c1,d1,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>p1<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>q1)
-m2<span style="color:#f92672">=</span>pow(c2,d2,p2<span style="color:#f92672">*</span>q2)
-print((long_to_bytes(m1) <span style="color:#f92672">+</span> long_to_bytes(m2))<span style="color:#f92672">.</span>decode())
-<span style="color:#75715e">#&#39;gMryPw#bt@m_SYG9!Z$87#a!bTm#6&#34;jHLFCzvIglH6bgp$I%YT%ie&lt;]r7!EA.;E1&#39;</span>
-</code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Crypto-CTF-2024/RM2.jpg?raw=true" alt=""></p>
-<p><em><strong>FLAG: CCTF{i_l0v3_5UpeR_S4fE_Pr1m3s!!}</strong></em>
+10**d + (enc-pkey) = the last 313 digits of t
+
+therefore, we only have to brute force the first 5 digits of t
+once t is recovered, padded_m can be calculated, and the padding consisting of &#39;1&#39; digits can be removed, revealing the original m
+</code></pre><p><strong>solver</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pkey <span style="color:#f92672">=</span> <span style="color:#ae81ff">8582435512564229286688465405009040056856016872134514945016805951785759509953023638490767572236748566493023965794194297026085882082781147026501124183913218900918532638964014591302221504335115379744625749001902791287122243760312557423006862735120339132655680911213722073949690947638446354528576541717311700749946777</span>
+</span></span><span style="display:flex;"><span>enc  <span style="color:#f92672">=</span> <span style="color:#ae81ff">6314597738211377086770535291073179315279171595861180001679392971498929017818237394074266448467963648845725270238638741470530326527225591470945568628357663345362977083408459035746665948779559824189070193446347235731566688204757001867451307179564783577100125355658166518394135392082890798973020986161756145194380336</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d<span style="color:#f92672">=</span>len(str(pkey))
+</span></span><span style="display:flex;"><span>padded_chunk <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span>d <span style="color:#f92672">+</span> enc <span style="color:#f92672">-</span> pkey
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>,<span style="color:#ae81ff">1000000</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> (int(str(i) <span style="color:#f92672">+</span> str(padded_chunk), <span style="color:#ae81ff">10</span>) <span style="color:#f92672">%</span> (d<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)):
+</span></span><span style="display:flex;"><span>        m<span style="color:#f92672">=</span>int(str(i) <span style="color:#f92672">+</span> str(padded_chunk), <span style="color:#ae81ff">10</span>) <span style="color:#f92672">//</span> (d<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(str(m<span style="color:#f92672">%</span>(<span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">100</span>)) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span>            print(m)
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">#6170704326493336128242608193100736601774626903966803036318189045381903593682775829229200905376968543264526051111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</span>
+</span></span><span style="display:flex;"><span>            print(long_to_bytes(<span style="color:#ae81ff">617070432649333612824260819310073660177462690396680303631818904538190359368277582922920090537696854326452605</span>)<span style="color:#f92672">.</span>decode())
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><p><em><strong>FLAG: <code>CCTF{h0M3_m4De_cRyp70_5ySTeM_1N_CryptoCTF!!!}</code></strong></em>
 <br/>
 <br/>
 <br/></p>
@@ -446,7 +560,7 @@ print((long_to_bytes(m1) <span style="color:#f92672">+</span> long_to_bytes(m2))
 >
   <div class="mr-auto">
     &copy; 2024
-    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a

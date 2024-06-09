@@ -105,22 +105,27 @@
   <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
   
-  <meta itemprop="name" content="Shakti CTF 2024 Writeup: Forensic and OSINT">
-<meta itemprop="description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF."><meta itemprop="datePublished" content="2024-03-10T16:05:16+08:00" />
-<meta itemprop="dateModified" content="2024-03-10T16:05:16+08:00" />
-<meta itemprop="wordCount" content="1706">
-<meta itemprop="keywords" content="" />
+
+
   
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Shakti CTF 2024 Writeup: Forensic and OSINT"/>
-<meta name="twitter:description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF."/>
+  
+  <meta itemprop="name" content="Shakti CTF 2024 Writeup: Forensic and OSINT">
+  <meta itemprop="description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF.">
+  <meta itemprop="datePublished" content="2024-03-10T16:05:16+08:00">
+  <meta itemprop="dateModified" content="2024-03-10T16:05:16+08:00">
+  <meta itemprop="wordCount" content="1706">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Shakti CTF 2024 Writeup: Forensic and OSINT">
+  <meta name="twitter:description" content="It was tiring but rewarding. Me and my duo Chovid99 won the 1st place at the shakti CTF 2024, playing as Fidethus. We managed to solve all challenges in Crypto, Web, pwn, reverse, and OSINT category. Competing as a team of two in a competition with no limit on the number of group members is always challenging. Although the prize only goes to the top all-woman team, we are very appreciative to the organizers for this unique CTF.">
 
   
   
@@ -135,7 +140,7 @@
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://berliangabriel.github.io"
+      href="https://berliangabriel.github.io/"
       >Berlian Gabriel</a
     >
     <div
@@ -279,7 +284,7 @@
 
 The name of the person that Freddy is trying to contact in regards of his research paper.
 
-The submisssion date of Freddy's Research paper that he had specifically noted on his desktop.
+The submisssion date of Freddy&#39;s Research paper that he had specifically noted on his desktop.
 
 The name of the downloaded file that looked suspicious.
 
@@ -298,7 +303,7 @@ However aside from this, there are some clue that we can infer from this Desktop
 <p>To extract the file from FTK Imager, right click on the file &gt; <code>Export Files...</code> &gt; choose destination folder.
 The proper way to open it is by using SQLite Database Browser, such as this <a href="https://sqlitebrowser.org/dl/">one</a>. However, opening it with just a text editor like Visual Code is also fine, since we only need to find text-based information.</p>
 <p>Inside the text editor, we can start with using the search function for the word &ldquo;Freddy&rdquo;. We can see a conversation flow between Freddy and someone. When searching using Freddy&rsquo;s last name <strong>&ldquo;Mileman&rdquo;</strong>, we found this key message:</p>
-<pre tabindex="0"><code>&quot;Hello.Mr Mileman I am an associate of Prof. Simon Clarke I was told to give u some suggestions on your report .I shall sent you the corrections in a document please go through it and make the required changes.&quot;
+<pre tabindex="0"><code>&#34;Hello.Mr Mileman I am an associate of Prof. Simon Clarke I was told to give u some suggestions on your report .I shall sent you the corrections in a document please go through it and make the required changes.&#34;
 </code></pre><p>It looks like this message was sent by that someone who pretends to be Freddy&rsquo;s Professor, and then sends malware disguised as documents file, likely via Skype as well.</p>
 <p>So, if we try to follow Freddy&rsquo;s conversation and piece everything together, it seems like Freddy tried to contact his Professor, but then, he encountered someone who he is not familiar with. Since the name of Freddy&rsquo;s Professor is revealed in the message above, we got the 1st part of the flag, which is <code>simonclarke</code>.</p>
 <p>Since we saw earlier in <code>\Users\mayyoo\AppData\Roaming\Microsoft\Windows\Recent</code>, there were a few Microsoft Word file, we can assume that the corrections document sent by this someone is also using similar extension. When searching for <strong>&quot;.doc&quot;</strong>, we found this file name:</p>
@@ -312,11 +317,11 @@ The proper way to open it is by using SQLite Database Browser, such as this <a h
 <p>We were given a zip file, that gives this image file when extracted:
 <img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/sea.jpg" alt=""></p>
 <p>First observation, the image size of ~800 KB for a 1920x1080 JPEG seems on the bigger side. This might be an indication that there are some hidden files embedded inside this sea.jpeg. We can use <code>binwalk</code> to make sure and extract the hidden files.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">binwalk -e sea.jpeg
-</code></pre></div><p>Turns out, hidden inside there is <code>7D353.zip</code> which contains <code>artofeye.jpg</code>. The zip file is password protected, but it can be cracked using John the Ripper, as follow:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">zip2john 7D353.zip &gt; zip.hash
-john zip.hash
-</code></pre></div><p>The zip cracking finished quickly and the password was found to be <code>angel1</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>binwalk -e sea.jpeg
+</span></span></code></pre></div><p>Turns out, hidden inside there is <code>7D353.zip</code> which contains <code>artofeye.jpg</code>. The zip file is password protected, but it can be cracked using John the Ripper, as follow:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>zip2john 7D353.zip &gt; zip.hash
+</span></span><span style="display:flex;"><span>john zip.hash
+</span></span></code></pre></div><p>The zip cracking finished quickly and the password was found to be <code>angel1</code>.
 Upon unzipping, there is another image file, <code>artofeye.jpg</code>
 <img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/artofeye.jpg" alt="">
 Looking at the size, ~300 KB for 1470x980 JPEG seems about right. Checking with Exiftool and inspecting the file in a Hex Editor, nothing seems to be out of place. So, it is time to move on to the next step of checking in steganography, which is LSB. The Least Significant Bit (LSB) method hides the message by inserting the message at the lower or rightmost bits in the cover work file as a medium to hide the message. Since this is a JPEG file, we can use <code>jsteg</code> to try to extract hidden information in artofeye.jpg.</p>
@@ -353,7 +358,7 @@ sudo chmod +x /usr/bin/slink
 <h3 id="2nd-prompt---asking-the-ctf-questions">2nd Prompt - Asking the CTF questions</h3>
 <pre tabindex="0"><code>these questions are from CTF OSINT challenge
 1)Who is the individual from crew has previously sailed with the captain of the ship?
-2)What was the name of Captain's close friend from the crew that found the abandoned ship?
+2)What was the name of Captain&#39;s close friend from the crew that found the abandoned ship?
 3)In the logbook, the captain noted the sighting of land, describing it as an island.What is the name of this enigmatic island?
 4)What was the original name of the ship shown in the image?
 
@@ -366,9 +371,9 @@ it is about the Mary Celeste
 <p>However, the flag crafted from Gemini&rsquo;s answer is still wrong. So some of the answers might not be correct.</p>
 <h3 id="4th-prompt---identifying-geminis-misunderstanding">4th Prompt - Identifying Gemini&rsquo;s Misunderstanding</h3>
 <p>Looking at answers and the reasoning from question 1,2,3,4, we can immediately identify that Gemini&rsquo;s answer for the 2nd questions indicates that it might misunderstood the question.</p>
-<pre tabindex="0"><code>2) What was the name of Captain's close friend from the crew that found the abandoned ship?
+<pre tabindex="0"><code>2) What was the name of Captain&#39;s close friend from the crew that found the abandoned ship?
 
-Oliver Deveau: Deveau was the first mate on the Dei Gratia, the ship that discovered the Mary Celeste. While he and Captain Morehouse may have had to work closely together during the salvage process, it's hard to say definitively if they were &quot;close friends&quot;.
+Oliver Deveau: Deveau was the first mate on the Dei Gratia, the ship that discovered the Mary Celeste. While he and Captain Morehouse may have had to work closely together during the salvage process, it&#39;s hard to say definitively if they were &#34;close friends&#34;.
 </code></pre><p>It seems that Gemini mistakenly thought that we were asking, <code>who is the close friend of the Captain of the crew that found Mary Celeste</code>. This is partly due to the ambiguous wording from the 2nd questions from the CTF challenge. A better phrasing would be <code>who is the Captain of Mary Celeste's close friend, who is also from the crew who found the abandoned ship?</code>. Since we know that the crew who found the abandoned ship is <code>Dei Gratia</code>, to get the answer we needed, we can try this prompt:</p>
 <pre tabindex="0"><code>Out of the crew of Dei Gratia, who is the most likely to be close friend with the captain of Mary Celeste?
 </code></pre><p><img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/resources/shakti-CTF-2024/ship4.png" alt=""></p>
@@ -376,7 +381,7 @@ Oliver Deveau: Deveau was the first mate on the Dei Gratia, the ship that discov
 <pre tabindex="0"><code>1)Who is the individual from crew has previously sailed with the captain of the ship?
 Albert G. Richardson
 
-2)What was the name of Captain's close friend from the crew that found the abandoned ship?
+2)What was the name of Captain&#39;s close friend from the crew that found the abandoned ship?
 David Morehouse
 
 3)In the logbook, the captain noted the sighting of land, describing it as an island.What is the name of this enigmatic island?
@@ -437,7 +442,7 @@ Amazon
 >
   <div class="mr-auto">
     &copy; 2024
-    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a

@@ -106,24 +106,29 @@ We were given 2 points from the same curve, Public Key which is equal to dG, and
   <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
   
-  <meta itemprop="name" content="bi0s CTF 2024 Write-up">
-<meta itemprop="description" content="Cryptography challengename ECDSA Nonce Reuse Attack due to flawed custom implementation of nonce XOR-ing. Recovering a and b value from two known curve points, the Public Key and Encryption Result
-We were given 2 points from the same curve, Public Key which is equal to dG, and Encrypted Flag which is equal to dF. We can use this two points as (x1,y1) and (x2,y2) to make the curve equation becomes a system of linear equation and solve it to recover a and b."><meta itemprop="datePublished" content="2024-02-26T07:43:29+08:00" />
-<meta itemprop="dateModified" content="2024-02-26T07:43:29+08:00" />
-<meta itemprop="wordCount" content="795">
-<meta itemprop="keywords" content="" />
+
+
   
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="bi0s CTF 2024 Write-up"/>
-<meta name="twitter:description" content="Cryptography challengename ECDSA Nonce Reuse Attack due to flawed custom implementation of nonce XOR-ing. Recovering a and b value from two known curve points, the Public Key and Encryption Result
-We were given 2 points from the same curve, Public Key which is equal to dG, and Encrypted Flag which is equal to dF. We can use this two points as (x1,y1) and (x2,y2) to make the curve equation becomes a system of linear equation and solve it to recover a and b."/>
+  
+  <meta itemprop="name" content="bi0s CTF 2024 Write-up">
+  <meta itemprop="description" content="Cryptography challengename ECDSA Nonce Reuse Attack due to flawed custom implementation of nonce XOR-ing. Recovering a and b value from two known curve points, the Public Key and Encryption Result
+We were given 2 points from the same curve, Public Key which is equal to dG, and Encrypted Flag which is equal to dF. We can use this two points as (x1,y1) and (x2,y2) to make the curve equation becomes a system of linear equation and solve it to recover a and b.">
+  <meta itemprop="datePublished" content="2024-02-26T07:43:29+08:00">
+  <meta itemprop="dateModified" content="2024-02-26T07:43:29+08:00">
+  <meta itemprop="wordCount" content="795">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="bi0s CTF 2024 Write-up">
+  <meta name="twitter:description" content="Cryptography challengename ECDSA Nonce Reuse Attack due to flawed custom implementation of nonce XOR-ing. Recovering a and b value from two known curve points, the Public Key and Encryption Result
+We were given 2 points from the same curve, Public Key which is equal to dG, and Encrypted Flag which is equal to dF. We can use this two points as (x1,y1) and (x2,y2) to make the curve equation becomes a system of linear equation and solve it to recover a and b.">
 
   
   
@@ -138,7 +143,7 @@ We were given 2 points from the same curve, Public Key which is equal to dG, and
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://berliangabriel.github.io"
+      href="https://berliangabriel.github.io/"
       >Berlian Gabriel</a
     >
     <div
@@ -276,66 +281,65 @@ We were given 2 points from the same curve, Public Key which is equal to dG, and
 <h2 id="challengename">challengename</h2>
 <p><em>ECDSA Nonce Reuse Attack due to flawed custom implementation of nonce XOR-ing. Recovering a and b value from two known curve points, the Public Key and Encryption Result</em></p>
 <p>We were given 2 points from the same curve, Public Key which is equal to dG, and Encrypted Flag which is equal to dF. We can use this two points as (x1,y1) and (x2,y2) to make the curve equation becomes a system of linear equation and solve it to recover a and b.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#sagemath</span>
-x1<span style="color:#f92672">=</span><span style="color:#ae81ff">61600024406073885532834502896649726027303457494482891878920198374829497624020</span>
-y1<span style="color:#f92672">=</span><span style="color:#ae81ff">69280030991018570318368009110412171820069942770686554653245684528998534423187</span>
-x2<span style="color:#f92672">=</span><span style="color:#ae81ff">11386122200168342563094845105265538185476210121219961865254382895010249983959</span>
-y2<span style="color:#f92672">=</span><span style="color:#ae81ff">28341196113496012135432397702493634501256271575119131587408850011138765511179</span>
-
-a<span style="color:#f92672">=</span>Mod(((y1<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> y2<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">-</span>(x1<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> x2<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>))<span style="color:#f92672">*</span>inverse_mod((x1<span style="color:#f92672">-</span>x2),p),p)
-b<span style="color:#f92672">=</span>Mod(y2<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> x2<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> a<span style="color:#f92672">*</span>x2, p)
-</code></pre></div><p>since now we know a, b, and p, we can retrieve the curve order.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#sagemath</span>
-E <span style="color:#f92672">=</span> EllipticCurve(GF(p), [a,b])
-E<span style="color:#f92672">.</span>order()
-</code></pre></div><p>With the way the <code>bigsur</code> is implemented, attacker can craft different values of<code>nonce</code> input such that the resulting <code>nunce</code> keeps giving the same value. In this case, we can use <code>00</code> and <code>0000</code> as the 2 inputs for the <code>nonce</code>. It is known that ECDSA is vulnerable to nonce reuse attack (<a href="https://notsosecure.com/ecdsa-nonce-reuse-attack)">https://notsosecure.com/ecdsa-nonce-reuse-attack)</a>. We can use the result of signing 2 different messages with the same <code>nunce</code> to retrieve the Private Key, <code>d</code>. Below is the python script to perform EDSA nonce reuse attack and retrieve <code>d</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> md5
-<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> bytes_to_long
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inverse_mod</span>(a, m):
-    <span style="color:#e6db74">&#34;&#34;&#34;Compute the modular inverse of a modulo m.&#34;&#34;&#34;</span>
-    g, x, y <span style="color:#f92672">=</span> egcd(a, m)
-    <span style="color:#66d9ef">if</span> g <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>:
-        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#39;Modular inverse does not exist&#39;</span>)
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">return</span> x <span style="color:#f92672">%</span> m
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">egcd</span>(a, b):
-    <span style="color:#e6db74">&#34;&#34;&#34;Extended Euclidean Algorithm.&#34;&#34;&#34;</span>
-    <span style="color:#66d9ef">if</span> a <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">return</span> (b, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
-    <span style="color:#66d9ef">else</span>:
-        g, y, x <span style="color:#f92672">=</span> egcd(b <span style="color:#f92672">%</span> a, a)
-        <span style="color:#66d9ef">return</span> (g, x <span style="color:#f92672">-</span> (b <span style="color:#f92672">//</span> a) <span style="color:#f92672">*</span> y, y)
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recover_private_key</span>(H_m1, H_m2, r, s1, s2, q):
-    <span style="color:#e6db74">&#34;&#34;&#34;Recover the private key d given two signatures with the same nonce.&#34;&#34;&#34;</span>
-    H_m1_int <span style="color:#f92672">=</span> bytes_to_long(md5(H_m1)<span style="color:#f92672">.</span>digest())
-    H_m2_int <span style="color:#f92672">=</span> bytes_to_long(md5(H_m2)<span style="color:#f92672">.</span>digest())
-    r_inv <span style="color:#f92672">=</span> inverse_mod(r, q)
-    d <span style="color:#f92672">=</span> ((inverse_mod(s1 <span style="color:#f92672">-</span> s2, q) <span style="color:#f92672">*</span> (H_m1_int <span style="color:#f92672">*</span> s2 <span style="color:#f92672">-</span> H_m2_int <span style="color:#f92672">*</span> s1) <span style="color:#f92672">%</span> q) <span style="color:#f92672">*</span> r_inv) <span style="color:#f92672">%</span> q
-    <span style="color:#66d9ef">return</span> d
-
-H_m1 <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;Fidethus&#34;</span>
-H_m2 <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;Cylabus&#34;</span>
-
-<span style="color:#75715e"># Example values (these need to be replaced with your actual values)</span>
-r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x39504995bcf174284cc4013aaae44454d349629d864c4b41456f8ecd1143c4b0</span>  <span style="color:#75715e"># Example r value from one of the signatures</span>
-s1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xa6c917eb8ff4d2b8e5424c6c01ac6e1b2c67bb48a362c3fcb9cde05d252836c3</span>  <span style="color:#75715e"># s value from signature 1</span>
-s2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x5c012f1f87731cec692375afdb56b6b38b80f935ab9d9d29cf531d528fed7703</span>  <span style="color:#75715e"># s value from signature 2</span>
-q <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551</span>  <span style="color:#75715e"># Order of the curve</span>
-
-<span style="color:#75715e"># Recover d</span>
-d <span style="color:#f92672">=</span> recover_private_key(H_m1, H_m2, r, s1, s2, q)
-print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Recovered private key: </span><span style="color:#e6db74">{</span>d<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-
-</code></pre></div><p>Since we know <code>Q</code> where <code>Q = dF</code>, and the flag is the x value of <code>F</code>, once we have the Private Key <code>d</code>, we can retrieve the flag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#sagemath</span>
-d_inverse<span style="color:#f92672">=</span>inverse_mod(d,E<span style="color:#f92672">.</span>order())
-Q<span style="color:#f92672">=</span>E<span style="color:#f92672">.</span>point([<span style="color:#ae81ff">16992676324977131273008947657295191567208515683606460326098734497649728555260</span>, <span style="color:#ae81ff">77304532410673092658334096326489354927782847394098654658641557840081762445162</span>])
-F<span style="color:#f92672">=</span>d_inverse<span style="color:#f92672">*</span>Q
-long_to_bytes(F[<span style="color:#ae81ff">0</span>])
-</code></pre></div><p><em><strong>FLAG: <code>bi0sctf{https://bit.ly/3I0zwtG}</code></strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#sagemath</span>
+</span></span><span style="display:flex;"><span>x1<span style="color:#f92672">=</span><span style="color:#ae81ff">61600024406073885532834502896649726027303457494482891878920198374829497624020</span>
+</span></span><span style="display:flex;"><span>y1<span style="color:#f92672">=</span><span style="color:#ae81ff">69280030991018570318368009110412171820069942770686554653245684528998534423187</span>
+</span></span><span style="display:flex;"><span>x2<span style="color:#f92672">=</span><span style="color:#ae81ff">11386122200168342563094845105265538185476210121219961865254382895010249983959</span>
+</span></span><span style="display:flex;"><span>y2<span style="color:#f92672">=</span><span style="color:#ae81ff">28341196113496012135432397702493634501256271575119131587408850011138765511179</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a<span style="color:#f92672">=</span>Mod(((y1<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> y2<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">-</span>(x1<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> x2<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>))<span style="color:#f92672">*</span>inverse_mod((x1<span style="color:#f92672">-</span>x2),p),p)
+</span></span><span style="display:flex;"><span>b<span style="color:#f92672">=</span>Mod(y2<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> x2<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> a<span style="color:#f92672">*</span>x2, p)
+</span></span></code></pre></div><p>since now we know a, b, and p, we can retrieve the curve order.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#sagemath</span>
+</span></span><span style="display:flex;"><span>E <span style="color:#f92672">=</span> EllipticCurve(GF(p), [a,b])
+</span></span><span style="display:flex;"><span>E<span style="color:#f92672">.</span>order()
+</span></span></code></pre></div><p>With the way the <code>bigsur</code> is implemented, attacker can craft different values of<code>nonce</code> input such that the resulting <code>nunce</code> keeps giving the same value. In this case, we can use <code>00</code> and <code>0000</code> as the 2 inputs for the <code>nonce</code>. It is known that ECDSA is vulnerable to nonce reuse attack (<a href="https://notsosecure.com/ecdsa-nonce-reuse-attack)">https://notsosecure.com/ecdsa-nonce-reuse-attack)</a>. We can use the result of signing 2 different messages with the same <code>nunce</code> to retrieve the Private Key, <code>d</code>. Below is the python script to perform EDSA nonce reuse attack and retrieve <code>d</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> md5
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> bytes_to_long
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inverse_mod</span>(a, m):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Compute the modular inverse of a modulo m.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    g, x, y <span style="color:#f92672">=</span> egcd(a, m)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> g <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#39;Modular inverse does not exist&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x <span style="color:#f92672">%</span> m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">egcd</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Extended Euclidean Algorithm.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> a <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (b, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        g, y, x <span style="color:#f92672">=</span> egcd(b <span style="color:#f92672">%</span> a, a)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (g, x <span style="color:#f92672">-</span> (b <span style="color:#f92672">//</span> a) <span style="color:#f92672">*</span> y, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recover_private_key</span>(H_m1, H_m2, r, s1, s2, q):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Recover the private key d given two signatures with the same nonce.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    H_m1_int <span style="color:#f92672">=</span> bytes_to_long(md5(H_m1)<span style="color:#f92672">.</span>digest())
+</span></span><span style="display:flex;"><span>    H_m2_int <span style="color:#f92672">=</span> bytes_to_long(md5(H_m2)<span style="color:#f92672">.</span>digest())
+</span></span><span style="display:flex;"><span>    r_inv <span style="color:#f92672">=</span> inverse_mod(r, q)
+</span></span><span style="display:flex;"><span>    d <span style="color:#f92672">=</span> ((inverse_mod(s1 <span style="color:#f92672">-</span> s2, q) <span style="color:#f92672">*</span> (H_m1_int <span style="color:#f92672">*</span> s2 <span style="color:#f92672">-</span> H_m2_int <span style="color:#f92672">*</span> s1) <span style="color:#f92672">%</span> q) <span style="color:#f92672">*</span> r_inv) <span style="color:#f92672">%</span> q
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> d
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>H_m1 <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;Fidethus&#34;</span>
+</span></span><span style="display:flex;"><span>H_m2 <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;Cylabus&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example values (these need to be replaced with your actual values)</span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x39504995bcf174284cc4013aaae44454d349629d864c4b41456f8ecd1143c4b0</span>  <span style="color:#75715e"># Example r value from one of the signatures</span>
+</span></span><span style="display:flex;"><span>s1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xa6c917eb8ff4d2b8e5424c6c01ac6e1b2c67bb48a362c3fcb9cde05d252836c3</span>  <span style="color:#75715e"># s value from signature 1</span>
+</span></span><span style="display:flex;"><span>s2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x5c012f1f87731cec692375afdb56b6b38b80f935ab9d9d29cf531d528fed7703</span>  <span style="color:#75715e"># s value from signature 2</span>
+</span></span><span style="display:flex;"><span>q <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551</span>  <span style="color:#75715e"># Order of the curve</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Recover d</span>
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> recover_private_key(H_m1, H_m2, r, s1, s2, q)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Recovered private key: </span><span style="color:#e6db74">{</span>d<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>Since we know <code>Q</code> where <code>Q = dF</code>, and the flag is the x value of <code>F</code>, once we have the Private Key <code>d</code>, we can retrieve the flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#sagemath</span>
+</span></span><span style="display:flex;"><span>d_inverse<span style="color:#f92672">=</span>inverse_mod(d,E<span style="color:#f92672">.</span>order())
+</span></span><span style="display:flex;"><span>Q<span style="color:#f92672">=</span>E<span style="color:#f92672">.</span>point([<span style="color:#ae81ff">16992676324977131273008947657295191567208515683606460326098734497649728555260</span>, <span style="color:#ae81ff">77304532410673092658334096326489354927782847394098654658641557840081762445162</span>])
+</span></span><span style="display:flex;"><span>F<span style="color:#f92672">=</span>d_inverse<span style="color:#f92672">*</span>Q
+</span></span><span style="display:flex;"><span>long_to_bytes(F[<span style="color:#ae81ff">0</span>])
+</span></span></code></pre></div><p><em><strong>FLAG: <code>bi0sctf{https://bit.ly/3I0zwtG}</code></strong></em></p>
 <h2 id="lalala">lalala</h2>
 <p><em>Using matrix operation in sagemath to solve a big linear equations system</em></p>
 <p>From the given value of <code>aa</code>, <code>bb</code>, <code>cc</code>, and the summation in out.py, we can create a system consisting of 100 equations (becasue the output consists of 100 sets of <code>aa</code>, <code>bb</code>, <code>cc</code>, and the summation values) with 100 unknowns (ranging from <code>x0^2 * x0^3, ..., x0^2 * x10^3, ..., x10^2 * x0^3, ..., x10^2 * x10^3</code>).
@@ -347,37 +351,37 @@ x = A^-1 sum
 </code></pre><p>where A is a 100x100 matrix consisting of the coefficients, x is a 100x1 matrix consisting of the 100 unknowns variable, sum is a 100x1 matrix consisting the value of <code>summation - constant</code></p>
 <p>Once we have the value for matrix x, we can use just value of <code>x0^5</code>, <code>x1^5</code>, &hellip;, <code>x9^5</code> in which each is represented by x[0], x[11], &hellip;, x[99] respectively.</p>
 <p>By paying attention to this part of chall.sage:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">p <span style="color:#f92672">=</span> random_prime(<span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">1024</span>)
-unknowns <span style="color:#f92672">=</span> [randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]
-unknowns <span style="color:#f92672">=</span> [f <span style="color:#f92672">+</span> i <span style="color:#f92672">-</span> (i<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)  <span style="color:#66d9ef">for</span> i, f <span style="color:#f92672">in</span> zip(unknowns, search(<span style="color:#e6db74">&#34;{(.*)}&#34;</span>, flag)<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>encode())]
-</code></pre></div><p>we can know that:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>p <span style="color:#f92672">=</span> random_prime(<span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>unknowns <span style="color:#f92672">=</span> [randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]
+</span></span><span style="display:flex;"><span>unknowns <span style="color:#f92672">=</span> [f <span style="color:#f92672">+</span> i <span style="color:#f92672">-</span> (i<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)  <span style="color:#66d9ef">for</span> i, f <span style="color:#f92672">in</span> zip(unknowns, search(<span style="color:#e6db74">&#34;{(.*)}&#34;</span>, flag)<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>encode())]
+</span></span></code></pre></div><p>we can know that:</p>
 <ul>
 <li><code>x^5</code> is always smaller than p, so we do not need to perform root finding in modulo operation.</li>
 <li>This operation <code>i - (i%1000)</code> made the random integer from unknowns have three 0s as their last 3 digits before the addition. This means the value of <code>f</code> (the integer representing the Unicode point of the flag character) can be retrieved from the last 3 digits of `x.</li>
 </ul>
 <p>Below is the python script to retrieve the flag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#sagemath</span>
-<span style="color:#f92672">import</span> out
-A<span style="color:#f92672">=</span>[]
-L<span style="color:#f92672">=</span>[]
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">400</span>,<span style="color:#ae81ff">4</span>):
-    row <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]
-    const<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">for</span> a, b, c <span style="color:#f92672">in</span> zip(out<span style="color:#f92672">.</span>output[i], out<span style="color:#f92672">.</span>output[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>], out<span style="color:#f92672">.</span>output[i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>]):
-           const<span style="color:#f92672">+=</span>a
-           row[b][c]<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
-    flattened_row <span style="color:#f92672">=</span> [element <span style="color:#66d9ef">for</span> sublist <span style="color:#f92672">in</span> row <span style="color:#66d9ef">for</span> element <span style="color:#f92672">in</span> sublist]
-    A<span style="color:#f92672">.</span>append(flattened_row)
-    L<span style="color:#f92672">.</span>append([out<span style="color:#f92672">.</span>output[i<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>]<span style="color:#f92672">-</span>const])
-A<span style="color:#f92672">=</span>Matrix(GF(out<span style="color:#f92672">.</span>p), A)
-L<span style="color:#f92672">=</span>Matrix(GF(out<span style="color:#f92672">.</span>p), L)
-x<span style="color:#f92672">=</span>A<span style="color:#f92672">.</span>inverse()<span style="color:#f92672">*</span>L
-
-flag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">11</span>):
-    flag<span style="color:#f92672">+=</span>chr((Integer(x[i][<span style="color:#ae81ff">0</span>])<span style="color:#f92672">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">5</span>))<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)
-print(<span style="color:#e6db74">&#34;bi0sctf{</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">}&#34;</span> <span style="color:#f92672">%</span> flag)
-</code></pre></div><p><em><strong>FLAG: <code>bi0sctf{8d522ae1a7}</code></strong></em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#sagemath</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> out
+</span></span><span style="display:flex;"><span>A<span style="color:#f92672">=</span>[]
+</span></span><span style="display:flex;"><span>L<span style="color:#f92672">=</span>[]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range (<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">400</span>,<span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>    row <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]
+</span></span><span style="display:flex;"><span>    const<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> a, b, c <span style="color:#f92672">in</span> zip(out<span style="color:#f92672">.</span>output[i], out<span style="color:#f92672">.</span>output[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>], out<span style="color:#f92672">.</span>output[i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>]):
+</span></span><span style="display:flex;"><span>           const<span style="color:#f92672">+=</span>a
+</span></span><span style="display:flex;"><span>           row[b][c]<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    flattened_row <span style="color:#f92672">=</span> [element <span style="color:#66d9ef">for</span> sublist <span style="color:#f92672">in</span> row <span style="color:#66d9ef">for</span> element <span style="color:#f92672">in</span> sublist]
+</span></span><span style="display:flex;"><span>    A<span style="color:#f92672">.</span>append(flattened_row)
+</span></span><span style="display:flex;"><span>    L<span style="color:#f92672">.</span>append([out<span style="color:#f92672">.</span>output[i<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>]<span style="color:#f92672">-</span>const])
+</span></span><span style="display:flex;"><span>A<span style="color:#f92672">=</span>Matrix(GF(out<span style="color:#f92672">.</span>p), A)
+</span></span><span style="display:flex;"><span>L<span style="color:#f92672">=</span>Matrix(GF(out<span style="color:#f92672">.</span>p), L)
+</span></span><span style="display:flex;"><span>x<span style="color:#f92672">=</span>A<span style="color:#f92672">.</span>inverse()<span style="color:#f92672">*</span>L
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">11</span>):
+</span></span><span style="display:flex;"><span>    flag<span style="color:#f92672">+=</span>chr((Integer(x[i][<span style="color:#ae81ff">0</span>])<span style="color:#f92672">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">5</span>))<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;bi0sctf{</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">}&#34;</span> <span style="color:#f92672">%</span> flag)
+</span></span></code></pre></div><p><em><strong>FLAG: <code>bi0sctf{8d522ae1a7}</code></strong></em></p>
 <p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a></p>
 </section>
 
@@ -425,7 +429,7 @@ print(<span style="color:#e6db74">&#34;bi0sctf{</span><span style="color:#e6db74
 >
   <div class="mr-auto">
     &copy; 2024
-    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a

