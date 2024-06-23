@@ -124,7 +124,7 @@ Problem The challenge has 3 functionality:
 Retrieve the secret encrypted with 3DES 192 bit key in CBC mode Submit any input (in hex string form) which will be decrypted using the same iv, but a corrupted key, and get the result. A maximum of 128 decryption requests can be made. Guess the plaintext of the encrypted secret to get the flag The iv is not given.">
   <meta itemprop="datePublished" content="2024-06-24T00:24:37+08:00">
   <meta itemprop="dateModified" content="2024-06-24T00:24:37+08:00">
-  <meta itemprop="wordCount" content="1090">
+  <meta itemprop="wordCount" content="1094">
   
   
   <meta name="twitter:card" content="summary">
@@ -382,9 +382,11 @@ chall.py</p>
 <p>After several rounds of flipping, the number of remaining bits that have not been flipped decreases, until none of it left when all of the remaining unflipped bits have been selected to get flipped. At this state, the resulting mask will be <code>b'\xff'*24</code>, in other words, the input will be decrypted using a key which has all of its original bit flipped. So what&rsquo;s the deal?</p>
 <p>This state where every bits of the key is flipped will happen several times, due to the reset in step 1. That means, <em><strong>the round where every bits of the key is flipped can be known</strong></em>, since the decryption result will be the same each time the key has all of its original bit flipped. This feels like a special situation that could enable some exploitation.</p>
 <p>This lead up to the next question, <em><strong>what is the relation between DES encryption/decryption using a normal key and the same key but all of its bit flipped?</strong></em> It turns out that DES has Complementation Property, in which encrypting a plaintext with the bitwise complement of the key, will result in the bitwise complement of the cipher encrypted with the same key.
-<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Google-CTF-2024/complement.png?raw=true" alt=""></p>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Google-CTF-2024/complement.png?raw=true" alt="">
+<em>source: <a href="https://en.wikipedia.org/wiki/Data_Encryption_Standard">https://en.wikipedia.org/wiki/Data_Encryption_Standard</a></em></p>
 <p>This mean, the API option 2 can be used to obtain the secret plaintext, by inputting the bitwise complement of the encrypted secret obtained from option 1. The final thing to do is making the adjustment to take into account the triple key and CBC mode. Below is the steps for DES CBC decryption:</p>
-<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Google-CTF-2024/cbc.png?raw=true" alt=""></p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Google-CTF-2024/cbc.png?raw=true" alt="">
+<em>source: <a href="https://sectigostore.com/blog/what-is-des-encryption-a-look-at-the-des-algorithm/">https://sectigostore.com/blog/what-is-des-encryption-a-look-at-the-des-algorithm/</a></em></p>
 <ul>
 <li>
 <p><strong>Subsequent Blocks:</strong></p>
