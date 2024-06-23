@@ -124,7 +124,7 @@ Problem The challenge has 3 functionality:
 Retrieve the secret encrypted with 3DES 192 bit key in CBC mode Submit any input (in hex string form) which will be decrypted using the same iv, but a corrupted key, and get the result. A maximum of 128 decryption requests can be made. Guess the plaintext of the encrypted secret to get the flag The iv is not given.">
   <meta itemprop="datePublished" content="2024-06-24T00:24:37+08:00">
   <meta itemprop="dateModified" content="2024-06-24T00:24:37+08:00">
-  <meta itemprop="wordCount" content="1004">
+  <meta itemprop="wordCount" content="1090">
   
   
   <meta name="twitter:card" content="summary">
@@ -380,10 +380,11 @@ chall.py</p>
 <li>Construct a mask which will facilitate the bit-flipping to the key</li>
 </ol>
 <p>After several rounds of flipping, the number of remaining bits that have not been flipped decreases, until none of it left when all of the remaining unflipped bits have been selected to get flipped. At this state, the resulting mask will be <code>b'\xff'*24</code>, in other words, the input will be decrypted using a key which has all of its original bit flipped. So what&rsquo;s the deal?</p>
-<p>This state where every bits of the key is flipped will happen several times, due to the reset in step 1. That means, <em><strong>the round where every bits of the key is flipped can be known</strong></em>, since the decryption result will be the same each time the key has all of its original bit flipped. This feels like a special situtaion that could enable some exploitation.</p>
-<p>This lead up to the next question, <em><strong>what is the relation between DES encryption/decryption using a normal key and the same key but all of its bit flipped?</strong></em> It turns out that DES has Complementation Property, in which encrypting a plaintext with the bitwise complement of the key, will result in the bitwise compelement of the cipher encrypted with the same key.
+<p>This state where every bits of the key is flipped will happen several times, due to the reset in step 1. That means, <em><strong>the round where every bits of the key is flipped can be known</strong></em>, since the decryption result will be the same each time the key has all of its original bit flipped. This feels like a special situation that could enable some exploitation.</p>
+<p>This lead up to the next question, <em><strong>what is the relation between DES encryption/decryption using a normal key and the same key but all of its bit flipped?</strong></em> It turns out that DES has Complementation Property, in which encrypting a plaintext with the bitwise complement of the key, will result in the bitwise complement of the cipher encrypted with the same key.
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Google-CTF-2024/complement.png?raw=true" alt=""></p>
 <p>This mean, the API option 2 can be used to obtain the secret plaintext, by inputting the bitwise complement of the encrypted secret obtained from option 1. The final thing to do is making the adjustment to take into account the triple key and CBC mode. Below is the steps for DES CBC decryption:</p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Google-CTF-2024/cbc.png?raw=true" alt=""></p>
 <ul>
 <li>
 <p><strong>Subsequent Blocks:</strong></p>
@@ -406,8 +407,9 @@ chall.py</p>
 </ol>
 </li>
 </ul>
-<p>For steo 4, since the 2nd to 8th blocks would have been XOR-ed with previous cipher text (which is already the bitwise complement of the original encrypted block), only the 1st block need to flipped (since it is being XOR-ed with the IV) to conver it into the 1st block of plaintext secret.</p>
+<p>For step 4, since the 2nd to 8th blocks would have been XOR-ed with previous ciphertext block (which is already the bitwise complement of the original ciphertext block), only the result for 1st block need to be flipped (since it is &ldquo;only&rdquo; being XOR-ed with the IV) to convert it into the 1st block of plaintext secret.</p>
 <h2 id="solution">Solution</h2>
+<p>The solver will keep sending input to the Decryption function, until there is a decryption result that appears twice (this is the decryption result when the key being used is the bitwise complement of the original key). Before sending as input, the encrypted result will be XOR-ed with <code>b'\xff'*64</code> to flip all of its bit. Due to the nature of CBC mode, only the 1st block of the decryption result needs to be flipped (XOR-ed with <code>b'\xff'*8</code>) to get the plaintext secret.</p>
 <p>solver.py</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
