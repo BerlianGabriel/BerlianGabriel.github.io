@@ -1,0 +1,524 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Google CTF 2024 - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Desfunctional The Complement Property of Triple Data Encryption Standard (3DES) with three 56-bit keys in CBC mode
+Problem The challenge has 3 functionality:
+Retrieve the secret encrypted with 3DES 192 bit key in CBC mode Submit any input (in hex string form) which will be decrypted using the same iv, but a corrupted key, and get the result. A maximum of 128 decryption requests can be made. Guess the plaintext of the encrypted secret to get the flag The iv is not given." />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.127.0">
+
+  
+  
+  
+  
+  
+
+
+  
+  
+  <meta itemprop="name" content="Google CTF 2024">
+  <meta itemprop="description" content="Desfunctional The Complement Property of Triple Data Encryption Standard (3DES) with three 56-bit keys in CBC mode
+Problem The challenge has 3 functionality:
+Retrieve the secret encrypted with 3DES 192 bit key in CBC mode Submit any input (in hex string form) which will be decrypted using the same iv, but a corrupted key, and get the result. A maximum of 128 decryption requests can be made. Guess the plaintext of the encrypted secret to get the flag The iv is not given.">
+  <meta itemprop="datePublished" content="2024-06-24T00:24:37+08:00">
+  <meta itemprop="dateModified" content="2024-06-24T00:24:37+08:00">
+  <meta itemprop="wordCount" content="1004">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Google CTF 2024">
+  <meta name="twitter:description" content="Desfunctional The Complement Property of Triple Data Encryption Standard (3DES) with three 56-bit keys in CBC mode
+Problem The challenge has 3 functionality:
+Retrieve the secret encrypted with 3DES 192 bit key in CBC mode Submit any input (in hex string form) which will be decrypted using the same iv, but a corrupted key, and get the result. A maximum of 128 decryption requests can be made. Guess the plaintext of the encrypted secret to get the flag The iv is not given.">
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/google-ctf-2024/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io/"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/BerlianGM"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Google CTF 2024</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jun 24, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="desfunctional">Desfunctional</h1>
+<p><code>The Complement Property of Triple Data Encryption Standard (3DES) with three 56-bit keys in CBC mode</code></p>
+<h2 id="problem">Problem</h2>
+<p>The challenge has 3 functionality:</p>
+<ol>
+<li>Retrieve the secret encrypted with 3DES 192 bit key in CBC mode</li>
+<li>Submit any input (in hex string form) which will be decrypted using the same iv, but a corrupted key, and get the result. A maximum of 128 decryption requests can be made.</li>
+<li>Guess the plaintext of the encrypted secret to get the flag</li>
+</ol>
+<p>The iv is not given. If there is no corruption on the key, the encrypted secret can just be submitted to API option 2, to get the plaintext. At a glance, the corruption seems to be random, in which different bit-positions of the key will be flipped.</p>
+<p>The following source code is given below:
+chall.py</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> signal
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> DES3
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Desfunctional</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">24</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>iv <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>flipped_bits <span style="color:#f92672">=</span> set(range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">192</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>challenge <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">64</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_flag</span>(self, plain):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> plain <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>challenge:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flag.txt&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>                FLAG <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> FLAG
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;Not quite right&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_challenge</span>(self):
+</span></span><span style="display:flex;"><span>        cipher <span style="color:#f92672">=</span> DES3<span style="color:#f92672">.</span>new(self<span style="color:#f92672">.</span>key, mode<span style="color:#f92672">=</span>DES3<span style="color:#f92672">.</span>MODE_CBC, iv<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>iv)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cipher<span style="color:#f92672">.</span>encrypt(self<span style="color:#f92672">.</span>challenge)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">corruption</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(self<span style="color:#f92672">.</span>flipped_bits) <span style="color:#f92672">==</span> <span style="color:#ae81ff">192</span>:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>flipped_bits <span style="color:#f92672">=</span> set(range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">192</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>        remaining <span style="color:#f92672">=</span> list(set(range(<span style="color:#ae81ff">192</span>)) <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>flipped_bits)
+</span></span><span style="display:flex;"><span>        num_flips <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, len(remaining))
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>flipped_bits <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>flipped_bits<span style="color:#f92672">.</span>union(
+</span></span><span style="display:flex;"><span>            random<span style="color:#f92672">.</span>choices(remaining, k<span style="color:#f92672">=</span>num_flips))
+</span></span><span style="display:flex;"><span>        mask <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>to_bytes(sum(<span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>flipped_bits), <span style="color:#ae81ff">24</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> bytes(i <span style="color:#f92672">^</span> j <span style="color:#66d9ef">for</span> i, j <span style="color:#f92672">in</span> zip(self<span style="color:#f92672">.</span>key, mask))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(self, text: bytes):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>counter <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>counter <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;Out of balance&#34;</span>)
+</span></span><span style="display:flex;"><span>        key <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>corruption()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(text) <span style="color:#f92672">%</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>        cipher <span style="color:#f92672">=</span> DES3<span style="color:#f92672">.</span>new(key, mode<span style="color:#f92672">=</span>DES3<span style="color:#f92672">.</span>MODE_CBC, iv<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>iv)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cipher<span style="color:#f92672">.</span>decrypt(text)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    chall <span style="color:#f92672">=</span> Desfunctional()
+</span></span><span style="display:flex;"><span>    PROMPT <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Choose an API option</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;1. Get challenge</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;2. Decrypt</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;3. Get the flag</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    signal<span style="color:#f92672">.</span>alarm(<span style="color:#ae81ff">128</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            option <span style="color:#f92672">=</span> int(input(PROMPT))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> option <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>                print(chall<span style="color:#f92672">.</span>get_challenge()<span style="color:#f92672">.</span>hex())
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> option <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>                ct <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(input(<span style="color:#e6db74">&#34;(hex) ct: &#34;</span>))
+</span></span><span style="display:flex;"><span>                print(chall<span style="color:#f92672">.</span>decrypt(ct)<span style="color:#f92672">.</span>hex())
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> option <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>                pt <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(input(<span style="color:#e6db74">&#34;(hex) pt: &#34;</span>))
+</span></span><span style="display:flex;"><span>                print(chall<span style="color:#f92672">.</span>get_flag(pt))
+</span></span><span style="display:flex;"><span>                sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            print(e)
+</span></span><span style="display:flex;"><span>            sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><h2 id="approach">Approach</h2>
+<p>The first main point that should be inferred from the code is that, the way the corruption is being impelemented, there will be a state in which every bits of the key will be flipped!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">corruption</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(self<span style="color:#f92672">.</span>flipped_bits) <span style="color:#f92672">==</span> <span style="color:#ae81ff">192</span>:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>flipped_bits <span style="color:#f92672">=</span> set(range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">192</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>        remaining <span style="color:#f92672">=</span> list(set(range(<span style="color:#ae81ff">192</span>)) <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>flipped_bits)
+</span></span><span style="display:flex;"><span>        num_flips <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, len(remaining))
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>flipped_bits <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>flipped_bits<span style="color:#f92672">.</span>union(
+</span></span><span style="display:flex;"><span>            random<span style="color:#f92672">.</span>choices(remaining, k<span style="color:#f92672">=</span>num_flips))
+</span></span><span style="display:flex;"><span>        mask <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>to_bytes(sum(<span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>flipped_bits), <span style="color:#ae81ff">24</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> bytes(i <span style="color:#f92672">^</span> j <span style="color:#66d9ef">for</span> i, j <span style="color:#f92672">in</span> zip(self<span style="color:#f92672">.</span>key, mask))
+</span></span></code></pre></div><p>The corruption function will do the following:</p>
+<ol>
+<li>Check if every bit-positions have already been flipped. If yes, reset to the initial state. Note that earlier, the initial state has been set to flip the bit at position 0, 8, 16, &hellip;, 184. Notice that for DES, those bits are parity bit which does not affect the decryption result even if those bits are changed.</li>
+<li>Randomly select the number of bits to be flipped</li>
+<li>Union the newly selected bits to be flipped with the bits that are already flipped, meaning no bit will be flipped twice</li>
+<li>Construct a mask which will facilitate the bit-flipping to the key</li>
+</ol>
+<p>After several rounds of flipping, the number of remaining bits that have not been flipped decreases, until none of it left when all of the remaining unflipped bits have been selected to get flipped. At this state, the resulting mask will be <code>b'\xff'*24</code>, in other words, the input will be decrypted using a key which has all of its original bit flipped. So what&rsquo;s the deal?</p>
+<p>This state where every bits of the key is flipped will happen several times, due to the reset in step 1. That means, <em><strong>the round where every bits of the key is flipped can be known</strong></em>, since the decryption result will be the same each time the key has all of its original bit flipped. This feels like a special situtaion that could enable some exploitation.</p>
+<p>This lead up to the next question, <em><strong>what is the relation between DES encryption/decryption using a normal key and the same key but all of its bit flipped?</strong></em> It turns out that DES has Complementation Property, in which encrypting a plaintext with the bitwise complement of the key, will result in the bitwise compelement of the cipher encrypted with the same key.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/Google-CTF-2024/complement.png?raw=true" alt=""></p>
+<p>This mean, the API option 2 can be used to obtain the secret plaintext, by inputting the bitwise complement of the encrypted secret obtained from option 1. The final thing to do is making the adjustment to take into account the triple key and CBC mode. Below is the steps for DES CBC decryption:</p>
+<ul>
+<li>
+<p><strong>Subsequent Blocks:</strong></p>
+<ol>
+<li>Decrypt the ciphertext block with (K_3).</li>
+<li>Encrypt the result with (K_2).</li>
+<li>Decrypt the result with (K_1).</li>
+<li>XOR the result with the previous ciphertext block to get the plaintext block.</li>
+<li>Store the ciphertext block for use with the next block.</li>
+</ol>
+</li>
+<li>
+<p><strong>First Block:</strong></p>
+<ol>
+<li>Decrypt the ciphertext block with (K_3).</li>
+<li>Encrypt the result with (K_2).</li>
+<li>Decrypt the result with (K_1).</li>
+<li>XOR the result with the IV to get the plaintext block.</li>
+<li>Store the ciphertext block as the IV for the next block.</li>
+</ol>
+</li>
+</ul>
+<p>For steo 4, since the 2nd to 8th blocks would have been XOR-ed with previous cipher text (which is already the bitwise complement of the original encrypted block), only the 1st block need to flipped (since it is being XOR-ed with the IV) to conver it into the 1st block of plaintext secret.</p>
+<h2 id="solution">Solution</h2>
+<p>solver.py</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Connect to the server</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;desfunctional.2024.ctfcompetition.com&#39;</span>, <span style="color:#ae81ff">1337</span>, level<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;debug&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_challenge</span>():
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#39;1&#39;</span><span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;flag</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    challenge <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>decode()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> challenge
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_challenge</span>(challenge):
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;flag</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#39;2&#39;</span><span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;ct: &#34;</span>)
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>sendline(challenge)
+</span></span><span style="display:flex;"><span>    response <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>decode()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> response
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_flag</span>(challenge):
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;flag</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>sendline(<span style="color:#e6db74">&#39;3&#39;</span><span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;pt: &#34;</span>)
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>sendline(challenge)
+</span></span><span style="display:flex;"><span>    response <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>decode()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> response
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    res<span style="color:#f92672">=</span>set()
+</span></span><span style="display:flex;"><span>    challenge <span style="color:#f92672">=</span> get_challenge()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print(f&#34;Challenge: {challenge}&#34;)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Decrypt the challenge</span>
+</span></span><span style="display:flex;"><span>            flip_enc<span style="color:#f92672">=</span>xor(bytes<span style="color:#f92672">.</span>fromhex(challenge),<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xff</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">64</span>)<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> decrypt_challenge(flip_enc<span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> response <span style="color:#f92672">in</span> res:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                secret<span style="color:#f92672">=</span>xor(bytes<span style="color:#f92672">.</span>fromhex(response),<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xff</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">+</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">56</span>)<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>                print(get_flag(secret<span style="color:#f92672">.</span>encode()))
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                res<span style="color:#f92672">.</span>add(response)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Error: </span><span style="color:#e6db74">{</span>e<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><p><em><strong>FLAG: <code>CTF{y0u_m4y_NOT_g3t_th3_k3y_but_y0u_m4y_NOT_g3t_th3_c1ph3rt3xt_as_w3ll}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h1 id="social-media">Social Media</h1>
+<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/crypto-ctf-2024/"
+      ><span>Crypto CTF 2024</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

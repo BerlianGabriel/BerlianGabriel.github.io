@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Berlian Gabriel</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 09 Jun 2024 21:45:16 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 24 Jun 2024 00:24:37 +0800</lastBuildDate>
     <atom:link href="https://berliangabriel.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google CTF 2024</title>
+      <link>https://berliangabriel.github.io/post/google-ctf-2024/</link>
+      <pubDate>Mon, 24 Jun 2024 00:24:37 +0800</pubDate>
+      <guid>https://berliangabriel.github.io/post/google-ctf-2024/</guid>
+      <description>Desfunctional The Complement Property of Triple Data Encryption Standard (3DES) with three 56-bit keys in CBC mode&#xA;Problem The challenge has 3 functionality:&#xA;Retrieve the secret encrypted with 3DES 192 bit key in CBC mode Submit any input (in hex string form) which will be decrypted using the same iv, but a corrupted key, and get the result. A maximum of 128 decryption requests can be made. Guess the plaintext of the encrypted secret to get the flag The iv is not given.</description>
+    </item>
     <item>
       <title>Crypto CTF 2024</title>
       <link>https://berliangabriel.github.io/post/crypto-ctf-2024/</link>
