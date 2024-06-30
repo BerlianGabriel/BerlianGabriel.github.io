@@ -6,8 +6,15 @@
     <description>Recent content on Berlian Gabriel</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 24 Jun 2024 00:24:37 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jul 2024 06:57:26 +0800</lastBuildDate>
     <atom:link href="https://berliangabriel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UIU CTF 2024 Writeup</title>
+      <link>https://berliangabriel.github.io/post/uiu-ctf-2024/</link>
+      <pubDate>Mon, 01 Jul 2024 06:57:26 +0800</pubDate>
+      <guid>https://berliangabriel.github.io/post/uiu-ctf-2024/</guid>
+      <description>Key in a Haystack Finding a prime factor via small subgroups using Pollard&#39;s p-1 algorithm&#xA;Problem We were given a flag encrypted with AES-ECB using a 40-bit prime key. The key is then multiplied with 300 1024-bit primes, and the result is given to us. The following source code is given:&#xA;from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from Crypto.Cipher import AES from hashlib import md5 from math import prod import sys from secret import flag key = getPrime(40) haystack = [ getPrime(1024) for _ in range(300) ] key_in_haystack = key * prod(haystack) enc_flag = AES.</description>
+    </item>
     <item>
       <title>Google CTF 2024 Writeup</title>
       <link>https://berliangabriel.github.io/post/google-ctf-2024/</link>
