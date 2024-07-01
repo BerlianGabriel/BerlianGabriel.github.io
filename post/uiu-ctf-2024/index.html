@@ -45,7 +45,7 @@
   />
 
   
-  <title>UIU CTF 2024 Writeup - Berlian Gabriel</title>
+  <title>UIUCTF 2024 Writeup - Berlian Gabriel</title>
 
   
   <meta name="theme-color" />
@@ -118,7 +118,7 @@ from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from
 
   
   
-  <meta itemprop="name" content="UIU CTF 2024 Writeup">
+  <meta itemprop="name" content="UIUCTF 2024 Writeup">
   <meta itemprop="description" content="Key in a Haystack Finding a prime factor via small subgroups using Pollard&#39;s p-1 algorithm
 Problem We were given a flag encrypted with AES-ECB using a 40-bit prime key. The key is then multiplied with 300 1024-bit primes, and the result is given to us. The following source code is given:
 from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from Crypto.Cipher import AES from hashlib import md5 from math import prod import sys from secret import flag key = getPrime(40) haystack = [ getPrime(1024) for _ in range(300) ] key_in_haystack = key * prod(haystack) enc_flag = AES.">
@@ -128,7 +128,7 @@ from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from
   
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="UIU CTF 2024 Writeup">
+  <meta name="twitter:title" content="UIUCTF 2024 Writeup">
   <meta name="twitter:description" content="Key in a Haystack Finding a prime factor via small subgroups using Pollard&#39;s p-1 algorithm
 Problem We were given a flag encrypted with AES-ECB using a 40-bit prime key. The key is then multiplied with 300 1024-bit primes, and the result is given to us. The following source code is given:
 from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from Crypto.Cipher import AES from hashlib import md5 from math import prod import sys from secret import flag key = getPrime(40) haystack = [ getPrime(1024) for _ in range(300) ] key_in_haystack = key * prod(haystack) enc_flag = AES.">
@@ -266,7 +266,7 @@ from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5">UIU CTF 2024 Writeup</h1>
+    <h1 class="!my-0 pb-2.5">UIUCTF 2024 Writeup</h1>
 
     
     <div class="text-sm antialiased opacity-60">
