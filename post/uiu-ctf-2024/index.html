@@ -124,7 +124,7 @@ Problem We were given a flag encrypted with AES-ECB using a 40-bit prime key. Th
 from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from Crypto.Cipher import AES from hashlib import md5 from math import prod import sys from secret import flag key = getPrime(40) haystack = [ getPrime(1024) for _ in range(300) ] key_in_haystack = key * prod(haystack) enc_flag = AES.">
   <meta itemprop="datePublished" content="2024-07-01T06:57:26+08:00">
   <meta itemprop="dateModified" content="2024-07-01T06:57:26+08:00">
-  <meta itemprop="wordCount" content="668">
+  <meta itemprop="wordCount" content="980">
   
   
   <meta name="twitter:card" content="summary">
@@ -310,9 +310,85 @@ from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>exit(<span style="color:#ae81ff">0</span>)
 </span></span></code></pre></div><h2 id="approach">Approach</h2>
-<p>We need to realize that, because 40-bit prime p is still relatively small, factorizing p-1 is fast. There is a significant probability that p-1 is B-smooth for a reasonably small B. In other words, given a random 40-bit prime p, there is a high probability that all of the prime factors of p-1 are less than or equal to B, where B is small enough to bruteforce.</p>
-<p>This means, we can use Pollard&rsquo;s p-1 algorithm to find the 40-bit prime. All that is left to do is determining the appropriate B value. If B is too small, we might not find p because the biggest prime factors of most p-1 is bigger than B. If B is too big, it will take the algorithm too long to complete.</p>
-<p>We can approximate the probability of encountering B-smooth p-1, based on how big the B is, using the script below:</p>
+<p>We need to realize that, because 40-bit prime key is still relatively small, factorizing key-1 is fast. There is a significant probability that key-1 is B-smooth for a reasonably small B. In other words, given a random 40-bit prime key, there is a high probability that all of the prime factors of key-1 are less than or equal to B, where B is small enough to bruteforce.</p>
+<p>Pollard&rsquo;s ( p-1 ) algorithm to find a non-trivial factor of a composite number ( key-1 ). It is particularly effective if one of the prime factors is ( B )-smooth. All that is left to do is determining the appropriate B value. If B is too small, we might not find p because the biggest prime factors of most p-1 is bigger than B. If B is too big, it will take the algorithm too long to complete.</p>
+<h3 id="steps-of-pollards--p-1--method">Steps of Pollard&rsquo;s ( p-1 ) Method</h3>
+<ol>
+<li>
+<p><strong>Choose a Bound ( B )</strong>:</p>
+<ul>
+<li>Select a bound ( B ) such that we will consider primes up to ( B ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Compute ( M )</strong>:</p>
+<ul>
+<li>Calculate the product of the primes up to ( B ). Specifically, compute ( M = \prod_{q \leq B} q^{\lfloor \log_q N \rfloor} ), where ( q ) are prime numbers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Choose a Base ( a )</strong>:</p>
+<ul>
+<li>Select a base ( a ) that is relatively prime to ( N ). Typically, ( a = 2 ) is chosen.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compute ( a^M \mod N )</strong>:</p>
+<ul>
+<li>Use modular exponentiation to compute ( a^M \mod N ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Compute ( \gcd(a^M - 1, N) )</strong>:</p>
+<ul>
+<li>Calculate the greatest common divisor (gcd) of ( a^M - 1 ) and ( N ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Results</strong>:</p>
+<ul>
+<li>If ( \gcd(a^M - 1, N) = 1 ), increase ( B ) and repeat the process.</li>
+<li>If ( \gcd(a^M - 1, N) = N ), decrease ( B ) and repeat the process.</li>
+<li>If ( 1 &lt; \gcd(a^M - 1, N) &lt; N ), a non-trivial factor of ( N ) has been found.</li>
+</ul>
+</li>
+</ol>
+<h3 id="mathematical-explanation">Mathematical Explanation</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Let ( N ) be the composite number we want to factor.</li>
+<li>Let ( p ) be a prime factor of ( N ) such that ( p-1 ) is ( B )-smooth.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compute ( M )</strong>:
+[
+M = \prod_{q \leq B} q^{\lfloor \log_q N \rfloor}
+]
+where ( q ) are all prime numbers less than or equal to ( B ).</p>
+</li>
+<li>
+<p><strong>Modular Exponentiation</strong>:</p>
+<ul>
+<li>Compute ( a^M \mod N ) efficiently using modular exponentiation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Greatest Common Divisor</strong>:</p>
+<ul>
+<li>Calculate ( \gcd(a^M - 1, N) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Outcome</strong>:</p>
+<ul>
+<li>The value of ( \gcd(a^M - 1, N) ) will either be a non-trivial factor of ( N ), 1, or ( N ).</li>
+</ul>
+</li>
+</ol>
+<p>We can approximate the probability of encountering B-smooth key-1, based on how big the B is, using the script below:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> getPrime
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sympy.ntheory <span style="color:#f92672">import</span> factorint
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> math
@@ -339,18 +415,22 @@ from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> smooth:
 </span></span><span style="display:flex;"><span>        count<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>print(count<span style="color:#f92672">/</span><span style="color:#ae81ff">10000</span>)
-</span></span></code></pre></div><p>It was found that
-- For 8-bit B, there is less than 1% chance
-- For 16-bit B, there is ~16% chance
-- For 13-bit B, there is ~5% chance</p>
-<p>Using an M1 Macbook Air, it takes
-- ~8 seconds to complete the algorithm for 8-bit B
-- ~16 seconds to complete the algorithm for 9-bit B
-- ~32 seconds to complete the algorithm for 10-bit B
-- ~64 seconds to complete the algorithm for 11-bit B
-- ~128 seconds to complete the algorithm for 12-bit B
-- ~256 seconds to complete the algorithm for 13-bit B</p>
-<p>Based on the trade-off, we will choose 13-bit B. With, ~5% chance of getting 13-bit-smooth p-1, we need approximately 14 attempts to have at least a 50% chance of getting a smooth p-1 at least once. So it will probably take around 1 hour to complete the bruteforce, which is reasonable.</p>
+</span></span></code></pre></div><p>It was found that</p>
+<ul>
+<li>For 8-bit B, there is less than 1% chance</li>
+<li>For 16-bit B, there is ~16% chance</li>
+<li>For 13-bit B, there is ~5% chance</li>
+</ul>
+<p>Using an M1 Macbook Air, it takes</p>
+<ul>
+<li>~8 seconds to complete the algorithm for 8-bit B</li>
+<li>~16 seconds to complete the algorithm for 9-bit B</li>
+<li>~32 seconds to complete the algorithm for 10-bit B</li>
+<li>~64 seconds to complete the algorithm for 11-bit B</li>
+<li>~128 seconds to complete the algorithm for 12-bit B</li>
+<li>~256 seconds to complete the algorithm for 13-bit B</li>
+</ul>
+<p>Based on the trade-off, we will choose 13-bit B. With, ~5% chance of getting 13-bit-smooth key-1, we need approximately <strong>14 attempts to have at least a 50% chance of getting a smooth p-1 at least once</strong>. So it will probably take around <strong>1 hour</strong> to complete the bruteforce, which is reasonable.</p>
 <h2 id="solution">Solution</h2>
 <p>Pollard&rsquo;s p-1 implementation in Sagemath to retrieve the 40-bit key, using 13-bit B</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sage" data-lang="sage"><span style="display:flex;"><span><span style="color:#f92672">from</span> sage.all <span style="color:#f92672">import</span> gcd, factorial, ZZ
