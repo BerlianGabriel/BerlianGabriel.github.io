@@ -124,7 +124,7 @@ Problem We were given a flag encrypted with AES-ECB using a 40-bit prime key. Th
 from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from Crypto.Cipher import AES from hashlib import md5 from math import prod import sys from secret import flag key = getPrime(40) haystack = [ getPrime(1024) for _ in range(300) ] key_in_haystack = key * prod(haystack) enc_flag = AES.">
   <meta itemprop="datePublished" content="2024-07-01T06:57:26+08:00">
   <meta itemprop="dateModified" content="2024-07-01T06:57:26+08:00">
-  <meta itemprop="wordCount" content="666">
+  <meta itemprop="wordCount" content="668">
   
   
   <meta name="twitter:card" content="summary">
@@ -350,7 +350,7 @@ from Crypto.Util.number import getPrime from Crypto.Util.Padding import pad from
 - ~64 seconds to complete the algorithm for 11-bit B
 - ~128 seconds to complete the algorithm for 12-bit B
 - ~256 seconds to complete the algorithm for 13-bit B</p>
-<p>Based on the trade-off, we will choose 13-bit B. With, ~5% chance of getting 13-bit-smooth p-1, we need approximately 14 attempts to have at least a 50% chance of guessing correctly at least once. So it will probably take around 1 hour to complete the bruteforce, which is reasonable.</p>
+<p>Based on the trade-off, we will choose 13-bit B. With, ~5% chance of getting 13-bit-smooth p-1, we need approximately 14 attempts to have at least a 50% chance of getting a smooth p-1 at least once. So it will probably take around 1 hour to complete the bruteforce, which is reasonable.</p>
 <h2 id="solution">Solution</h2>
 <p>Pollard&rsquo;s p-1 implementation in Sagemath to retrieve the 40-bit key, using 13-bit B</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sage" data-lang="sage"><span style="display:flex;"><span><span style="color:#f92672">from</span> sage.all <span style="color:#f92672">import</span> gcd, factorial, ZZ
