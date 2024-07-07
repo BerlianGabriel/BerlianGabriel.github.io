@@ -6,8 +6,15 @@
     <description>Recent content on Berlian Gabriel</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 01 Jul 2024 06:57:26 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jul 2024 17:05:51 +0800</lastBuildDate>
     <atom:link href="https://berliangabriel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DUCTF 2024</title>
+      <link>https://berliangabriel.github.io/post/ductf-2024/</link>
+      <pubDate>Sun, 07 Jul 2024 17:05:51 +0800</pubDate>
+      <guid>https://berliangabriel.github.io/post/ductf-2024/</guid>
+      <description>V for Vieta Implementing Vieta jumping algorithm&#xA;Problem The following source code is given.&#xA;#!/usr/bin/env python3 import os import random import json from enum import Enum FLAG = os.getenv(&amp;#34;FLAG&amp;#34;, &amp;#34;DUCTF{dummy_flag}&amp;#34;) class State(Enum): INITIAL = 1 TEST = 2 QUIT = 3 class Server: def __init__(self): self.level = 2048 self.target = 2048 self.finish = 8 self.state = State.INITIAL def win(self): return { &amp;#34;flag&amp;#34;: FLAG, } def generate_k(self): self.k = random.getrandbits(self.level) ** 2 self.</description>
+    </item>
     <item>
       <title>UIUCTF 2024 Writeup</title>
       <link>https://berliangabriel.github.io/post/uiuctf-2024/</link>
