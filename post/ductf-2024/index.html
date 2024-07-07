@@ -45,7 +45,7 @@
   />
 
   
-  <title>DUCTF 2024 - Berlian Gabriel</title>
+  <title>DownUnder CTF (DUCTF) 2024 Writeup - Berlian Gabriel</title>
 
   
   <meta name="theme-color" />
@@ -118,17 +118,17 @@ Problem The following source code is given.
 
   
   
-  <meta itemprop="name" content="DUCTF 2024">
+  <meta itemprop="name" content="DownUnder CTF (DUCTF) 2024 Writeup">
   <meta itemprop="description" content="V for Vieta Implementing Vieta jumping algorithm
 Problem The following source code is given.
 #!/usr/bin/env python3 import os import random import json from enum import Enum FLAG = os.getenv(&#34;FLAG&#34;, &#34;DUCTF{dummy_flag}&#34;) class State(Enum): INITIAL = 1 TEST = 2 QUIT = 3 class Server: def __init__(self): self.level = 2048 self.target = 2048 self.finish = 8 self.state = State.INITIAL def win(self): return { &#34;flag&#34;: FLAG, } def generate_k(self): self.k = random.getrandbits(self.level) ** 2 self.">
   <meta itemprop="datePublished" content="2024-07-07T17:05:51+08:00">
   <meta itemprop="dateModified" content="2024-07-07T17:05:51+08:00">
-  <meta itemprop="wordCount" content="672">
+  <meta itemprop="wordCount" content="683">
   
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="DUCTF 2024">
+  <meta name="twitter:title" content="DownUnder CTF (DUCTF) 2024 Writeup">
   <meta name="twitter:description" content="V for Vieta Implementing Vieta jumping algorithm
 Problem The following source code is given.
 #!/usr/bin/env python3 import os import random import json from enum import Enum FLAG = os.getenv(&#34;FLAG&#34;, &#34;DUCTF{dummy_flag}&#34;) class State(Enum): INITIAL = 1 TEST = 2 QUIT = 3 class Server: def __init__(self): self.level = 2048 self.target = 2048 self.finish = 8 self.state = State.INITIAL def win(self): return { &#34;flag&#34;: FLAG, } def generate_k(self): self.k = random.getrandbits(self.level) ** 2 self.">
@@ -266,7 +266,7 @@ Problem The following source code is given.
 
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5">DUCTF 2024</h1>
+    <h1 class="!my-0 pb-2.5">DownUnder CTF (DUCTF) 2024 Writeup</h1>
 
     
     <div class="text-sm antialiased opacity-60">
@@ -365,22 +365,22 @@ Problem The following source code is given.
 </span></span><span style="display:flex;"><span>    main()
 </span></span></code></pre></div><p>The essence is, we need to find a pair of (a,b) which satisfies the requirement:</p>
 <ul>
-<li><code>(a**2 + a * b + b**2) / (2 * a * b + 1)</code> == k</li>
+<li><code>(a**2 + a * b + b**2) / (2 * a * b + 1)</code> == <code>k</code></li>
 <li>along the way, k will get smaller, until it reaches 8 bit, but we still need to always supply a and be that are atleast 2048 bit</li>
 </ul>
 <h2 id="approach">Approach</h2>
 <p>Re-arrange the quadratic equation in terms of a:</p>
 <pre tabindex="0"><code>a**2 - (2*k-1)*b * a + (b^2 - k) == 0
 </code></pre><p>The first few pairs of (a,b) that satisfy the quadratic equation above are as follow, where r is the square root of the given k:</p>
-<pre tabindex="0"><code>(0              , r)
-(r              , 2 * r ** 3 - r)
-(2 * r ** 3 - r , 4 * r ** 5 - 4 * r ** 3)
+<pre tabindex="0"><code>1st pair: (0              , r)
+2nd pair: (r              , 2 * r ** 3 - r)
+3rd pair: (2 * r ** 3 - r , 4 * r ** 5 - 4 * r ** 3)
 </code></pre><p>After observing the patter, notice that</p>
 <pre tabindex="0"><code>a[i] = b[i-1]
 b[i] = (2 * r ** 2 - 1)*b[i-1] - a 
 </code></pre><p>where (a[i-1],b[i-1]) is the previous working pair before (a[i],b[i]). This means, we can determine the elements of the next pair from the previous elements.</p>
 <h2 id="solution">Solution</h2>
-<p>The key thing to understand is, because k will keep gettin smaller in each iteration, we cannot use the same form of (a,b) pair, as the earlier form of (a,b) will be smaller than 2048 bit. This is why we need to <code>jump</code> to the next (bigger) form of (a,b), in order to be able to hit the 2048 bit requirement with smaller k.</p>
+<p>The key thing to understand is, because k will keep getting smaller in each iteration, we cannot use the same form of (a,b) pair, as the earlier form of (a,b) will end up being smaller than 2048 bit for smaller k. This is why we need to <code>jump</code> to the next (bigger) form of (a,b), in order to be able to hit the 2048 bit requirement with smaller k.</p>
 <p>Below is the solver script.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> isqrt
