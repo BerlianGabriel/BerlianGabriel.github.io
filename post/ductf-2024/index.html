@@ -124,7 +124,7 @@ Problem The following source code is given.
 #!/usr/bin/env python3 import os import random import json from enum import Enum FLAG = os.getenv(&#34;FLAG&#34;, &#34;DUCTF{dummy_flag}&#34;) class State(Enum): INITIAL = 1 TEST = 2 QUIT = 3 class Server: def __init__(self): self.level = 2048 self.target = 2048 self.finish = 8 self.state = State.INITIAL def win(self): return { &#34;flag&#34;: FLAG, } def generate_k(self): self.k = random.getrandbits(self.level) ** 2 self.">
   <meta itemprop="datePublished" content="2024-07-07T17:05:51+08:00">
   <meta itemprop="dateModified" content="2024-07-07T17:05:51+08:00">
-  <meta itemprop="wordCount" content="689">
+  <meta itemprop="wordCount" content="690">
   
   
   <meta name="twitter:card" content="summary">
@@ -371,7 +371,7 @@ Problem The following source code is given.
 <h2 id="approach">Approach</h2>
 <p>Re-arrange the quadratic equation in terms of a:</p>
 <pre tabindex="0"><code>a**2 - (2*k-1)*b * a + (b^2 - k) == 0
-</code></pre><p>The first few pairs of (a,b) that satisfy the quadratic equation above can be derived from the Wikipedia page on <img src="https://en.wikipedia.org/wiki/Vieta_jumping" alt="Vieta jumping">, where <code>r</code> is the square root of the given <code>k</code>:</p>
+</code></pre><p>The first few pairs of (a,b) that satisfy the quadratic equation above can be derived from the Wikipedia page on <a href="https://en.wikipedia.org/wiki/Vieta_jumping">Vieta jumping</a>, where <code>r</code> is the square root of the given <code>k</code>:</p>
 <pre tabindex="0"><code>1st pair: (0              , r)
 2nd pair: (r              , 2 * r ** 3 - r)
 3rd pair: (2 * r ** 3 - r , 4 * r ** 5 - 4 * r ** 3)
