@@ -1,0 +1,544 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>TSA CTF 2024 - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Crypto zkrsa PS: This was my first time dabling with real ZKP stuff, and I am really glad I got the first blood! A very fruitful learning experience!!
+I found the amazing zero-knowledge proof example which demonstrates that you can prove that you know factorization of given RSA modulus without revealing the factors. Nothing can go wrong with the official example, right? nc 0.cloud.chals.io 13706 Terdapat kerentanan pada contoh implementasi ZKP RSA dari gnark di https://play." />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.127.0">
+
+  
+  
+  
+  
+  
+
+
+  
+  
+  <meta itemprop="name" content="TSA CTF 2024">
+  <meta itemprop="description" content="Crypto zkrsa PS: This was my first time dabling with real ZKP stuff, and I am really glad I got the first blood! A very fruitful learning experience!!
+I found the amazing zero-knowledge proof example which demonstrates that you can prove that you know factorization of given RSA modulus without revealing the factors. Nothing can go wrong with the official example, right? nc 0.cloud.chals.io 13706 Terdapat kerentanan pada contoh implementasi ZKP RSA dari gnark di https://play.">
+  <meta itemprop="datePublished" content="2024-11-10T15:36:57+08:00">
+  <meta itemprop="dateModified" content="2024-11-10T15:36:57+08:00">
+  <meta itemprop="wordCount" content="1070">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TSA CTF 2024">
+  <meta name="twitter:description" content="Crypto zkrsa PS: This was my first time dabling with real ZKP stuff, and I am really glad I got the first blood! A very fruitful learning experience!!
+I found the amazing zero-knowledge proof example which demonstrates that you can prove that you know factorization of given RSA modulus without revealing the factors. Nothing can go wrong with the official example, right? nc 0.cloud.chals.io 13706 Terdapat kerentanan pada contoh implementasi ZKP RSA dari gnark di https://play.">
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/tsa-ctf-2024/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io/"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/BerlianGM"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">TSA CTF 2024</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Nov 10, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="crypto">Crypto</h1>
+<h2 id="zkrsa">zkrsa</h2>
+<p><em>PS: This was my first time dabling with real ZKP stuff, and I am really glad I got the <strong>first blood</strong>! A very fruitful learning experience!!</em></p>
+<pre tabindex="0"><code>I found the amazing zero-knowledge proof example which demonstrates that you can prove that you know factorization of given RSA modulus without revealing the factors.
+Nothing can go wrong with the official example, right?
+nc 0.cloud.chals.io 13706
+</code></pre><p>Terdapat kerentanan pada contoh implementasi ZKP RSA dari gnark di <a href="https://play.gnark.io/?id=rsa">https://play.gnark.io/?id=rsa</a>. Permasalahannya terletak pada penggunaan Field Size yang lebih kecil daripada RSA modulus yang dipilih. Hal ini mengakibatkan terjadinya overflow, yang mana seluruh operasi matematika yang terjadi akan di modulo oleh Field Size. Akibatnya, prover dapat memilih p’ dan q’ (yang berbeda dengan p dan q yang asli) asalkan hasil kali p’ dan q’ ekuivalen dengan n mod fieldSize. Karena n tersedia untuk publik dan fieldSize dan dengan mudah dicari nilainya, dan juga karena n mod fieldSize hampir selalu menghasilkan bilangan komposit yang mudah di faktorkan, mendapatkan p’ dan q’ dan lolos verifikasi menjadi trivial.</p>
+<p>Berikut adalah skrip yang digunakan untuk menyelesaikan Proof of Work:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> itertools
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Target hash</span>
+</span></span><span style="display:flex;"><span>target_hash <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ca91a7e88bf72726944357e0708edae2d384ce3091f7b01fe789e8b9fa0cc864&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate all possible 6-character hex strings (000000 to ffffff)</span>
+</span></span><span style="display:flex;"><span>hex_chars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;0123456789abcdef&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> candidate <span style="color:#f92672">in</span> itertools<span style="color:#f92672">.</span>product(hex_chars, repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>):
+</span></span><span style="display:flex;"><span>    candidate_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(candidate)
+</span></span><span style="display:flex;"><span>    candidate_hash <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha256(candidate_str<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>hexdigest()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> candidate_hash <span style="color:#f92672">==</span> target_hash:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Found match: </span><span style="color:#e6db74">{</span>candidate_str<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><p>Berikut adalah interaksi manual dengan server:
+{image_placeholder}</p>
+<p>Didaptkan RSA Modulus:
+<code>n=23616729774663799837626113306952932346278820066379183137179434019720364586692087317557593792970765338529743713236923148732700197711219075545528945402020813852243662254151188638543551896021132262748663301121989512886923427067781433270173692348137528909249284681096207319930296433138738305544801657298564999971230523661123459254136517621352644995551803555624090536473000580574617842952674463465974501630452248286978757592831395658040746846866563765761333340402952938518218127774560863211966877040069493611453155712131198254449197054609170107068959972721600370045054135764300948487046208624947451366952483622928032574891</code></p>
+<p>Challenge ini menggunakan kurva BLS12-377, yang memiliki <code>fieldSize=8444461749428370424248824938781546531375899335154063827935233455917409239041</code>
+Semua operasi aritmatika dalam sirkuit dilakukan dalam modulo fieldSize.</p>
+<p>Dengan melakukan modulo terhadap fieldSize:
+<code>n mod fieldSize = 2895983124281732224885085646670319702231579455911637541975043558644528600064</code></p>
+<p>Kita dapat dengan mudah memfaktorkan n mod fieldSize menjadi p,q, dimana:
+<code>p=2</code>
+<code>q=1447991562140866112442542823335159851115789727955818770987521779322264300032</code></p>
+<p>Berbekalkan nilai p dan q, kita dapat  membuat nilai proof hex string. Pertama, kita perlu melakukan rekonstruksi nilai proof key, yang kita dapatkan bersamaan dengan RSA modulus tadi. Konversi string heksadesimal dari kunci pembuktian kembali menjadi byte.
+Gunakan API gnark untuk membaca kunci pembuktian dari byte stream.
+Selanjutnya lakukan kompilasi sirkuit dengan menggunakan definisi sirkuit yang sama dengan challenge, dan fieldSize yang sama juga. Lakukan Instansiasi Witness, lalu gunakan fungsi proof dari gnark untuk menghasilkan proof. Terakhir, serialisasi proof tersebut menjadi hex string untuk siap di submit ke server.</p>
+<p>Berikut adalah solver.go yang mengimplementasikan langkah-langkah di atas untuk dapat mengubah nilai p dan q yang sudah kita hitung menjadi proof.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;bytes&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;encoding/hex&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;math/big&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/consensys/gnark-crypto/ecc&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/consensys/gnark/backend/groth16&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/consensys/gnark/frontend&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/consensys/gnark/frontend/cs/r1cs&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Circuit</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">P</span>   <span style="color:#a6e22e">frontend</span>.<span style="color:#a6e22e">Variable</span> <span style="color:#75715e">// p  --&gt; secret visibility (default)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Q</span>   <span style="color:#a6e22e">frontend</span>.<span style="color:#a6e22e">Variable</span> <span style="color:#e6db74">`gnark:&#34;q,secret&#34;`</span> <span style="color:#75715e">// q  --&gt; secret visibility
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">RSA</span> <span style="color:#a6e22e">frontend</span>.<span style="color:#a6e22e">Variable</span> <span style="color:#e6db74">`gnark:&#34;,public&#34;`</span>  <span style="color:#75715e">// rsa  --&gt; public visibility
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// taken from official example: https://play.gnark.io/?id=rsa
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// so it should be safe
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">circuit</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Circuit</span>) <span style="color:#a6e22e">Define</span>(<span style="color:#a6e22e">api</span> <span style="color:#a6e22e">frontend</span>.<span style="color:#a6e22e">API</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ensure we don&#39;t accept RSA * 1 == RSA
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">AssertIsDifferent</span>(<span style="color:#a6e22e">circuit</span>.<span style="color:#a6e22e">P</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">AssertIsDifferent</span>(<span style="color:#a6e22e">circuit</span>.<span style="color:#a6e22e">Q</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// compute P * Q and store it in the local variable res.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">rsa</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">Mul</span>(<span style="color:#a6e22e">circuit</span>.<span style="color:#a6e22e">P</span>, <span style="color:#a6e22e">circuit</span>.<span style="color:#a6e22e">Q</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// assert that the statement P * Q == RSA is true.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">AssertIsEqual</span>(<span style="color:#a6e22e">circuit</span>.<span style="color:#a6e22e">RSA</span>, <span style="color:#a6e22e">rsa</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Get N and pk from the challenge
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">NString</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;23616729774663799837626113306952932346278820066379183137179434019720364586692087317557593792970765338529743713236923148732700197711219075545528945402020813852243662254151188638543551896021132262748663301121989512886923427067781433270173692348137528909249284681096207319930296433138738305544801657298564999971230523661123459254136517621352644995551803555624090536473000580574617842952674463465974501630452248286978757592831395658040746846866563765761333340402952938518218127774560863211966877040069493611453155712131198254449197054609170107068959972721600370045054135764300948487046208624947451366952483622928032574891&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pkHexString</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;00000000000000040e008c06f3a17c00c88739d6c529c401033fd93f1c000000c78d200000000001000000000000000023ed1347970dec00cf664765b00000018f1a40000000000112ab655e9a2ca5563cc739d6c529c4008a442f991fffffff7af74000000000000000000000000000000000000000000000000000000000000000000000000016028bbc5e5ad78ae8dea4390fc6c1c68bd20b9bdcedd1745d3b8e05d1745d17460180db3decb27681d916e9c01fc24f0303e4df35e24ce58c63e529f81b684fa57265f75bb3f8f619f6bd6af355f8856b79a1645157550970787cacdbceffa12271a1b78cccdd378c1a497953c2c6c689df7e482649a96e02c69ed5222f0e5aced4807389e3501dfc160ed9e2bc28487cfa92bdae62087e05ae1a493198786f386e1c64cc1f5c2adb119fa122c70839b89d0000000480cdd8ff36fbcc149b2de4cb5a27cd029f554ceaf4ea646869edd1593bf66b5aac9ced177e3fefebf181e7f0a596bb1fa04055ddd66efc26b6e43c0103f322cfac2b291891a6d1599ca3ac790dd2f3ba78696bdc27447a1884ed5918a8750e3aa1a0613c0a045df910aea156abc9a445137419086179c68d124ca680fb53401be0dd2b26e642ce1ea2c3974d587e09ec818465c4be8095a73dd1bbc9b6f1083730baf314f4089a3f5e680f8b838ca3db4f28cf5a77a74015c4612608ad44a8a700000004a06c4e72c0f1b991068a31be80c9f79c08045e1b6e9d55aa2e54efe0881752d32e32ef55c67bf6cab7533a193059da0f80cdd8ff36fbcc149b2de4cb5a27cd029f554ceaf4ea646869edd1593bf66b5aac9ced177e3fefebf181e7f0a596bb1fa1a0613c0a045df910aea156abc9a445137419086179c68d124ca680fb53401be0dd2b26e642ce1ea2c3974d587e09eca00c9abb2b722b94cd0c2b5ff365e4801b9aba63b176fe00cd65a4baf89460bb47b7e6aaaa8f9bead748e4c859e4bceb0000000380d5fae772291649109405628f4575a143b03a7f383b8114b2040c864952ad24581565f65bf8b72fa1ee7960fa353d9780236775fd6a60b5d6bc6e62a36d3ab5fe0638142eb7a0d1325c406b28e4b85c30f6b1cc7bda89961b2cfc4bc0486fb6808d8ada57fc1e0871708699a2f6d20d36ce5ba81bf6ee3ed7f70f921fb69ce336798e775e11f601f6bd7e85aceefe4e00000005a15eaefb8338b987ef14e756a99dfda5d939398e54df62cd4dd57b63b83086642770c956b679860e386c3fd920b71b2aa0f4e5d4bdc8191c438f20f8b474e7a745cb1d01c5435d72c30236da0520314752156503888e8f693acd98bf529fa2d98191e909267eeba419d72778dd4fbe1ee5b0b82630d9ca0b2bfda898278a991981c51e93ed0127e13d142164afcdb7ac8089c26e9942a972ff8c46621848a1197cd3acb1e6a52e42ba38103197a7cd8d8ab6f9944a3e32f9d9e4f40f57d9b434817520a978036ed5871a1da85b63b9accd978b63648ada293fb237c1210bad86fd7b4902bdad017660dc76d060ad45fe803d0dfc7c198d95f32b6bec5cdf5b373bb5e963860f165f0e955947dd0468a39107e6a31ed056daf411ad8db0328d1401248d8b1dac80846f4a354ddb6ee86ace4f8b3095c203222cf1778ed81d7424874184202c05447970e1a677f5c01500a084eb88293bb47ffac8f860bff60fbdb1bfc2a7b8fa1cd1083e989835c22aaac4fa2bd922c8a2958c2eca25b5a7a572019f2abac5cca8141c3efbad3bfeb48167b2d087743a8d8ef0b8b494abc3c9119a75630721d64ae0d79eaf055244511700000004818465534decfecdf54fc65a8aefe57c19413dad778b239f53d2678c2eb7118a1f57d55b202679ce601bc8acb8aff8070062b930649be95cf196db8a636dbc3a43deaa01ce210aa62697ab68e9c2b383d9da74be5c08416234302b0000fe0570808683a0bcecf22ce324e8a4f039668de752f525d300589d0778d39afe0467ed96b894e012a33915ac0d4059dcf5ce5e0101f7abdcb9a9d1fa7733e93f6ec379a70f83cae4aad9b501230431777c115cdc33d5458cabdbb2a991167a0682f4bda129dae311fcd8c22d5ab9979480b1dab8a2540765ecb21bb68bd7435007337d70ab2ecc2a27ffad061382ec778bd1ab0014d9cf717a9bc24dd202a3107b504f6e363799932719d509e53d7a3851749c8943a5fb769eee3bd72b10983ebe257a81110663ad5732335051d2a57a4c98361ad9fb27c61585151f8bb9e080b343e4662973919cbe4d4d5e46d11b9d4d517c01638d7bd72421a2a036a1f951a52399007fdde13041748fbdb96b3861e13ea68d0a3ce5a599095e8237a9072c5f3d7d000000000000000700000000000000030000000000000003000100010000010000000001010100000000&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Convert N to big.Int
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">N</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">big</span>.<span style="color:#a6e22e">Int</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">N</span>.<span style="color:#a6e22e">SetString</span>(<span style="color:#a6e22e">NString</span>, <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">q</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">big</span>.<span style="color:#a6e22e">Int</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">q</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">q</span>.<span style="color:#a6e22e">SetString</span>(<span style="color:#e6db74">&#34;1447991562140866112442542823335159851115789727955818770987521779322264300032&#34;</span>, <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Prepare the witness
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">circuit</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Circuit</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">P</span>:   <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Q</span>:   <span style="color:#a6e22e">q</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">RSA</span>: <span style="color:#a6e22e">N</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">witness</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">frontend</span>.<span style="color:#a6e22e">NewWitness</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">circuit</span>, <span style="color:#a6e22e">ecc</span>.<span style="color:#a6e22e">BLS12_377</span>.<span style="color:#a6e22e">ScalarField</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Step 8: Reconstruct pk
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">pkBytes</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">hex</span>.<span style="color:#a6e22e">DecodeString</span>(<span style="color:#a6e22e">pkHexString</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pk</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">groth16</span>.<span style="color:#a6e22e">NewProvingKey</span>(<span style="color:#a6e22e">ecc</span>.<span style="color:#a6e22e">BLS12_377</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">pk</span>.<span style="color:#a6e22e">ReadFrom</span>(<span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">pkBytes</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Step 9: Compile the circuit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ckt</span> <span style="color:#a6e22e">Circuit</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r1cs</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">frontend</span>.<span style="color:#a6e22e">Compile</span>(<span style="color:#a6e22e">ecc</span>.<span style="color:#a6e22e">BLS12_377</span>.<span style="color:#a6e22e">ScalarField</span>(), <span style="color:#a6e22e">r1cs</span>.<span style="color:#a6e22e">NewBuilder</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ckt</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Step 10: Generate the proof
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">proof</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">groth16</span>.<span style="color:#a6e22e">Prove</span>(<span style="color:#a6e22e">r1cs</span>, <span style="color:#a6e22e">pk</span>, <span style="color:#a6e22e">witness</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Step 11: Output the proof
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">proofBuf</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">proof</span>.<span style="color:#a6e22e">WriteTo</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">proofBuf</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">proofHex</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">hex</span>.<span style="color:#a6e22e">EncodeToString</span>(<span style="color:#a6e22e">proofBuf</span>.<span style="color:#a6e22e">Bytes</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Generated Proof:&#34;</span>, <span style="color:#a6e22e">proofHex</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em><strong>FLAG: <code>TSA{small_warmup_and_intro_to_zkp_in_the_wild}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h2 id="cryptomata">cryptomata</h2>
+<pre tabindex="0"><code>I implemented BLS pairing signature thanks to ChatGPT
+nc 0.cloud.chals.io 32571
+</code></pre><p>Terdapat kerantanan pada implementasi BLS buatan ChatGPT. Kerentanan terletak pada implementasi fungsi <code>hash_to_G1</code> di file <code>bls.py</code>. Secara khusus, fungsi ini:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hash_to_G1</span>(message: bytes) <span style="color:#f92672">-&gt;</span> tuple:
+</span></span><span style="display:flex;"><span>    hash_val <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(hashlib<span style="color:#f92672">.</span>sha256(message)<span style="color:#f92672">.</span>digest(), <span style="color:#e6db74">&#39;big&#39;</span>) <span style="color:#f92672">%</span> curve_order
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> multiply(G1, hash_val)
+</span></span></code></pre></div><p>Fungsi ini melakukan hash terhadap pesan menjadi skalar <code>hash_val</code> dan kemudian mengalikan generator kurva <code>G1</code> dengan <code>hash_val</code>. Metode ini tidak aman karena memungkinkan kita untuk melakukan aritmatika skalar pada nilai hash, yang dapat mengarah pada pemalsuan tanda tangan.</p>
+<p>Dalam skema tanda tangan BLS, tanda tangan untuk sebuah pesan <code>m</code> adalah <code>σ = sk * H(m)</code>. Jika <code>H(m)</code> bersifat linear (seperti dalam implementasi ini), kita dapat memanipulasi tanda tangan dengan memanfaatkan hubungan skalar antar-hasil hash dari pesan yang berbeda.</p>
+<p>Proses eksploitasi untuk mendapatkan flag dapat dilakukan sebagai berikut:</p>
+<p>Pertama-tama, dapatkan Tanda Tangan yang Valid untuk Username yang Dikenal. Daftar dengan username yang dapat kita kontrol (misalnya, <code>&quot;user&quot;</code>). Simpan tanda tangan (token) untuk &ldquo;user&rdquo;. Hitung Skalar k sehingga:
+<code>H(&quot;admin&quot;) = k * H(&quot;user&quot;) mod curve_order</code>
+Karena <code>H(m)</code> dihitung sebagai <code>hash_val * G1</code>, dan <code>hash_val</code> diketahui, kita dapat menghitung <code>k</code> seperti berikut:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> py_ecc.optimized_bls12_381.optimized_curve <span style="color:#f92672">import</span> curve_order
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute_hash_val</span>(message: bytes) <span style="color:#f92672">-&gt;</span> int:
+</span></span><span style="display:flex;"><span>    hash_val <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(hashlib<span style="color:#f92672">.</span>sha256(message)<span style="color:#f92672">.</span>digest(), <span style="color:#e6db74">&#39;big&#39;</span>) <span style="color:#f92672">%</span> curve_order
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> hash_val
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>h_user <span style="color:#f92672">=</span> compute_hash_val(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;user&#39;</span>)
+</span></span><span style="display:flex;"><span>h_admin <span style="color:#f92672">=</span> compute_hash_val(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;admin&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">modinv</span>(a, n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pow(a, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, n)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> (h_admin <span style="color:#f92672">*</span> modinv(h_user, curve_order)) <span style="color:#f92672">%</span> curve_order
+</span></span></code></pre></div><p>Kemudian, Palsukan Tanda Tangan untuk<code>&quot;admin&quot;. Kalikan tanda tangan untuk &quot;user&quot; dengan </code>k<code>untuk mendapatkan tanda tangan untuk</code>&ldquo;admin&rdquo;<code>: </code>σ_admin = k * σ_user`.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> py_ecc.fields <span style="color:#f92672">import</span> optimized_bls12_381_FQ <span style="color:#66d9ef">as</span> FQ
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">deserialize</span>(token):
+</span></span><span style="display:flex;"><span>    token <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(token)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> len(token) <span style="color:#f92672">==</span> <span style="color:#ae81ff">96</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(token[:<span style="color:#ae81ff">48</span>], <span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(token[<span style="color:#ae81ff">48</span>:], <span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (FQ(x), FQ(y), FQ(<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sigma_user <span style="color:#f92672">=</span> deserialize(token_from_step_1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> py_ecc.optimized_bls12_381 <span style="color:#f92672">import</span> multiply
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sigma_admin <span style="color:#f92672">=</span> multiply(sigma_user, k)
+</span></span></code></pre></div><p>Selanjutnya, lakukan Serialisasi Tanda Tangan Palsu. Ubah kembali titik tanda tangan palsu menjadi format token ter-serialisasi yang diharapkan oleh tantangan.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">serialize</span>(point):
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> py_ecc.optimized_bls12_381 <span style="color:#f92672">import</span> normalize
+</span></span><span style="display:flex;"><span>    xy <span style="color:#f92672">=</span> normalize(point)
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>to_bytes(int(xy[<span style="color:#ae81ff">0</span>]), <span style="color:#ae81ff">48</span>, <span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">+=</span> int<span style="color:#f92672">.</span>to_bytes(int(xy[<span style="color:#ae81ff">1</span>]), <span style="color:#ae81ff">48</span>, <span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> b<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>token_admin <span style="color:#f92672">=</span> serialize(sigma_admin)
+</span></span></code></pre></div><p>Terakhir, masuk sebagai <code>&quot;admin&quot;</code> Menggunakan Token Palsu. Setelah masuk sebagai &ldquo;admin&rdquo;, pilih opsi untuk mengambil flag.</p>
+<p>Seluruh langkah tadi dapat dilakukan secara manual seperti screenshot berikut:</p>
+<p><em><strong>FLAG: <code>TSA{proof_that_you_are_smarter_than_AI_3a78250f}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h2 id="101---cryptography">101 - Cryptography</h2>
+<pre tabindex="0"><code>Crypto 101
+Author: Fedra
+</code></pre><p>Diberikan sebuah file chall.txt berisikan sebagai berikut:</p>
+<pre tabindex="0"><code>❯ cat chall.txt
+c = 231722077914684998818993776518942509384465803531548983146869754932667754136315007943497593396644630089073196170276638447665765624960333289097324447779290700092664403080584161276778064977902852018557301618273474139777712464709585187730351308079009718870031364399745764326436147001877583703027251271265576350621173
+e = 65537
+n = 257208938346934642693512128888810986151634836498153528507638790770764504946719195736987613302526116425873247750032929224521429342437621496424825810959518932424007107126934957421561529561264636001476988808843995824395131838577901446930016348590793828420808295335603083382120208905347497068915850813369038886980997
+</code></pre><p>n yang diberikan adalah weak prime yang mana faktor nya dapat ditemukan di factordb</p>
+<p>Setelah mengetahui nilai p dan q, plaintext dapat didekripsi dengan trivial sebagai berikut:</p>
+<p><em><strong>FLAG: <code>TSA{Crypto_101_d5b55ff525198ba6}</code></strong></em>
+<br/>
+<br/>
+<br/></p>
+<h2 id="zeronium-tbc">zeronium (TBC)</h2>
+<h1 id="forensic">Forensic</h1>
+<h2 id="101---forensic-tbc">101 - Forensic (TBC)</h2>
+<h1 id="web">Web</h1>
+<h2 id="101---web-tbc">101 - Web (TBC)</h2>
+<h1 id="social-media">Social Media</h1>
+<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/ductf-2024/"
+      ><span>DownUnder CTF (DUCTF) 2024 Writeup</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
