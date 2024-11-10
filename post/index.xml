@@ -13,7 +13,7 @@
       <link>https://berliangabriel.github.io/post/tsa-ctf-2024/</link>
       <pubDate>Sun, 10 Nov 2024 15:36:57 +0800</pubDate>
       <guid>https://berliangabriel.github.io/post/tsa-ctf-2024/</guid>
-      <description>Crypto zkrsa PS: This was my first time dabling with real ZKP stuff, and I am really glad I got the first blood! A very fruitful learning experience!!&#xA;I found the amazing zero-knowledge proof example which demonstrates that you can prove that you know factorization of given RSA modulus without revealing the factors. Nothing can go wrong with the official example, right? nc 0.cloud.chals.io 13706 Terdapat kerentanan pada contoh implementasi ZKP RSA dari gnark di https://play.</description>
+      <description>Crypto zkrsa PS: This was my first time dabbling in real ZKP stuff, really glad that I got the first blood! A very fruitful learning experience indeed!!&#xA;I found the amazing zero-knowledge proof example which demonstrates that you can prove that you know factorization of given RSA modulus without revealing the factors. Nothing can go wrong with the official example, right? nc 0.cloud.chals.io 13706 Terdapat kerentanan pada contoh implementasi ZKP RSA dari gnark di https://play.</description>
     </item>
     <item>
       <title>DownUnder CTF (DUCTF) 2024 Writeup</title>
