@@ -1,0 +1,476 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Debunking Irreversible Alwin–Sahira Transform (IAST): GeoFence-Based Cryptographic Protocol - Berlian Gabriel</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Someone claiming to be a researcher from top Indonesian University published a new geofencing encryption algorithm in ResearchGate and people have been sharing this in LinkedIn without realizing the danger of this encryption. You can see the full paper here: https://www.researchgate.net/profile/Alwin-Sebastian-4/publication/392833582_IAST_Irreversible_Alwin-Sahira_Transform_GeoFence-Based_Cryptographic_Protocol_for_Location_Security/links/685489e107d6d53e82ed4d4c/IAST-Irreversible-Alwin-Sahira-Transform-GeoFence-Based-Cryptographic-Protocol-for-Location-Security.pdf
+There are so many hilarious things about the author and the calculation errors in the published paper, but we are not here to attack anyone. We are here to educate the public that encryption is no laughing matters." />
+  <meta name="author" content="Berlian Gabriel" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://berliangabriel.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://berliangabriel.github.io/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://berliangabriel.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link rel="icon" href="https://berliangabriel.github.io/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://berliangabriel.github.io/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.127.0">
+
+  
+  
+  
+  
+  
+
+
+  
+  
+  <meta itemprop="name" content="Debunking Irreversible Alwin–Sahira Transform (IAST): GeoFence-Based Cryptographic Protocol">
+  <meta itemprop="description" content="Someone claiming to be a researcher from top Indonesian University published a new geofencing encryption algorithm in ResearchGate and people have been sharing this in LinkedIn without realizing the danger of this encryption. You can see the full paper here: https://www.researchgate.net/profile/Alwin-Sebastian-4/publication/392833582_IAST_Irreversible_Alwin-Sahira_Transform_GeoFence-Based_Cryptographic_Protocol_for_Location_Security/links/685489e107d6d53e82ed4d4c/IAST-Irreversible-Alwin-Sahira-Transform-GeoFence-Based-Cryptographic-Protocol-for-Location-Security.pdf
+There are so many hilarious things about the author and the calculation errors in the published paper, but we are not here to attack anyone. We are here to educate the public that encryption is no laughing matters.">
+  <meta itemprop="datePublished" content="2025-07-06T17:41:21+08:00">
+  <meta itemprop="dateModified" content="2025-07-06T17:41:21+08:00">
+  <meta itemprop="wordCount" content="1569">
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Debunking Irreversible Alwin–Sahira Transform (IAST): GeoFence-Based Cryptographic Protocol">
+  <meta name="twitter:description" content="Someone claiming to be a researcher from top Indonesian University published a new geofencing encryption algorithm in ResearchGate and people have been sharing this in LinkedIn without realizing the danger of this encryption. You can see the full paper here: https://www.researchgate.net/profile/Alwin-Sebastian-4/publication/392833582_IAST_Irreversible_Alwin-Sahira_Transform_GeoFence-Based_Cryptographic_Protocol_for_Location_Security/links/685489e107d6d53e82ed4d4c/IAST-Irreversible-Alwin-Sahira-Transform-GeoFence-Based-Cryptographic-Protocol-for-Location-Security.pdf
+There are so many hilarious things about the author and the calculation errors in the published paper, but we are not here to attack anyone. We are here to educate the public that encryption is no laughing matters.">
+
+  
+  
+  
+  <link rel="canonical" href="https://berliangabriel.github.io/post/debunking-iast/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://berliangabriel.github.io/"
+      >Berlian Gabriel</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/BerlianGM"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/berlian-gabriel"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Debunking Irreversible Alwin–Sahira Transform (IAST): GeoFence-Based Cryptographic Protocol</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jul 6, 2025</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>Someone claiming to be a researcher from top Indonesian University published a new geofencing encryption algorithm in ResearchGate and people have been sharing this in LinkedIn without realizing the danger of this encryption.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/debunking-iast/linkedin1.png?raw=true" alt=""></p>
+<p>You can see the full paper here: <a href="https://www.researchgate.net/profile/Alwin-Sebastian-4/publication/392833582_IAST_Irreversible_Alwin-Sahira_Transform_GeoFence-Based_Cryptographic_Protocol_for_Location_Security/links/685489e107d6d53e82ed4d4c/IAST-Irreversible-Alwin-Sahira-Transform-GeoFence-Based-Cryptographic-Protocol-for-Location-Security.pdf">https://www.researchgate.net/profile/Alwin-Sebastian-4/publication/392833582_IAST_Irreversible_Alwin-Sahira_Transform_GeoFence-Based_Cryptographic_Protocol_for_Location_Security/links/685489e107d6d53e82ed4d4c/IAST-Irreversible-Alwin-Sahira-Transform-GeoFence-Based-Cryptographic-Protocol-for-Location-Security.pdf</a></p>
+<p>There are so many hilarious things about the author and the calculation errors in the published paper, but we are not here to attack anyone. We are here to educate the public that encryption is no laughing matters. What if some developers copy paste this implementation (thinking that it must be secure because there is a paper for it)? Many innocent end-users will be impacted with leaked private/confindetial data. So, let&rsquo;s not focus on the author, instead we&rsquo;ll deep dive on why the encryption provided by IAST does <strong>NOT</strong> work.</p>
+<h1 id="author-claims">Author Claims</h1>
+<ol>
+<li>He created new mathematical techniques so you could open a WebApp which will only decrypt a message when you are physically located on a specific area.</li>
+<li>IAST-GeoFence decryption without being in the correct geofence requires polynomial time in the security parameter.</li>
+<li>The I in IAST stands for &ldquo;Irreversible&rdquo; and IAST is Pre-Image resistant.</li>
+</ol>
+<h1 id="how-to-quickly-find-the-flaw-without-even-reading-the-paper">How to quickly find the flaw without even reading the paper?</h1>
+<p>This encryption uses location coordinate as part of the key. Intuitively we can immediately worry about whether the location claimed by the user is the real location of the user. From the description in linkedin post, the author never mentioned anything about how the user location is taken / verified, eventhough that should be the most important part of this whole operation.</p>
+<p>Funnily enough, the description in linkedin post already gave away the flaw, as you can see in the circled part below.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/debunking-iast/linkedin2.png?raw=true" alt="">
+Having no backend for encryption is not something you should be boasting about, it is a flaw. Client-side verification in encryption is equivalent to not having any encryption at all. It is trivial for user to manipulate their location coordinate.</p>
+<p>We can confirm our suspicion further by visiting the webapp the author showcased in one of the photo in the linkedin post. You can try it yourself here: <a href="https://iasttest.netlify.app/">https://iasttest.netlify.app/</a></p>
+<p>Viewing the page source, we can immediately identify that the verfication of user location is being done on client-side.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>        <span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">geolocation</span>.<span style="color:#a6e22e">getCurrentPosition</span>(<span style="color:#a6e22e">pos</span> =&gt; {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lat</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pos</span>.<span style="color:#a6e22e">coords</span>.<span style="color:#a6e22e">latitude</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lon</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pos</span>.<span style="color:#a6e22e">coords</span>.<span style="color:#a6e22e">longitude</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dist</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">haversine</span>(<span style="color:#a6e22e">lat</span>, <span style="color:#a6e22e">lon</span>, <span style="color:#a6e22e">center</span>.<span style="color:#a6e22e">latitude</span>, <span style="color:#a6e22e">center</span>.<span style="color:#a6e22e">longitude</span>);
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Jarak ke pusat: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">dist</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">2</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74"> meter`</span>);
+</span></span></code></pre></div><p><em>navigator.geolocation.getCurrentPosition</em> is a browser-only API exposed by the JavaScript engine.
+When called, the latitude and longitude are obtained entirely inside the user’s device, passed to the arrow-function callback, and then processed locally. No data is sent to or checked by a back-end server.</p>
+<p>As a demonstration, we can go to developer options in our browser &gt; More Tools &gt; Sensors, and key in the MIT Great Dome coordinate. The WebApp will think that we really are at the MIT Great Dome, and then proceed with the decryption.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/debunking-iast/webapp.png?raw=true" alt=""></p>
+<p>So, without knowing math, without even opening the paper, we can already debunk Author&rsquo;s 1st Claim, because we can make the WebApp decrypt the message without being physically present at the required location.</p>
+<h1 id="dissecting-the-math-and-implementation-in-the-paper">Dissecting the math and implementation in the paper</h1>
+<p>Below is the schematic of the IAST-GeoFence Protocol as outlined in the paper. The flaws on the pertinent steps are highlighted in red.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/debunking-iast/schematic.jpg?raw=true" alt=""></p>
+<h2 id="unauthorized-decryption-of-the-iast-geofence">Unauthorized decryption of the IAST-GeoFence</h2>
+<p>The most obvious issue with IAST-GeoFence is that it included the metadata, salt, and geocode (which was used to deterministically derive the key using HKDF) together with the ciphertext in the cipher_pkg.json. This is the same as encrypting a secret with AES and then sending the key together with the ciphertext to the recipient, so that the recipient can use that key to decrypt! Anyone on the internet can also use the key to decrypt the ciphertext.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> base64<span style="color:#f92672">,</span> hmac<span style="color:#f92672">,</span> hashlib<span style="color:#f92672">,</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># from cipher_pkg.json which was made public for web integration</span>
+</span></span><span style="display:flex;"><span>pkg <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;ciphertext&#34;</span>: <span style="color:#e6db74">&#34;3ihLSuNCzM/W4dU=&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;tag&#34;</span>: <span style="color:#e6db74">&#34;dTl2ayqhshWTv1VGA46tBg==&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;nonce&#34;</span>: <span style="color:#e6db74">&#34;sG8fXYYhjYSmz8B5l5hLiQ==&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;salt&#34;</span>: <span style="color:#e6db74">&#34;lUYCdhbacnBd6dFy/ve5lA==&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;geocode&#34;</span>: <span style="color:#e6db74">&#34;drt2yr27|50&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;metadata&#34;</span>: [<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">19</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># re-implement HKDF-SHA-256 to derive key based on 3 input: digest, geocode, salt</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hkdf_sha256</span>(digest_b, geocode, salt_b, length<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>):
+</span></span><span style="display:flex;"><span>    prk <span style="color:#f92672">=</span> hmac<span style="color:#f92672">.</span>new(salt_b, digest_b <span style="color:#f92672">+</span> geocode<span style="color:#f92672">.</span>encode(), hashlib<span style="color:#f92672">.</span>sha256)<span style="color:#f92672">.</span>digest()
+</span></span><span style="display:flex;"><span>    okm, t, c <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(okm) <span style="color:#f92672">&lt;</span> length:
+</span></span><span style="display:flex;"><span>        t <span style="color:#f92672">=</span> hmac<span style="color:#f92672">.</span>new(prk, t <span style="color:#f92672">+</span> bytes([c]), hashlib<span style="color:#f92672">.</span>sha256)<span style="color:#f92672">.</span>digest()
+</span></span><span style="display:flex;"><span>        okm <span style="color:#f92672">+=</span> t
+</span></span><span style="display:flex;"><span>        c <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> okm[:length]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># build 6-byte digest as the source code does (big-endian 16-bit words)</span>
+</span></span><span style="display:flex;"><span>digest_bytes <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(d<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;big&#39;</span>) <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> pkg[<span style="color:#e6db74">&#34;metadata&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># key can be derived without even needing to guess the coordinate,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># because HKDF is deterministic, and all three values of </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># digest, geocode, salt are made known to the public</span>
+</span></span><span style="display:flex;"><span>key <span style="color:#f92672">=</span> hkdf_sha256(digest_bytes, pkg[<span style="color:#e6db74">&#34;geocode&#34;</span>], base64<span style="color:#f92672">.</span>b64decode(pkg[<span style="color:#e6db74">&#34;salt&#34;</span>]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># decrypting AES-GCM using the derived key normally</span>
+</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_GCM, nonce<span style="color:#f92672">=</span>base64<span style="color:#f92672">.</span>b64decode(pkg[<span style="color:#e6db74">&#34;nonce&#34;</span>]))
+</span></span><span style="display:flex;"><span>pt <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt_and_verify(base64<span style="color:#f92672">.</span>b64decode(pkg[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]),
+</span></span><span style="display:flex;"><span>                               base64<span style="color:#f92672">.</span>b64decode(pkg[<span style="color:#e6db74">&#34;tag&#34;</span>]))
+</span></span><span style="display:flex;"><span>print(pt<span style="color:#f92672">.</span>decode())
+</span></span></code></pre></div><p>As we can see below, without even needing to guess the coordinate location, anyone who has the cipher package can easily decrypt the secret locally. When the code above was run, the secret used in the paper, which was &ldquo;SahiraAlwin&rdquo;, can be retrieved.</p>
+<p><img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/debunking-iast/decrypting.png?raw=true" alt=""></p>
+<p>So with the PoC code above, we have debunked Author&rsquo;s 2nd claim that decryption without being in the correct geofence requires polynomial time. We just decrypt the cipher in O(1) time without being at the required location or even knowing the coordinate.</p>
+<h2 id="irreversible-alwin-sahira-transform-is-not-irreversible">Irreversible Alwin-Sahira Transform IS NOT IRREVERSIBLE</h2>
+<p>First of all, what is &ldquo;irreversible&rdquo; in the context of cryptography?</p>
+<p>A one-way (irreversible) function needs to have two properties:</p>
+<ul>
+<li>Pre-image resistance (Given the output, nobody can figure out any input that produces it)</li>
+<li>Second-pre-image resistance (Given one input x, nobody can find a different input x′ with the same output)</li>
+</ul>
+<p>IAST is NOT pre-image resistance, because we can easily find another input that produces the same output used in the paper, [14,18,21]</p>
+<pre tabindex="0"><code>Note: The Auhor made a mistake in calculating the digit sum modulo m. Since m is 2**16, and the biggest possible value of digit sum will always be smaller than 2**16, the mod will not do anything. The final result of IAST in 2.3 Calculation Example should have been [14,18,21]
+</code></pre><p>IAST starts with a list of whole numbers (the bytes of your plaintext). IAST outputs k words, each reduced modulo m. So, it will end with only three small numbers.</p>
+<p>With the paper’s default k = 3, m = 2**16 the digest space contains:
+<code>2**16 * 2**16 * 2**16 = 2**48</code></p>
+<p>If the input vector holds n 16-bit elements (they use 7 ASCII codes in the example, so we will take n=7 here) the input space is:
+<code>2**(16n) = 2**112</code></p>
+<p>By the pigeon-hole principle at least:
+<code>2**112 / 2**48 = 2**64</code>
+distinct inputs share every single digest value.
+The bottom line is: far more different inputs than outputs ⇒ many inputs must collapse to the same digest.
+That alone proves the transform cannot be one-to-one, hence not “irreversible.”</p>
+<p>Another way of looking at it is that, the digest output space is tiny, at 48 bits. A bruteforce to find collisions will take at worst <code>2**48</code> trials. One high-end consumer GPU (≈ <code>10**12</code> ops/s) reduces that to ~5 minutes. Not to mention the are still digit-sum and sorting clusters outputs, so the effective cost will definitely be much lower than <code>2**48</code>.</p>
+<p>Another issue is the non-uniform distribution. Digit-sum maps many integers to the same residue class (e.g., every number whose digits sum to 18 yields identical Dⱼ). Even from Table 1 in the paper, we can already see that the Digit Sum 18 was shared among the input v3 (104), v4 (105), and v7 (97).</p>
+<p>The code below demonstrates how quickly we can find a collision, which are 2 different inputs that will yield the same tranformation output.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> math<span style="color:#f92672">,</span> itertools
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># IAST parameters</span>
+</span></span><span style="display:flex;"><span>ALPHA <span style="color:#f92672">=</span> (<span style="color:#ae81ff">22.459</span>, <span style="color:#ae81ff">5.043</span>, <span style="color:#ae81ff">1.820</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">iast</span>(v, k<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, m<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">16</span>):
+</span></span><span style="display:flex;"><span>    scaled <span style="color:#f92672">=</span> [int(math<span style="color:#f92672">.</span>floor(x <span style="color:#f92672">*</span> ALPHA[i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>])) <span style="color:#66d9ef">for</span> i, x <span style="color:#f92672">in</span> enumerate(v)]
+</span></span><span style="display:flex;"><span>    k_min  <span style="color:#f92672">=</span> sorted(scaled)[:k]
+</span></span><span style="display:flex;"><span>    digest <span style="color:#f92672">=</span> tuple(sum(int(c) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> str(abs(y))) <span style="color:#f92672">%</span> m <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> k_min)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> digest, scaled, k_min
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Step1: Calculate digest with Original vector</span>
+</span></span><span style="display:flex;"><span>original <span style="color:#f92672">=</span> [<span style="color:#ae81ff">83</span>, <span style="color:#ae81ff">97</span>, <span style="color:#ae81ff">104</span>, <span style="color:#ae81ff">105</span>, <span style="color:#ae81ff">114</span>, <span style="color:#ae81ff">97</span>, <span style="color:#ae81ff">97</span>]           <span style="color:#75715e"># “Sahiraa”</span>
+</span></span><span style="display:flex;"><span>dig_orig, scaled_orig, sorted_orig <span style="color:#f92672">=</span> iast(original)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Original input  :&#34;</span>, original)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Scaled values   :&#34;</span>, scaled_orig)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Sorted values   :&#34;</span>, sorted_orig)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Original digest :&#34;</span>, dig_orig, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Step2: Find a 3-byte collision</span>
+</span></span><span style="display:flex;"><span>target <span style="color:#f92672">=</span> dig_orig
+</span></span><span style="display:flex;"><span>tries  <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> a, b, c <span style="color:#f92672">in</span> itertools<span style="color:#f92672">.</span>product(range(<span style="color:#ae81ff">256</span>), repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>):
+</span></span><span style="display:flex;"><span>    tries <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> iast([a, b, c])[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> target:
+</span></span><span style="display:flex;"><span>        triple <span style="color:#f92672">=</span> [a, b, c]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Collision search: </span><span style="color:#e6db74">{</span>tries<span style="color:#e6db74">}</span><span style="color:#e6db74"> tries&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Collision prefix :&#34;</span>, triple, <span style="color:#e6db74">&#34;→&#34;</span>, target)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Step3: Extend with arbitrary large bytes</span>
+</span></span><span style="display:flex;"><span>collision <span style="color:#f92672">=</span> triple <span style="color:#f92672">+</span> [<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">1001</span>, <span style="color:#ae81ff">1002</span>, <span style="color:#ae81ff">1003</span>]
+</span></span><span style="display:flex;"><span>dig_col, _, _ <span style="color:#f92672">=</span> iast(collision)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Full collision   :&#34;</span>, collision)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Collision digest :&#34;</span>, dig_col)
+</span></span></code></pre></div><p>As we can see below, after just 2036585 tries, we can already find a collision.
+<img src="https://github.com/BerlianGabriel/BerlianGabriel.github.io/blob/main/resources/debunking-iast/collision.png?raw=true" alt=""></p>
+<p>Since it is possible to quickly find another input that produces the same output used in the paper [14, 18, 21], we have debunked Author&rsquo;s 3rd claim that the IAST is irreversible and Pre-Image resistant.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>What IAST-Geofence really achieves is just making an already proven encryption algorithm, AES-GCM, become vulnerable in its implementation. The Alwin-Sahira Transform does nothing to add to the robustness of the encryption, and it is NOT irreversible NOR Pre-Image Resistant. The client-side geolocation verification in the WebApp can be easily bypassed, enabling anyone not present in the required location to decrypt.</p>
+<p>So please please please, don&rsquo;t roll your own crypto and don&rsquo;t endorse someone who does without fully understanding it first.
+<br/>
+<br/>
+<br/></p>
+<h1 id="social-media">Social Media</h1>
+<p>Thanks for reading! Follow me on <a href="https://twitter.com/BerlianGM"><strong>Twitter</strong></a> and <a href="https://linkedin.com/in/berlian-gabriel"><strong>LinkedIn</strong></a></p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://berliangabriel.github.io/post/tsa-ctf-2024/"
+      ><span>TSA CTF 2024</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2025
+    <a class="link" href="https://berliangabriel.github.io/">Berlian Gabriel</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
